@@ -1,0 +1,222 @@
+{
+  "services": [
+    {
+      "slug": "complete-home-interiors",
+      "title": "Complete Home Interiors",
+      "summary": "End-to-end design and execution for your entire home — from layout planning to the last cushion.",
+      "image": "living-double-height",
+      "icon": "home",
+      "points": [
+        "Space planning and 3D visualisation",
+        "Civil, electrical and false ceiling work",
+        "Furniture, décor and lighting",
+        "Single point of contact"
+      ]
+    },
+    {
+      "slug": "modular-kitchens",
+      "title": "Modular Kitchens",
+      "summary": "Ergonomic, durable kitchens in L, U, parallel and island layouts with premium hardware.",
+      "image": "kitchen-modular",
+      "icon": "chef-hat",
+      "points": [
+        "BWP plywood and acrylic finishes",
+        "Soft-close hardware",
+        "Tall units and pantry pull-outs",
+        "Appliance integration"
+      ]
+    },
+    {
+      "slug": "living-room-interiors",
+      "title": "Living Room Interiors",
+      "summary": "Inviting living spaces with TV units, feature walls, layered lighting and curated furniture.",
+      "image": "living-gallery",
+      "icon": "sofa",
+      "points": [
+        "Feature walls and panelling",
+        "Custom TV and display units",
+        "Mood and accent lighting",
+        "Curated furniture and art"
+      ]
+    },
+    {
+      "slug": "bedroom-interiors",
+      "title": "Bedroom Interiors",
+      "summary": "Calm, restful bedrooms with upholstered headboards, study corners and smart storage.",
+      "image": "bedroom-luxe",
+      "icon": "bed-double",
+      "points": [
+        "Headboards and bed back panels",
+        "Kids' and master bedrooms",
+        "Study and vanity units",
+        "Blackout drapery"
+      ]
+    },
+    {
+      "slug": "wardrobe-designs",
+      "title": "Wardrobe Designs",
+      "summary": "Sliding, hinged and walk-in wardrobes designed around how you dress and store.",
+      "image": "foyer-storage",
+      "icon": "door-closed",
+      "points": [
+        "Sliding and hinged shutters",
+        "Walk-in closets",
+        "Lofts and internal organisers",
+        "Glass, lacquer and laminate finishes"
+      ]
+    },
+    {
+      "slug": "office-interiors",
+      "title": "Office Interiors",
+      "summary": "Productive, brand-aligned workplaces — from compact studios to full corporate floors.",
+      "image": "office-loft",
+      "icon": "briefcase",
+      "points": [
+        "Workstations and cabins",
+        "Meeting and collaboration zones",
+        "Reception and branding",
+        "Acoustic and lighting design"
+      ]
+    }
+  ],
+  "portfolio": [
+    {
+      "slug": "lakeview-apartment-hebbal",
+      "title": "Lakeview Apartment",
+      "category": "Complete Home Interiors",
+      "location": "Hebbal, Bengaluru",
+      "description": "A warm, minimal 3 BHK with oak finishes, a statement dining nook and concealed storage throughout.",
+      "image": "living-wood",
+      "gallery": [
+        "living-wood",
+        "dining-living",
+        "bedroom-modern"
+      ]
+    },
+    {
+      "slug": "island-kitchen-sarjapur-road",
+      "title": "Island Kitchen",
+      "category": "Modular Kitchens",
+      "location": "Sarjapur Road, Bengaluru",
+      "description": "A white quartz island kitchen with handle-less shutters, tall appliance units and pendant lighting.",
+      "image": "kitchen-island",
+      "gallery": [
+        "kitchen-island",
+        "kitchen-white"
+      ]
+    },
+    {
+      "slug": "boho-living-room-baner",
+      "title": "Boho Living Room",
+      "category": "Living Room Interiors",
+      "location": "Whitefield, Bengaluru",
+      "description": "Rattan, linen and layered textures create a relaxed, sunlit family living room.",
+      "image": "living-rattan",
+      "gallery": [
+        "living-rattan",
+        "living-beige"
+      ]
+    },
+    {
+      "slug": "master-suite-jubilee-hills",
+      "title": "Master Suite",
+      "category": "Bedroom Interiors",
+      "location": "Soukya Road, Bengaluru",
+      "description": "A hotel-inspired master suite with a channel-tufted headboard, walk-in wardrobe and spa bath.",
+      "image": "bedroom-luxe",
+      "gallery": [
+        "bedroom-luxe",
+        "bathroom-luxe",
+        "bedroom-suite"
+      ]
+    },
+    {
+      "slug": "dark-kitchen-golf-course-road",
+      "title": "Charcoal Modular Kitchen",
+      "category": "Modular Kitchens",
+      "location": "HSR Layout, Bengaluru",
+      "description": "A charcoal and brass parallel kitchen with open shelving and a breakfast counter.",
+      "image": "kitchen-modular",
+      "gallery": [
+        "kitchen-modular",
+        "kitchen-marble"
+      ]
+    },
+    {
+      "slug": "creative-studio-kondapur",
+      "title": "Creative Studio Office",
+      "category": "Office Interiors",
+      "location": "Electronic City, Bengaluru",
+      "description": "An open-plan studio office with collaboration tables, glass meeting rooms and industrial lighting.",
+      "image": "office-cowork",
+      "gallery": [
+        "office-cowork",
+        "office-loft",
+        "workspace-window"
+      ]
+    },
+    {
+      "slug": "villa-living-sarjapur",
+      "title": "Double-height Villa Living",
+      "category": "Complete Home Interiors",
+      "location": "Sarjapur Road, Bengaluru",
+      "description": "A double-height living room with a sculptural staircase, marble flooring and floor-to-ceiling glazing.",
+      "image": "villa-staircase",
+      "gallery": [
+        "villa-staircase",
+        "living-double-height",
+        "living-lounge"
+      ]
+    },
+    {
+      "slug": "serene-bedroom-koramangala",
+      "title": "Serene Guest Bedroom",
+      "category": "Bedroom Interiors",
+      "location": "Koramangala, Bengaluru",
+      "description": "Soft neutrals, natural textures and indirect lighting for a calm guest room.",
+      "image": "bedroom-boho",
+      "gallery": [
+        "bedroom-boho",
+        "bedroom-white"
+      ]
+    },
+    {
+      "slug": "entry-wardrobe-anna-nagar",
+      "title": "Foyer & Storage Wall",
+      "category": "Wardrobe Designs",
+      "location": "Bommasandra, Bengaluru",
+      "description": "A cane-finish foyer console and full-height storage wall that hides shoes, coats and utilities.",
+      "image": "foyer-storage",
+      "gallery": [
+        "foyer-storage",
+        "living-accent"
+      ]
+    }
+  ],
+  "process": [
+    {
+      "title": "Free Consultation",
+      "description": "Meet our designer at your site or our studio to discuss your space, style and timelines."
+    },
+    {
+      "title": "Requirement Discussion",
+      "description": "We understand how your family lives, your storage needs and your budget."
+    },
+    {
+      "title": "Design Planning",
+      "description": "Layouts, mood boards and 3D views so you can see your home before work begins."
+    },
+    {
+      "title": "Material Selection",
+      "description": "Choose finishes, fabrics and hardware from curated, quality-checked options."
+    },
+    {
+      "title": "Execution",
+      "description": "Dedicated project manager, factory-finished modules and regular site updates."
+    },
+    {
+      "title": "Final Handover",
+      "description": "Deep cleaning, styling and a detailed walkthrough of your finished home."
+    }
+  ]
+}

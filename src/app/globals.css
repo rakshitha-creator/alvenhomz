@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #08152a;
+  --color-navy-900: #0d1f3a;
+  --color-navy-800: #142a4b;
+  --color-navy-700: #1d3a63;
+  --color-navy-600: #2a4c7d;
+  --color-gold-300: #e6cf9f;
+  --color-gold-400: #d6b779;
+  --color-gold-500: #c29d57;
+  --color-gold-600: #a5803c;
+  --color-ivory: #faf7f2;
+  --color-sand: #f1eadf;
+  --color-ink: #17202e;
+  --color-muted: #5d6879;
+  --color-line: #e7e1d6;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+
+  --shadow-card: 0 1px 2px rgb(13 31 58 / 0.04), 0 8px 24px -12px rgb(13 31 58 / 0.18);
+  --shadow-lift: 0 2px 4px rgb(13 31 58 / 0.05), 0 24px 48px -20px rgb(13 31 58 / 0.35);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  /* "backwards" so no stacking context lingers after the animation (keeps modals above the header) */
+  --animate-fade-in: fade-in 0.3s ease-out backwards;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-navy-900;
+  }
+  ::selection {
+    @apply bg-gold-300 text-navy-950;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold-500;
+  }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+@utility eyebrow {
+  @apply text-xs font-semibold tracking-[0.22em] text-gold-600 uppercase;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-primary {
+  @apply btn bg-navy-900 text-white hover:bg-navy-700 hover:shadow-lift;
+}
+@utility btn-gold {
+  @apply btn bg-gold-500 text-navy-950 hover:bg-gold-400 hover:shadow-lift;
+}
+@utility btn-outline {
+  @apply btn border border-navy-900/15 bg-white text-navy-900 hover:border-navy-900/40 hover:bg-ivory;
+}
+@utility btn-ghost-light {
+  @apply btn border border-white/30 text-white hover:bg-white/10;
+}
+@utility btn-whatsapp {
+  @apply btn bg-[#1faa53] text-white hover:bg-[#178f45] hover:shadow-lift;
+}
+@utility input {
+  @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition outline-none focus:border-gold-500 focus:ring-4 focus:ring-gold-300/30;
+}
+@utility label {
+  @apply mb-1.5 block text-xs font-semibold tracking-wide text-navy-800 uppercase;
+}
+@utility chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3.5 py-2 text-sm text-navy-800 transition hover:border-navy-700/40;
+}
+@utility chip-active {
+  @apply border-navy-900 bg-navy-900 text-white hover:border-navy-900;
+}
+@utility card {
+  @apply rounded-2xl border border-line bg-white shadow-card;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }

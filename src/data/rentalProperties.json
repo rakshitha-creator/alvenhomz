@@ -1,0 +1,103 @@
+[
+  {
+    "slug": "2-bhk-furnished-koramangala-bengaluru",
+    "title": "Furnished 2 BHK in Koramangala 5th Block",
+    "propertyType": "apartment",
+    "city": "Bengaluru",
+    "locality": "Koramangala",
+    "address": "5th Block, Koramangala, Bengaluru 560095",
+    "lat": 12.9352,
+    "lng": 77.6245,
+    "rent": 55000,
+    "deposit": 300000,
+    "maintenance": 4500,
+    "bhk": 2,
+    "bathrooms": 2,
+    "carpetArea": 1100,
+    "floor": "3rd",
+    "totalFloors": 5,
+    "furnishing": "furnished",
+    "furnishingDetails": [
+      "Sofa and dining set",
+      "2 double beds with mattresses",
+      "Wardrobes",
+      "Refrigerator",
+      "Washing machine",
+      "2 ACs",
+      "Microwave"
+    ],
+    "parking": "1 Covered (car)",
+    "availableFrom": "2026-11-01",
+    "tenantPreference": [
+      "family",
+      "bachelor"
+    ],
+    "postedOn": "2026-10-15",
+    "featured": true,
+    "images": [
+      "living-blue",
+      "bedroom-classic",
+      "kitchen-white",
+      "dining-living"
+    ],
+    "description": "A fully furnished, move-in ready 2 BHK close to Forum Mall, restaurants and startup offices. Bright rooms, cross-ventilation and a cosy balcony overlooking a quiet lane.",
+    "amenities": [
+      "Lift",
+      "Power Backup",
+      "24x7 Security",
+      "Covered Parking",
+      "Water Supply 24x7",
+      "CCTV"
+    ],
+    "isSample": true
+  },
+  {
+    "slug": "3-bhk-furnished-hsr-layout-bengaluru",
+    "title": "Furnished 3 BHK Duplex in HSR Layout",
+    "propertyType": "independent-house",
+    "city": "Bengaluru",
+    "locality": "HSR Layout",
+    "address": "Sector 2, HSR Layout, Bengaluru 560102",
+    "lat": 12.9116,
+    "lng": 77.6474,
+    "rent": 85000,
+    "deposit": 500000,
+    "maintenance": 0,
+    "bhk": 3,
+    "bathrooms": 3,
+    "carpetArea": 2100,
+    "floor": "G+1",
+    "totalFloors": 2,
+    "furnishing": "furnished",
+    "furnishingDetails": [
+      "Sofa, dining and beds",
+      "Wardrobes",
+      "Refrigerator",
+      "Washing machine",
+      "3 ACs",
+      "Water purifier"
+    ],
+    "parking": "1 Covered + 1 Open",
+    "availableFrom": "2026-12-01",
+    "tenantPreference": [
+      "family"
+    ],
+    "postedOn": "2026-10-17",
+    "featured": true,
+    "images": [
+      "house-modern",
+      "living-rattan",
+      "bedroom-boho",
+      "kitchen-marble"
+    ],
+    "description": "A stylish independent duplex with a private terrace and garden patch, close to HSR's cafés and offices. Pets considered on request.",
+    "amenities": [
+      "Private Garden",
+      "Power Backup",
+      "Water Supply 24x7",
+      "Covered Parking",
+      "Pet Park"
+    ],
+    "isSample": true
+  }
+]
