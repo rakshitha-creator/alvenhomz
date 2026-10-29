@@ -32,8 +32,10 @@
     "postedOn": "2026-10-02",
     "featured": true,
     "images": [
+      "/images/brand/resale-apartment.webp",
       "living-white",
       "kitchen-island",
+      "/images/brand/resale-bedroom.webp",
       "bedroom-modern",
       "dining-living",
       "bathroom-luxe"
@@ -49,7 +51,8 @@
       "Water Supply 24x7",
       "Gymnasium"
     ],
-    "isSample": true
+    "isSample": true,
+    "cover": "/images/brand/resale-apartment.webp"
   },
   {
     "slug": "4-bhk-villa-whitefield-bengaluru",
@@ -83,6 +86,7 @@
     "postedOn": "2026-10-10",
     "featured": true,
     "images": [
+      "/images/brand/resale-villa.webp",
       "villa-pool-deck",
       "living-double-height",
       "kitchen-marble",
@@ -101,6 +105,7 @@
       "Children's Play Area",
       "Landscaped Gardens"
     ],
-    "isSample": true
+    "isSample": true,
+    "cover": "/images/brand/resale-villa.webp"
   }
 ]

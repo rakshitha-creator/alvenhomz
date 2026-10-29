@@ -18,7 +18,7 @@ export default function Footer() {
     <footer className="bg-navy-950 text-white/70">
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Logo className="rounded-2xl bg-white px-5 py-4" imgClassName="h-28" />
+          <Logo variant="light" imgClassName="h-32" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed">{site.description}</p>
           <ul className="mt-6 flex gap-3">
             {socials.map(({ href, label, Icon }) => (

@@ -31,6 +31,8 @@ interface ListingBase {
   lat: number;
   lng: number;
   images: string[];
+  /** Optional card/thumbnail image (path under /public); falls back to images[0]. */
+  cover?: string;
   amenities: string[];
   description: string;
   featured?: boolean;

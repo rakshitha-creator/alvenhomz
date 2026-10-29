@@ -99,7 +99,11 @@ export default async function ProjectPage({ params }: Props) {
           }
         />
         <Gallery images={p.images} title={p.name} />
-        {p.representativeImages && <p className="mt-2 text-xs text-muted">Representative images — not actual photographs of this project.</p>}
+        {p.representativeImages && (
+          <p className="mt-2 text-xs text-muted">
+            {p.cover ? "First image is the official project visual; other photos are representative." : "Representative images — not actual photographs of this project."}
+          </p>
+        )}
 
         <div className="grid gap-10 py-10 lg:grid-cols-[1fr_380px]">
           <div className="min-w-0">

@@ -47,6 +47,7 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-codename.webp",
       "glass-towers",
       "clubhouse-pool",
       "living-double-height",
@@ -114,7 +115,8 @@
         "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": true,
+    "cover": "/images/brand/project-codename.webp"
   },
   {
     "slug": "abhee-celestial-city-gunjur",
@@ -154,6 +156,7 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-celestial.webp",
       "tower-balconies",
       "living-white",
       "kitchen-white",
@@ -236,7 +239,8 @@
         "category": "shopping"
       }
     ],
-    "representativeImages": true
+    "representativeImages": true,
+    "cover": "/images/brand/project-celestial.webp"
   },
   {
     "slug": "abhee-aaria-gunjur-lake",
@@ -287,6 +291,7 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-aaria.webp",
       "villa-lap-pool",
       "living-gallery",
       "kitchen-modular",
@@ -364,7 +369,8 @@
         "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": true,
+    "cover": "/images/brand/project-aaria.webp"
   },
   {
     "slug": "abhee-serenity-springs-bommasandra",
@@ -400,6 +406,7 @@
     "featured": false,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-serenity.webp",
       "apartment-brick",
       "living-plants",
       "kitchen-white",
@@ -475,7 +482,8 @@
         "category": "office"
       }
     ],
-    "representativeImages": true
+    "representativeImages": true,
+    "cover": "/images/brand/project-serenity.webp"
   },
   {
     "slug": "abhee-silicon-shine-sarjapur-road",
@@ -511,6 +519,7 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-silicon.webp",
       "apartment-block",
       "living-accent",
       "kitchen-marble",
@@ -582,7 +591,8 @@
         "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": true,
+    "cover": "/images/brand/project-silicon.webp"
   },
   {
     "slug": "abhee-tranquila-sarjapur-attibele-road",
@@ -619,6 +629,7 @@
     "featured": false,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-tranquila.webp",
       "plot-sunrise",
       "villa-garden",
       "house-lawn",
@@ -682,6 +693,7 @@
         "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": true,
+    "cover": "/images/brand/project-tranquila.webp"
   }
 ]
