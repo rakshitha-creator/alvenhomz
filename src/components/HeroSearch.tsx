@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Building2, KeyRound, Search, Sparkles } from "lucide-react";
-import LocationInput from "./LocationInput";
 import { BUY_BUDGETS, PROPERTY_TYPES, RENT_BUDGETS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -19,10 +18,9 @@ const TYPES_BY_TAB: Record<string, string[]> = {
   new: ["apartment", "villa", "plot"],
 };
 
-export default function HeroSearch({ suggestions }: { suggestions: string[] }) {
+export default function HeroSearch() {
   const router = useRouter();
   const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("new");
-  const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [budget, setBudget] = useState("");
 
@@ -31,7 +29,6 @@ export default function HeroSearch({ suggestions }: { suggestions: string[] }) {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (location.trim()) params.set("q", location.trim());
     if (type) params.set("type", type);
     const b = budgets[Number(budget)];
     if (budget !== "" && b) {
@@ -70,9 +67,8 @@ export default function HeroSearch({ suggestions }: { suggestions: string[] }) {
       <form
         onSubmit={submit}
         role="search"
-        className="grid gap-3 rounded-2xl rounded-tl-none bg-white p-3 shadow-lift sm:p-4 md:grid-cols-[1.6fr_1fr_1fr_auto]"
+        className="grid gap-3 rounded-2xl rounded-tl-none bg-white p-3 shadow-lift sm:p-4 md:grid-cols-[1fr_1fr_auto]"
       >
-        <LocationInput value={location} onChange={setLocation} suggestions={suggestions} placeholder="Search city or locality" inputClassName="border-transparent bg-ivory" />
         <div>
           <label htmlFor="hero-type" className="sr-only">Property type</label>
           <select id="hero-type" value={type} onChange={(e) => setType(e.target.value)} className="input border-transparent bg-ivory">

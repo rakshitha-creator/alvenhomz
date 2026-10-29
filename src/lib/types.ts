@@ -38,6 +38,30 @@ interface ListingBase {
   isSample?: boolean;
   /** Photos are stand-ins, not of this property — shows a "Representative images" note. */
   representativeImages?: boolean;
+  /** When false, listing is hidden from the public site. Defaults to true for seed/JSON data. */
+  published?: boolean;
+  /** Optional project/property walkthrough video (Firebase Storage download URL). */
+  videoUrl?: string;
+  /** Storage object path for deleting the video from admin. */
+  videoStoragePath?: string;
+}
+
+export interface ProjectFaq {
+  question: string;
+  answer: string;
+}
+
+export interface ProjectContact {
+  phone?: string;
+  whatsapp?: string;
+  email?: string;
+  note?: string;
+}
+
+export interface ProjectTestimonial {
+  name: string;
+  context?: string;
+  quote: string;
 }
 
 export interface Project extends ListingBase {
@@ -58,6 +82,27 @@ export interface Project extends ListingBase {
   floorPlans: FloorPlan[];
   nearby: NearbyPlace[];
   launchedOn: string;
+  /** Optional FAQs shown on the project detail page. */
+  faqs?: ProjectFaq[];
+  /** Optional project-specific contact overrides. */
+  contact?: ProjectContact;
+  /** Optional testimonials specific to this project. */
+  testimonials?: ProjectTestimonial[];
+}
+
+export interface Lead {
+  id?: string;
+  name: string;
+  phone: string;
+  email?: string;
+  interest?: string;
+  city?: string;
+  message?: string;
+  listingTitle?: string;
+  listingUrl?: string;
+  source: string;
+  createdAt?: string;
+  status?: "new" | "contacted" | "closed";
 }
 
 export interface ResaleProperty extends ListingBase {
@@ -98,6 +143,17 @@ export interface RentalProperty extends ListingBase {
   availableFrom: string;
   tenantPreference: string[];
   postedOn: string;
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  coverImage: string;
+  author: string;
+  published: boolean;
+  publishedAt: string;
 }
 
 export interface InteriorService {

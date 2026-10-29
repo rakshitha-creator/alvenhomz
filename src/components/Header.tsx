@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 
 export const NAV = [
   { href: "/", label: "Home" },
+  { href: "/about-us/", label: "About Us" },
   { href: "/new-projects/", label: "New Projects" },
   { href: "/resale-properties/", label: "Resale" },
   { href: "/rental-properties/", label: "Rentals" },
-  { href: "/interiors/", label: "Interiors" },
-  { href: "/about-us/", label: "About Us" },
+  { href: "/blogs/", label: "Blogs" },
   { href: "/contact-us/", label: "Contact" },
 ];
 

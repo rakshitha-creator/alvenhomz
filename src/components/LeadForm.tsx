@@ -88,7 +88,7 @@ export default function LeadForm({
     if (errors[k]) setErrors((er) => ({ ...er, [k]: undefined }));
   };
 
-  const send = (channel: "whatsapp" | "email") => {
+  const send = async (channel: "whatsapp" | "email") => {
     const errs = validate(values, variant);
     setErrors(errs);
     const first = Object.keys(errs)[0];
@@ -97,6 +97,27 @@ export default function LeadForm({
       return;
     }
     const message = buildMessage(values, variant, listing);
+    try {
+      const { createLead } = await import("@/lib/firebase-data");
+      const { isFirebaseConfigured } = await import("@/lib/firebase");
+      if (isFirebaseConfigured()) {
+        await createLead({
+          name: values.name.trim(),
+          phone: values.phone.trim(),
+          email: values.email?.trim() || undefined,
+          interest: values.interest || values.service || values.intent || undefined,
+          city: values.city || values.location || undefined,
+          message: values.message || undefined,
+          listingTitle: listing?.title,
+          listingUrl: listing?.url,
+          source: variant,
+          createdAt: new Date().toISOString(),
+          status: "new",
+        });
+      }
+    } catch {
+      // Lead storage is best-effort; WhatsApp/email still open.
+    }
     if (channel === "whatsapp") {
       window.open(whatsappHref(message), "_blank", "noopener");
     } else {

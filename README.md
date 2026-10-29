@@ -87,6 +87,32 @@ Before going live:
 
 ---
 
+## Admin CMS (Firebase)
+
+Listings (New Projects, Resale, Rentals), optional videos, and Blogs are managed from **`/admin/`** using Firebase Auth, Firestore and Storage. The public site stays a static export and loads published content in the browser.
+
+### One-time setup
+
+1. Create a Firebase project. Enable **Email/Password** Auth, **Firestore**, and **Storage**.
+2. Create one admin user in Authentication. Disable public signup.
+3. Deploy rules: `firestore.rules` and `storage.rules` (or paste them in the Console).
+4. Copy `.env.example` → `.env.local` and fill in the web app config (`NEXT_PUBLIC_FIREBASE_*`).
+5. Download a service account JSON for seeding (local only; never commit). Set:
+   ```bash
+   # PowerShell
+   $env:GOOGLE_APPLICATION_CREDENTIALS=".\serviceAccount.json"
+   npm run seed:firestore
+   ```
+6. Sign in at `/admin/login/` and manage content. Image and optional MP4/WebM video uploads go to Storage.
+
+Without `.env.local`, the site falls back to the JSON files in `src/data/` so local browsing still works.
+
+### Filters
+
+Location search/city filters were removed. Remaining filters (budget, BHK, type, status, furnishing, tenant) are built from the live listing data.
+
+---
+
 ## Local development
 
 Requires Node.js 20 or newer (only on your computer, not on the server).

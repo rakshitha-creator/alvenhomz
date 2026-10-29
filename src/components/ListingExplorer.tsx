@@ -4,7 +4,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, SearchX, SlidersHorizontal, X } from "lucide-react";
 import ListingCard from "./ListingCard";
-import LocationInput from "./LocationInput";
 import type { ListingCardData } from "@/lib/data";
 import type { ListingKind } from "@/lib/types";
 import { FURNISHING, PROJECT_STATUS, PROPERTY_TYPES, TENANT_PREFERENCE } from "@/lib/constants";
@@ -23,8 +22,6 @@ const SORTS = [
 ];
 
 type Filters = {
-  q: string;
-  city: string;
   type: string[];
   bhk: string[];
   status: string[];
@@ -39,8 +36,6 @@ type Filters = {
 function readFilters(sp: URLSearchParams): Filters {
   const list = (k: string) => (sp.get(k) ?? "").split(",").filter(Boolean);
   return {
-    q: sp.get("q") ?? "",
-    city: sp.get("city") ?? "",
     type: list("type"),
     bhk: list("bhk"),
     status: list("status"),
@@ -55,8 +50,6 @@ function readFilters(sp: URLSearchParams): Filters {
 
 function toQuery(f: Filters) {
   const p = new URLSearchParams();
-  if (f.q) p.set("q", f.q);
-  if (f.city) p.set("city", f.city);
   for (const k of ["type", "bhk", "status", "furnishing", "tenant"] as const) if (f[k].length) p.set(k, f[k].join(","));
   if (f.min) p.set("min", f.min);
   if (f.max) p.set("max", f.max);
@@ -66,19 +59,10 @@ function toQuery(f: Filters) {
 }
 
 function applyFilters(items: ListingCardData[], f: Filters) {
-  const tokens = f.q
-    .toLowerCase()
-    .split(/[,\s]+/)
-    .filter((t) => t.length > 1);
   const min = Number(f.min) || 0;
   const max = Number(f.max) || 0;
 
   const out = items.filter((it) => {
-    if (tokens.length) {
-      const hay = `${it.title} ${it.subtitle} ${it.locality} ${it.city} ${it.typeLabel}`.toLowerCase();
-      if (!tokens.every((t) => hay.includes(t))) return false;
-    }
-    if (f.city && it.city !== f.city) return false;
     if (f.type.length && !f.type.includes(it.propertyType)) return false;
     if (f.bhk.length && !it.bhks.some((b) => f.bhk.includes(b >= 5 ? "5" : String(b)))) return false;
     if (f.status.length && !f.status.includes(it.status ?? "")) return false;
@@ -104,20 +88,16 @@ function applyFilters(items: ListingCardData[], f: Filters) {
 export default function ListingExplorer({
   kind,
   items,
-  suggestions,
 }: {
   kind: ListingKind;
   items: ListingCardData[];
-  suggestions: string[];
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const filters = useMemo(() => readFilters(new URLSearchParams(searchParams.toString())), [searchParams]);
   const [drawer, setDrawer] = useState(false);
-  const [q, setQ] = useState(filters.q);
 
-  useEffect(() => setQ(filters.q), [filters.q]);
   useEffect(() => {
     document.body.style.overflow = drawer ? "hidden" : "";
   }, [drawer]);
@@ -127,14 +107,6 @@ export default function ListingExplorer({
     const qs = toQuery(next);
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
-
-  // Debounce free-text location search.
-  useEffect(() => {
-    if (q === filters.q) return;
-    const t = setTimeout(() => update({ q }), 300);
-    return () => clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q]);
 
   const toggle = (key: "type" | "bhk" | "status" | "furnishing" | "tenant", value: string) => {
     const cur = filters[key];
@@ -146,14 +118,32 @@ export default function ListingExplorer({
   const page = Math.min(filters.page, pages);
   const visible = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
-  const cities = useMemo(() => [...new Set(items.map((i) => i.city))].sort(), [items]);
-  const types = useMemo(() => [...new Set(items.map((i) => i.propertyType))], [items]);
+  const types = useMemo(() => [...new Set(items.map((i) => i.propertyType).filter(Boolean))], [items]);
+  const bhkOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const it of items) {
+      for (const b of it.bhks) set.add(b >= 5 ? "5" : String(b));
+    }
+    return [...set].sort((a, b) => Number(a) - Number(b));
+  }, [items]);
+  const statusOptions = useMemo(
+    () => [...new Set(items.map((i) => i.status).filter(Boolean) as string[])],
+    [items],
+  );
+  const furnishingOptions = useMemo(
+    () => [...new Set(items.map((i) => i.furnishing).filter(Boolean) as string[])],
+    [items],
+  );
+  const tenantOptions = useMemo(() => {
+    const set = new Set<string>();
+    for (const it of items) for (const t of it.tenantPreference ?? []) set.add(t);
+    return [...set];
+  }, [items]);
+
   const steps = kind === "rental" ? RENT_STEPS : BUY_STEPS;
   const priceLabel = kind === "rental" ? "Monthly rent" : "Budget";
 
   const activeCount =
-    (filters.q ? 1 : 0) +
-    (filters.city ? 1 : 0) +
     filters.type.length +
     filters.bhk.length +
     filters.status.length +
@@ -163,23 +153,11 @@ export default function ListingExplorer({
     (filters.max ? 1 : 0);
 
   const clearAll = () => {
-    setQ("");
     router.replace(filters.sort ? `${pathname}?sort=${filters.sort}` : pathname, { scroll: false });
   };
 
   const panel = (
     <div className="space-y-7">
-      <FilterGroup title="Location">
-        <LocationInput value={q} onChange={setQ} suggestions={suggestions} placeholder="Locality, city or project" />
-        <label htmlFor={`${kind}-city`} className="sr-only">City</label>
-        <select id={`${kind}-city`} value={filters.city} onChange={(e) => update({ city: e.target.value })} className="input mt-3">
-          <option value="">All cities</option>
-          {cities.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-        </select>
-      </FilterGroup>
-
       <FilterGroup title={priceLabel}>
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -203,33 +181,49 @@ export default function ListingExplorer({
         </div>
       </FilterGroup>
 
-      <FilterGroup title="BHK">
-        <Chips
-          options={["1", "2", "3", "4", "5"].map((v) => ({ value: v, label: v === "5" ? "5+ BHK" : `${v} BHK` }))}
-          selected={filters.bhk}
-          onToggle={(v) => toggle("bhk", v)}
-        />
-      </FilterGroup>
+      {bhkOptions.length > 0 && (
+        <FilterGroup title="BHK">
+          <Chips
+            options={bhkOptions.map((v) => ({ value: v, label: v === "5" ? "5+ BHK" : `${v} BHK` }))}
+            selected={filters.bhk}
+            onToggle={(v) => toggle("bhk", v)}
+          />
+        </FilterGroup>
+      )}
 
-      <FilterGroup title="Property type">
-        <Chips options={types.map((t) => ({ value: t, label: PROPERTY_TYPES[t] ?? t }))} selected={filters.type} onToggle={(v) => toggle("type", v)} />
-      </FilterGroup>
+      {types.length > 0 && (
+        <FilterGroup title="Property type">
+          <Chips options={types.map((t) => ({ value: t, label: PROPERTY_TYPES[t] ?? t }))} selected={filters.type} onToggle={(v) => toggle("type", v)} />
+        </FilterGroup>
+      )}
 
-      {kind === "project" && (
+      {kind === "project" && statusOptions.length > 0 && (
         <FilterGroup title="Project status">
-          <Chips options={Object.entries(PROJECT_STATUS).map(([value, label]) => ({ value, label }))} selected={filters.status} onToggle={(v) => toggle("status", v)} />
+          <Chips
+            options={statusOptions.map((value) => ({ value, label: PROJECT_STATUS[value] ?? value }))}
+            selected={filters.status}
+            onToggle={(v) => toggle("status", v)}
+          />
         </FilterGroup>
       )}
 
-      {kind !== "project" && (
+      {kind !== "project" && furnishingOptions.length > 0 && (
         <FilterGroup title="Furnishing">
-          <Chips options={Object.entries(FURNISHING).map(([value, label]) => ({ value, label }))} selected={filters.furnishing} onToggle={(v) => toggle("furnishing", v)} />
+          <Chips
+            options={furnishingOptions.map((value) => ({ value, label: FURNISHING[value] ?? value }))}
+            selected={filters.furnishing}
+            onToggle={(v) => toggle("furnishing", v)}
+          />
         </FilterGroup>
       )}
 
-      {kind === "rental" && (
+      {kind === "rental" && tenantOptions.length > 0 && (
         <FilterGroup title="Preferred tenants">
-          <Chips options={Object.entries(TENANT_PREFERENCE).map(([value, label]) => ({ value, label }))} selected={filters.tenant} onToggle={(v) => toggle("tenant", v)} />
+          <Chips
+            options={tenantOptions.map((value) => ({ value, label: TENANT_PREFERENCE[value] ?? value }))}
+            selected={filters.tenant}
+            onToggle={(v) => toggle("tenant", v)}
+          />
         </FilterGroup>
       )}
     </div>
@@ -306,7 +300,6 @@ export default function ListingExplorer({
         )}
       </div>
 
-      {/* Mobile filter drawer */}
       <div className={cn("fixed inset-0 z-[60] lg:hidden", drawer ? "visible" : "invisible")} role="dialog" aria-modal="true" aria-label="Filters">
         <button type="button" aria-label="Close filters" onClick={() => setDrawer(false)} className={cn("absolute inset-0 bg-navy-950/50 transition-opacity", drawer ? "opacity-100" : "opacity-0")} />
         <div className={cn("absolute inset-x-0 bottom-0 flex max-h-[88vh] flex-col rounded-t-3xl bg-white transition-transform duration-300", drawer ? "translate-y-0" : "translate-y-full")}>

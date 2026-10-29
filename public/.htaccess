@@ -28,6 +28,20 @@ ErrorDocument 404 /404.html
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME}.html -f
   RewriteRule ^(.*)$ $1.html [L]
+
+  # CMS detail fallbacks — unknown slugs load the client shell at …/_/
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^new-projects/([^/]+)/?$ /new-projects/_/index.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^resale-properties/([^/]+)/?$ /resale-properties/_/index.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^rental-properties/([^/]+)/?$ /rental-properties/_/index.html [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^blogs/([^/]+)/?$ /blogs/_/index.html [L]
 </IfModule>
 
 # Compression

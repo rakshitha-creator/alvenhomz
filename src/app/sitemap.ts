@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/resale-properties/"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
     { url: absoluteUrl("/rental-properties/"), lastModified: now, changeFrequency: "daily", priority: 0.9 },
     { url: absoluteUrl("/interiors/"), lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/blogs/"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: absoluteUrl("/about-us/"), lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: absoluteUrl("/contact-us/"), lastModified: now, changeFrequency: "yearly", priority: 0.6 },
   ];

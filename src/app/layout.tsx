@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import PublicChrome from "@/components/PublicChrome";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/lib/data";
 import { absoluteUrl } from "@/lib/seo";
@@ -73,10 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <JsonLd data={organizationLd} />
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <FloatingWhatsApp />
+        <PublicChrome>{children}</PublicChrome>
       </body>
     </html>
   );

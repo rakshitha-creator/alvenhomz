@@ -12,21 +12,12 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import HeroSearch from "@/components/HeroSearch";
-import ListingCard from "@/components/ListingCard";
+import FeaturedListings from "@/components/FeaturedListings";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import { SectionHeading, ViewAll } from "@/components/ui";
 import { WhatsAppIcon } from "@/components/icons";
-import {
-  interiorServices,
-  locationSuggestions,
-  popularLocations,
-  projectCards,
-  rentalCards,
-  resaleCards,
-  site,
-  testimonials,
-} from "@/lib/data";
+import { interiorServices, popularLocations, site, testimonials } from "@/lib/data";
 import { telHref, whatsappHref } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import { img, initials } from "@/lib/utils";
@@ -40,8 +31,6 @@ export const metadata = {
   }),
   title: { absolute: "Alven Homz – Find Your Perfect Space | New Projects, Resale, Rentals & Interiors" },
 };
-
-const featured = <T extends { featured: boolean }>(list: T[], n = 3) => list.filter((x) => x.featured).slice(0, n);
 
 const WHY = [
   { icon: BadgeCheck, title: "Diligence before display", text: "We review documents, approvals and pricing before a property is presented to you." },
@@ -70,7 +59,7 @@ export default function HomePage() {
             Explore New Projects, Resale Homes, Rentals & Premium Interiors.
           </p>
           <div className="mt-10 animate-fade-up [animation-delay:240ms]">
-            <HeroSearch suggestions={locationSuggestions()} />
+            <HeroSearch />
           </div>
         </div>
       </section>
@@ -83,13 +72,7 @@ export default function HomePage() {
           description="Handpicked new-launch and under-construction projects from reputed developers."
           action={<ViewAll href="/new-projects/">All new projects</ViewAll>}
         />
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured(projectCards()).map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={i * 80}>
-              <ListingCard item={p} />
-            </Reveal>
-          ))}
-        </ul>
+        <FeaturedListings kind="project" />
       </section>
 
       {/* Featured Resale */}
@@ -101,13 +84,7 @@ export default function HomePage() {
           description="Ready homes in established neighbourhoods — move in without the wait."
           action={<ViewAll href="/resale-properties/">All resale properties</ViewAll>}
         />
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured(resaleCards()).map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={i * 80}>
-              <ListingCard item={p} />
-            </Reveal>
-          ))}
-        </ul>
+        <FeaturedListings kind="resale" />
         </div>
       </section>
 
@@ -160,13 +137,7 @@ export default function HomePage() {
           description="Apartments, villas and commercial spaces with rent, deposit and maintenance shown clearly."
           action={<ViewAll href="/rental-properties/">All rentals</ViewAll>}
         />
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured(rentalCards()).map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={i * 80}>
-              <ListingCard item={p} />
-            </Reveal>
-          ))}
-        </ul>
+        <FeaturedListings kind="rental" />
       </section>
 
       {/* Popular locations */}

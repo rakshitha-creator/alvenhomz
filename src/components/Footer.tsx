@@ -42,6 +42,7 @@ export default function Footer() {
           <FooterLink href="/resale-properties/">Resale Properties</FooterLink>
           <FooterLink href="/rental-properties/">Rental Properties</FooterLink>
           <FooterLink href="/interiors/">Alven Homz Interiors</FooterLink>
+          <FooterLink href="/blogs/">Blogs</FooterLink>
           <FooterLink href="/about-us/">About Us</FooterLink>
           <FooterLink href="/contact-us/">Contact Us</FooterLink>
         </FooterCol>

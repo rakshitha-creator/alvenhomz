@@ -1,14 +1,14 @@
 import { Suspense } from "react";
-import ListingExplorer, { ExplorerSkeleton } from "@/components/ListingExplorer";
+import ListingExplorerLive from "@/components/ListingExplorerLive";
+import { ExplorerSkeleton } from "@/components/ListingExplorer";
 import { PageHero } from "@/components/ui";
-import { locationSuggestions, resaleCards } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
   title: "Resale Properties – Ready-to-Move Flats, Villas & Houses for Sale",
   description:
-    "Find resale apartments, villas, independent houses and office spaces for sale. Filter by location, budget, BHK, furnishing and property type.",
+    "Find resale apartments, villas, independent houses and office spaces for sale. Filter by budget, BHK, furnishing and property type.",
   path: "/resale-properties/",
   image: "living-white",
 });
@@ -24,7 +24,7 @@ export default function ResalePage() {
       />
       <section className="container-x py-12">
         <Suspense fallback={<ExplorerSkeleton />}>
-          <ListingExplorer kind="resale" items={resaleCards()} suggestions={locationSuggestions()} />
+          <ListingExplorerLive kind="resale" />
         </Suspense>
       </section>
     </>
