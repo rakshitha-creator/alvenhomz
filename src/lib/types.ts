@@ -102,6 +102,7 @@ export interface Lead {
   listingUrl?: string;
   source: string;
   createdAt?: string;
+  updatedAt?: string;
   status?: "new" | "contacted" | "closed";
 }
 
