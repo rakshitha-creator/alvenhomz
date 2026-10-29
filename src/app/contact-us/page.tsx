@@ -31,6 +31,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        bannerId="contact"
         eyebrow="Contact Us"
         title="We'd love to hear from you"
         description="Whether you're buying, renting, selling or designing — reach us on call, WhatsApp or email."

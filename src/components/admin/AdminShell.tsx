@@ -14,6 +14,7 @@ import {
   LogOut,
   RefreshCw,
   BarChart3,
+  ImageIcon,
   UserRound,
 } from "lucide-react";
 import { getFirebaseAuth } from "@/lib/firebase";
@@ -26,6 +27,7 @@ const NAV = [
   { href: "/admin/resale/", label: "Resale", icon: RefreshCw },
   { href: "/admin/rentals/", label: "Rentals", icon: KeyRound },
   { href: "/admin/blogs/", label: "Blogs", icon: FileText },
+  { href: "/admin/banners/", label: "Banners", icon: ImageIcon },
   { href: "/admin/reports/", label: "Reports", icon: BarChart3 },
   { href: "/admin/profile/", label: "Profile", icon: UserRound },
 ];

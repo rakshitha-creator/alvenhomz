@@ -53,7 +53,7 @@ export default function AdminDashboardPage() {
     <div className="space-y-8">
       <AdminPageHeader
         title="Dashboard"
-        description="Live counts from Firestore. Content changes appear on the website without a rebuild."
+        description="Projects, resale, rentals, blogs, banners and leads are live from Firestore. Edits here show on the website without a rebuild."
       />
 
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">

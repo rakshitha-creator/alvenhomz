@@ -31,22 +31,23 @@ export default function ResaleDetailClient() {
         setP(null);
         return;
       }
-      const seed = getResale(slug) ?? null;
       if (!isFirebaseConfigured()) {
-        if (!cancelled) setP(seed);
+        const seed = getResale(slug) ?? null;
+        if (!cancelled) {
+          setP(seed);
+          if (seed) setSimilarItems(similar(resaleProperties, seed, (x) => x.price).map(resaleCard));
+        }
         return;
       }
       try {
         const live = await getResaleBySlug(slug);
-        const item = live ?? seed;
-        if (!cancelled) setP(item);
-        if (item) {
+        if (!cancelled) setP(live);
+        if (live) {
           const all = await listPublishedResale();
-          const pool = all.length ? all : resaleProperties;
-          if (!cancelled) setSimilarItems(similar(pool, item, (x) => x.price).map(resaleCard));
+          if (!cancelled) setSimilarItems(similar(all, live, (x) => x.price).map(resaleCard));
         }
       } catch {
-        if (!cancelled) setP(seed);
+        if (!cancelled) setP(null);
       }
     }
     load();

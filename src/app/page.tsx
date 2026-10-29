@@ -11,6 +11,7 @@ import {
   Scale,
   ShieldCheck,
 } from "lucide-react";
+import BannerMedia from "@/components/BannerMedia";
 import HeroSearch from "@/components/HeroSearch";
 import FeaturedListings from "@/components/FeaturedListings";
 import LeadForm from "@/components/LeadForm";
@@ -47,8 +48,12 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-navy-950 lg:min-h-[720px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/Luxury Blue Living Room Family Gathering.png" alt="Family gathered on a sofa in a luxury blue living room" className="absolute inset-0 -z-10 h-full w-full object-cover" fetchPriority="high" />
+        <BannerMedia
+          pageId="home"
+          fallback="/images/Luxury Blue Living Room Family Gathering.png"
+          alt="Family gathered on a sofa in a luxury blue living room"
+          priority
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950/90 via-navy-950/60 to-navy-950/20" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-navy-950/70 to-transparent" />
         <div className="container-x py-20">

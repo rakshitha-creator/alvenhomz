@@ -32,6 +32,7 @@ export default function ListingExplorerLive({ kind }: { kind: ListingKind }) {
     let cancelled = false;
 
     async function load() {
+      // When Firebase is configured, dashboard/Firestore is the source of truth (no JSON override).
       if (!isFirebaseConfigured()) {
         if (!cancelled) setItems(FALLBACK[kind]());
         return;
@@ -39,16 +40,16 @@ export default function ListingExplorerLive({ kind }: { kind: ListingKind }) {
       try {
         if (kind === "project") {
           const rows = await listPublishedProjects();
-          if (!cancelled) setItems(rows.length ? rows.map(projectCard) : FALLBACK.project());
+          if (!cancelled) setItems(rows.map(projectCard));
         } else if (kind === "resale") {
           const rows = await listPublishedResale();
-          if (!cancelled) setItems(rows.length ? rows.map(resaleCard) : FALLBACK.resale());
+          if (!cancelled) setItems(rows.map(resaleCard));
         } else {
           const rows = await listPublishedRentals();
-          if (!cancelled) setItems(rows.length ? rows.map(rentalCard) : FALLBACK.rental());
+          if (!cancelled) setItems(rows.map(rentalCard));
         }
       } catch {
-        if (!cancelled) setItems(FALLBACK[kind]());
+        if (!cancelled) setItems([]);
       }
     }
 

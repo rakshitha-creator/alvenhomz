@@ -31,6 +31,10 @@ service cloud.firestore {
         && request.resource.data.source is string;
       allow read, update, delete: if signedIn();
     }
+    // Page hero banners — public read (site), admin write
+    match /banners/{id} {
+      allow read: if true;
+      allow write: if signedIn();
+    }
   }
 }
-

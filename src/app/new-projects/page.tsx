@@ -17,6 +17,7 @@ export default function NewProjectsPage() {
   return (
     <>
       <PageHero
+        bannerId="new-projects"
         eyebrow="New Projects"
         title="New Launch & Under-Construction Projects"
         description="Compare configurations, starting prices, possession timelines and amenities across premium projects."

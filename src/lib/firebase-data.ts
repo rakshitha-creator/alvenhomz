@@ -12,7 +12,7 @@ import {
   where,
   type Unsubscribe,
 } from "firebase/firestore";
-import type { BlogPost, Lead, Project, RentalProperty, ResaleProperty } from "./types";
+import type { BlogPost, Lead, PageBanner, Project, RentalProperty, ResaleProperty } from "./types";
 import { getFirebaseDb, isFirebaseConfigured } from "./firebase";
 
 export type ListingCollection = "projects" | "resaleProperties" | "rentalProperties";
@@ -23,6 +23,7 @@ const COLLECTIONS = {
   rentalProperties: "rentalProperties",
   blogs: "blogs",
   leads: "leads",
+  banners: "banners",
 } as const;
 
 function stripUndefined<T extends Record<string, unknown>>(obj: T): T {
@@ -205,4 +206,35 @@ export async function listLeadsAdmin(): Promise<Lead[]> {
 
 export async function updateLeadStatus(id: string, status: Lead["status"]) {
   await setDoc(doc(getFirebaseDb(), COLLECTIONS.leads, id), { status, updatedAt: new Date().toISOString() }, { merge: true });
+}
+
+export async function getBanner(id: PageBanner["id"]): Promise<PageBanner | null> {
+  if (!isFirebaseConfigured()) return null;
+  const snap = await getDoc(doc(getFirebaseDb(), COLLECTIONS.banners, id));
+  if (!snap.exists()) return null;
+  return { id, ...(snap.data() as Omit<PageBanner, "id">) };
+}
+
+export async function listBannersAdmin(): Promise<PageBanner[]> {
+  if (!isFirebaseConfigured()) return [];
+  const snap = await getDocs(collection(getFirebaseDb(), COLLECTIONS.banners));
+  return snap.docs.map((d) => ({ id: d.id as PageBanner["id"], ...(d.data() as Omit<PageBanner, "id">) }));
+}
+
+export async function saveBanner(banner: PageBanner) {
+  const now = new Date().toISOString();
+  await setDoc(
+    doc(getFirebaseDb(), COLLECTIONS.banners, banner.id),
+    stripUndefined({
+      mediaType: banner.mediaType,
+      mediaUrl: banner.mediaUrl,
+      mediaStoragePath: banner.mediaStoragePath,
+      updatedAt: now,
+    } as Record<string, unknown>),
+    { merge: true },
+  );
+}
+
+export async function clearBanner(id: PageBanner["id"]) {
+  await deleteDoc(doc(getFirebaseDb(), COLLECTIONS.banners, id));
 }

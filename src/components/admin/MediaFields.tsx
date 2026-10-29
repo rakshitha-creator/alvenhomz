@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Field, FormInput } from "./form";
 import { deleteStoragePath, uploadBlogImage, uploadListingImage, uploadListingVideo } from "@/lib/uploads";
+import { confirmMediaChange } from "@/lib/media-confirm";
 import { img } from "@/lib/utils";
 
 type Kind = "projects" | "resale" | "rental";
@@ -21,10 +22,15 @@ export function ImageUploadField({
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState("");
 
-  const onFiles = async (files: FileList | null) => {
+  const onFiles = async (files: FileList | null, input: HTMLInputElement) => {
     if (!files?.length) return;
     if (!slug) {
       setError("Set a slug before uploading images.");
+      input.value = "";
+      return;
+    }
+    if (!confirmMediaChange("add", "images")) {
+      input.value = "";
       return;
     }
     setError("");
@@ -40,17 +46,23 @@ export function ImageUploadField({
       setError(e instanceof Error ? e.message : "Upload failed");
     } finally {
       setProgress(null);
+      input.value = "";
     }
+  };
+
+  const removeImage = (src: string) => {
+    if (!confirmMediaChange("remove", "image")) return;
+    onChange(images.filter((i) => i !== src));
   };
 
   return (
     <div className="space-y-3">
-      <Field label="Images" hint="Upload images or paste existing image keys / URLs (comma-separated).">
+      <Field label="Images" hint="Upload images or paste existing image keys / URLs (comma-separated). Stored in Firebase Storage.">
         <FormInput
           type="file"
           accept="image/*"
           multiple
-          onChange={(e) => onFiles(e.target.files)}
+          onChange={(e) => onFiles(e.target.files, e.target)}
           disabled={!slug}
         />
       </Field>
@@ -77,7 +89,7 @@ export function ImageUploadField({
               <button
                 type="button"
                 className="absolute top-1 right-1 rounded bg-navy-950/80 px-1.5 text-[10px] text-white"
-                onClick={() => onChange(images.filter((i) => i !== src))}
+                onClick={() => removeImage(src)}
               >
                 Remove
               </button>
@@ -105,18 +117,26 @@ export function VideoUploadField({
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState("");
 
-  const onFile = async (file?: File | null) => {
+  const onFile = async (file: File | undefined | null, input: HTMLInputElement) => {
     if (!file) return;
     if (!slug) {
       setError("Set a slug before uploading a video.");
+      input.value = "";
       return;
     }
     if (!["video/mp4", "video/webm"].includes(file.type)) {
       setError("Only MP4 or WebM videos are allowed.");
+      input.value = "";
       return;
     }
     if (file.size > 100 * 1024 * 1024) {
       setError("Video must be under 100MB.");
+      input.value = "";
+      return;
+    }
+    const action = videoUrl ? "replace" : "add";
+    if (!confirmMediaChange(action, "video")) {
+      input.value = "";
       return;
     }
     setError("");
@@ -128,18 +148,25 @@ export function VideoUploadField({
       setError(e instanceof Error ? e.message : "Upload failed");
     } finally {
       setProgress(null);
+      input.value = "";
     }
   };
 
   const remove = async () => {
+    if (!confirmMediaChange("remove", "video")) return;
     await deleteStoragePath(videoStoragePath);
     onChange({ videoUrl: undefined, videoStoragePath: undefined });
   };
 
   return (
     <div className="space-y-3">
-      <Field label="Video (optional)" hint="MP4 or WebM, max 100MB.">
-        <FormInput type="file" accept="video/mp4,video/webm" onChange={(e) => onFile(e.target.files?.[0])} disabled={!slug} />
+      <Field label="Video (optional)" hint="MP4 or WebM, max 100MB. Stored in Firebase Storage.">
+        <FormInput
+          type="file"
+          accept="video/mp4,video/webm"
+          onChange={(e) => onFile(e.target.files?.[0], e.target)}
+          disabled={!slug}
+        />
       </Field>
       {progress !== null && <p className="text-xs text-muted">Uploading… {progress}%</p>}
       {error && <p className="text-xs text-red-600">{error}</p>}
@@ -167,10 +194,16 @@ export function BlogCoverField({
   const [progress, setProgress] = useState<number | null>(null);
   const [error, setError] = useState("");
 
-  const onFile = async (file?: File | null) => {
+  const onFile = async (file: File | undefined | null, input: HTMLInputElement) => {
     if (!file) return;
     if (!slug) {
       setError("Set a slug before uploading.");
+      input.value = "";
+      return;
+    }
+    const action = coverImage ? "replace" : "add";
+    if (!confirmMediaChange(action, "image")) {
+      input.value = "";
       return;
     }
     setError("");
@@ -181,13 +214,14 @@ export function BlogCoverField({
       setError(e instanceof Error ? e.message : "Upload failed");
     } finally {
       setProgress(null);
+      input.value = "";
     }
   };
 
   return (
     <div className="space-y-3">
       <Field label="Cover image">
-        <FormInput type="file" accept="image/*" onChange={(e) => onFile(e.target.files?.[0])} disabled={!slug} />
+        <FormInput type="file" accept="image/*" onChange={(e) => onFile(e.target.files?.[0], e.target)} disabled={!slug} />
       </Field>
       {progress !== null && <p className="text-xs text-muted">Uploading… {progress}%</p>}
       {error && <p className="text-xs text-red-600">{error}</p>}

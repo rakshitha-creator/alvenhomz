@@ -31,22 +31,23 @@ export default function RentalDetailClient() {
         setP(null);
         return;
       }
-      const seed = getRental(slug) ?? null;
       if (!isFirebaseConfigured()) {
-        if (!cancelled) setP(seed);
+        const seed = getRental(slug) ?? null;
+        if (!cancelled) {
+          setP(seed);
+          if (seed) setSimilarItems(similar(rentalProperties, seed, (x) => x.rent).map(rentalCard));
+        }
         return;
       }
       try {
         const live = await getRentalBySlug(slug);
-        const item = live ?? seed;
-        if (!cancelled) setP(item);
-        if (item) {
+        if (!cancelled) setP(live);
+        if (live) {
           const all = await listPublishedRentals();
-          const pool = all.length ? all : rentalProperties;
-          if (!cancelled) setSimilarItems(similar(pool, item, (x) => x.rent).map(rentalCard));
+          if (!cancelled) setSimilarItems(similar(all, live, (x) => x.rent).map(rentalCard));
         }
       } catch {
-        if (!cancelled) setP(seed);
+        if (!cancelled) setP(null);
       }
     }
     load();

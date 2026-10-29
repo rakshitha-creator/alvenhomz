@@ -30,6 +30,16 @@ export async function uploadBlogImage(slug: string, file: File, onProgress?: (pc
   return uploadFile(path, file, onProgress);
 }
 
+export async function uploadBannerMedia(
+  pageId: string,
+  file: File,
+  onProgress?: (pct: number) => void,
+) {
+  const kind = file.type.startsWith("video/") ? "video" : "image";
+  const path = `banners/${pageId}/${kind}-${crypto.randomUUID()}-${safeName(file.name)}`;
+  return uploadFile(path, file, onProgress);
+}
+
 async function uploadFile(path: string, file: File, onProgress?: (pct: number) => void) {
   const storageRef = ref(getFirebaseStorage(), path);
   const task = uploadBytesResumable(storageRef, file, { contentType: file.type });

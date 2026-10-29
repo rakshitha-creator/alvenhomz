@@ -17,6 +17,7 @@ export default function RentalPage() {
   return (
     <>
       <PageHero
+        bannerId="rentals"
         eyebrow="Rental Properties"
         title="Homes & Workspaces for Rent"
         description="Monthly rent, security deposit and maintenance — shown clearly for every listing."

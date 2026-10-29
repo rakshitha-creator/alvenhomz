@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 import { initializeApp, cert, getApps } from "firebase-admin/app";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 
-const sa = JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS || "./serviceAccount.json", "utf8"));
+const sa = JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS || "./alven-51419-firebase-adminsdk-fbsvc-f53e1ddc72.json", "utf8"));
 if (!getApps().length) initializeApp({ credential: cert(sa) });
 const db = getFirestore();
 

@@ -25,6 +25,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        bannerId="about"
         eyebrow="About Alven Homz"
         title="Your home, our continued commitment"
         description="The trusted home services vertical of Abhee Ventures, built on 17 years of legacy."

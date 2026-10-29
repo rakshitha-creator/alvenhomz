@@ -106,6 +106,25 @@ export interface Lead {
   status?: "new" | "contacted" | "closed";
 }
 
+/** CMS-managed page hero/banner media (Firestore text meta + Storage file). */
+export type BannerPageId =
+  | "home"
+  | "new-projects"
+  | "resale"
+  | "rentals"
+  | "blogs"
+  | "about"
+  | "contact"
+  | "interiors";
+
+export interface PageBanner {
+  id: BannerPageId;
+  mediaType: "image" | "video";
+  mediaUrl: string;
+  mediaStoragePath?: string;
+  updatedAt?: string;
+}
+
 export interface ResaleProperty extends ListingBase {
   title: string;
   propertyType: string;

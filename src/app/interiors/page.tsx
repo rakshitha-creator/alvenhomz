@@ -1,4 +1,5 @@
 import { ArrowRight, BedDouble, Briefcase, ChefHat, Check, DoorClosed, Home, Phone, Sofa, type LucideIcon } from "lucide-react";
+import BannerMedia from "@/components/BannerMedia";
 import InteriorPortfolio from "@/components/InteriorPortfolio";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
@@ -35,8 +36,12 @@ export default function InteriorsPage() {
     <div className="bg-navy-950">
       {/* Hero */}
       <section className="relative isolate flex min-h-[600px] items-center overflow-hidden lg:min-h-[680px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={img("living-double-height")} alt="Double-height luxury living room designed by Alven Homz Interiors" className="absolute inset-0 -z-10 h-full w-full object-cover" fetchPriority="high" />
+        <BannerMedia
+          pageId="interiors"
+          fallback="living-double-height"
+          alt="Double-height luxury living room designed by Alven Homz Interiors"
+          priority
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/75 to-navy-950/10" />
         <div className="container-x py-20">
           <p className="eyebrow animate-fade-up text-gold-300">Alven Homz Interiors</p>

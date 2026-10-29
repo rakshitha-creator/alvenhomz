@@ -17,6 +17,7 @@ export default function ResalePage() {
   return (
     <>
       <PageHero
+        bannerId="resale"
         eyebrow="Resale Properties"
         title="Ready Homes in Established Neighbourhoods"
         description="Explore resale apartments, villas and independent houses — with clear pricing, area and furnishing details."

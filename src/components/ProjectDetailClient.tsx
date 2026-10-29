@@ -36,22 +36,23 @@ export default function ProjectDetailClient() {
         setP(null);
         return;
       }
-      const seed = getProject(slug) ?? null;
       if (!isFirebaseConfigured()) {
-        if (!cancelled) setP(seed);
+        const seed = getProject(slug) ?? null;
+        if (!cancelled) {
+          setP(seed);
+          if (seed) setSimilarItems(similar(projects, seed, (x) => x.priceFrom).map(projectCard));
+        }
         return;
       }
       try {
         const live = await getProjectBySlug(slug);
-        const item = live ?? seed;
-        if (!cancelled) setP(item);
-        if (item) {
+        if (!cancelled) setP(live);
+        if (live) {
           const all = await listPublishedProjects();
-          const pool = all.length ? all : projects;
-          if (!cancelled) setSimilarItems(similar(pool, item, (x) => x.priceFrom).map(projectCard));
+          if (!cancelled) setSimilarItems(similar(all, live, (x) => x.priceFrom).map(projectCard));
         }
       } catch {
-        if (!cancelled) setP(seed);
+        if (!cancelled) setP(null);
       }
     }
     load();

@@ -18,8 +18,9 @@ function loadJson(rel) {
   return JSON.parse(readFileSync(join(root, rel), "utf8"));
 }
 
+const credPath = process.env.GOOGLE_APPLICATION_CREDENTIALS || "./alven-51419-firebase-adminsdk-fbsvc-f53e1ddc72.json";
 if (!getApps().length) {
-  initializeApp({ credential: cert(JSON.parse(readFileSync(process.env.GOOGLE_APPLICATION_CREDENTIALS, "utf8"))) });
+  initializeApp({ credential: cert(JSON.parse(readFileSync(credPath, "utf8"))) });
 }
 
 const db = getFirestore();

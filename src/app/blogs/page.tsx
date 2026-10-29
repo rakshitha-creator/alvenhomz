@@ -14,6 +14,7 @@ export default function BlogsPage() {
   return (
     <>
       <PageHero
+        bannerId="blogs"
         eyebrow="Blogs"
         title="Insights for Homebuyers & Investors"
         description="Practical guidance on new projects, resale, rentals and interiors — written by the Alven Homz team."

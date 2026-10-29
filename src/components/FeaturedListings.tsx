@@ -31,12 +31,21 @@ const FALLBACK: Record<ListingKind, () => ListingCardData[]> = {
 };
 
 export default function FeaturedListings({ kind }: { kind: ListingKind }) {
-  const [items, setItems] = useState<ListingCardData[]>(() => featured(FALLBACK[kind]()));
+  const [items, setItems] = useState<ListingCardData[]>(() =>
+    isFirebaseConfigured() ? [] : featured(FALLBACK[kind]()),
+  );
+  const [loading, setLoading] = useState(() => isFirebaseConfigured());
 
   useEffect(() => {
     let cancelled = false;
     async function load() {
-      if (!isFirebaseConfigured()) return;
+      if (!isFirebaseConfigured()) {
+        if (!cancelled) {
+          setItems(featured(FALLBACK[kind]()));
+          setLoading(false);
+        }
+        return;
+      }
       try {
         let cards: ListingCardData[] = [];
         if (kind === "project") {
@@ -49,9 +58,13 @@ export default function FeaturedListings({ kind }: { kind: ListingKind }) {
           const rows = await listPublishedRentals();
           cards = rows.map(rentalCard);
         }
-        if (!cancelled && cards.length) setItems(featured(cards));
+        // Prefer featured; if none marked featured, show first 3 published.
+        const top = featured(cards);
+        if (!cancelled) setItems(top.length ? top : cards.slice(0, 3));
       } catch {
-        // keep seed fallback
+        if (!cancelled) setItems([]);
+      } finally {
+        if (!cancelled) setLoading(false);
       }
     }
     load();
@@ -59,6 +72,14 @@ export default function FeaturedListings({ kind }: { kind: ListingKind }) {
       cancelled = true;
     };
   }, [kind]);
+
+  if (loading) {
+    return <p className="text-sm text-muted" aria-busy="true">Loading listings…</p>;
+  }
+
+  if (!items.length) {
+    return <p className="text-sm text-muted">No featured listings published yet.</p>;
+  }
 
   return (
     <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

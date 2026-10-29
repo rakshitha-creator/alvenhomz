@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, Info } from "lucide-react";
+import BannerMedia from "@/components/BannerMedia";
+import type { BannerPageId } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export function SectionHeading({
@@ -66,11 +68,28 @@ export function SampleNotice({ className }: { className?: string }) {
   );
 }
 
-export function PageHero({ eyebrow, title, description, image }: { eyebrow: string; title: string; description: string; image: string }) {
+export function PageHero({
+  eyebrow,
+  title,
+  description,
+  image,
+  bannerId,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: string;
+  /** When set, hero media is loaded from Firestore/Storage banners. */
+  bannerId?: BannerPageId;
+}) {
   return (
     <section className="relative isolate overflow-hidden bg-navy-950">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={image} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35" fetchPriority="high" />
+      {bannerId ? (
+        <BannerMedia pageId={bannerId} fallback={image} opacity={0.35} priority />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={image} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35" fetchPriority="high" />
+      )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/30" />
       <div className="container-x py-16 sm:py-20">
         <p className="eyebrow text-gold-300 animate-fade-up">{eyebrow}</p>
