@@ -57,7 +57,7 @@ export function ImageUploadField({
 
   return (
     <div className="space-y-3">
-      <Field label="Images" hint="Upload images or paste existing image keys / URLs (comma-separated). Stored in Firebase Storage.">
+      <Field label="Images" hint="Upload images or paste existing image keys / URLs (comma-separated). Stored in Firebase Storage. Remember to Save after changes.">
         <FormInput
           type="file"
           accept="image/*"
@@ -155,12 +155,12 @@ export function VideoUploadField({
   const remove = async () => {
     if (!confirmMediaChange("remove", "video")) return;
     await deleteStoragePath(videoStoragePath);
-    onChange({ videoUrl: undefined, videoStoragePath: undefined });
+    onChange({ videoUrl: "", videoStoragePath: "" });
   };
 
   return (
     <div className="space-y-3">
-      <Field label="Video (optional)" hint="MP4 or WebM, max 100MB. Stored in Firebase Storage.">
+      <Field label="Video (optional)" hint="MP4 or WebM, max 100MB. Stored in Firebase Storage. Remember to Save after changes.">
         <FormInput
           type="file"
           accept="video/mp4,video/webm"
@@ -218,17 +218,28 @@ export function BlogCoverField({
     }
   };
 
+  const remove = () => {
+    if (!coverImage) return;
+    if (!confirmMediaChange("remove", "image")) return;
+    onChange("");
+  };
+
   return (
     <div className="space-y-3">
-      <Field label="Cover image">
+      <Field label="Cover image" hint="Stored in Firebase Storage. Remember to Save after changes.">
         <FormInput type="file" accept="image/*" onChange={(e) => onFile(e.target.files?.[0], e.target)} disabled={!slug} />
       </Field>
       {progress !== null && <p className="text-xs text-muted">Uploading… {progress}%</p>}
       {error && <p className="text-xs text-red-600">{error}</p>}
       <FormInput value={coverImage} onChange={(e) => onChange(e.target.value)} placeholder="Image URL or key" />
       {coverImage && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={img(coverImage, "sm")} alt="" className="h-40 w-full rounded-xl object-cover" />
+        <div className="space-y-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={img(coverImage, "sm")} alt="" className="h-40 w-full rounded-xl object-cover" />
+          <button type="button" className="text-xs font-semibold text-red-600" onClick={remove}>
+            Remove cover image
+          </button>
+        </div>
       )}
     </div>
   );

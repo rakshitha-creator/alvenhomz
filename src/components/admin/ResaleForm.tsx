@@ -65,6 +65,9 @@ export default function ResaleForm({ initial }: { initial?: ResaleProperty }) {
       await saveListingDoc("resaleProperties", slug, {
         ...form,
         slug,
+        images: form.images ?? [],
+        videoUrl: form.videoUrl || "",
+        videoStoragePath: form.videoStoragePath || "",
         amenities: csvToList(amenitiesText),
         furnishingDetails: csvToList(furnishText),
         published: form.published !== false,

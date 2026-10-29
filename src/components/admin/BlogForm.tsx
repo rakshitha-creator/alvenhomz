@@ -39,7 +39,12 @@ export default function BlogForm({ initial }: { initial?: BlogPost }) {
     }
     setSaving(true);
     try {
-      await saveListingDoc("blogs", slug, { ...form, slug, published: form.published !== false } as unknown as Record<string, unknown>);
+      await saveListingDoc("blogs", slug, {
+        ...form,
+        slug,
+        coverImage: form.coverImage || "",
+        published: form.published !== false,
+      } as unknown as Record<string, unknown>);
       setMessage("Saved.");
       if (!isEdit) router.replace(`/admin/blogs/edit/?slug=${encodeURIComponent(slug)}`);
     } catch (err) {

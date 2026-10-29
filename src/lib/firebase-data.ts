@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteField,
   doc,
   getDoc,
   getDocs,
@@ -26,13 +27,52 @@ const COLLECTIONS = {
   banners: "banners",
 } as const;
 
-function stripUndefined<T extends Record<string, unknown>>(obj: T): T {
-  const out = { ...obj };
-  for (const key of Object.keys(out)) {
-    if (out[key] === undefined) delete out[key];
+/** Firestore rejects `undefined` anywhere (including nested). Strip deeply. */
+function sanitizeForFirestore(value: unknown): unknown {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => sanitizeForFirestore(item))
+      .filter((item) => item !== undefined);
   }
-  return out;
+  if (typeof value === "object") {
+    // Keep Firestore sentinels (deleteField, serverTimestamp, etc.)
+    const proto = Object.getPrototypeOf(value);
+    if (proto && proto !== Object.prototype) return value;
+    const out: Record<string, unknown> = {};
+    for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
+      const next = sanitizeForFirestore(child);
+      if (next !== undefined) out[key] = next;
+    }
+    return out;
+  }
+  return value;
 }
+
+function stripUndefined<T extends Record<string, unknown>>(obj: T): T {
+  return sanitizeForFirestore(obj) as T;
+}
+
+function isBlank(value: unknown) {
+  return value === undefined || value === null || value === "";
+}
+
+/** merge:true keeps omitted keys — use deleteField so cleared media/options disappear on the site. */
+function clearBlankFields(payload: Record<string, unknown>, source: Record<string, unknown>, keys: string[]) {
+  for (const key of keys) {
+    if (isBlank(source[key])) payload[key] = deleteField();
+  }
+}
+
+const LISTING_CLEAR_KEYS = [
+  "videoUrl",
+  "videoStoragePath",
+  "priceTo",
+  "reraNumber",
+  "towers",
+  "coverImage",
+];
 
 function fromDoc<T>(id: string, data: Record<string, unknown> | undefined): T | null {
   if (!data) return null;
@@ -133,12 +173,22 @@ export async function getAdminDoc<T>(col: ListingCollection | "blogs", slug: str
 export async function saveListingDoc(col: ListingCollection | "blogs", slug: string, data: Record<string, unknown>) {
   const now = new Date().toISOString();
   const existing = await getDoc(doc(getFirebaseDb(), col, slug));
-  const payload = stripUndefined({
+  const normalized = {
     ...data,
     slug,
+    // Always persist gallery as a full array so removals replace the old list.
+    images: Array.isArray(data.images) ? data.images : data.images === undefined ? undefined : [],
     updatedAt: now,
     createdAt: existing.exists() ? (existing.data()?.createdAt ?? now) : now,
-  });
+  };
+  const payload = stripUndefined(normalized) as Record<string, unknown>;
+  clearBlankFields(payload, normalized, LISTING_CLEAR_KEYS);
+
+  // Empty gallery must clear previous images on merge writes.
+  if (Array.isArray(normalized.images) && normalized.images.length === 0) {
+    payload.images = [];
+  }
+
   await setDoc(doc(getFirebaseDb(), col, slug), payload, { merge: true });
 }
 
@@ -223,16 +273,16 @@ export async function listBannersAdmin(): Promise<PageBanner[]> {
 
 export async function saveBanner(banner: PageBanner) {
   const now = new Date().toISOString();
-  await setDoc(
-    doc(getFirebaseDb(), COLLECTIONS.banners, banner.id),
-    stripUndefined({
-      mediaType: banner.mediaType,
-      mediaUrl: banner.mediaUrl,
-      mediaStoragePath: banner.mediaStoragePath,
-      updatedAt: now,
-    } as Record<string, unknown>),
-    { merge: true },
-  );
+  const source = {
+    mediaType: banner.mediaType,
+    mediaUrl: banner.mediaUrl || "",
+    mediaStoragePath: banner.mediaStoragePath || "",
+    updatedAt: now,
+  };
+  const payload = stripUndefined(source) as Record<string, unknown>;
+  clearBlankFields(payload, source, ["mediaUrl", "mediaStoragePath"]);
+  // Full replace so removed banner media cannot linger via merge.
+  await setDoc(doc(getFirebaseDb(), COLLECTIONS.banners, banner.id), payload);
 }
 
 export async function clearBanner(id: PageBanner["id"]) {

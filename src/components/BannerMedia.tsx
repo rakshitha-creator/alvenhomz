@@ -46,8 +46,9 @@ export default function BannerMedia({
     };
   }, [pageId]);
 
-  const mediaUrl = banner?.mediaUrl || resolveFallback(fallback);
-  const isVideo = banner?.mediaType === "video" && Boolean(banner.mediaUrl);
+  const cmsUrl = banner?.mediaUrl?.trim() || "";
+  const mediaUrl = cmsUrl || resolveFallback(fallback);
+  const isVideo = banner?.mediaType === "video" && Boolean(cmsUrl);
   const style = opacity !== undefined ? { opacity } : undefined;
 
   // Keep layout stable: show fallback immediately, swap when CMS media loads

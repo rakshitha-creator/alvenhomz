@@ -81,7 +81,13 @@ function textToTestimonials(text: string): ProjectTestimonial[] {
     .filter(Boolean)
     .map((line) => {
       const [name, context, ...rest] = line.split("|");
-      return { name: (name ?? "").trim(), context: (context ?? "").trim() || undefined, quote: rest.join("|").trim() };
+      const item: ProjectTestimonial = {
+        name: (name ?? "").trim(),
+        quote: rest.join("|").trim(),
+      };
+      const ctx = (context ?? "").trim();
+      if (ctx) item.context = ctx;
+      return item;
     })
     .filter((t) => t.name && t.quote);
 }
@@ -117,7 +123,9 @@ function textToPlans(text: string): Project["floorPlans"] {
     .filter(Boolean)
     .map((line) => {
       const [label, bhk, area, image] = line.split("|").map((s) => s.trim());
-      return { label: label || "Plan", bhk: Number(bhk) || 0, area: area || "", image: image || undefined };
+      const plan: Project["floorPlans"][number] = { label: label || "Plan", bhk: Number(bhk) || 0, area: area || "" };
+      if (image) plan.image = image;
+      return plan;
     });
 }
 
@@ -150,12 +158,13 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
       .filter(Boolean)
       .map((line) => {
         const [label, bhk, area, price] = line.split("|").map((s) => s.trim());
-        return {
+        const config: Project["configurations"][number] = {
           label: label || "Config",
-          bhk: bhk ? Number(bhk) : undefined,
           area: area || "",
-          price: price ? Number(price) : undefined,
         };
+        if (bhk) config.bhk = Number(bhk);
+        if (price) config.price = Number(price);
+        return config;
       });
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -169,9 +178,18 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
     }
     setSaving(true);
     try {
+      const contact: NonNullable<Project["contact"]> = {};
+      if (form.contact?.phone) contact.phone = form.contact.phone;
+      if (form.contact?.whatsapp) contact.whatsapp = form.contact.whatsapp;
+      if (form.contact?.email) contact.email = form.contact.email;
+      if (form.contact?.note) contact.note = form.contact.note;
+
       await saveListingDoc("projects", slug, {
         ...form,
         slug,
+        images: form.images ?? [],
+        videoUrl: form.videoUrl || "",
+        videoStoragePath: form.videoStoragePath || "",
         configurations: parseConfigs(),
         amenities: csvToList(amenitiesText),
         highlights: csvToList(highlightsText),
@@ -179,12 +197,7 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
         nearby: textToNearby(nearbyText),
         faqs: textToFaqs(faqsText),
         testimonials: textToTestimonials(testimonialsText),
-        contact: {
-          phone: form.contact?.phone || undefined,
-          whatsapp: form.contact?.whatsapp || undefined,
-          email: form.contact?.email || undefined,
-          note: form.contact?.note || undefined,
-        },
+        contact,
         published: form.published !== false,
       } as unknown as Record<string, unknown>);
       setMessage("Saved successfully.");

@@ -64,6 +64,9 @@ export default function RentalForm({ initial }: { initial?: RentalProperty }) {
       await saveListingDoc("rentalProperties", slug, {
         ...form,
         slug,
+        images: form.images ?? [],
+        videoUrl: form.videoUrl || "",
+        videoStoragePath: form.videoStoragePath || "",
         amenities: csvToList(amenitiesText),
         furnishingDetails: csvToList(furnishText),
         tenantPreference: csvToList(tenantText),
