@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import ListingExplorerLive from "@/components/ListingExplorerLive";
-import { ExplorerSkeleton } from "@/components/ListingExplorer";
+import ListingExplorer, { ExplorerSkeleton } from "@/components/ListingExplorer";
 import { PageHero } from "@/components/ui";
+import { projectCards } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
@@ -17,7 +17,6 @@ export default function NewProjectsPage() {
   return (
     <>
       <PageHero
-        bannerId="new-projects"
         eyebrow="New Projects"
         title="New Launch & Under-Construction Projects"
         description="Compare configurations, starting prices, possession timelines and amenities across premium projects."
@@ -25,7 +24,7 @@ export default function NewProjectsPage() {
       />
       <section className="container-x py-12">
         <Suspense fallback={<ExplorerSkeleton />}>
-          <ListingExplorerLive kind="project" />
+          <ListingExplorer kind="project" items={projectCards()} />
         </Suspense>
       </section>
     </>

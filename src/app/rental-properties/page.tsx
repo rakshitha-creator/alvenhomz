@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import ListingExplorerLive from "@/components/ListingExplorerLive";
-import { ExplorerSkeleton } from "@/components/ListingExplorer";
+import ListingExplorer, { ExplorerSkeleton } from "@/components/ListingExplorer";
 import { PageHero } from "@/components/ui";
+import { rentalCards } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
@@ -17,7 +17,6 @@ export default function RentalPage() {
   return (
     <>
       <PageHero
-        bannerId="rentals"
         eyebrow="Rental Properties"
         title="Homes & Workspaces for Rent"
         description="Monthly rent, security deposit and maintenance — shown clearly for every listing."
@@ -25,7 +24,7 @@ export default function RentalPage() {
       />
       <section className="container-x py-12">
         <Suspense fallback={<ExplorerSkeleton />}>
-          <ListingExplorerLive kind="rental" />
+          <ListingExplorer kind="rental" items={rentalCards()} />
         </Suspense>
       </section>
     </>

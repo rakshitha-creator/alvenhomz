@@ -3,14 +3,14 @@
     "slug": "abhee-codename-new-dimension-gunjur",
     "name": "Abhee Codename New Dimension",
     "developer": "Abhee Ventures",
-    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
+    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru \u2014 including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "apartment",
     "status": "upcoming",
     "possession": "Dec 2033",
     "reraNumber": "PRM/KA/RERA/1251/308/PR/250826/008887",
     "city": "Bengaluru",
     "locality": "Gunjur",
-    "address": "Gunjur, Whitefield–Sarjapur Main Road, East Bengaluru",
+    "address": "Gunjur, Whitefield\u2013Sarjapur Main Road, East Bengaluru",
     "lat": 12.9205,
     "lng": 77.7368,
     "priceFrom": 11900000,
@@ -47,6 +47,7 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-codename.webp",
       "glass-towers",
       "clubhouse-pool",
       "living-double-height",
@@ -54,11 +55,11 @@
       "bedroom-luxe",
       "patio-lounge"
     ],
-    "description": "A 45-acre township planned on the Whitefield–Sarjapur corridor, directly behind Abhee Celestial City. Around 3,000 homes across 14 high-rise towers are being developed in phases, with close to 85% of the land kept as open space. Its centrepiece is a 3-acre private golf course, alongside four clubhouses and a dedicated wellness club. Expressions of interest are open; Phase I is RERA registered.",
+    "description": "A 45-acre township planned on the Whitefield\u2013Sarjapur corridor, directly behind Abhee Celestial City. Around 3,000 homes across 14 high-rise towers are being developed in phases, with close to 85% of the land kept as open space. Its centrepiece is a 3-acre private golf course, alongside four clubhouses and a dedicated wellness club. Expressions of interest are open; Phase I is RERA registered.",
     "highlights": [
       "45-acre township with close to 85% open space",
       "3-acre private golf course with putting green and simulator",
-      "Four clubhouses plus a wellness club — about 1.5 lakh sq.ft in all",
+      "Four clubhouses plus a wellness club \u2014 about 1.5 lakh sq.ft in all",
       "140+ amenities including padel, pickleball, squash and a skating rink",
       "Minutes from Greenwood High, Oakridge and The International School",
       "Phase I RERA registered; later phases to be registered at launch"
@@ -120,14 +121,14 @@
     "slug": "abhee-celestial-city-gunjur",
     "name": "Abhee Celestial City",
     "developer": "Abhee Ventures",
-    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
+    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru \u2014 including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "apartment",
     "status": "under-construction",
     "possession": "To be confirmed",
     "reraNumber": "PRM/KA/RERA/1251/308/PR/071123/006380",
     "city": "Bengaluru",
     "locality": "Gunjur",
-    "address": "Chikkavaderapura, Varthur–Sarjapur Road, near Dommasandra Circle (behind Greenwood High School), East Bengaluru",
+    "address": "Chikkavaderapura, Varthur\u2013Sarjapur Road, near Dommasandra Circle (behind Greenwood High School), East Bengaluru",
     "lat": 12.9168,
     "lng": 77.7352,
     "priceFrom": 15500000,
@@ -140,12 +141,12 @@
       {
         "label": "2.5 BHK",
         "bhk": 2,
-        "area": "1,680 – 1,685 sq.ft (SBUA)"
+        "area": "1,680 \u2013 1,685 sq.ft (SBUA)"
       },
       {
         "label": "3 BHK",
         "bhk": 3,
-        "area": "1,950 – 1,990 sq.ft (SBUA)"
+        "area": "1,950 \u2013 1,990 sq.ft (SBUA)"
       }
     ],
     "totalUnits": 397,
@@ -154,13 +155,14 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-celestial.webp",
       "tower-balconies",
       "living-white",
       "kitchen-white",
       "bedroom-modern",
       "clubhouse-pool"
     ],
-    "description": "Three high-rise towers on five acres in Gunjur, with 397 vastu-compliant 2, 2.5 and 3 BHK homes and about 73% of the site left open. The clubhouse includes a heated pool, squash and badminton courts, a spa and a café, and leading international schools are a few minutes away. BDA and RERA approved.",
+    "description": "Three high-rise towers on five acres in Gunjur, with 397 vastu-compliant 2, 2.5 and 3 BHK homes and about 73% of the site left open. The clubhouse includes a heated pool, squash and badminton courts, a spa and a caf\u00e9, and leading international schools are a few minutes away. BDA and RERA approved.",
     "highlights": [
       "397 homes in three B2+G+26 towers",
       "About 73% open space on a 5-acre site",
@@ -242,14 +244,14 @@
     "slug": "abhee-aaria-gunjur-lake",
     "name": "Abhee Aaria",
     "developer": "Abhee Ventures",
-    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
+    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru \u2014 including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "apartment",
     "status": "under-construction",
     "possession": "May 2031",
     "reraNumber": "PRM/KA/RERA/1251/309/PR/050325/007545",
     "city": "Bengaluru",
     "locality": "Gunjur",
-    "address": "Gunjur–Dommasandra Main Road, opposite Gunjur Lake, Sarjapur–Whitefield Road, East Bengaluru",
+    "address": "Gunjur\u2013Dommasandra Main Road, opposite Gunjur Lake, Sarjapur\u2013Whitefield Road, East Bengaluru",
     "lat": 12.9318,
     "lng": 77.7392,
     "priceFrom": 19000000,
@@ -262,7 +264,7 @@
       {
         "label": "2 BHK",
         "bhk": 2,
-        "area": "1,320 – 1,330 sq.ft (SBUA)"
+        "area": "1,320 \u2013 1,330 sq.ft (SBUA)"
       },
       {
         "label": "2.5 BHK",
@@ -272,7 +274,7 @@
       {
         "label": "3 BHK",
         "bhk": 3,
-        "area": "1,670 – 1,765 sq.ft (SBUA)",
+        "area": "1,670 \u2013 1,765 sq.ft (SBUA)",
         "price": 19000000
       },
       {
@@ -287,13 +289,14 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-aaria.webp",
       "villa-lap-pool",
       "living-gallery",
       "kitchen-modular",
       "bedroom-boho",
       "patio-lounge"
     ],
-    "description": "A lake-facing community opposite Gunjur Lake, with 1,017 homes across five towers on 12 acres. Nearly 85% of the land is open space, including a 2-acre forest zone, and two clubhouses of about 60,000 sq.ft offer 60+ amenities — from an infinity pool and mini theatre to a business centre and work-from-home stations.",
+    "description": "A lake-facing community opposite Gunjur Lake, with 1,017 homes across five towers on 12 acres. Nearly 85% of the land is open space, including a 2-acre forest zone, and two clubhouses of about 60,000 sq.ft offer 60+ amenities \u2014 from an infinity pool and mini theatre to a business centre and work-from-home stations.",
     "highlights": [
       "Opposite Gunjur Lake, with a 2-acre forest zone",
       "Nearly 85% open space on 12 acres",
@@ -370,7 +373,7 @@
     "slug": "abhee-serenity-springs-bommasandra",
     "name": "Abhee Serenity Springs",
     "developer": "Abhee Ventures",
-    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
+    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru \u2014 including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "apartment",
     "status": "under-construction",
     "possession": "Jun 2030",
@@ -385,13 +388,13 @@
       {
         "label": "2.5 BHK (3 bed, 2 bath)",
         "bhk": 2,
-        "area": "1,375 – 1,470 sq.ft (SBUA)",
+        "area": "1,375 \u2013 1,470 sq.ft (SBUA)",
         "price": 11200000
       },
       {
         "label": "3 BHK (3 bed, 3 bath)",
         "bhk": 3,
-        "area": "1,595 – 1,675 sq.ft (SBUA)"
+        "area": "1,595 \u2013 1,675 sq.ft (SBUA)"
       }
     ],
     "totalUnits": 288,
@@ -400,6 +403,7 @@
     "featured": false,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-serenity.webp",
       "apartment-brick",
       "living-plants",
       "kitchen-white",
@@ -481,7 +485,7 @@
     "slug": "abhee-silicon-shine-sarjapur-road",
     "name": "Abhee Silicon Shine",
     "developer": "Abhee Ventures",
-    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
+    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru \u2014 including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "apartment",
     "status": "under-construction",
     "possession": "Aug 2026",
@@ -511,6 +515,7 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-silicon.webp",
       "apartment-block",
       "living-accent",
       "kitchen-marble",
@@ -519,9 +524,9 @@
     ],
     "description": "A low-rise community of 462 homes in three B+G+4 blocks on 6.75 acres, directly opposite Wipro SEZ off Sarjapur Road. Every home is planned with no common walls, and amenities include a pool, indoor and outdoor gyms, a skating rink and an outdoor workstation and library. Nearing completion, with possession targeted for August 2026. BDA and RERA approved.",
     "highlights": [
-      "Directly opposite Wipro SEZ — about 4 minutes away",
+      "Directly opposite Wipro SEZ \u2014 about 4 minutes away",
       "Low-rise B+G+4 blocks with no common walls",
-      "Nearing completion — possession targeted Aug 2026",
+      "Nearing completion \u2014 possession targeted Aug 2026",
       "BDA and RERA approved",
       "2 minutes to National Public School; 7 minutes to RGA Tech Park"
     ],
@@ -588,14 +593,14 @@
     "slug": "abhee-tranquila-sarjapur-attibele-road",
     "name": "Abhee Tranquila",
     "developer": "Abhee Ventures",
-    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
+    "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru \u2014 including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "plot",
     "status": "under-construction",
     "possession": "Dec 2026",
     "reraNumber": "PRM/KA/RERA/1251/310/PR/020725/007891",
     "city": "Bengaluru",
-    "locality": "Sarjapur–Attibele Road",
-    "address": "Sarjapur–Attibele Road, South-East Bengaluru",
+    "locality": "Sarjapur\u2013Attibele Road",
+    "address": "Sarjapur\u2013Attibele Road, South-East Bengaluru",
     "lat": 12.8165,
     "lng": 77.7395,
     "priceFrom": 9100000,
@@ -619,14 +624,15 @@
     "featured": false,
     "launchedOn": "2026-10-26",
     "images": [
+      "/images/brand/project-tranquila.webp",
       "plot-sunrise",
       "villa-garden",
       "house-lawn",
       "farmhouse-dusk"
     ],
-    "description": "A gated plotted community of 279 villa plots on 20 acres along Sarjapur–Attibele Road, so you can design and build your own home. The layout has wide internal roads, avenue planting, a forest walk and a clubhouse with an infinity pool, and sits close to the planned SWIFT City and STRR. RERA and STRR approved.",
+    "description": "A gated plotted community of 279 villa plots on 20 acres along Sarjapur\u2013Attibele Road, so you can design and build your own home. The layout has wide internal roads, avenue planting, a forest walk and a clubhouse with an infinity pool, and sits close to the planned SWIFT City and STRR. RERA and STRR approved.",
     "highlights": [
-      "279 villa plots on 20 acres — build your own home",
+      "279 villa plots on 20 acres \u2014 build your own home",
       "1,200 and 1,500 sq.ft East-facing plots with 12 m roads",
       "Clubhouse with infinity pool, gym and guest rooms",
       "Forest walk, tree house, pet park and sports courts",

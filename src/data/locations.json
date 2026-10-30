@@ -1,19 +1,19 @@
 [
   {
-    "name": "Soukya Road, East Bangalore",
-    "image": "villa-garden",
+    "name": "Kudlu Gate",
+    "image": "/images/brand/location-kudlu-gate.webp",
     "blurb": "Peaceful homes, thoughtfully designed and cared for.",
-    "description": "Calm, green living near Whitefield, where Alven Homz brings you interior solutions, rental and resale services under one roof."
+    "description": "A well-connected neighbourhood off Hosur Road near HSR Layout, where Alven Homz brings you interior solutions, rental and resale services under one roof."
   },
   {
     "name": "Sarjapur Road",
-    "image": "glass-towers",
+    "image": "/images/brand/location-sarjapur-road.webp",
     "blurb": "Rent, lease or resell with ease.",
     "description": "In Bangalore's busiest IT corridor, Alven Homz makes leasing, resale and property management simple and hassle-free."
   },
   {
     "name": "Bommasandra",
-    "image": "apartment-brick",
+    "image": "/images/brand/location-bommasandra.webp",
     "blurb": "Homes managed with care, built for value.",
     "description": "A growing neighbourhood near Electronic City, where Alven Homz offers reliable interior solutions and property management for your home."
   }

@@ -18,7 +18,7 @@ export default function Footer() {
     <footer className="bg-navy-950 text-white/70">
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Logo className="rounded-2xl bg-white px-5 py-4" imgClassName="h-28" />
+          <Logo variant="light" imgClassName="h-32 w-auto" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed">{site.description}</p>
           <ul className="mt-6 flex gap-3">
             {socials.map(({ href, label, Icon }) => (
@@ -37,15 +37,41 @@ export default function Footer() {
           </ul>
         </div>
 
-        <FooterCol title="Explore">
-          <FooterLink href="/new-projects/">New Projects</FooterLink>
-          <FooterLink href="/resale-properties/">Resale Properties</FooterLink>
-          <FooterLink href="/rental-properties/">Rental Properties</FooterLink>
-          <FooterLink href="/interiors/">Alven Homz Interiors</FooterLink>
-          <FooterLink href="/blogs/">Blogs</FooterLink>
-          <FooterLink href="/about-us/">About Us</FooterLink>
-          <FooterLink href="/contact-us/">Contact Us</FooterLink>
-        </FooterCol>
+        <div className="lg:col-span-3">
+          <h2 className="font-sans text-xs font-semibold tracking-[0.22em] text-gold-400 uppercase">Explore</h2>
+          <ul className="mt-5 space-y-3 text-sm">
+            <li>
+              <Link href="/new-projects/" className="transition hover:text-white">
+                New Projects
+              </Link>
+            </li>
+            <li>
+              <Link href="/resale-properties/" className="transition hover:text-white">
+                Resale Properties
+              </Link>
+            </li>
+            <li>
+              <Link href="/rental-properties/" className="transition hover:text-white">
+                Rental Properties
+              </Link>
+            </li>
+            <li>
+              <Link href="/interiors/" className="transition hover:text-white">
+                Alven Homz Interiors
+              </Link>
+            </li>
+            <li>
+              <Link href="/about-us/" className="transition hover:text-white">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact-us/" className="transition hover:text-white">
+                Contact Us
+              </Link>
+            </li>
+          </ul>
+        </div>
 
         <div className="lg:col-span-4">
           <h2 className="font-sans text-xs font-semibold tracking-[0.22em] text-gold-400 uppercase">Get in touch</h2>
@@ -71,32 +97,9 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-3 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} {site.name}. All rights reserved.</p>
-          {site.sampleContentNotice && (
-            <p className="text-white/50">
-              Resale and rental listings shown are sample content for demonstration and are not verified offers.
-            </p>
-          )}
+          <p className="text-white/50">Rental listings shown are sample content for demonstration and are not verified offers.</p>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="lg:col-span-3">
-      <h2 className="font-sans text-xs font-semibold tracking-[0.22em] text-gold-400 uppercase">{title}</h2>
-      <ul className="mt-5 space-y-3 text-sm">{children}</ul>
-    </div>
-  );
-}
-
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <li>
-      <Link href={href} className="transition hover:text-white">
-        {children}
-      </Link>
-    </li>
   );
 }

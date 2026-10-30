@@ -132,12 +132,12 @@ export interface ResaleProperty extends ListingBase {
   bhk: number;
   bathrooms: number;
   balconies: number;
-  carpetArea: number;
+  carpetArea?: number | null;
   builtUpArea: number;
   floor: string;
   totalFloors: number;
   facing: string;
-  furnishing: "furnished" | "semi-furnished" | "unfurnished";
+  furnishing: "furnished" | "semi-furnished" | "unfurnished" | "not-confirmed" | string;
   furnishingDetails: string[];
   parking: string;
   ageYears: number;
@@ -154,10 +154,10 @@ export interface RentalProperty extends ListingBase {
   maintenance: number;
   bhk: number;
   bathrooms: number;
-  carpetArea: number;
+  carpetArea?: number | null;
   floor: string;
   totalFloors: number;
-  furnishing: "furnished" | "semi-furnished" | "unfurnished";
+  furnishing: "furnished" | "semi-furnished" | "unfurnished" | "not-confirmed" | string;
   furnishingDetails: string[];
   parking: string;
   availableFrom: string;

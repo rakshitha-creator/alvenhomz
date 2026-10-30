@@ -4,7 +4,7 @@ export function cn(...classes: Array<string | false | null | undefined>) {
 
 /** Formats INR amounts the Indian way: ₹1.25 Cr, ₹85 L, ₹45,000 */
 export function formatINR(value?: number | null, opts: { short?: boolean } = {}) {
-  if (value === undefined || value === null || Number.isNaN(value)) return "Price on request";
+  if (value === undefined || value === null || Number.isNaN(value) || value <= 0) return "Price on request";
   const short = opts.short ?? true;
   if (short && value >= 1_00_00_000) return `₹${trim(value / 1_00_00_000)} Cr`;
   if (short && value >= 1_00_000) return `₹${trim(value / 1_00_000)} L`;

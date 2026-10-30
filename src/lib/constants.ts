@@ -20,6 +20,7 @@ export const FURNISHING: Record<string, string> = {
   furnished: "Furnished",
   "semi-furnished": "Semi-Furnished",
   unfurnished: "Unfurnished",
+  "not-confirmed": "Under construction",
 };
 
 export const TENANT_PREFERENCE: Record<string, string> = {

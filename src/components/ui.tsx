@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, Info } from "lucide-react";
+import { ArrowRight, ChevronRight, Info } from "lucide-react";
 import BannerMedia from "@/components/BannerMedia";
 import type { BannerPageId } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  center = false,
   action,
   light = false,
 }: {
@@ -16,12 +17,14 @@ export function SectionHeading({
   title: string;
   description?: string;
   align?: "left" | "center";
+  center?: boolean;
   action?: React.ReactNode;
   light?: boolean;
 }) {
+  const isCenter = center || align === "center";
   return (
-    <div className={cn("mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", align === "center" && "items-center text-center sm:flex-col sm:items-center")}>
-      <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
+    <div className={cn("mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between", isCenter && "items-center text-center sm:flex-col sm:items-center")}>
+      <div className={cn("max-w-2xl", isCenter && "mx-auto")}>
         {eyebrow && <p className={cn("eyebrow", light && "text-gold-300")}>{eyebrow}</p>}
         <h2 className={cn("mt-3 text-3xl font-semibold sm:text-4xl", light && "text-white")}>{title}</h2>
         {description && <p className={cn("mt-4 text-base leading-relaxed", light ? "text-white/70" : "text-muted")}>{description}</p>}
@@ -31,11 +34,23 @@ export function SectionHeading({
   );
 }
 
-export function ViewAll({ href, children = "View all" }: { href: string; children?: React.ReactNode }) {
+export function ViewAll({
+  href,
+  children = "View all",
+  arrow = false,
+}: {
+  href: string;
+  children?: React.ReactNode;
+  arrow?: boolean;
+}) {
   return (
     <Link href={href} className="group inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-navy-900">
       {children}
-      <ChevronRight className="h-4 w-4 text-gold-600 transition group-hover:translate-x-0.5" />
+      {arrow ? (
+        <ArrowRight className="h-4 w-4 text-gold-600 transition group-hover:translate-x-0.5" />
+      ) : (
+        <ChevronRight className="h-4 w-4 text-gold-600 transition group-hover:translate-x-0.5" />
+      )}
     </Link>
   );
 }
@@ -65,6 +80,30 @@ export function SampleNotice({ className }: { className?: string }) {
       <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
       Sample listing for demonstration. Prices, availability and approvals shown here are illustrative — confirm all details with our team before making decisions.
     </p>
+  );
+}
+
+export function Badge({ children, variant = "default" }: { children: React.ReactNode; variant?: "default" | "gold" | "subtle" }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold",
+        variant === "default" && "bg-navy-900 text-white",
+        variant === "gold" && "bg-gold-500 text-navy-950",
+        variant === "subtle" && "bg-ivory text-navy-800",
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
+export function NoticeBanner({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3 rounded-2xl border border-gold-400/40 bg-sand/60 p-4 text-sm text-navy-900">
+      <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
+      <div className="flex-1 leading-relaxed">{children}</div>
+    </div>
   );
 }
 
