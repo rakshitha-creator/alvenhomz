@@ -30,19 +30,22 @@ export default function ListingCard({ item, priority = false }: { item: ListingC
           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-950/60 to-transparent" />
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          {item.statusLabel && (
-            <span className={cn("rounded-full px-2.5 py-1 text-[11px] font-semibold", STATUS_STYLES[item.status ?? ""] ?? "bg-white text-navy-900")}>
-              {item.statusLabel}
+        {/* Badge row: status+type on left, Featured on right — using justify-between so they never overlap */}
+        <div className="absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+          <div className="flex flex-wrap gap-1.5">
+            {item.statusLabel && (
+              <span className={cn("rounded-full px-2.5 py-1 text-[11px] font-semibold", STATUS_STYLES[item.status ?? ""] ?? "bg-white text-navy-900")}>
+                {item.statusLabel}
+              </span>
+            )}
+            <span className="rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-semibold text-navy-900">{item.typeLabel}</span>
+          </div>
+          {item.featured && (
+            <span className="shrink-0 rounded-full bg-gold-500 px-2.5 py-1 text-[11px] font-bold tracking-wide text-navy-950 uppercase">
+              Featured
             </span>
           )}
-          <span className="rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-semibold text-navy-900">{item.typeLabel}</span>
         </div>
-        {item.featured && (
-          <span className="absolute top-3 right-3 rounded-full bg-gold-500 px-2.5 py-1 text-[11px] font-bold tracking-wide text-navy-950 uppercase">
-            Featured
-          </span>
-        )}
         <p className="absolute bottom-3 left-4 text-white">
           <span className="font-sans text-2xl font-semibold">{item.priceLabel}</span>
           <span className="ml-1.5 text-xs text-white/80">{item.priceNote}</span>

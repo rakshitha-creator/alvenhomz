@@ -166,7 +166,7 @@ export default function HomePage() {
               </a>
             </div>
           </Reveal>
-          <div className="reveal grid h-[440px] grid-cols-3 grid-rows-4 gap-3 sm:h-[560px] sm:gap-4" style={{ transitionDelay: "120ms" }}>
+          <Reveal delay={120} className="grid h-[440px] grid-cols-3 grid-rows-4 gap-3 sm:h-[560px] sm:gap-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/brand/interiors-4.webp"
@@ -202,7 +202,7 @@ export default function HomePage() {
               loading="lazy"
               className="h-full w-full rounded-2xl object-cover col-start-3 row-span-2 row-start-3"
             />
-          </div>
+          </Reveal>
         </div>
       </section>
 

@@ -107,7 +107,7 @@ export function EnquirySidebar({
 }) {
   return (
     <aside id="enquire" className="scroll-mt-24">
-      <div className="space-y-4 lg:sticky lg:top-24">
+      <div className="space-y-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto lg:pb-2 no-scrollbar">
         <div className="card p-6">
           {summary}
           <h2 className="mt-5 font-sans text-base font-bold">Interested? Get in touch</h2>
