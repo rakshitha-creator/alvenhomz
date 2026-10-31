@@ -18,7 +18,7 @@ export default function RentalPage() {
     <>
       <PageHero
         eyebrow="Rental Properties"
-        title="Homes & Workspaces for Rent"
+        title="Homes for Rent"
         description="Monthly rent, security deposit and maintenance — shown clearly for every listing."
         image={img("living-blue")}
       />

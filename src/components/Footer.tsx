@@ -57,7 +57,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/interiors/" className="transition hover:text-white">
-                Alven Homz Interiors
+                Alven Homz
               </Link>
             </li>
             <li>

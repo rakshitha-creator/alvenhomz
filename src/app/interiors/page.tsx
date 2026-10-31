@@ -44,7 +44,7 @@ export default function InteriorsPage() {
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/75 to-navy-950/10" />
         <div className="container-x py-20">
-          <p className="eyebrow animate-fade-up text-gold-300">Alven Homz Interiors</p>
+          <p className="eyebrow animate-fade-up text-gold-300">Alven Homz</p>
           <h1 className="mt-5 max-w-3xl animate-fade-up text-4xl leading-[1.08] font-semibold text-white [animation-delay:80ms] sm:text-6xl">
             Beautiful Spaces. <span className="text-gold-400 italic">Thoughtful Designs.</span> Inspired Living.
           </h1>

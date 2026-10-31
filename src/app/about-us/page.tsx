@@ -8,9 +8,9 @@ import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "About Alven Homz – The Home Services Vertical of Abhee Ventures",
+  title: "About Alven Homz – Dedicated Home Services",
   description:
-    "Alven Homz is the trusted home services vertical of Abhee Ventures, built on 17 years of legacy — interior design, rental, resale and property management under one roof.",
+    "Alven Homz is your trusted home services partner, built on 17 years of legacy — interior design, rental, resale and property management under one roof.",
   path: "/about-us/",
   image: "living-penthouse",
 });
@@ -28,7 +28,7 @@ export default function AboutPage() {
         bannerId="about"
         eyebrow="About Alven Homz"
         title="Your home, our continued commitment"
-        description="The trusted home services vertical of Abhee Ventures, built on 17 years of legacy."
+        description="Your trusted home services partner, built on 17 years of legacy."
         image={img("living-penthouse")}
       />
 
@@ -38,12 +38,12 @@ export default function AboutPage() {
           <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Beyond the keys to your home</h2>
           <div className="mt-6 space-y-4 leading-relaxed text-navy-800">
             <p>
-              At Abhee Ventures, our relationship with homeowners has always gone beyond handing over the keys. Over 17 years of building quality homes, we
+              At Alven Homz, our relationship with homeowners has always gone beyond handing over the keys. Over 17 years of building quality homes, we
               have earned the trust of our homeowners, and Alven Homz is our next step in strengthening that bond.
             </p>
             <p>
-              Alven Homz is the dedicated in-house service vertical of Abhee Ventures. We were created to support you long after you take possession of your
-              home. Built on Abhee&apos;s values of trust, care and quality, we offer reliable and cost-effective solutions that make homeownership easier and
+              Alven Homz is your dedicated home services partner. We were created to support you long after you take possession of your
+              home. Built on Alven Homz&apos;s values of trust, care and quality, we offer reliable and cost-effective solutions that make homeownership easier and
               more convenient.
             </p>
             <p>
@@ -75,7 +75,7 @@ export default function AboutPage() {
               <Eye className="h-8 w-8 text-gold-400" />
               <h3 className="mt-5 text-2xl font-semibold text-white">Our Vision</h3>
               <ul className="mt-3 list-disc pl-5 leading-relaxed text-white/70 marker:text-gold-400">
-                <li>To be the most trusted home services partner for homeowners, carrying forward the legacy of quality and trust that defines Abhee Ventures.</li>
+                <li>To be the most trusted home services partner for homeowners, carrying forward the legacy of quality and trust that defines Alven Homz.</li>
               </ul>
             </Reveal>
             <Reveal delay={160} className="rounded-2xl border border-white/10 bg-white/5 p-8">

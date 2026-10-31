@@ -17,7 +17,7 @@ export const NAV = [
   { href: "/rental-properties/", label: "Rentals" },
   { href: "/interiors/", label: "Interiors" },
   { href: "/about-us/", label: "About Us" },
-  { href: "/contact-us/", label: "Contact" },
+  { href: "/contact-us/", label: "Contact Us" },
 ];
 
 export default function Header() {

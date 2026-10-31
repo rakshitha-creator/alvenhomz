@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
-  keywords: ["real estate Bangalore", "Sarjapur Road apartments", "Abhee Ventures", "new projects", "resale flats", "rental apartments", "luxury villas", "interior design", "Alven Homz", "Alvenhomz"],
+  keywords: ["real estate Bangalore", "Sarjapur Road apartments", "new projects", "resale flats", "rental apartments", "luxury villas", "interior design", "Alven Homz", "Alvenhomz"],
   icons: { icon: "/favicon.svg", apple: "/images/alvenhomz-logo.png" },
   openGraph: {
     type: "website",

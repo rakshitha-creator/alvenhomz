@@ -46,7 +46,7 @@ const WHY = [
   { icon: BadgeCheck, title: "Diligence before display", text: "We review documents, approvals and pricing before a property is presented to you." },
   { icon: Scale, title: "Honest, data-led advice", text: "Clear comparisons on price, location and rental yield — never pressure selling." },
   { icon: Handshake, title: "End-to-end assistance", text: "Site visits, negotiation, home loans, documentation and registration support." },
-  { icon: Paintbrush, title: "Interiors under one roof", text: "Move from keys to a finished home with Alven Homz Interiors." },
+  { icon: Paintbrush, title: "Interiors under one roof", text: "Move from keys to a finished home with Alven Homz." },
   { icon: ShieldCheck, title: "Transparent costs", text: "Rent, deposit, maintenance and charges spelled out upfront." },
   { icon: Building, title: "New, resale & rental", text: "One trusted advisor for every stage — buying, renting or investing." },
 ];
@@ -138,7 +138,7 @@ export default function HomePage() {
         />
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
-            <p className="eyebrow">Alven Homz Interiors</p>
+            <p className="eyebrow">Alven Homz</p>
             <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">
               Transform Your House into a <span className="text-gold-600 italic">Dream Home.</span>
             </h2>
