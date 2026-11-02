@@ -44,12 +44,12 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b transition-all duration-300",
-          scrolled ? "border-line bg-white/90 backdrop-blur-md shadow-[0_6px_24px_-16px_rgb(13_31_58/0.35)]" : "border-transparent bg-transparent",
+          "fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300",
+          scrolled ? "border-line bg-white/95 backdrop-blur-md shadow-[0_6px_24px_-16px_rgb(13_31_58/0.35)]" : "border-transparent bg-transparent",
         )}
       >
         <div className="container-x flex h-[88px] items-center justify-between gap-6">
-          <Logo />
+          <Logo variant={scrolled ? "dark" : "light"} />
 
           <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center gap-1">
@@ -60,7 +60,9 @@ export default function Header() {
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
                       "relative rounded-full px-3.5 py-2 text-sm font-medium transition",
-                      isActive(item.href) ? "text-navy-900" : "text-muted hover:text-navy-900",
+                      isActive(item.href)
+                        ? scrolled ? "text-navy-900" : "text-white"
+                        : scrolled ? "text-muted hover:text-navy-900" : "text-white/80 hover:text-white",
                     )}
                   >
                     {item.label}
@@ -72,15 +74,24 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <a href={telHref()} className="hidden items-center gap-2 text-sm font-semibold text-navy-900 xl:flex">
-              <Phone className="h-4 w-4 text-gold-600" /> {site.phone}
+            <a
+              href={telHref()}
+              className={cn(
+                "hidden items-center gap-2 text-sm font-semibold xl:flex",
+                scrolled ? "text-navy-900" : "text-white",
+              )}
+            >
+              <Phone className={cn("h-4 w-4", scrolled ? "text-gold-600" : "text-white/80")} /> {site.phone}
             </a>
             <a
               href={whatsappHref("Hi Alven Homz, I'd like to know more about your properties.")}
               target="_blank"
               rel="noopener"
               aria-label="Chat on WhatsApp"
-              className="hidden h-10 w-10 items-center justify-center rounded-full border border-line text-[#1faa53] transition hover:border-[#1faa53] sm:flex"
+              className={cn(
+                "hidden h-10 w-10 items-center justify-center rounded-full border text-[#1faa53] transition hover:border-[#1faa53] sm:flex",
+                scrolled ? "border-line" : "border-white/40",
+              )}
             >
               <WhatsAppIcon className="h-5 w-5" />
             </a>
@@ -93,7 +104,10 @@ export default function Header() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy-900 lg:hidden"
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden",
+                scrolled ? "border-line text-navy-900" : "border-white/40 text-white",
+              )}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
