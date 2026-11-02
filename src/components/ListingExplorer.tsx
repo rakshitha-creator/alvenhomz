@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, SearchX, SlidersHorizontal, X } from "lucide-react";
 import ListingCard from "./ListingCard";
+import LocationInput from "./LocationInput";
 import type { ListingCardData } from "@/lib/data";
 import type { ListingKind } from "@/lib/types";
 import { FURNISHING, PROJECT_STATUS, PROPERTY_TYPES, TENANT_PREFERENCE } from "@/lib/constants";
@@ -22,6 +23,8 @@ const SORTS = [
 ];
 
 type Filters = {
+  q: string;
+  city: string;
   type: string[];
   bhk: string[];
   status: string[];
@@ -36,6 +39,8 @@ type Filters = {
 function readFilters(sp: URLSearchParams): Filters {
   const list = (k: string) => (sp.get(k) ?? "").split(",").filter(Boolean);
   return {
+    q: sp.get("q") ?? "",
+    city: sp.get("city") ?? "",
     type: list("type"),
     bhk: list("bhk"),
     status: list("status"),
@@ -50,6 +55,8 @@ function readFilters(sp: URLSearchParams): Filters {
 
 function toQuery(f: Filters) {
   const p = new URLSearchParams();
+  if (f.q) p.set("q", f.q);
+  if (f.city) p.set("city", f.city);
   for (const k of ["type", "bhk", "status", "furnishing", "tenant"] as const) if (f[k].length) p.set(k, f[k].join(","));
   if (f.min) p.set("min", f.min);
   if (f.max) p.set("max", f.max);
@@ -59,10 +66,19 @@ function toQuery(f: Filters) {
 }
 
 function applyFilters(items: ListingCardData[], f: Filters) {
+  const tokens = f.q
+    .toLowerCase()
+    .split(/[,\s]+/)
+    .filter((t) => t.length > 1);
   const min = Number(f.min) || 0;
   const max = Number(f.max) || 0;
 
   const out = items.filter((it) => {
+    if (tokens.length) {
+      const hay = `${it.title} ${it.subtitle} ${it.locality} ${it.city} ${it.typeLabel}`.toLowerCase();
+      if (!tokens.every((t) => hay.includes(t))) return false;
+    }
+    if (f.city && it.city !== f.city) return false;
     if (f.type.length && !f.type.includes(it.propertyType)) return false;
     if (f.bhk.length && !it.bhks.some((b) => f.bhk.includes(b >= 5 ? "5" : String(b)))) return false;
     if (f.status.length && !f.status.includes(it.status ?? "")) return false;
@@ -88,16 +104,20 @@ function applyFilters(items: ListingCardData[], f: Filters) {
 export default function ListingExplorer({
   kind,
   items,
+  suggestions = [],
 }: {
   kind: ListingKind;
   items: ListingCardData[];
+  suggestions?: string[];
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const filters = useMemo(() => readFilters(new URLSearchParams(searchParams.toString())), [searchParams]);
   const [drawer, setDrawer] = useState(false);
+  const [q, setQ] = useState(filters.q);
 
+  useEffect(() => setQ(filters.q), [filters.q]);
   useEffect(() => {
     document.body.style.overflow = drawer ? "hidden" : "";
   }, [drawer]);
@@ -107,6 +127,14 @@ export default function ListingExplorer({
     const qs = toQuery(next);
     router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   };
+
+  // Debounce free-text location search.
+  useEffect(() => {
+    if (q === filters.q) return;
+    const t = setTimeout(() => update({ q }), 300);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q]);
 
   const toggle = (key: "type" | "bhk" | "status" | "furnishing" | "tenant", value: string) => {
     const cur = filters[key];
@@ -118,6 +146,7 @@ export default function ListingExplorer({
   const page = Math.min(filters.page, pages);
   const visible = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
+  const cities = useMemo(() => [...new Set(items.map((i) => i.city).filter(Boolean))].sort(), [items]);
   const types = useMemo(() => [...new Set(items.map((i) => i.propertyType).filter(Boolean))], [items]);
   const bhkOptions = useMemo(() => {
     const set = new Set<string>();
@@ -144,6 +173,8 @@ export default function ListingExplorer({
   const priceLabel = kind === "rental" ? "Monthly rent" : "Budget";
 
   const activeCount =
+    (filters.q ? 1 : 0) +
+    (filters.city ? 1 : 0) +
     filters.type.length +
     filters.bhk.length +
     filters.status.length +
@@ -153,16 +184,32 @@ export default function ListingExplorer({
     (filters.max ? 1 : 0);
 
   const clearAll = () => {
+    setQ("");
     router.replace(filters.sort ? `${pathname}?sort=${filters.sort}` : pathname, { scroll: false });
   };
 
   const panel = (
-    <div className="space-y-7">
+    <div className="space-y-6">
+      <FilterGroup title="Location">
+        <LocationInput value={q} onChange={setQ} suggestions={suggestions} placeholder="Locality, city or project" />
+        {cities.length > 1 && (
+          <div className="mt-2.5">
+            <label htmlFor={`${kind}-city`} className="sr-only">City</label>
+            <select id={`${kind}-city`} value={filters.city} onChange={(e) => update({ city: e.target.value })} className="input px-3">
+              <option value="">All cities</option>
+              {cities.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+        )}
+      </FilterGroup>
+
       <FilterGroup title={priceLabel}>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-2">
           <div>
             <label htmlFor={`${kind}-min`} className="sr-only">Minimum</label>
-            <select id={`${kind}-min`} value={filters.min} onChange={(e) => update({ min: e.target.value })} className="input px-3">
+            <select id={`${kind}-min`} value={filters.min} onChange={(e) => update({ min: e.target.value })} className="input px-2 text-xs">
               <option value="">No min</option>
               {steps.map((s) => (
                 <option key={s} value={s} disabled={!!filters.max && s >= Number(filters.max)}>{formatINR(s)}</option>
@@ -171,7 +218,7 @@ export default function ListingExplorer({
           </div>
           <div>
             <label htmlFor={`${kind}-max`} className="sr-only">Maximum</label>
-            <select id={`${kind}-max`} value={filters.max} onChange={(e) => update({ max: e.target.value })} className="input px-3">
+            <select id={`${kind}-max`} value={filters.max} onChange={(e) => update({ max: e.target.value })} className="input px-2 text-xs">
               <option value="">No max</option>
               {steps.map((s) => (
                 <option key={s} value={s} disabled={!!filters.min && s <= Number(filters.min)}>{formatINR(s)}</option>
@@ -233,7 +280,7 @@ export default function ListingExplorer({
     <div className="grid gap-6 lg:grid-cols-[210px_1fr]">
       <aside className="hidden lg:block">
         <div className="card sticky top-24 p-4">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-5 flex items-center justify-between">
             <h2 className="font-sans text-base font-bold">Filters</h2>
             {activeCount > 0 && (
               <button type="button" onClick={clearAll} className="text-xs font-semibold text-gold-600 hover:text-navy-900">
@@ -248,17 +295,34 @@ export default function ListingExplorer({
       <div>
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-muted" aria-live="polite">
-            <span className="font-semibold text-navy-900">{results.length}</span> {results.length === 1 ? "property" : "properties"} found
+            Showing <span className="font-semibold text-navy-900">{results.length}</span>{" "}
+            {results.length === 1 ? "property" : "properties"}
+            {activeCount > 0 && <span className="text-xs text-muted"> ({activeCount} active filter{activeCount > 1 ? "s" : ""})</span>}
           </p>
-          <div className="flex items-center gap-2">
-            <button type="button" onClick={() => setDrawer(true)} className="btn-outline py-2.5 lg:hidden">
-              <SlidersHorizontal className="h-4 w-4" /> Filters
-              {activeCount > 0 && <span className="rounded-full bg-gold-500 px-1.5 text-[11px] text-navy-950">{activeCount}</span>}
+
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setDrawer(true)}
+              className="btn-outline flex items-center gap-2 py-2 text-xs lg:hidden"
+            >
+              <SlidersHorizontal className="h-3.5 w-3.5" /> Filters
+              {activeCount > 0 && <span className="rounded-full bg-gold-500 px-1.5 py-0.5 text-[10px] font-bold text-navy-950">{activeCount}</span>}
             </button>
-            <label htmlFor={`${kind}-sort`} className="sr-only">Sort by</label>
-            <select id={`${kind}-sort`} value={filters.sort} onChange={(e) => update({ sort: e.target.value })} className="input w-auto rounded-full py-2.5 pr-9">
+
+            <label htmlFor="sort-by" className="sr-only">
+              Sort by
+            </label>
+            <select
+              id="sort-by"
+              value={filters.sort}
+              onChange={(e) => update({ sort: e.target.value })}
+              className="input w-auto py-2 text-xs"
+            >
               {SORTS.map((s) => (
-                <option key={s.value} value={s.value}>{s.label}</option>
+                <option key={s.value} value={s.value}>
+                  {s.label}
+                </option>
               ))}
             </select>
           </div>
@@ -323,7 +387,7 @@ export default function ListingExplorer({
 function FilterGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <fieldset>
-      <legend className="label mb-3">{title}</legend>
+      <legend className="label mb-2 text-xs font-bold text-navy-900">{title}</legend>
       {children}
     </fieldset>
   );
@@ -331,11 +395,11 @@ function FilterGroup({ title, children }: { title: string; children: React.React
 
 function Chips({ options, selected, onToggle }: { options: { value: string; label: string }[]; selected: string[]; onToggle: (v: string) => void }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       {options.map((o) => {
         const on = selected.includes(o.value);
         return (
-          <button key={o.value} type="button" aria-pressed={on} onClick={() => onToggle(o.value)} className={cn("chip py-1.5 text-xs", on && "chip-active")}>
+          <button key={o.value} type="button" aria-pressed={on} onClick={() => onToggle(o.value)} className={cn("chip py-1 px-2.5 text-[11px]", on && "chip-active")}>
             {o.label}
           </button>
         );

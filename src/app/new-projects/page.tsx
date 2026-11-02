@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import ListingExplorer, { ExplorerSkeleton } from "@/components/ListingExplorer";
 import { PageHero } from "@/components/ui";
-import { projectCards } from "@/lib/data";
+import { locationSuggestions, projectCards } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
@@ -24,7 +24,7 @@ export default function NewProjectsPage() {
       />
       <section className="container-x py-12">
         <Suspense fallback={<ExplorerSkeleton />}>
-          <ListingExplorer kind="project" items={projectCards()} />
+          <ListingExplorer kind="project" items={projectCards()} suggestions={locationSuggestions()} />
         </Suspense>
       </section>
     </>
