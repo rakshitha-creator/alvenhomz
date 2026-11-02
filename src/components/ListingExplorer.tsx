@@ -230,9 +230,9 @@ export default function ListingExplorer({
   );
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
+    <div className="grid gap-6 lg:grid-cols-[210px_1fr]">
       <aside className="hidden lg:block">
-        <div className="card sticky top-24 p-6">
+        <div className="card sticky top-24 p-4">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="font-sans text-base font-bold">Filters</h2>
             {activeCount > 0 && (
@@ -379,7 +379,7 @@ function PageButton({
 
 export function ExplorerSkeleton() {
   return (
-    <div className="grid gap-8 lg:grid-cols-[300px_1fr]" aria-busy="true" aria-label="Loading properties">
+    <div className="grid gap-6 lg:grid-cols-[210px_1fr]" aria-busy="true" aria-label="Loading properties">
       <div className="card hidden h-[560px] animate-pulse bg-ivory lg:block" />
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (

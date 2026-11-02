@@ -44,8 +44,8 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b bg-white/90 backdrop-blur-md transition-shadow",
-          scrolled ? "border-line shadow-[0_6px_24px_-16px_rgb(13_31_58/0.35)]" : "border-transparent",
+          "sticky top-0 z-50 border-b transition-all duration-300",
+          scrolled ? "border-line bg-white/90 backdrop-blur-md shadow-[0_6px_24px_-16px_rgb(13_31_58/0.35)]" : "border-transparent bg-transparent",
         )}
       >
         <div className="container-x flex h-[88px] items-center justify-between gap-6">
