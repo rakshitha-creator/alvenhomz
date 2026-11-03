@@ -10,7 +10,7 @@ export function ContactActions({ listing }: { listing: ListingRef }) {
         <Phone className="h-4 w-4 text-gold-600" /> Call
       </a>
       <a href={whatsappHref(listingMessage(listing))} target="_blank" rel="noopener" className="flex flex-col items-center gap-1 rounded-xl border border-line py-3 text-xs font-semibold text-navy-900 transition hover:bg-ivory">
-        <WhatsAppIcon className="h-4 w-4 text-[#1faa53]" /> WhatsApp
+        <WhatsAppIcon className="h-4 w-4 text-espresso-900" /> WhatsApp
       </a>
       <a href={mailtoHref(`Enquiry: ${listing.title}`, listingMessage(listing))} className="flex flex-col items-center gap-1 rounded-xl border border-line py-3 text-xs font-semibold text-navy-900 transition hover:bg-ivory">
         <Mail className="h-4 w-4 text-gold-600" /> Email

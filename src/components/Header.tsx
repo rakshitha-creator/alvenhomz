@@ -97,7 +97,7 @@ export default function Header() {
               aria-label="Chat on WhatsApp"
               className={cn(
                 "hidden h-10 w-10 items-center justify-center rounded-full border text-white transition sm:flex",
-                solid ? "border-[#1faa53] bg-[#1faa53] hover:bg-[#178f45]" : "border-white/40 hover:bg-white/10",
+                solid ? "border-espresso-900 bg-espresso-900 hover:bg-espresso-700" : "border-white/40 hover:bg-white/10",
               )}
             >
               <WhatsAppIcon className="h-5 w-5" />

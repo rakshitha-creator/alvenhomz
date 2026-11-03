@@ -79,7 +79,7 @@ export default function ListingCard({ item, priority = false }: { item: ListingC
             target="_blank"
             rel="noopener"
             aria-label={`Enquire about ${item.title} on WhatsApp`}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-[#1faa53] transition hover:border-[#1faa53] hover:bg-[#1faa53]/5"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-espresso-900 transition hover:border-espresso-900 hover:bg-espresso-900/5"
           >
             <WhatsAppIcon className="h-5 w-5" />
           </a>

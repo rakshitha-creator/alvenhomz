@@ -81,7 +81,7 @@
   @apply btn border border-white/30 text-white hover:bg-white/10;
 }
 @utility btn-whatsapp {
-  @apply btn bg-[#1faa53] text-white hover:bg-[#178f45] hover:shadow-lift;
+  @apply btn bg-espresso-900 text-white hover:bg-espresso-700 hover:shadow-lift;
 }
 @utility input {
   @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition outline-none focus:border-gold-500 focus:ring-4 focus:ring-gold-300/30;
