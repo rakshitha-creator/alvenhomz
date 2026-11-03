@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import AdminList from "@/components/admin/AdminList";
+import { resaleProperties } from "@/lib/data";
 
 export default function AdminResalePage() {
   const mapRow = useCallback(
@@ -22,6 +23,7 @@ export default function AdminResalePage() {
       newHref="/admin/resale/new/"
       editHref={(slug) => `/admin/resale/edit/?slug=${encodeURIComponent(slug)}`}
       mapRow={mapRow}
+      siteItems={resaleProperties}
     />
   );
 }

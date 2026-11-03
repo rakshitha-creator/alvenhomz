@@ -56,7 +56,7 @@
       "slug": "wardrobe-designs",
       "title": "Wardrobe Designs",
       "summary": "Sliding, hinged and walk-in wardrobes designed around how you dress and store.",
-      "image": "foyer-storage",
+      "image": "wardrobe-modern",
       "icon": "door-closed",
       "points": [
         "Sliding and hinged shutters",
@@ -66,16 +66,16 @@
       ]
     },
     {
-      "slug": "office-interiors",
-      "title": "Office Interiors",
-      "summary": "Productive, brand-aligned workplaces — from compact studios to full corporate floors.",
-      "image": "office-loft",
+      "slug": "home-office-interiors",
+      "title": "Home Office Interiors",
+      "summary": "Quiet, comfortable home offices and study corners designed for focused work and video calls.",
+      "image": "home-office-study",
       "icon": "briefcase",
       "points": [
-        "Workstations and cabins",
-        "Meeting and collaboration zones",
-        "Reception and branding",
-        "Acoustic and lighting design"
+        "Ergonomic desks and seating",
+        "Built-in storage and bookshelves",
+        "Task and ambient lighting",
+        "Cable management and acoustics"
       ]
     }
   ],
@@ -121,7 +121,7 @@
       "slug": "master-suite-jubilee-hills",
       "title": "Master Suite",
       "category": "Bedroom Interiors",
-      "location": "Soukya Road, Bengaluru",
+      "location": "Kudlu Gate, Bengaluru",
       "description": "A hotel-inspired master suite with a channel-tufted headboard, walk-in wardrobe and spa bath.",
       "image": "bedroom-luxe",
       "gallery": [
@@ -143,16 +143,15 @@
       ]
     },
     {
-      "slug": "creative-studio-kondapur",
-      "title": "Creative Studio Office",
-      "category": "Office Interiors",
+      "slug": "home-study-electronic-city",
+      "title": "Home Study & Work Corner",
+      "category": "Home Office Interiors",
       "location": "Electronic City, Bengaluru",
-      "description": "An open-plan studio office with collaboration tables, glass meeting rooms and industrial lighting.",
-      "image": "office-cowork",
+      "description": "A calm home office with a walnut desk, ergonomic seating, open shelving and a reading nook by the window — built for focused work and video calls.",
+      "image": "home-office-study",
       "gallery": [
-        "office-cowork",
-        "office-loft",
-        "workspace-window"
+        "home-office-study",
+        "study-green"
       ]
     },
     {

@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/blogs/"), lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     { url: absoluteUrl("/about-us/"), lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: absoluteUrl("/contact-us/"), lastModified: now, changeFrequency: "yearly", priority: 0.6 },
+    { url: absoluteUrl("/privacy-policy/"), lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: absoluteUrl("/terms-and-conditions/"), lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
   return [
     ...pages,

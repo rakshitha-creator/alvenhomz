@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-IN" data-scroll-behavior="smooth" className={`${manrope.variable} ${playfair.variable}`}>
       <body>
-        <a href="#main" className="sr-only z-[100] rounded-md bg-navy-900 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
+        <a href="#main" className="sr-only z-[100] rounded-md bg-espresso-900 px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
           Skip to content
         </a>
         <JsonLd data={organizationLd} />

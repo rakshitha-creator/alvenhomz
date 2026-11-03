@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import AdminList from "@/components/admin/AdminList";
+import { rentalProperties } from "@/lib/data";
 
 export default function AdminRentalsPage() {
   const mapRow = useCallback(
@@ -22,6 +23,7 @@ export default function AdminRentalsPage() {
       newHref="/admin/rentals/new/"
       editHref={(slug) => `/admin/rentals/edit/?slug=${encodeURIComponent(slug)}`}
       mapRow={mapRow}
+      siteItems={rentalProperties}
     />
   );
 }

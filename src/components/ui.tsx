@@ -88,7 +88,7 @@ export function Badge({ children, variant = "default" }: { children: React.React
     <span
       className={cn(
         "inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold",
-        variant === "default" && "bg-navy-900 text-white",
+        variant === "default" && "bg-espresso-900 text-white",
         variant === "gold" && "bg-gold-500 text-navy-950",
         variant === "subtle" && "bg-ivory text-navy-800",
       )}
@@ -122,15 +122,15 @@ export function PageHero({
   bannerId?: BannerPageId;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-navy-950">
+    <section className="relative isolate overflow-hidden bg-espresso-950">
       {bannerId ? (
         <BannerMedia pageId={bannerId} fallback={image} opacity={0.35} priority />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={image} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35" fetchPriority="high" />
       )}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/85 to-navy-950/30" />
-      <div className="container-x py-16 sm:py-20">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950 via-espresso-950/85 to-espresso-950/30" />
+      <div className="container-x pt-[calc(88px+3rem)] pb-16 sm:pt-[calc(88px+4rem)] sm:pb-20">
         <p className="eyebrow text-gold-300 animate-fade-up">{eyebrow}</p>
         <h1 className="mt-4 max-w-3xl text-4xl font-semibold text-white animate-fade-up [animation-delay:80ms] sm:text-5xl">{title}</h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 animate-fade-up [animation-delay:160ms] sm:text-lg">{description}</p>

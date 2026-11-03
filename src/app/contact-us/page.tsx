@@ -47,7 +47,7 @@ export default function ContactPage() {
             rel={c.external ? "noopener" : undefined}
             className="group card relative flex items-center gap-4 p-6 transition hover:-translate-y-1 hover:shadow-lift"
           >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-gold-400">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-espresso-900 text-gold-400">
               <c.icon className="h-5 w-5" />
             </span>
             <span>

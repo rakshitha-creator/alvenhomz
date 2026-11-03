@@ -8,8 +8,10 @@ import {
   onSnapshot,
   orderBy,
   query,
+  serverTimestamp,
   setDoc,
   deleteDoc,
+  updateDoc,
   where,
   type Unsubscribe,
 } from "firebase/firestore";
@@ -76,8 +78,9 @@ const LISTING_CLEAR_KEYS = [
 
 function fromDoc<T>(id: string, data: Record<string, unknown> | undefined): T | null {
   if (!data) return null;
-  const { createdAt: _c, updatedAt: _u, ...rest } = data;
-  return { slug: id, ...rest } as T;
+  const { createdAt: _c, updatedAt, ...rest } = data;
+  // Admin saves write an ISO-string updatedAt; the original bulk seed wrote a Firestore Timestamp.
+  return { slug: id, ...rest, editedInAdmin: typeof updatedAt === "string" } as T;
 }
 
 export async function listPublishedProjects(): Promise<Project[]> {
@@ -190,6 +193,50 @@ export async function saveListingDoc(col: ListingCollection | "blogs", slug: str
   }
 
   await setDoc(doc(getFirebaseDb(), col, slug), payload, { merge: true });
+}
+
+export type ImportPlan = { create: string[]; refresh: string[]; keep: string[]; hide: string[] };
+
+/**
+ * Copies the website's built-in listings into Firestore without overwriting admin work (same rules as
+ * scripts/sync-firestore.mjs): missing → created; only ever seeded (Timestamp updatedAt) → refreshed from the site data;
+ * saved in the admin (ISO-string updatedAt) → kept; seed-only docs no longer on the site → unpublished.
+ * With `apply: false` it only returns the plan.
+ */
+export async function importSiteListings(
+  col: ListingCollection,
+  items: { slug: string }[],
+  apply: boolean,
+): Promise<ImportPlan> {
+  const db = getFirebaseDb();
+  const snap = await getDocs(collection(db, col));
+  const existing = new Map(snap.docs.map((d) => [d.id, d.data()]));
+  const slugs = new Set(items.map((i) => i.slug));
+  const plan: ImportPlan = { create: [], refresh: [], keep: [], hide: [] };
+
+  for (const item of items) {
+    const cur = existing.get(item.slug);
+    if (cur && typeof cur.updatedAt === "string") {
+      plan.keep.push(item.slug);
+      continue;
+    }
+    (cur ? plan.refresh : plan.create).push(item.slug);
+    if (apply) {
+      const data = sanitizeForFirestore(JSON.parse(JSON.stringify(item))) as Record<string, unknown>;
+      await setDoc(doc(db, col, item.slug), {
+        ...data,
+        published: (item as { published?: boolean }).published !== false,
+        createdAt: cur?.createdAt ?? serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+    }
+  }
+  for (const [id, data] of existing) {
+    if (slugs.has(id) || typeof data.updatedAt === "string" || data.published === false) continue;
+    plan.hide.push(id);
+    if (apply) await updateDoc(doc(db, col, id), { published: false, updatedAt: serverTimestamp() });
+  }
+  return plan;
 }
 
 export async function deleteListingDoc(col: ListingCollection | "blogs", slug: string) {

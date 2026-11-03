@@ -271,7 +271,7 @@ export default function HomePage() {
               delay={i * 60}
               className="card p-7 text-center transition hover:-translate-y-1 hover:shadow-lift"
             >
-              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold-400">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-espresso-900 text-gold-400">
                 <item.icon className="h-6 w-6" />
               </span>
               <h3 className="mt-5 text-xl font-semibold">{item.title}</h3>
@@ -300,7 +300,7 @@ export default function HomePage() {
                 <Quote className="h-8 w-8 text-gold-500" />
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-navy-800">{t.quote}</p>
                 <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-900 text-sm font-semibold text-gold-300">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-espresso-900 text-sm font-semibold text-gold-300">
                     {initials(t.name)}
                   </span>
                   <div>
@@ -316,7 +316,7 @@ export default function HomePage() {
 
       {/* Contact CTA */}
       <section id="contact" className="container-x py-20 sm:py-24">
-        <div className="grid overflow-hidden rounded-3xl bg-navy-900 lg:grid-cols-[1fr_1.15fr]">
+        <div className="grid overflow-hidden rounded-3xl bg-espresso-900 lg:grid-cols-[1fr_1.15fr]">
           <div className="relative p-8 text-white sm:p-12">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

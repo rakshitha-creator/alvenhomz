@@ -60,7 +60,7 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
-      <section className="bg-navy-950 py-20 text-white sm:py-24">
+      <section className="bg-espresso-950 py-20 text-white sm:py-24">
         <div className="container-x">
           <SectionHeading eyebrow="What drives us" title="Mission, vision and values" align="center" light />
           <div className="grid gap-6 md:grid-cols-3">
@@ -103,7 +103,7 @@ export default function AboutPage() {
       </section>
 
       <section className="container-x pb-20 sm:pb-24">
-        <div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-navy-900 p-8 sm:p-12 md:flex-row md:items-center">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-espresso-900 p-8 sm:p-12 md:flex-row md:items-center">
           <div>
             <h2 className="text-3xl font-semibold text-white">Let&apos;s take care of your home</h2>
             <p className="mt-2 text-white/70">Interiors, rental, resale or property management — talk to the Alven Homz team today.</p>

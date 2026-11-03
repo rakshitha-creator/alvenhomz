@@ -365,7 +365,7 @@ export default function ListingExplorer({
       </div>
 
       <div className={cn("fixed inset-0 z-[60] lg:hidden", drawer ? "visible" : "invisible")} role="dialog" aria-modal="true" aria-label="Filters">
-        <button type="button" aria-label="Close filters" onClick={() => setDrawer(false)} className={cn("absolute inset-0 bg-navy-950/50 transition-opacity", drawer ? "opacity-100" : "opacity-0")} />
+        <button type="button" aria-label="Close filters" onClick={() => setDrawer(false)} className={cn("absolute inset-0 bg-espresso-950/50 transition-opacity", drawer ? "opacity-100" : "opacity-0")} />
         <div className={cn("absolute inset-x-0 bottom-0 flex max-h-[88vh] flex-col rounded-t-3xl bg-white transition-transform duration-300", drawer ? "translate-y-0" : "translate-y-full")}>
           <div className="flex items-center justify-between border-b border-line px-5 py-4">
             <h2 className="font-sans text-base font-bold">Filters</h2>
@@ -433,7 +433,7 @@ function PageButton({
       aria-current={active ? "page" : undefined}
       className={cn(
         "flex h-10 min-w-10 items-center justify-center rounded-full border px-3 text-sm font-semibold transition disabled:opacity-40",
-        active ? "border-navy-900 bg-navy-900 text-white" : "border-line bg-white text-navy-900 hover:border-navy-700/40",
+        active ? "border-espresso-900 bg-espresso-900 text-white" : "border-line bg-white text-navy-900 hover:border-navy-700/40",
       )}
     >
       {children}

@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { Pencil, Plus } from "lucide-react";
-import { listAllAdmin, type ListingCollection } from "@/lib/firebase-data";
+import { DownloadCloud, Pencil, Plus } from "lucide-react";
+import { importSiteListings, listAllAdmin, type ListingCollection } from "@/lib/firebase-data";
 import { AdminPageHeader } from "./form";
 
 type Row = { slug: string; title: string; published?: boolean; subtitle?: string };
@@ -15,6 +15,7 @@ export default function AdminList({
   newHref,
   editHref,
   mapRow,
+  siteItems,
 }: {
   collection: ListingCollection | "blogs";
   title: string;
@@ -22,9 +23,15 @@ export default function AdminList({
   newHref: string;
   editHref: (slug: string) => string;
   mapRow: (item: Record<string, unknown>) => Row;
+  /** The website's built-in listings; when set, shows an "Import website listings" button. */
+  siteItems?: { slug: string }[];
 }) {
   const [rows, setRows] = useState<Row[] | null>(null);
   const [error, setError] = useState("");
+
+  const [reload, setReload] = useState(0);
+  const [importing, setImporting] = useState(false);
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -39,7 +46,35 @@ export default function AdminList({
     return () => {
       cancelled = true;
     };
-  }, [collection, mapRow]);
+  }, [collection, mapRow, reload]);
+
+  const runImport = useCallback(async () => {
+    if (collection === "blogs" || !siteItems) return;
+    setImporting(true);
+    setError("");
+    setNotice("");
+    try {
+      const plan = await importSiteListings(collection, siteItems, false);
+      const lines = [
+        plan.create.length && `Add ${plan.create.length} listing(s) from the website:\n  ${plan.create.join("\n  ")}`,
+        plan.refresh.length && `Update ${plan.refresh.length} untouched listing(s) to match the website.`,
+        plan.hide.length && `Hide (unpublish, not delete) ${plan.hide.length} old sample(s):\n  ${plan.hide.join("\n  ")}`,
+        plan.keep.length && `Keep ${plan.keep.length} listing(s) you edited here unchanged.`,
+      ].filter(Boolean);
+      if (!plan.create.length && !plan.refresh.length && !plan.hide.length) {
+        setNotice("Everything is already in sync with the website.");
+        return;
+      }
+      if (!window.confirm(`Import website listings?\n\n${lines.join("\n\n")}`)) return;
+      await importSiteListings(collection, siteItems, true);
+      setNotice(`Done: ${plan.create.length} added, ${plan.refresh.length} updated, ${plan.hide.length} hidden, ${plan.keep.length} kept.`);
+      setReload((n) => n + 1);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Import failed");
+    } finally {
+      setImporting(false);
+    }
+  }, [collection, siteItems]);
 
   return (
     <div>
@@ -47,11 +82,19 @@ export default function AdminList({
         title={title}
         description={description}
         action={
-          <Link href={newHref} className="btn-primary py-2 text-xs">
-            <Plus className="h-3.5 w-3.5" /> Add new
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            {siteItems && (
+              <button type="button" onClick={runImport} disabled={importing} className="btn-outline py-2 text-xs">
+                <DownloadCloud className="h-3.5 w-3.5" /> {importing ? "Importing…" : "Import website listings"}
+              </button>
+            )}
+            <Link href={newHref} className="btn-primary py-2 text-xs">
+              <Plus className="h-3.5 w-3.5" /> Add new
+            </Link>
+          </div>
         }
       />
+      {notice && <p className="mb-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800">{notice}</p>}
       {error && <p className="mb-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p>}
       {!rows && !error && <p className="text-sm text-muted">Loading…</p>}
       {rows && rows.length === 0 && (

@@ -30,13 +30,16 @@ export default function Gallery({ images, title }: { images: string[]; title: st
 
   return (
     <div>
-      <div className="grid gap-2 sm:grid-cols-4 sm:grid-rows-2">
+      <div className="grid gap-2 sm:h-[460px] sm:grid-cols-4 sm:grid-rows-2">
         <div className="group relative aspect-[16/10] overflow-hidden rounded-2xl bg-sand sm:col-span-3 sm:row-span-2 sm:aspect-auto sm:h-[460px]">
           <button type="button" onClick={() => setOpen(true)} className="block h-full w-full" aria-label="Open photo gallery">
+            {/* Whole photo, never cropped: portrait and landscape shots sit on a blurred copy of themselves. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img(images[index])} alt={alt(index)} className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]" fetchPriority="high" />
+            <img src={img(images[index], "sm")} alt="" aria-hidden className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl brightness-90" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img key={images[index]} src={img(images[index])} alt={alt(index)} className="relative h-full w-full object-contain animate-fade-in" fetchPriority="high" />
           </button>
-          <span className="pointer-events-none absolute right-4 bottom-4 flex items-center gap-1.5 rounded-full bg-navy-950/70 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+          <span className="pointer-events-none absolute right-4 bottom-4 flex items-center gap-1.5 rounded-full bg-espresso-950/70 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
             <Expand className="h-3.5 w-3.5" /> {index + 1} / {count}
           </span>
           {count > 1 && (
@@ -58,13 +61,13 @@ export default function Gallery({ images, title }: { images: string[]; title: st
               setIndex(i + 1);
               setOpen(true);
             }}
-            className="relative hidden overflow-hidden rounded-2xl bg-sand sm:block"
+            className="relative hidden min-h-0 overflow-hidden rounded-2xl bg-sand sm:block"
             aria-label={`View photo ${i + 2}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={img(name, "sm")} alt={alt(i + 1)} loading="lazy" className="h-full w-full object-cover transition duration-500 hover:scale-105" />
             {i === 1 && count > 3 && (
-              <span className="absolute inset-0 flex items-center justify-center bg-navy-950/55 text-sm font-semibold text-white">+{count - 3} photos</span>
+              <span className="absolute inset-0 flex items-center justify-center bg-espresso-950/55 text-sm font-semibold text-white">+{count - 3} photos</span>
             )}
           </button>
         ))}
@@ -80,7 +83,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
       </div>
 
       {open && (
-        <div role="dialog" aria-modal="true" aria-label={`${title} photos`} className="fixed inset-0 z-[70] flex flex-col bg-navy-950/95 animate-fade-in">
+        <div role="dialog" aria-modal="true" aria-label={`${title} photos`} className="fixed inset-0 z-[70] flex flex-col bg-espresso-950/95 animate-fade-in">
           <div className="flex items-center justify-between px-4 py-3 text-white sm:px-6">
             <p className="text-sm">
               <span className="font-display text-lg">{title}</span>

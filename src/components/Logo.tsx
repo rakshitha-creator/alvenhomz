@@ -16,9 +16,9 @@ export default function Logo({
       <img
         src={variant === "light" ? "/images/brand/logo-light.webp" : "/images/brand/logo-dark.webp"}
         alt="Alven Homz – Care • Trust • Value"
-        width={521}
-        height={640}
-        className={cn("h-[68px] w-auto", imgClassName)}
+        width={386}
+        height={491}
+        className={imgClassName ?? "h-[76px] w-auto"}
       />
     </Link>
   );

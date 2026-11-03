@@ -6,6 +6,7 @@
   --color-navy-800: #142a4b;
   --color-navy-700: #1d3a63;
   --color-navy-600: #2a4c7d;
+  --color-espresso-950: #1c120c;
   --color-espresso-900: #2a1c13;
   --color-espresso-700: #4a3324;
   --color-gold-300: #e6cf9f;
@@ -68,13 +69,13 @@
   @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
 }
 @utility btn-primary {
-  @apply btn bg-navy-900 text-white hover:bg-navy-700 hover:shadow-lift;
+  @apply btn bg-espresso-900 text-white hover:bg-espresso-700 hover:shadow-lift;
 }
 @utility btn-gold {
   @apply btn bg-gold-500 text-navy-950 hover:bg-gold-400 hover:shadow-lift;
 }
 @utility btn-outline {
-  @apply btn border border-navy-900/15 bg-white text-navy-900 hover:border-navy-900/40 hover:bg-ivory;
+  @apply btn border border-espresso-900/15 bg-white text-navy-900 hover:border-espresso-900/40 hover:bg-ivory;
 }
 @utility btn-ghost-light {
   @apply btn border border-white/30 text-white hover:bg-white/10;
@@ -92,7 +93,7 @@
   @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3.5 py-2 text-sm text-navy-800 transition hover:border-navy-700/40;
 }
 @utility chip-active {
-  @apply border-navy-900 bg-navy-900 text-white hover:border-navy-900;
+  @apply border-espresso-900 bg-espresso-900 text-white hover:border-espresso-900;
 }
 @utility card {
   @apply rounded-2xl border border-line bg-white shadow-card;

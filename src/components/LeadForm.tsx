@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState } from "react";
 import { CalendarCheck, Mail, MessageSquareText, Phone } from "lucide-react";
 import { WhatsAppIcon } from "./icons";
@@ -166,7 +167,7 @@ export default function LeadForm({
               onClick={() => setValues((v) => ({ ...v, intent }))}
               className={cn(
                 "flex items-center justify-center gap-1.5 rounded-full py-2 text-xs font-semibold transition",
-                values.intent === intent ? "bg-navy-900 text-white shadow" : "text-navy-800",
+                values.intent === intent ? "bg-espresso-900 text-white shadow" : "text-navy-800",
               )}
             >
               {intent === "visit" ? <CalendarCheck className="h-3.5 w-3.5" /> : <MessageSquareText className="h-3.5 w-3.5" />}
@@ -266,7 +267,11 @@ export default function LeadForm({
       ) : (
         <p className={cn("flex items-start gap-1.5 text-[11px] leading-relaxed", dark ? "text-white/50" : "text-muted")}>
           <Phone className="mt-0.5 h-3 w-3 shrink-0" />
-          Your details open in WhatsApp or your email app for you to send — this website doesn&apos;t store them.
+          <span>
+            By sending, you agree to our{" "}
+            <Link href="/privacy-policy/" className="underline">Privacy Policy</Link> and{" "}
+            <Link href="/terms-and-conditions/" className="underline">Terms</Link>. Your details open in WhatsApp or your email app for you to send.
+          </span>
         </p>
       )}
     </form>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Field, FormInput } from "./form";
 import { deleteStoragePath, uploadBlogImage, uploadListingImage, uploadListingVideo } from "@/lib/uploads";
 import { confirmMediaChange } from "@/lib/media-confirm";
-import { img } from "@/lib/utils";
+import { cn, img } from "@/lib/utils";
 
 type Kind = "projects" | "resale" | "rental";
 
@@ -55,6 +55,17 @@ export function ImageUploadField({
     onChange(images.filter((i) => i !== src));
   };
 
+  // Reordering: the first image is the cover on cards and the main gallery photo.
+  const [dragFrom, setDragFrom] = useState<number | null>(null);
+  const [dragOver, setDragOver] = useState<number | null>(null);
+  const move = (from: number, to: number) => {
+    if (from === to || to < 0 || to >= images.length) return;
+    const next = [...images];
+    const [item] = next.splice(from, 1);
+    next.splice(to, 0, item);
+    onChange(next);
+  };
+
   return (
     <div className="space-y-3">
       <Field label="Images" hint="Upload images or paste existing image keys / URLs (comma-separated). Stored in Firebase Storage. Remember to Save after changes.">
@@ -81,21 +92,85 @@ export function ImageUploadField({
         placeholder="image-key or https://…"
       />
       {images.length > 0 && (
-        <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4">
-          {images.map((src) => (
-            <li key={src} className="relative overflow-hidden rounded-lg border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img(src, "sm")} alt="" className="aspect-square w-full object-cover" />
-              <button
-                type="button"
-                className="absolute top-1 right-1 rounded bg-navy-950/80 px-1.5 text-[10px] text-white"
-                onClick={() => removeImage(src)}
+        <>
+          <p className="text-xs text-muted">
+            Drag photos to change their order, or use the arrows. The first photo is the cover. Remember to Save after changes.
+          </p>
+          <ul className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+            {images.map((src, i) => (
+              <li
+                key={src}
+                draggable
+                onDragStart={(e) => {
+                  setDragFrom(i);
+                  e.dataTransfer.effectAllowed = "move";
+                }}
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  setDragOver(i);
+                }}
+                onDragLeave={() => setDragOver((o) => (o === i ? null : o))}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  if (dragFrom !== null) move(dragFrom, i);
+                  setDragFrom(null);
+                  setDragOver(null);
+                }}
+                onDragEnd={() => {
+                  setDragFrom(null);
+                  setDragOver(null);
+                }}
+                className={cn(
+                  "relative cursor-grab overflow-hidden rounded-lg border bg-white active:cursor-grabbing",
+                  dragOver === i && dragFrom !== i ? "border-gold-500 ring-2 ring-gold-500" : "border-line",
+                  dragFrom === i && "opacity-40",
+                )}
               >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={img(src, "sm")} alt="" draggable={false} className="aspect-square w-full object-cover" />
+                <span className="absolute top-1 left-1 rounded bg-espresso-950/80 px-1.5 text-[10px] font-semibold text-white">
+                  {i === 0 ? "Cover" : i + 1}
+                </span>
+                <button
+                  type="button"
+                  className="absolute top-1 right-1 rounded bg-espresso-950/80 px-1.5 text-[10px] text-white"
+                  onClick={() => removeImage(src)}
+                >
+                  Remove
+                </button>
+                <div className="absolute inset-x-1 bottom-1 flex items-center justify-between gap-1">
+                  <button
+                    type="button"
+                    aria-label="Move earlier"
+                    disabled={i === 0}
+                    onClick={() => move(i, i - 1)}
+                    className="rounded bg-white/90 px-2 text-xs font-bold text-espresso-900 shadow disabled:opacity-30"
+                  >
+                    ←
+                  </button>
+                  {i !== 0 && (
+                    <button
+                      type="button"
+                      onClick={() => move(i, 0)}
+                      className="rounded bg-white/90 px-1.5 text-[10px] font-semibold text-espresso-900 shadow"
+                    >
+                      Make cover
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    aria-label="Move later"
+                    disabled={i === images.length - 1}
+                    onClick={() => move(i, i + 1)}
+                    className="rounded bg-white/90 px-2 text-xs font-bold text-espresso-900 shadow disabled:opacity-30"
+                  >
+                    →
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );

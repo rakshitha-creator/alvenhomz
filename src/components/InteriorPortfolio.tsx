@@ -61,7 +61,7 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={img(item.image, i % 5 === 0 ? "lg" : "sm")} alt={`${item.title} – ${item.category}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/10 to-transparent opacity-90 transition group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-gradient-to-t from-espresso-950/90 via-espresso-950/10 to-transparent opacity-90 transition group-hover:opacity-100" />
               <div className="absolute inset-x-0 bottom-0 p-5">
                 <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-300 uppercase">{item.category}</p>
                 <p className="mt-1.5 font-display text-xl font-semibold text-white">{item.title}</p>
@@ -75,10 +75,10 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
       </ul>
 
       {open && (
-        <div role="dialog" aria-modal="true" aria-label={open.title} className="fixed inset-0 z-[70] flex items-center justify-center bg-navy-950/95 p-4 animate-fade-in">
+        <div role="dialog" aria-modal="true" aria-label={open.title} className="fixed inset-0 z-[70] flex items-center justify-center bg-espresso-950/95 p-4 animate-fade-in">
           <button type="button" className="absolute inset-0" aria-label="Close" onClick={() => setOpen(null)} />
           <div className="relative grid w-full max-w-5xl overflow-hidden rounded-2xl bg-white lg:grid-cols-[1.6fr_1fr]">
-            <div className="relative bg-navy-950">
+            <div className="relative bg-espresso-950">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img key={open.gallery[photo]} src={img(open.gallery[photo])} alt={`${open.title} – photo ${photo + 1}`} className="aspect-[4/3] w-full object-cover animate-fade-in" />
               {open.gallery.length > 1 && (

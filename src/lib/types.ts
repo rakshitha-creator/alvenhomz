@@ -38,6 +38,8 @@ interface ListingBase {
   isSample?: boolean;
   /** Photos are stand-ins, not of this property — shows a "Representative images" note. */
   representativeImages?: boolean;
+  /** Set on live (Firebase) copies that have been saved through the admin — only those override the built-in data. */
+  editedInAdmin?: boolean;
   /** When false, listing is hidden from the public site. Defaults to true for seed/JSON data. */
   published?: boolean;
   /** Optional project/property walkthrough video (Firebase Storage download URL). */

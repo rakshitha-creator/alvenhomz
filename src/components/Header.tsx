@@ -12,13 +12,16 @@ import { cn } from "@/lib/utils";
 
 export const NAV = [
   { href: "/", label: "Home" },
+  { href: "/about-us/", label: "About Us" },
   { href: "/new-projects/", label: "New Projects" },
   { href: "/resale-properties/", label: "Resale" },
   { href: "/rental-properties/", label: "Rentals" },
   { href: "/interiors/", label: "Interiors" },
-  { href: "/about-us/", label: "About Us" },
   { href: "/contact-us/", label: "Contact Us" },
 ];
+
+/** Pages that open with a full-bleed dark hero; the header sits transparently over it until the page scrolls. */
+const HERO_PAGES = ["/", "/about-us/", "/contact-us/", "/interiors/", "/new-projects/", "/resale-properties/", "/rental-properties/", "/blogs/", "/privacy-policy/", "/terms-and-conditions/"];
 
 export default function Header() {
   const pathname = usePathname();
@@ -38,6 +41,10 @@ export default function Header() {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  // Everywhere else (detail pages, etc.) the header is solid and a spacer keeps content out from under it.
+  const overHero = HERO_PAGES.includes(pathname.endsWith("/") ? pathname : `${pathname}/`);
+  const solid = scrolled || !overHero;
+
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href.replace(/\/$/, "")));
 
   return (
@@ -45,11 +52,11 @@ export default function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300",
-          scrolled ? "border-line bg-white/95 backdrop-blur-md shadow-[0_6px_24px_-16px_rgb(13_31_58/0.35)]" : "border-transparent bg-transparent",
+          solid ? "border-line bg-white/95 backdrop-blur-md shadow-[0_6px_24px_-16px_rgb(13_31_58/0.35)]" : "border-transparent bg-transparent",
         )}
       >
-        <div className="container-x flex h-[88px] items-center justify-between gap-6">
-          <Logo variant={scrolled ? "dark" : "light"} />
+        <div className="container-x flex h-[98px] items-center justify-between gap-6">
+          <Logo variant={solid ? "dark" : "light"} />
 
           <nav aria-label="Main" className="hidden lg:block">
             <ul className="flex items-center gap-1">
@@ -61,8 +68,8 @@ export default function Header() {
                     className={cn(
                       "relative rounded-full px-3.5 py-2 text-sm font-medium transition",
                       isActive(item.href)
-                        ? scrolled ? "text-navy-900" : "text-white"
-                        : scrolled ? "text-muted hover:text-navy-900" : "text-white/80 hover:text-white",
+                        ? solid ? "text-navy-900" : "text-white"
+                        : solid ? "text-muted hover:text-navy-900" : "text-white/80 hover:text-white",
                     )}
                   >
                     {item.label}
@@ -78,10 +85,10 @@ export default function Header() {
               href={telHref()}
               className={cn(
                 "hidden items-center gap-2 text-sm font-semibold xl:flex",
-                scrolled ? "text-navy-900" : "text-white",
+                solid ? "text-navy-900" : "text-white",
               )}
             >
-              <Phone className={cn("h-4 w-4", scrolled ? "text-gold-600" : "text-white/80")} /> {site.phone}
+              <Phone className={cn("h-4 w-4", solid ? "text-gold-600" : "text-white/80")} /> {site.phone}
             </a>
             <a
               href={whatsappHref("Hi Alven Homz, I'd like to know more about your properties.")}
@@ -89,8 +96,8 @@ export default function Header() {
               rel="noopener"
               aria-label="Chat on WhatsApp"
               className={cn(
-                "hidden h-10 w-10 items-center justify-center rounded-full border text-[#1faa53] transition hover:border-[#1faa53] sm:flex",
-                scrolled ? "border-line" : "border-white/40",
+                "hidden h-10 w-10 items-center justify-center rounded-full border text-white transition sm:flex",
+                solid ? "border-[#1faa53] bg-[#1faa53] hover:bg-[#178f45]" : "border-white/40 hover:bg-white/10",
               )}
             >
               <WhatsAppIcon className="h-5 w-5" />
@@ -106,7 +113,7 @@ export default function Header() {
               aria-label={open ? "Close menu" : "Open menu"}
               className={cn(
                 "flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden",
-                scrolled ? "border-line text-navy-900" : "border-white/40 text-white",
+                solid ? "border-line text-navy-900" : "border-white/40 text-white",
               )}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -114,10 +121,11 @@ export default function Header() {
           </div>
         </div>
       </header>
+      {!overHero && <div aria-hidden className="h-[88px]" />}
 
       {/* Mobile nav drawer */}
       {open && (
-        <div id="mobile-nav" className="fixed inset-0 z-40 bg-navy-950/60 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)}>
+        <div id="mobile-nav" className="fixed inset-0 z-40 bg-espresso-950/60 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)}>
           <div
             className="absolute top-[88px] right-0 bottom-0 w-full max-w-sm border-l border-line bg-white p-6 shadow-2xl transition-transform"
             onClick={(e) => e.stopPropagation()}

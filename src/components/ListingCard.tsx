@@ -29,7 +29,7 @@ export default function ListingCard({ item, priority = false }: { item: ListingC
           decoding="async"
           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-950/60 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-espresso-950/60 to-transparent" />
         {/* Badge row: status+type on left, Featured on right — using justify-between so they never overlap */}
         <div className="absolute inset-x-3 top-3 flex items-start justify-between gap-2">
           <div className="flex flex-wrap gap-1.5">

@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import AdminList from "@/components/admin/AdminList";
+import { projects } from "@/lib/data";
 
 export default function AdminProjectsPage() {
   const mapRow = useCallback(
@@ -22,6 +23,7 @@ export default function AdminProjectsPage() {
       newHref="/admin/projects/new/"
       editHref={(slug) => `/admin/projects/edit/?slug=${encodeURIComponent(slug)}`}
       mapRow={mapRow}
+      siteItems={projects}
     />
   );
 }

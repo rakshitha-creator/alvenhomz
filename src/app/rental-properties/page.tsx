@@ -1,5 +1,6 @@
 import { Suspense } from "react";
-import ListingExplorer, { ExplorerSkeleton } from "@/components/ListingExplorer";
+import { ExplorerSkeleton } from "@/components/ListingExplorer";
+import LiveListingExplorer from "@/components/live/LiveListingExplorer";
 import { PageHero } from "@/components/ui";
 import { locationSuggestions, rentalCards } from "@/lib/data";
 import { pageMetadata } from "@/lib/seo";
@@ -24,7 +25,7 @@ export default function RentalPage() {
       />
       <section className="container-x py-12">
         <Suspense fallback={<ExplorerSkeleton />}>
-          <ListingExplorer kind="rental" items={rentalCards()} suggestions={locationSuggestions()} />
+          <LiveListingExplorer kind="rental" items={rentalCards()} suggestions={locationSuggestions()} />
         </Suspense>
       </section>
     </>

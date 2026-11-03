@@ -120,7 +120,7 @@ export default function TestimonialsSlider({ testimonials }: { testimonials: Tes
             <Quote className="h-7 w-7 text-gold-500" aria-hidden="true" />
             <p className="mt-4 flex-1 leading-relaxed text-navy-800">&ldquo;{testimonial.quote}&rdquo;</p>
             <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-navy-900 text-sm font-semibold text-gold-300">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-espresso-900 text-sm font-semibold text-gold-300">
                 {initials(testimonial.name)}
               </span>
               <div>

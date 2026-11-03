@@ -226,7 +226,7 @@ export default function ProjectDetailClient() {
 
             <DetailSection id="developer" title={`About ${p.developer}`}>
               <div className="flex gap-5 rounded-2xl bg-ivory p-6">
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-navy-900 font-display text-2xl text-gold-300">{p.developer[0]}</span>
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-espresso-900 font-display text-2xl text-gold-300">{p.developer[0]}</span>
                 <p className="text-sm leading-relaxed text-navy-800">{p.developerAbout}</p>
               </div>
             </DetailSection>

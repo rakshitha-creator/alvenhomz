@@ -11,9 +11,9 @@ import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Alven Homz Interiors – Home, Kitchen, Bedroom & Office Interior Design",
+  title: "Alven Homz Interiors – Home, Kitchen, Bedroom & Home Office Interior Design",
   description:
-    "Beautiful spaces, thoughtful designs, inspired living. Complete home interiors, modular kitchens, living rooms, bedrooms, wardrobes and office interiors by Alven Homz Interiors.",
+    "Beautiful spaces, thoughtful designs, inspired living. Complete home interiors, modular kitchens, living rooms, bedrooms, wardrobes and home offices by Alven Homz Interiors.",
   path: "/interiors/",
   image: "living-double-height",
 });
@@ -33,7 +33,7 @@ export default function InteriorsPage() {
   const interiorTestimonial = testimonials.find((t) => /interior/i.test(t.context));
 
   return (
-    <div className="bg-navy-950">
+    <div className="bg-espresso-950">
       {/* Hero */}
       <section className="relative isolate flex min-h-[600px] items-center overflow-hidden lg:min-h-[680px]">
         <BannerMedia
@@ -42,7 +42,7 @@ export default function InteriorsPage() {
           alt="Double-height luxury living room designed by Alven Homz Interiors"
           priority
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/75 to-navy-950/10" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950 via-espresso-950/75 to-espresso-950/10" />
         <div className="container-x py-20">
           <p className="eyebrow animate-fade-up text-gold-300">Alven Homz</p>
           <h1 className="mt-5 max-w-3xl animate-fade-up text-4xl leading-[1.08] font-semibold text-white [animation-delay:80ms] sm:text-6xl">
@@ -74,7 +74,7 @@ export default function InteriorsPage() {
                   <div className="relative aspect-[16/10] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={img(s.image, "sm")} alt={s.title} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                    <span className="absolute bottom-0 left-6 flex h-12 w-12 translate-y-1/2 items-center justify-center rounded-xl bg-navy-900 text-gold-400 shadow-lift">
+                    <span className="absolute bottom-0 left-6 flex h-12 w-12 translate-y-1/2 items-center justify-center rounded-xl bg-espresso-900 text-gold-400 shadow-lift">
                       <Icon className="h-6 w-6" />
                     </span>
                   </div>
@@ -156,7 +156,7 @@ export default function InteriorsPage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={img("kitchen-marble", "sm")} alt="Marble modular kitchen" loading="lazy" className="mt-10 hidden aspect-[16/10] w-full max-w-md rounded-2xl object-cover lg:block" />
           </div>
-          <div className="rounded-3xl border border-white/10 bg-navy-900 p-6 sm:p-10">
+          <div className="rounded-3xl border border-white/10 bg-espresso-900 p-6 sm:p-10">
             <LeadForm variant="interiors" dark />
           </div>
         </div>

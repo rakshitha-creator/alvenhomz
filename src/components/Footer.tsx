@@ -15,7 +15,7 @@ const socials = [
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="bg-navy-950 text-white/70">
+    <footer className="bg-espresso-950 text-white/70">
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Logo variant="light" imgClassName="h-32 w-auto" />
@@ -96,7 +96,11 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-3 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {site.name}. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <p>© {year} {site.name}. All rights reserved.</p>
+            <Link href="/privacy-policy/" className="transition hover:text-white">Privacy Policy</Link>
+            <Link href="/terms-and-conditions/" className="transition hover:text-white">Terms &amp; Conditions</Link>
+          </div>
           <p className="text-white/50">Rental listings shown are sample content for demonstration and are not verified offers.</p>
         </div>
       </div>

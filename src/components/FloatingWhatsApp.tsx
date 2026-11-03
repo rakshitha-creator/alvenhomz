@@ -12,7 +12,7 @@ export default function FloatingWhatsApp() {
     >
       <span className="absolute inset-0 animate-ping rounded-full bg-[#1faa53] opacity-25 [animation-duration:2.5s]" aria-hidden />
       <WhatsAppIcon className="relative h-7 w-7" />
-      <span className="pointer-events-none absolute right-full mr-3 hidden rounded-full bg-navy-900 px-3 py-1.5 text-xs font-semibold whitespace-nowrap opacity-0 transition group-hover:opacity-100 sm:block">
+      <span className="pointer-events-none absolute right-full mr-3 hidden rounded-full bg-espresso-900 px-3 py-1.5 text-xs font-semibold whitespace-nowrap opacity-0 transition group-hover:opacity-100 sm:block">
         Chat with us
       </span>
     </a>

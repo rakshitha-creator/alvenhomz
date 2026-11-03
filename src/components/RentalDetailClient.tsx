@@ -121,7 +121,7 @@ export default function RentalDetailClient() {
             <DetailSection id="costs" title="Rent & Charges">
               <ul className="grid gap-4 sm:grid-cols-3">
                 {costs.map((c) => (
-                  <li key={c.label} className={c.highlight ? "rounded-2xl bg-navy-900 p-5 text-white" : "rounded-2xl border border-line bg-white p-5"}>
+                  <li key={c.label} className={c.highlight ? "rounded-2xl bg-espresso-900 p-5 text-white" : "rounded-2xl border border-line bg-white p-5"}>
                     <p className={c.highlight ? "text-xs font-semibold tracking-wide text-gold-300 uppercase" : "text-xs font-semibold tracking-wide text-muted uppercase"}>{c.label}</p>
                     <p className={c.highlight ? "mt-2 font-display text-2xl font-semibold text-white" : "mt-2 font-display text-2xl font-semibold text-navy-900"}>{c.value}</p>
                     <p className={c.highlight ? "mt-1 text-xs text-white/70" : "mt-1 text-xs text-muted"}>{c.note}</p>
