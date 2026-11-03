@@ -22,6 +22,8 @@ export const FURNISHING: Record<string, string> = {
   unfurnished: "Unfurnished",
 };
 
+export const furnishingLabel = (f: string) => FURNISHING[f] ?? "Not confirmed";
+
 export const TENANT_PREFERENCE: Record<string, string> = {
   family: "Family",
   bachelor: "Bachelors",

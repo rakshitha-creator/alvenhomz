@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 
 export const NAV = [
   { href: "/", label: "Home" },
+  { href: "/about-us/", label: "About Us" },
   { href: "/new-projects/", label: "New Projects" },
   { href: "/resale-properties/", label: "Resale" },
   { href: "/rental-properties/", label: "Rentals" },
   { href: "/interiors/", label: "Interiors" },
-  { href: "/about-us/", label: "About Us" },
   { href: "/contact-us/", label: "Contact" },
 ];
 
@@ -59,12 +59,12 @@ export default function Header() {
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
-                    "relative rounded-full px-3.5 py-2 text-sm font-medium transition",
+                    "relative rounded-full px-2.5 py-2 text-sm font-medium whitespace-nowrap transition xl:px-3.5",
                     isActive(item.href) ? "text-navy-900" : "text-muted hover:text-navy-900",
                   )}
                 >
                   {item.label}
-                  {isActive(item.href) && <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-gold-500" />}
+                  {isActive(item.href) && <span className="absolute inset-x-2.5 -bottom-0.5 xl:inset-x-3.5 h-0.5 rounded-full bg-gold-500" />}
                 </Link>
               </li>
             ))}
@@ -72,7 +72,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href={telHref()} className="hidden items-center gap-2 text-sm font-semibold text-navy-900 xl:flex">
+          <a href={telHref()} className="hidden items-center gap-2 text-sm font-semibold whitespace-nowrap text-navy-900 2xl:flex">
             <Phone className="h-4 w-4 text-gold-600" /> {site.phone}
           </a>
           <a
@@ -84,7 +84,7 @@ export default function Header() {
           >
             <WhatsAppIcon className="h-5 w-5" />
           </a>
-          <Link href="/contact-us/" className="btn-gold hidden py-2.5 sm:inline-flex">
+          <Link href="/contact-us/" className="btn-gold hidden py-2.5 whitespace-nowrap sm:inline-flex">
             Enquire Now
           </Link>
           <button

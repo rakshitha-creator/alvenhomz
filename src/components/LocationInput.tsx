@@ -29,7 +29,7 @@ export default function LocationInput({
 
   const matches = useMemo(() => {
     const q = value.trim().toLowerCase();
-    const list = q ? suggestions.filter((s) => s.toLowerCase().includes(q)) : suggestions.filter((s) => !s.includes(","));
+    const list = q ? suggestions.filter((s) => s.toLowerCase().includes(q)) : suggestions;
     return list.slice(0, 8);
   }, [value, suggestions]);
 

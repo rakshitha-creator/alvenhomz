@@ -37,17 +37,16 @@ export default function AboutPage() {
           <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Beyond the keys to your home</h2>
           <div className="mt-6 space-y-4 leading-relaxed text-navy-800">
             <p>
-              At Abhee Ventures, our relationship with homeowners has always gone beyond handing over the keys. Over 17 years of building quality homes, we
-              have earned the trust of our homeowners, and Alven Homz is our next step in strengthening that bond.
+              For over 17 years, Abhee Ventures has built quality homes and earned the trust of its homeowners. Our relationship with homeowners
+              has never ended at handing over the keys — and Alven Homz is how we carry that commitment forward.
             </p>
             <p>
-              Alven Homz is the dedicated in-house service vertical of Abhee Ventures. We were created to support you long after you take possession of your
-              home. Built on Abhee&apos;s values of trust, care and quality, we offer reliable and cost-effective solutions that make homeownership easier and
-              more convenient.
+              Alven Homz brings together the home services you need after possession, delivered by one team that already knows your home. Guided by
+              the values of care, trust and value, we offer reliable, cost-effective solutions that make owning a home simpler.
             </p>
             <p>
-              From interior design and home transformations to rental, resale and property management, we bring essential home services together under one
-              roof, with one team you can rely on.
+              Whether you want to design your interiors, rent out or resell your property, or find your next home in a new project, we take care of it
+              for you — all under one roof.
             </p>
           </div>
         </Reveal>

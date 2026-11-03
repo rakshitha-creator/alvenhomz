@@ -30,7 +30,7 @@
       "slug": "living-room-interiors",
       "title": "Living Room Interiors",
       "summary": "Inviting living spaces with TV units, feature walls, layered lighting and curated furniture.",
-      "image": "living-gallery",
+      "image": "/images/brand/interiors-5.webp",
       "icon": "sofa",
       "points": [
         "Feature walls and panelling",
@@ -56,7 +56,7 @@
       "slug": "wardrobe-designs",
       "title": "Wardrobe Designs",
       "summary": "Sliding, hinged and walk-in wardrobes designed around how you dress and store.",
-      "image": "foyer-storage",
+      "image": "wardrobe-sliding",
       "icon": "door-closed",
       "points": [
         "Sliding and hinged shutters",
@@ -66,16 +66,16 @@
       ]
     },
     {
-      "slug": "office-interiors",
-      "title": "Office Interiors",
-      "summary": "Productive, brand-aligned workplaces — from compact studios to full corporate floors.",
-      "image": "office-loft",
+      "slug": "home-office-interiors",
+      "title": "Home Office Interiors",
+      "summary": "Quiet, comfortable home offices and study corners designed for focused work and video calls.",
+      "image": "study-green",
       "icon": "briefcase",
       "points": [
-        "Workstations and cabins",
-        "Meeting and collaboration zones",
-        "Reception and branding",
-        "Acoustic and lighting design"
+        "Ergonomic desks and seating",
+        "Built-in storage and bookshelves",
+        "Task and ambient lighting",
+        "Cable management and acoustics"
       ]
     }
   ],
@@ -121,7 +121,7 @@
       "slug": "master-suite-jubilee-hills",
       "title": "Master Suite",
       "category": "Bedroom Interiors",
-      "location": "Soukya Road, Bengaluru",
+      "location": "Kudlu Gate, Bengaluru",
       "description": "A hotel-inspired master suite with a channel-tufted headboard, walk-in wardrobe and spa bath.",
       "image": "bedroom-luxe",
       "gallery": [

@@ -10,9 +10,9 @@ import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Alven Homz Interiors – Home, Kitchen, Bedroom & Office Interior Design",
+  title: "Interiors – Home, Kitchen, Bedroom & Home Office Interior Design",
   description:
-    "Beautiful spaces, thoughtful designs, inspired living. Complete home interiors, modular kitchens, living rooms, bedrooms, wardrobes and office interiors by Alven Homz Interiors.",
+    "Beautiful spaces, thoughtful designs, inspired living. Complete home interiors, modular kitchens, living rooms, bedrooms, wardrobes and home offices by Alven Homz.",
   path: "/interiors/",
   image: "living-double-height",
 });
@@ -26,7 +26,7 @@ const ICONS: Record<string, LucideIcon> = {
   briefcase: Briefcase,
 };
 
-const CONSULT_MSG = "Hi Alven Homz Interiors, I'd like to book a free interior consultation.";
+const CONSULT_MSG = "Hi Alven Homz, I'd like to book a free interior consultation.";
 
 export default function InteriorsPage() {
   const interiorTestimonial = testimonials.find((t) => /interior/i.test(t.context));
@@ -36,10 +36,10 @@ export default function InteriorsPage() {
       {/* Hero */}
       <section className="relative isolate flex min-h-[600px] items-center overflow-hidden lg:min-h-[680px]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={img("living-double-height")} alt="Double-height luxury living room designed by Alven Homz Interiors" className="absolute inset-0 -z-10 h-full w-full object-cover" fetchPriority="high" />
+        <img src={img("living-double-height")} alt="Double-height luxury living room designed by Alven Homz" className="absolute inset-0 -z-10 h-full w-full object-cover" fetchPriority="high" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-950/75 to-navy-950/10" />
         <div className="container-x py-20">
-          <p className="eyebrow animate-fade-up text-gold-300">Alven Homz Interiors</p>
+          <p className="eyebrow animate-fade-up text-gold-300">ALVEN HOMZ</p>
           <h1 className="mt-5 max-w-3xl animate-fade-up text-4xl leading-[1.08] font-semibold text-white [animation-delay:80ms] sm:text-6xl">
             Beautiful Spaces. <span className="text-gold-400 italic">Thoughtful Designs.</span> Inspired Living.
           </h1>
@@ -83,7 +83,7 @@ export default function InteriorsPage() {
                         </li>
                       ))}
                     </ul>
-                    <a href={whatsappHref(`Hi Alven Homz Interiors, I'm interested in ${s.title}. Please share details.`)} target="_blank" rel="noopener" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-600">
+                    <a href={whatsappHref(`Hi Alven Homz, I'm interested in ${s.title}. Please share details.`)} target="_blank" rel="noopener" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-600">
                       Enquire on WhatsApp <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>

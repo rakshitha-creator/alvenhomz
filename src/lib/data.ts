@@ -15,7 +15,7 @@ import type {
   ResaleProperty,
   Testimonial,
 } from "./types";
-import { FURNISHING, KIND_BASE, PROJECT_STATUS, PROPERTY_TYPES } from "./constants";
+import { FURNISHING, furnishingLabel, KIND_BASE, PROJECT_STATUS, PROPERTY_TYPES } from "./constants";
 import { bhkLabel, formatArea, formatINR } from "./utils";
 
 export const site = siteJson;
@@ -97,14 +97,14 @@ export function resaleCard(p: ResaleProperty): ListingCardData {
     city: p.city,
     locality: p.locality,
     image: p.cover ?? p.images[0],
-    price: p.price,
+    price: p.price ?? 0,
     priceLabel: formatINR(p.price),
-    priceNote: `₹${Math.round(p.price / p.builtUpArea).toLocaleString("en-IN")}/sq.ft`,
+    priceNote: p.price ? `₹${Math.round(p.price / p.builtUpArea).toLocaleString("en-IN")}/sq.ft` : "",
     bhks: p.bhk ? [p.bhk] : [],
     propertyType: p.propertyType,
     typeLabel: PROPERTY_TYPES[p.propertyType] ?? p.propertyType,
     furnishing: p.furnishing,
-    specs: [p.bhk ? bhkLabel(p.bhk) : PROPERTY_TYPES[p.propertyType], formatArea(p.builtUpArea), FURNISHING[p.furnishing]],
+    specs: [p.bhk ? bhkLabel(p.bhk) : PROPERTY_TYPES[p.propertyType], formatArea(p.builtUpArea), p.readyToMove ? furnishingLabel(p.furnishing) : "Under construction"],
     date: p.postedOn,
     featured: !!p.featured,
     isSample: !!p.isSample,
@@ -167,11 +167,7 @@ export function allCities() {
 }
 
 /** Suggestions for the location search box: "Locality, City" plus bare city names. */
-export function locationSuggestions() {
-  const set = new Set<string>();
-  for (const p of [...projects, ...resaleProperties, ...rentalProperties]) {
-    set.add(p.city);
-    set.add(`${p.locality}, ${p.city}`);
-  }
-  return [...set].sort();
+/** Localities of the Abhee projects (new + resale) by default; the rentals page passes its own listings. */
+export function locationSuggestions(items: { locality: string; city: string }[] = [...projects, ...resaleProperties]) {
+  return [...new Set(items.map((p) => `${p.locality}, ${p.city}`))].sort();
 }

@@ -53,11 +53,16 @@ const INTERIOR_COLLAGE = [
   { src: "/images/brand/interiors-5.webp", alt: "Living room with TV wall and accent chairs", area: "col-start-3 row-span-2 row-start-3" },
 ];
 
+// Homepage "Featured Rental Properties" section is hidden until further notice.
+const SHOW_FEATURED_RENTALS = false;
+// Homepage "Featured Resale Properties" section is hidden until further notice.
+const SHOW_FEATURED_RESALE = true;
+
 const WHY = [
   { icon: BadgeCheck, title: "Diligence before display", text: "We review documents, approvals and pricing before a property is presented to you." },
   { icon: Scale, title: "Honest, data-led advice", text: "Clear comparisons on price, location and rental yield — never pressure selling." },
   { icon: Handshake, title: "End-to-end assistance", text: "Site visits, negotiation, home loans, documentation and registration support." },
-  { icon: Paintbrush, title: "Interiors under one roof", text: "Move from keys to a finished home with Alven Homz Interiors." },
+  { icon: Paintbrush, title: "Interiors under one roof", text: "Move from keys to a finished home with Alven Homz." },
   { icon: ShieldCheck, title: "Transparent costs", text: "Rent, deposit, maintenance and charges spelled out upfront." },
   { icon: Building, title: "New, resale & rental", text: "One trusted advisor for every stage — buying, renting or investing." },
 ];
@@ -107,7 +112,8 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* Featured Resale */}
+      {/* Featured Resale — set SHOW_FEATURED_RESALE to false to hide it */}
+      {SHOW_FEATURED_RESALE && (
       <section className="bg-ivory py-20 sm:py-24">
         <div className="container-x">
         <SectionHeading
@@ -125,6 +131,7 @@ export default function HomePage() {
         </ul>
         </div>
       </section>
+      )}
 
       {/* Interiors promo */}
       <section className="relative isolate overflow-hidden bg-sand py-20 sm:py-28">
@@ -133,7 +140,7 @@ export default function HomePage() {
         <img src="/images/brand/interiors-watermark.webp" alt="" aria-hidden className="pointer-events-none absolute bottom-0 left-0 -z-10 h-[85%] w-auto select-none" />
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
-            <p className="eyebrow">Alven Homz Interiors</p>
+            <p className="eyebrow">Interiors</p>
             <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">
               Transform Your House into a <span className="text-gold-600 italic">Dream Home.</span>
             </h2>
@@ -151,7 +158,7 @@ export default function HomePage() {
               <Link href="/interiors/" className="btn-gold">
                 Explore Interiors <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href={whatsappHref("Hi Alven Homz Interiors, I'd like a free interior consultation.")} target="_blank" rel="noopener" className="btn-outline">
+              <a href={whatsappHref("Hi Alven Homz, I'd like a free interior consultation.")} target="_blank" rel="noopener" className="btn-outline">
                 <WhatsAppIcon className="h-4 w-4" /> Free consultation
               </a>
             </div>
@@ -165,7 +172,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Rentals */}
+      {/* Featured Rentals — hidden for now; set SHOW_FEATURED_RENTALS to true to bring it back */}
+      {SHOW_FEATURED_RENTALS && (
       <section className="container-x py-20 sm:py-24">
         <SectionHeading
           eyebrow="Rentals"
@@ -181,6 +189,7 @@ export default function HomePage() {
           ))}
         </ul>
       </section>
+      )}
 
       {/* Popular locations */}
       <section className="bg-ivory py-20 sm:py-24">
@@ -227,12 +236,12 @@ export default function HomePage() {
         <SectionHeading eyebrow="Why Alven Homz" title="Why Choose Alven Homz" description="A premium advisory experience built on transparency, local expertise and care." align="center" />
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {WHY.map((w, i) => (
-            <Reveal as="li" key={w.title} delay={i * 60} className="card p-7 transition hover:-translate-y-1 hover:shadow-lift">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold-400">
+            <Reveal as="li" key={w.title} delay={i * 60} className="card p-7 text-center transition hover:-translate-y-1 hover:shadow-lift">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-navy-900 text-gold-400">
                 <w.icon className="h-6 w-6" />
               </span>
               <h3 className="mt-5 text-xl font-semibold">{w.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted">{w.text}</p>
+              <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted">{w.text}</p>
             </Reveal>
           ))}
         </ul>

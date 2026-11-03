@@ -65,22 +65,26 @@ export interface Project extends ListingBase {
 export interface ResaleProperty extends ListingBase {
   title: string;
   propertyType: string;
-  price: number;
+  /** Omit to show "Price on request". */
+  price?: number;
   bhk: number;
   bathrooms: number;
   balconies: number;
   carpetArea: number;
   builtUpArea: number;
   floor: string;
-  totalFloors: number;
+  totalFloors?: number;
   facing: string;
-  furnishing: "furnished" | "semi-furnished" | "unfurnished";
+  furnishing: "furnished" | "semi-furnished" | "unfurnished" | "not-confirmed";
   furnishingDetails: string[];
   parking: string;
-  ageYears: number;
+  /** Omit for under-construction homes (shown as "Under construction" when readyToMove is false). */
+  ageYears?: number;
   readyToMove: boolean;
   ownership: string;
   postedOn: string;
+  /** Fields still to be confirmed, e.g. ["builtUpArea", "floor", "parking"] — shown with an asterisk. */
+  tentative?: string[];
 }
 
 export interface RentalProperty extends ListingBase {

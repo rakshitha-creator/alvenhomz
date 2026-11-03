@@ -16,7 +16,7 @@ const TABS = [
 const TYPES_BY_TAB: Record<string, string[]> = {
   buy: ["apartment", "villa", "independent-house", "penthouse", "commercial-office"],
   rent: ["apartment", "villa", "independent-house", "commercial-office", "commercial-shop"],
-  new: ["apartment", "villa", "plot"],
+  new: ["apartment"],
 };
 
 export default function HeroSearch({ suggestions }: { suggestions: string[] }) {

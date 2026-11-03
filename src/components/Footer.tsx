@@ -18,7 +18,7 @@ export default function Footer() {
     <footer className="bg-navy-950 text-white/70">
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Logo variant="light" imgClassName="h-32" />
+          <Logo variant="light" size="lg" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed">{site.description}</p>
           <ul className="mt-6 flex gap-3">
             {socials.map(({ href, label, Icon }) => (
@@ -41,7 +41,7 @@ export default function Footer() {
           <FooterLink href="/new-projects/">New Projects</FooterLink>
           <FooterLink href="/resale-properties/">Resale Properties</FooterLink>
           <FooterLink href="/rental-properties/">Rental Properties</FooterLink>
-          <FooterLink href="/interiors/">Alven Homz Interiors</FooterLink>
+          <FooterLink href="/interiors/">Interiors</FooterLink>
           <FooterLink href="/about-us/">About Us</FooterLink>
           <FooterLink href="/contact-us/">Contact Us</FooterLink>
         </FooterCol>
@@ -72,7 +72,7 @@ export default function Footer() {
           <p>© {year} {site.name}. All rights reserved.</p>
           {site.sampleContentNotice && (
             <p className="text-white/50">
-              Resale and rental listings shown are sample content for demonstration and are not verified offers.
+              Rental listings shown are sample content for demonstration and are not verified offers.
             </p>
           )}
         </div>

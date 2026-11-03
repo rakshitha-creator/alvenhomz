@@ -47,7 +47,7 @@ function buildMessage(v: Values, variant: Variant, listing?: ListingRef) {
     ]);
   }
   if (variant === "interiors") {
-    return formatFields("Hi Alven Homz Interiors, I'd like to book a free consultation.", [
+    return formatFields("Hi Alven Homz, I'd like to book a free consultation.", [
       ...contactRows,
       ["Property location", v.location],
       ["Property type", v.propertyType],
@@ -61,7 +61,7 @@ function buildMessage(v: Values, variant: Variant, listing?: ListingRef) {
 
 function subjectFor(v: Values, variant: Variant, listing?: ListingRef) {
   if (variant === "listing" && listing) return `${v.intent === "visit" ? "Site visit request" : "Enquiry"}: ${listing.title}`;
-  if (variant === "interiors") return `Interior consultation request – ${v.service || "Alven Homz Interiors"}`;
+  if (variant === "interiors") return `Interior consultation request – ${v.service || "Interiors"}`;
   return `Website enquiry – ${v.interest || "General"}`;
 }
 
