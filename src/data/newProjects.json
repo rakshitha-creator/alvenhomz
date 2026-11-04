@@ -164,8 +164,8 @@
     "city": "Bengaluru",
     "locality": "Gunjur",
     "address": "Gunjur, Whitefield–Sarjapur Main Road, East Bengaluru",
-    "lat": 12.9205,
-    "lng": 77.7368,
+    "lat": 12.897113,
+    "lng": 77.7500831,
     "priceFrom": 11900000,
     "configurations": [
       {
@@ -200,13 +200,17 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
-      "/images/brand/project-codename.webp",
-      "glass-towers",
-      "clubhouse-pool",
-      "living-double-height",
-      "kitchen-island",
-      "bedroom-luxe",
-      "patio-lounge"
+      "/images/brand/codename-1.webp",
+      "/images/brand/codename-2.webp",
+      "/images/brand/codename-3.webp",
+      "/images/brand/codename-4.webp",
+      "/images/brand/codename-5.webp",
+      "/images/brand/codename-6.webp",
+      "/images/brand/codename-7.webp",
+      "/images/brand/codename-8.webp",
+      "/images/brand/codename-master-plan.webp",
+      "/images/brand/codename-location-map.webp",
+      "https://firebasestorage.googleapis.com/v0/b/alven-51419.firebasestorage.app/o/listings%2Fprojects%2Fabhee-codename-new-dimension-gunjur%2F39254905-662f-4447-b8d1-0bc6b394dadc-exec-5e374a92-8fd6-4a4c-9fd3-607791d03a39.png?alt=media&token=3bbe351c-1a07-465d-a795-15efc1d5a2a3"
     ],
     "description": "A 45-acre township planned on the Whitefield–Sarjapur corridor, directly behind Abhee Celestial City. Around 3,000 homes across 14 high-rise towers are being developed in phases, with close to 85% of the land kept as open space. Its centrepiece is a 3-acre private golf course, alongside four clubhouses and a dedicated wellness club. Expressions of interest are open; Phase I is RERA registered.",
     "highlights": [
@@ -235,7 +239,38 @@
       "Creche",
       "Amphitheatre"
     ],
-    "floorPlans": [],
+    "floorPlans": [
+      {
+        "label": "2 BHK",
+        "bhk": 2,
+        "area": "Plan from the developer — sizes on request",
+        "image": "/images/brand/codename-plan-2bhk.webp"
+      },
+      {
+        "label": "2.5 BHK",
+        "bhk": 2,
+        "area": "Plan from the developer — sizes on request",
+        "image": "/images/brand/codename-plan-2-5bhk.webp"
+      },
+      {
+        "label": "3 BHK",
+        "bhk": 3,
+        "area": "Plan from the developer — sizes on request",
+        "image": "/images/brand/codename-plan-3bhk.webp"
+      },
+      {
+        "label": "3.5 BHK",
+        "bhk": 3,
+        "area": "Plan from the developer — sizes on request",
+        "image": "/images/brand/codename-plan-3-5bhk.webp"
+      },
+      {
+        "label": "4.5 BHK",
+        "bhk": 4,
+        "area": "Plan from the developer — sizes on request",
+        "image": "/images/brand/codename-plan-4-5bhk.webp"
+      }
+    ],
     "nearby": [
       {
         "name": "Greenwood High School",
@@ -268,7 +303,9 @@
         "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": false,
+    "contentUpdatedAt": "2026-11-04T13:30:00.000Z",
+    "cover": "/images/brand/codename-1.webp"
   },
   {
     "slug": "abhee-celestial-city-gunjur",
@@ -282,8 +319,8 @@
     "city": "Bengaluru",
     "locality": "Gunjur",
     "address": "Chikkavaderapura, Varthur–Sarjapur Road, near Dommasandra Circle (behind Greenwood High School), East Bengaluru",
-    "lat": 12.9168,
-    "lng": 77.7352,
+    "lat": 12.8987785,
+    "lng": 77.7488578,
     "priceFrom": 15500000,
     "configurations": [
       {
@@ -308,12 +345,16 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
-      "/images/brand/project-celestial.webp",
-      "tower-balconies",
-      "living-white",
-      "kitchen-white",
-      "bedroom-modern",
-      "clubhouse-pool"
+      "/images/brand/celestial-1.webp",
+      "/images/brand/celestial-2.webp",
+      "/images/brand/celestial-3.webp",
+      "/images/brand/celestial-4.webp",
+      "/images/brand/celestial-5.webp",
+      "/images/brand/celestial-6.webp",
+      "/images/brand/celestial-7.webp",
+      "/images/brand/celestial-8.webp",
+      "/images/brand/celestial-master-plan.webp",
+      "/images/brand/celestial-location-map.webp"
     ],
     "description": "Three high-rise towers on five acres in Gunjur, with 397 vastu-compliant 2, 2.5 and 3 BHK homes and about 73% of the site left open. The clubhouse includes a heated pool, squash and badminton courts, a spa and a café, and leading international schools are a few minutes away. BDA and RERA approved.",
     "highlights": [
@@ -344,19 +385,34 @@
     ],
     "floorPlans": [
       {
-        "label": "2 BHK",
+        "label": "2 BHK · 1,345",
         "bhk": 2,
-        "area": "1,345 sq.ft"
+        "area": "1,345 sq.ft SBUA",
+        "image": "/images/brand/celestial-plan-2bhk-1345.webp"
       },
       {
-        "label": "2.5 BHK",
+        "label": "2.5 BHK · 1,680",
         "bhk": 3,
-        "area": "1,680 sq.ft"
+        "area": "1,680 sq.ft SBUA · 3 BHK + 2T",
+        "image": "/images/brand/celestial-plan-2-5bhk-1680.webp"
       },
       {
-        "label": "3 BHK",
+        "label": "2.5 BHK · 1,685",
         "bhk": 3,
-        "area": "1,950 sq.ft"
+        "area": "1,685 sq.ft SBUA · 3 BHK + 2T",
+        "image": "/images/brand/celestial-plan-2-5bhk-1685.webp"
+      },
+      {
+        "label": "3 BHK · 1,950",
+        "bhk": 3,
+        "area": "1,950 sq.ft SBUA",
+        "image": "/images/brand/celestial-plan-3bhk-1950.webp"
+      },
+      {
+        "label": "3 BHK · 1,990",
+        "bhk": 3,
+        "area": "1,990 sq.ft SBUA",
+        "image": "/images/brand/celestial-plan-3bhk-1990.webp"
       }
     ],
     "nearby": [
@@ -391,7 +447,9 @@
         "category": "shopping"
       }
     ],
-    "representativeImages": true
+    "representativeImages": false,
+    "contentUpdatedAt": "2026-11-04T13:30:00.000Z",
+    "cover": "/images/brand/celestial-1.webp"
   },
   {
     "slug": "abhee-aaria-gunjur-lake",
@@ -634,7 +692,7 @@
       }
     ],
     "cover": "/images/brand/aaria-1.webp",
-    "contentUpdatedAt": "2026-11-04T00:00:00.000Z",
+    "contentUpdatedAt": "2026-11-04T13:30:00.000Z",
     "representativeImages": false
   },
   {
@@ -649,10 +707,15 @@
     "city": "Bengaluru",
     "locality": "Bommasandra",
     "address": "Hennagara Main Road, Bommasandra, near Electronic City, South Bengaluru",
-    "lat": 12.8045,
-    "lng": 77.7005,
+    "lat": 12.7983979,
+    "lng": 77.6857453,
     "priceFrom": 11200000,
     "configurations": [
+      {
+        "label": "2 BHK (2 bed, 2 bath)",
+        "bhk": 2,
+        "area": "1,050 – 1,200 sq.ft (SBUA)"
+      },
       {
         "label": "2.5 BHK (3 bed, 2 bath)",
         "bhk": 2,
@@ -671,11 +734,15 @@
     "featured": false,
     "launchedOn": "2026-10-26",
     "images": [
-      "/images/brand/project-serenity.webp",
-      "apartment-brick",
-      "living-plants",
-      "kitchen-white",
-      "bedroom-bright"
+      "/images/brand/serenity-1.webp",
+      "/images/brand/serenity-2.webp",
+      "/images/brand/serenity-3.webp",
+      "/images/brand/serenity-4.webp",
+      "/images/brand/serenity-5.webp",
+      "/images/brand/serenity-6.webp",
+      "/images/brand/serenity-7.webp",
+      "/images/brand/serenity-master-plan.webp",
+      "/images/brand/serenity-metro-map.webp"
     ],
     "description": "A low-rise community of 288 homes in two B+G+7 towers on 4.5 acres in Bommasandra. Layouts are three-side open with no common walls, and about 70% of the site is open space. Narayana Health City is about six minutes away, with Electronic City and Bommasandra Metro around fifteen.",
     "highlights": [
@@ -705,14 +772,64 @@
     ],
     "floorPlans": [
       {
-        "label": "2.5 BHK",
-        "bhk": 3,
-        "area": "1,375 sq.ft"
+        "label": "2 BHK · 1,050",
+        "bhk": 2,
+        "area": "1,050 sq.ft SBUA · 2 BHK + 2T (Comfort)",
+        "image": "/images/brand/serenity-plan-2bhk-2t-confort1050.webp"
       },
       {
-        "label": "3 BHK",
+        "label": "2 BHK · 1,185",
+        "bhk": 2,
+        "area": "1,185 sq.ft SBUA · 2 BHK + 2T (Comfort)",
+        "image": "/images/brand/serenity-plan-2bhk-2t-comfort1185.webp"
+      },
+      {
+        "label": "2 BHK · 1,200",
+        "bhk": 2,
+        "area": "1,200 sq.ft SBUA · 2 BHK + 2T (Comfort)",
+        "image": "/images/brand/serenity-plan-2bhk-2t-comfort1200.webp"
+      },
+      {
+        "label": "3 BHK + 2T · 1,375",
         "bhk": 3,
-        "area": "1,595 sq.ft"
+        "area": "1,375 sq.ft SBUA · Luxury",
+        "image": "/images/brand/serenity-plan-3bhk-2t-luxury1375.webp"
+      },
+      {
+        "label": "3 BHK + 2T · 1,425",
+        "bhk": 3,
+        "area": "1,425 sq.ft SBUA · Luxury",
+        "image": "/images/brand/serenity-plan-3bhk-2t-luxury1425.webp"
+      },
+      {
+        "label": "3 BHK + 2T · 1,440",
+        "bhk": 3,
+        "area": "1,440 sq.ft SBUA · Luxury",
+        "image": "/images/brand/serenity-plan-3bhk-2t-luxury1440.webp"
+      },
+      {
+        "label": "3 BHK + 2T · 1,470",
+        "bhk": 3,
+        "area": "1,470 sq.ft SBUA · Luxury",
+        "image": "/images/brand/serenity-plan-3bhk-2t-luxury1470.webp"
+      },
+      {
+        "label": "3 BHK + 3T · 1,595",
+        "bhk": 3,
+        "area": "1,595 sq.ft SBUA · Royale",
+        "image": "/images/brand/serenity-plan-3bhk-3t-royale-1595.webp"
+      },
+      {
+        "label": "3 BHK + 3T · 1,655",
+        "bhk": 3,
+        "area": "1,655 sq.ft SBUA · Royale",
+        "image": "/images/brand/serenity-plan-3bhk-3t-royale-1655.webp"
+      },
+      {
+        "label": "3 BHK + 3T · 1,675",
+        "bhk": 3,
+        "area": "1,675 sq.ft SBUA · Royale",
+        "image": "/images/brand/serenity-plan-3bhk-3t-royale-1675.webp"
       }
     ],
     "nearby": [
@@ -747,7 +864,9 @@
         "category": "office"
       }
     ],
-    "representativeImages": true
+    "representativeImages": false,
+    "contentUpdatedAt": "2026-11-04T13:30:00.000Z",
+    "cover": "/images/brand/serenity-1.webp"
   },
   {
     "slug": "abhee-silicon-shine-sarjapur-road",
@@ -910,7 +1029,7 @@
       }
     ],
     "representativeImages": false,
-    "contentUpdatedAt": "2026-11-04T12:00:00.000Z",
+    "contentUpdatedAt": "2026-11-04T13:30:00.000Z",
     "cover": "/images/brand/silicon-1.webp"
   },
   {
@@ -1057,7 +1176,7 @@
       }
     ],
     "representativeImages": false,
-    "contentUpdatedAt": "2026-11-04T12:00:00.000Z",
+    "contentUpdatedAt": "2026-11-04T13:30:00.000Z",
     "cover": "/images/brand/tranquila-1.webp"
   }
 ]

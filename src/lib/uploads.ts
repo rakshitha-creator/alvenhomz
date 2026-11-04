@@ -67,3 +67,21 @@ export async function deleteStoragePath(path?: string | null) {
     // Object may already be gone
   }
 }
+
+/** True for photos already in Firebase Storage. */
+export const isStorageUrl = (src: string) => /^https:\/\/firebasestorage\.googleapis\.com\//.test(src);
+
+/**
+ * Copies a photo the website serves itself (an /images/… path or a library key) into Firebase Storage under the
+ * listing's folder and returns its download URL. Storage URLs and other external URLs are returned unchanged.
+ */
+export async function copyImageToStorage(kind: "projects" | "resale" | "rental", slug: string, src: string, resolve: (src: string) => string) {
+  if (!src || isStorageUrl(src) || /^https?:\/\//.test(src)) return src;
+  const res = await fetch(resolve(src));
+  if (!res.ok) throw new Error(`Couldn't read ${src} (${res.status})`);
+  const blob = await res.blob();
+  const name = src.split("/").pop() || "photo.webp";
+  const file = new File([blob], name.includes(".") ? name : `${name}.webp`, { type: blob.type || "image/webp" });
+  const { url } = await uploadListingImage(kind, slug, file);
+  return url;
+}

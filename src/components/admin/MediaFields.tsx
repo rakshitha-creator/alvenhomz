@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Field, FormInput } from "./form";
-import { deleteStoragePath, uploadBlogImage, uploadListingImage, uploadListingVideo } from "@/lib/uploads";
+import { copyImageToStorage, deleteStoragePath, isStorageUrl, uploadBlogImage, uploadListingImage, uploadListingVideo } from "@/lib/uploads";
 import { confirmMediaChange } from "@/lib/media-confirm";
 import { cn, img } from "@/lib/utils";
 
@@ -55,6 +55,27 @@ export function ImageUploadField({
     onChange(images.filter((i) => i !== src));
   };
 
+  // Copy website-hosted photos (/images/… or library keys) into Firebase Storage, keeping their order.
+  const localCount = images.filter((s) => !isStorageUrl(s) && !/^https?:\/\//.test(s)).length;
+  const [copying, setCopying] = useState<string | null>(null);
+  const copyAllToStorage = async () => {
+    if (!slug) return setError("Set a slug before uploading images.");
+    if (!window.confirm(`Upload ${localCount} website photo(s) to Firebase Storage? The gallery order stays the same. Click Save afterwards.`)) return;
+    setError("");
+    try {
+      const next: string[] = [];
+      for (const [i, src] of images.entries()) {
+        setCopying(`${i + 1} / ${images.length}`);
+        next.push(await copyImageToStorage(kind, slug, src, (s) => img(s)));
+      }
+      onChange(next);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed");
+    } finally {
+      setCopying(null);
+    }
+  };
+
   // Reordering: the first image is the cover on cards and the main gallery photo.
   const [dragFrom, setDragFrom] = useState<number | null>(null);
   const [dragOver, setDragOver] = useState<number | null>(null);
@@ -78,6 +99,14 @@ export function ImageUploadField({
         />
       </Field>
       {progress !== null && <p className="text-xs text-muted">Uploading… {progress}%</p>}
+      {localCount > 0 && (
+        <div className="flex flex-wrap items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-900">
+          <span>{localCount} photo(s) are stored with the website files, not in Firebase Storage.</span>
+          <button type="button" onClick={copyAllToStorage} disabled={!!copying || !slug} className="btn-outline bg-white py-1.5 text-xs">
+            {copying ? `Uploading ${copying}…` : "Upload them to Firebase Storage"}
+          </button>
+        </div>
+      )}
       {error && <p className="text-xs text-red-600">{error}</p>}
       <FormInput
         value={images.join(", ")}

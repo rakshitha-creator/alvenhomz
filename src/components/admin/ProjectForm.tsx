@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import type { Project, ProjectFaq, ProjectTestimonial } from "@/lib/types";
 import { saveListingDoc, deleteListingDoc } from "@/lib/firebase-data";
 import { csvToList, listToCsv, slugify } from "@/lib/slug";
-import { cn } from "@/lib/utils";
+import { cn, img } from "@/lib/utils";
+import { copyImageToStorage, isStorageUrl } from "@/lib/uploads";
 import { AdminPageHeader, Field, FormCard, FormInput, FormSelect, FormTextarea } from "./form";
 import { ImageUploadField, VideoUploadField } from "./MediaFields";
 
@@ -343,6 +344,7 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
           </Field>
           <Field label="Floor plans" hint="One per line: Label|BHK|Area|image-key">
             <FormTextarea value={plansText} onChange={(e) => setPlansText(e.target.value)} className="min-h-[120px] font-mono text-xs" />
+            <PlanImagesToStorage slug={form.slug || slugify(form.name)} text={plansText} onChange={setPlansText} />
           </Field>
         </FormCard>
       )}
@@ -453,5 +455,39 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
         </button>
       </div>
     </form>
+  );
+}
+
+/** Uploads floor-plan images that live with the website files into Firebase Storage and rewrites the plans text. */
+function PlanImagesToStorage({ slug, text, onChange }: { slug: string; text: string; onChange: (t: string) => void }) {
+  const [busy, setBusy] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const plans = textToPlans(text);
+  const local = plans.filter((p) => p.image && !isStorageUrl(p.image) && !/^https?:\/\//.test(p.image));
+  if (!local.length) return null;
+  const run = async () => {
+    if (!slug || !window.confirm(`Upload ${local.length} floor-plan image(s) to Firebase Storage? Click Save afterwards.`)) return;
+    setError("");
+    try {
+      const next: Project["floorPlans"] = [];
+      for (const [i, p] of plans.entries()) {
+        setBusy(`${i + 1} / ${plans.length}`);
+        next.push(p.image ? { ...p, image: await copyImageToStorage("projects", slug, p.image, (s) => img(s)) } : p);
+      }
+      onChange(plansToText(next));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed");
+    } finally {
+      setBusy(null);
+    }
+  };
+  return (
+    <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-amber-900">
+      <span>{local.length} plan image(s) are stored with the website files.</span>
+      <button type="button" onClick={run} disabled={!!busy} className="btn-outline py-1.5 text-xs">
+        {busy ? `Uploading ${busy}…` : "Upload them to Firebase Storage"}
+      </button>
+      {error && <span className="text-red-600">{error}</span>}
+    </div>
   );
 }
