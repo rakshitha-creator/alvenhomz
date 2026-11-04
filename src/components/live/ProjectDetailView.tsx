@@ -20,7 +20,7 @@ import type { Project } from "@/lib/types";
 const STATUS_TONE = { ready: "green", "under-construction": "amber", upcoming: "sky" } as const;
 
 /** Detail page layout, shared by the static build (site data) and the live admin (Firebase) data. */
-export default function ProjectDetailView({ p }: { p: Project }) {
+export default function ProjectDetailView({ p, all = projects }: { p: Project; all?: Project[] }) {
 
   const path = `/new-projects/${p.slug}/`;
   const location = `${p.locality}, ${p.city}`;
@@ -224,7 +224,7 @@ export default function ProjectDetailView({ p }: { p: Project }) {
         </div>
       </div>
 
-      <Similar title="Similar Projects" items={similar(projects, p, (x) => x.priceFrom).map(projectCard)} />
+      <Similar title="Similar Projects" items={similar(all, p, (x) => x.priceFrom).map(projectCard)} />
       <MobileEnquiryBar listing={listingRef} />
     </>
   );

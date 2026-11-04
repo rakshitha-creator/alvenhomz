@@ -25,7 +25,7 @@ export default function NewProjectsPage() {
       />
       <section className="container-x py-12">
         <Suspense fallback={<ExplorerSkeleton />}>
-          <LiveListingExplorer kind="project" items={projectCards()} suggestions={locationSuggestions()} />
+          <LiveListingExplorer kind="project" items={projectCards()} suggestions={locationSuggestions()} firebaseOnly />
         </Suspense>
       </section>
     </>
