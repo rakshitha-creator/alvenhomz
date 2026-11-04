@@ -405,8 +405,8 @@
     "city": "Bengaluru",
     "locality": "Gunjur",
     "address": "Gunjur–Dommasandra Main Road, opposite Gunjur Lake, Sarjapur–Whitefield Road, East Bengaluru",
-    "lat": 12.9318,
-    "lng": 77.7392,
+    "lat": 12.9152508,
+    "lng": 77.7363184,
     "priceFrom": 19000000,
     "configurations": [
       {
@@ -442,50 +442,133 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
-      "/images/brand/project-aaria.webp",
-      "villa-lap-pool",
-      "living-gallery",
-      "kitchen-modular",
-      "bedroom-boho",
-      "patio-lounge"
+      "/images/brand/aaria-1.webp",
+      "/images/brand/aaria-2.webp",
+      "/images/brand/aaria-3.webp",
+      "/images/brand/aaria-4.webp",
+      "/images/brand/aaria-5.webp",
+      "/images/brand/aaria-6.webp",
+      "/images/brand/aaria-7.webp",
+      "/images/brand/aaria-8.webp",
+      "/images/brand/aaria-9.webp",
+      "/images/brand/aaria-10.webp",
+      "/images/brand/aaria-11.webp",
+      "/images/brand/aaria-12.webp",
+      "/images/brand/aaria-master-plan.webp",
+      "/images/brand/aaria-location-map.webp"
     ],
-    "description": "A lake-facing community opposite Gunjur Lake, with 1,017 homes across five towers on 12 acres. Nearly 85% of the land is open space, including a 2-acre forest zone, and two clubhouses of about 60,000 sq.ft offer 60+ amenities — from an infinity pool and mini theatre to a business centre and work-from-home stations.",
+    "description": "A lake-facing community opposite Gunjur Lake on the Sarjapur–Whitefield corridor, with 1,017 homes across five towers of up to G+32 floors on 12 acres. Nearly 85% of the land is open space, including a dedicated 2-acre forest zone, landscaped greens, a seasonal stream, lotus pond and hammock garden. Two clubhouses of about 60,000 sq.ft offer 60+ amenities — heated, terrace and infinity pools, a spa, mini theatre, business centre, work-from-home stations, squash, badminton and pickleball. Leading schools such as Greenwood High, Inventure Academy, Oakridge and TISB are a few minutes away, and the planned Peripheral Ring Road and Yelahanka–Sarjapur Metro are close by.",
     "highlights": [
-      "Opposite Gunjur Lake, with a 2-acre forest zone",
-      "Nearly 85% open space on 12 acres",
+      "Opposite Gunjur Lake, with a dedicated 2-acre forest zone",
+      "Nearly 85% open space across 12 acres",
+      "1,017 homes in 5 towers rising up to G+32",
       "Two clubhouses of about 60,000 sq.ft with 60+ amenities",
-      "Infinity pool, heated pool, mini theatre and business centre",
-      "Around 500 m from the planned Peripheral Ring Road",
-      "1 BHK to 4.5 BHK homes from approx. 709 to 2,500 sq.ft"
+      "Infinity, terrace and heated pools, spa, mini theatre and business centre",
+      "About 500 m to the planned Peripheral Ring Road and 1.5 km to the upcoming Yelahanka–Sarjapur Metro",
+      "Around 3 km from the upcoming SWIFT City"
     ],
     "amenities": [
-      "Swimming Pool",
+      "Infinity Swimming Pool",
+      "Heated Pool",
+      "Terrace Pool",
       "Clubhouse",
-      "Gymnasium",
-      "Spa",
+      "Gym",
+      "Outdoor Gym",
+      "Yoga / Meditation",
+      "Spa / Salon",
+      "Mini Theatre",
+      "Business Center",
+      "Library",
+      "Indoor Games Room",
+      "Video / Board Games",
       "Squash Court",
       "Badminton Court",
-      "Yoga Deck",
-      "Mini Theatre",
-      "Co-working Lounge",
-      "Indoor Games",
-      "Cafeteria",
+      "Pickle Ball",
+      "Muga Court",
+      "Cricket Practice Net",
+      "Boxing Bay",
+      "Mini Golf",
+      "Skating Track",
+      "Walking / Jogging Track",
+      "Toddlers' Play Area",
+      "Miniature Fort",
+      "Lawn Maze",
       "Creche",
-      "Children's Play Area",
-      "Jogging Track",
-      "Pet Park",
-      "Skating Rink"
+      "Pet Park Pavilion",
+      "Butterfly / Aroma Garden",
+      "Hammock Garden",
+      "Vintage Garden",
+      "Lotus Pond",
+      "Seasonal Stream",
+      "Feature Waterbody",
+      "Mist Oasis",
+      "Event Lawn",
+      "Multi-purpose Hall",
+      "Guest Rooms",
+      "Cafeteria",
+      "Coffee Bar Lounge",
+      "Supermarket",
+      "Convenience Store",
+      "Clinic",
+      "Pharmacy",
+      "ATM",
+      "Cycle Parking Zone",
+      "Bus Bay"
     ],
     "floorPlans": [
       {
-        "label": "2 BHK",
+        "label": "2 BHK · 1,330 (East)",
         "bhk": 2,
-        "area": "1,320 sq.ft"
+        "area": "1,330 sq.ft (SBUA) · 2 BHK + 2T",
+        "image": "/images/brand/aaria-plan-2bhk-east-1330.webp"
       },
       {
-        "label": "3 BHK",
+        "label": "2 BHK · 1,320 (West)",
+        "bhk": 2,
+        "area": "1,320 sq.ft (SBUA) · 2 BHK + 2T",
+        "image": "/images/brand/aaria-plan-2bhk-west-1320.webp"
+      },
+      {
+        "label": "3 BHK · 1,765 (East)",
         "bhk": 3,
-        "area": "1,670 sq.ft"
+        "area": "1,765 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-east-1765.webp"
+      },
+      {
+        "label": "3 BHK · 1,765 (West)",
+        "bhk": 3,
+        "area": "1,765 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-west-1765.webp"
+      },
+      {
+        "label": "3 BHK · 1,760",
+        "bhk": 3,
+        "area": "1,760 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-north-1760.webp"
+      },
+      {
+        "label": "3 BHK · 1,700",
+        "bhk": 3,
+        "area": "1,700 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-north-1700.webp"
+      },
+      {
+        "label": "3 BHK · 1,690",
+        "bhk": 3,
+        "area": "1,690 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-north-1690.webp"
+      },
+      {
+        "label": "3 BHK · 1,675",
+        "bhk": 3,
+        "area": "1,675 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-east-1675.webp"
+      },
+      {
+        "label": "3 BHK · 1,670",
+        "bhk": 3,
+        "area": "1,670 sq.ft (SBUA) · 3 BHK + 3T",
+        "image": "/images/brand/aaria-plan-3bhk-east-1670.webp"
       }
     ],
     "nearby": [
@@ -495,14 +578,34 @@
         "category": "school"
       },
       {
-        "name": "Swastik Hospital",
-        "distance": "9 min",
-        "category": "hospital"
+        "name": "Global Indian International School",
+        "distance": "5 min",
+        "category": "school"
       },
       {
-        "name": "Wipro SEZ",
-        "distance": "11 min",
-        "category": "office"
+        "name": "Inventure Academy",
+        "distance": "7 min",
+        "category": "school"
+      },
+      {
+        "name": "The International School Bangalore (TISB)",
+        "distance": "7 min",
+        "category": "school"
+      },
+      {
+        "name": "Oakridge International School",
+        "distance": "8 min",
+        "category": "school"
+      },
+      {
+        "name": "Peripheral Ring Road (planned)",
+        "distance": "500 m",
+        "category": "transit"
+      },
+      {
+        "name": "Yelahanka–Sarjapur Metro (upcoming)",
+        "distance": "1.5 km",
+        "category": "transit"
       },
       {
         "name": "Carmelaram Railway Station",
@@ -510,17 +613,29 @@
         "category": "transit"
       },
       {
-        "name": "Decathlon",
-        "distance": "10 min",
+        "name": "Manipal Hospital Whitefield",
+        "distance": "Nearby",
+        "category": "hospital"
+      },
+      {
+        "name": "Forum Neighbourhood Mall",
+        "distance": "Nearby",
         "category": "shopping"
       },
       {
-        "name": "Whitefield",
-        "distance": "20 min",
-        "category": "transit"
+        "name": "Decathlon Sarjapur",
+        "distance": "Nearby",
+        "category": "shopping"
+      },
+      {
+        "name": "Wipro SEZ",
+        "distance": "11 min",
+        "category": "office"
       }
     ],
-    "representativeImages": true
+    "cover": "/images/brand/aaria-1.webp",
+    "contentUpdatedAt": "2026-11-04T00:00:00.000Z",
+    "representativeImages": false
   },
   {
     "slug": "abhee-serenity-springs-bommasandra",
@@ -641,15 +756,20 @@
     "developerAbout": "Abhee Ventures is a Bengaluru-based real estate developer with apartment communities, villas and plotted developments across East and South Bengaluru — including Gunjur, Sarjapur Road, Bommasandra and Electronic City.",
     "propertyType": "apartment",
     "status": "under-construction",
-    "possession": "Aug 2026",
+    "possession": "Aug 2026 (nearing completion)",
     "reraNumber": "TOR/PRM/KA/RERA/1251/446/PR/230914/004587",
     "city": "Bengaluru",
     "locality": "Sarjapur Road",
     "address": "Mullur, off Sarjapur Road, opposite Wipro SEZ, Bengaluru",
-    "lat": 12.9008,
-    "lng": 77.7012,
+    "lat": 12.9022715,
+    "lng": 77.7190619,
     "priceFrom": 15900000,
     "configurations": [
+      {
+        "label": "2 BHK",
+        "bhk": 2,
+        "area": "1,330 sq.ft (SBUA) · Sold out"
+      },
       {
         "label": "2.5 BHK",
         "bhk": 2,
@@ -668,44 +788,73 @@
     "featured": true,
     "launchedOn": "2026-10-26",
     "images": [
-      "/images/brand/project-silicon.webp",
-      "apartment-block",
-      "living-accent",
-      "kitchen-marble",
-      "bedroom-white",
-      "dining-living"
+      "/images/brand/silicon-1.webp",
+      "/images/brand/silicon-2.webp",
+      "/images/brand/silicon-3.webp",
+      "/images/brand/silicon-4.webp",
+      "/images/brand/silicon-5.webp",
+      "/images/brand/silicon-6.webp",
+      "/images/brand/silicon-7.webp",
+      "/images/brand/silicon-8.webp",
+      "/images/brand/silicon-9.webp",
+      "/images/brand/silicon-master-plan.webp",
+      "/images/brand/silicon-metro-map.webp"
     ],
-    "description": "A low-rise community of 462 homes in three B+G+4 blocks on 6.75 acres, directly opposite Wipro SEZ off Sarjapur Road. Every home is planned with no common walls, and amenities include a pool, indoor and outdoor gyms, a skating rink and an outdoor workstation and library. Nearing completion, with possession targeted for August 2026. BDA and RERA approved.",
+    "description": "A premium community of 462 homes on 6.75 acres, directly opposite Wipro SEZ off Sarjapur Road. Low-rise B+G+4 blocks with no common walls are planned for natural light, ventilation and space efficiency, set around landscaped gardens, courtyards and pedestrian-friendly pathways. Amenities include adult and toddler pools, indoor and outdoor gyms, a cricket practice pitch, skating rink, outdoor workstations and library, a trampoline park, a cascade waterfall and a kids' day-care centre. RGA Tech Park, RMZ Ecospace, Embassy TechVillage and leading schools such as DPS East, Oakridge, Greenwood High and Inventure Academy are close by. BDA and RERA approved, and nearing completion.",
     "highlights": [
-      "Directly opposite Wipro SEZ — about 4 minutes away",
-      "Low-rise B+G+4 blocks with no common walls",
+      "Directly opposite Wipro SEZ, off Sarjapur Road",
+      "462 homes on 6.75 acres in low-rise B+G+4 blocks",
+      "No common walls between homes",
+      "2.5 and 3 BHK available (2 BHK sold out)",
       "Nearing completion — possession targeted Aug 2026",
       "BDA and RERA approved",
-      "2 minutes to National Public School; 7 minutes to RGA Tech Park"
+      "2 minutes to National Public School"
     ],
     "amenities": [
-      "Swimming Pool",
-      "Gymnasium",
-      "Jogging Track",
-      "Senior Citizen Zone",
+      "Adult & Toddler Pool",
+      "Indoor & Outdoor Gym",
+      "Jogging & Cycling Track",
+      "Elders' Zone with Reflexology Pathway",
+      "Multipurpose Court",
+      "Cricket Practice Pitch",
       "Skating Rink",
+      "Informal Amphitheatre",
       "Indoor Games",
-      "Amphitheatre",
-      "Co-working Lounge",
-      "Children's Play Area",
-      "Creche",
-      "Landscaped Gardens"
+      "Party & Yoga Lawn",
+      "Outdoor Workstation & Library",
+      "Giant Chess Courtyard",
+      "Seating Gallery",
+      "Wooden Deck with Shaded Lounge",
+      "Sculpture Garden",
+      "Children's Play Trampoline",
+      "Children's Play on Lawns",
+      "Children's Play Sand Pit",
+      "Climbing Wall",
+      "Kids Day Care Centre",
+      "Floral Garden",
+      "Vegetable & Herbal Garden",
+      "Cascade Waterfall",
+      "Water Fountain Park",
+      "Clubhouse"
     ],
     "floorPlans": [
       {
-        "label": "2.5 BHK",
-        "bhk": 3,
-        "area": "1,540 sq.ft"
+        "label": "2 BHK · 1,330",
+        "bhk": 2,
+        "area": "1,330 sq.ft SBA · 854 sq.ft carpet · West facing (sold out)",
+        "image": "/images/brand/silicon-plan-2bhk-1330.webp"
       },
       {
-        "label": "3 BHK",
+        "label": "2.5 BHK · 1,540",
         "bhk": 3,
-        "area": "1,765 sq.ft"
+        "area": "1,540 sq.ft SBA · 960 sq.ft carpet · North facing",
+        "image": "/images/brand/silicon-plan-2-5bhk-1540.webp"
+      },
+      {
+        "label": "3 BHK · 1,765",
+        "bhk": 3,
+        "area": "1,765 sq.ft SBA · 1,087 sq.ft carpet · East facing",
+        "image": "/images/brand/silicon-plan-3bhk-1765.webp"
       }
     ],
     "nearby": [
@@ -715,19 +864,29 @@
         "category": "school"
       },
       {
-        "name": "Snehadaan Hospital",
-        "distance": "3 min",
-        "category": "hospital"
+        "name": "Baldwin High School",
+        "distance": "5 min",
+        "category": "school"
+      },
+      {
+        "name": "St. Patrick's Academy",
+        "distance": "5 min",
+        "category": "school"
+      },
+      {
+        "name": "Carmel Convent School",
+        "distance": "9 min",
+        "category": "school"
+      },
+      {
+        "name": "Delhi Public School",
+        "distance": "14 min",
+        "category": "school"
       },
       {
         "name": "Wipro SEZ",
-        "distance": "4 min",
+        "distance": "Opposite",
         "category": "office"
-      },
-      {
-        "name": "D Mart & Decathlon",
-        "distance": "6 min",
-        "category": "shopping"
       },
       {
         "name": "RGA Tech Park",
@@ -735,12 +894,24 @@
         "category": "office"
       },
       {
+        "name": "Snehadaan Hospital",
+        "distance": "3 min",
+        "category": "hospital"
+      },
+      {
+        "name": "D Mart & Decathlon",
+        "distance": "6 min",
+        "category": "shopping"
+      },
+      {
         "name": "Outer Ring Road",
         "distance": "22 min",
         "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": false,
+    "contentUpdatedAt": "2026-11-04T12:00:00.000Z",
+    "cover": "/images/brand/silicon-1.webp"
   },
   {
     "slug": "abhee-tranquila-sarjapur-attibele-road",
@@ -753,9 +924,9 @@
     "reraNumber": "PRM/KA/RERA/1251/310/PR/020725/007891",
     "city": "Bengaluru",
     "locality": "Sarjapur–Attibele Road",
-    "address": "Sarjapur–Attibele Road, South-East Bengaluru",
-    "lat": 12.8165,
-    "lng": 77.7395,
+    "address": "Sarjapur–Attibele Road, beside the upcoming SWIFT City, South-East Bengaluru",
+    "lat": 12.8036048,
+    "lng": 77.7747529,
     "priceFrom": 9100000,
     "configurations": [
       {
@@ -777,36 +948,65 @@
     "featured": false,
     "launchedOn": "2026-10-26",
     "images": [
-      "/images/brand/project-tranquila.webp",
-      "plot-sunrise",
-      "villa-garden",
-      "house-lawn",
-      "farmhouse-dusk"
+      "/images/brand/tranquila-1.webp",
+      "/images/brand/tranquila-2.webp",
+      "/images/brand/tranquila-3.webp",
+      "/images/brand/tranquila-4.webp",
+      "/images/brand/tranquila-5.webp",
+      "/images/brand/tranquila-6.webp",
+      "/images/brand/tranquila-7.webp",
+      "/images/brand/tranquila-8.webp",
+      "/images/brand/tranquila-9.webp",
+      "/images/brand/tranquila-10.webp",
+      "/images/brand/tranquila-master-plan.webp",
+      "/images/brand/tranquila-location-map.webp"
     ],
-    "description": "A gated plotted community of 279 villa plots on 20 acres along Sarjapur–Attibele Road, so you can design and build your own home. The layout has wide internal roads, avenue planting, a forest walk and a clubhouse with an infinity pool, and sits close to the planned SWIFT City and STRR. RERA and STRR approved.",
+    "description": "A premium gated plotted community of 279 villa plots on 20 acres off Sarjapur–Attibele Road, right beside the upcoming 1,500+ acre SWIFT City. Plots of 1,200 to 1,500 sq.ft give you the freedom to build your own home, with wide internal roads, avenue plantations, landscaped parks and well-planned civic infrastructure. Over 30 outdoor amenities — a forest walk, tree house, hammocks, amphitheatre, volleyball and multipurpose courts, pet park and kids' play areas — plus a clubhouse with an infinity pool, gym, guest rooms and indoor games. The STRR, Bengaluru Business Corridor (PRR) and Electronic City metro connectivity strengthen the corridor's long-term growth. RERA and STRR approved.",
     "highlights": [
       "279 villa plots on 20 acres — build your own home",
-      "1,200 and 1,500 sq.ft East-facing plots with 12 m roads",
-      "Clubhouse with infinity pool, gym and guest rooms",
-      "Forest walk, tree house, pet park and sports courts",
-      "Near the planned SWIFT City and STRR",
-      "RERA and STRR approved; possession Dec 2026"
+      "1,200–1,500 sq.ft plots, including 30x40 and 30x50 East-facing plots with 12 m roads",
+      "Beside the upcoming 1,500+ acre SWIFT City",
+      "Clubhouse with infinity pool, gym, guest rooms and indoor games",
+      "Forest walk, tree house, amphitheatre, pet park and sports courts",
+      "RERA and STRR approved; possession targeted Dec 2026"
     ],
     "amenities": [
-      "Gated Community",
+      "Infinity Swimming Pool",
       "Clubhouse",
-      "Swimming Pool",
-      "Gymnasium",
-      "Yoga Deck",
-      "Jogging Track",
-      "Children's Play Area",
-      "Senior Citizen Zone",
-      "Pet Park",
-      "Skating Rink",
+      "Gym",
+      "Yoga / Meditation Deck",
+      "Terrace Party Lawn",
       "Indoor Games",
+      "TT Room",
+      "Pool & Billiards",
+      "Multi Purpose Hall",
+      "Guest Rooms",
+      "Creche",
+      "Kids' Play Area",
+      "Forest Walk",
+      "Tree House",
+      "Hammocks",
+      "Fire Pit",
+      "Skating Rink",
+      "Kitchen Garden",
+      "Jogging / Walking Track",
+      "Sculpture Park",
+      "Multipurpose Lawn (Futsal, Yoga)",
       "Amphitheatre",
-      "Landscaped Gardens",
-      "24x7 Security"
+      "Pergola with Climbers",
+      "Giant Chess",
+      "Snake and Ladder",
+      "Volleyball Court",
+      "Multipurpose Court (Tennis / Basketball)",
+      "Outdoor Gym",
+      "Children Play Area (3–12 yrs)",
+      "Sand Pit",
+      "Meditation Pavilion",
+      "Reflexology Pathway",
+      "Elders Chit Chat Zone",
+      "Pet Park",
+      "Security Cabin",
+      "Bus Waiting Bay"
     ],
     "floorPlans": [],
     "nearby": [
@@ -816,9 +1016,34 @@
         "category": "school"
       },
       {
+        "name": "St. Philomena's PU & Degree College",
+        "distance": "12 min",
+        "category": "school"
+      },
+      {
+        "name": "Jnana Jyoti Public School",
+        "distance": "15 min",
+        "category": "school"
+      },
+      {
         "name": "Azim Premji University",
         "distance": "15 min",
         "category": "school"
+      },
+      {
+        "name": "Oxford Medical College Hospital",
+        "distance": "19 min",
+        "category": "hospital"
+      },
+      {
+        "name": "Oakridge International School",
+        "distance": "24 min",
+        "category": "school"
+      },
+      {
+        "name": "SWIFT City (upcoming)",
+        "distance": "Adjacent",
+        "category": "office"
       },
       {
         "name": "Wipro SEZ",
@@ -826,21 +1051,13 @@
         "category": "office"
       },
       {
-        "name": "Kalppa Vriksha Hospital",
-        "distance": "14 min",
-        "category": "hospital"
-      },
-      {
         "name": "Decathlon",
         "distance": "13 min",
         "category": "shopping"
-      },
-      {
-        "name": "Whitefield",
-        "distance": "25 min",
-        "category": "transit"
       }
     ],
-    "representativeImages": true
+    "representativeImages": false,
+    "contentUpdatedAt": "2026-11-04T12:00:00.000Z",
+    "cover": "/images/brand/tranquila-1.webp"
   }
 ]

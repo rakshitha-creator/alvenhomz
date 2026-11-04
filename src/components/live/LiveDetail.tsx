@@ -5,6 +5,7 @@ import ProjectDetailView from "./ProjectDetailView";
 import RentalDetailView from "./RentalDetailView";
 import ResaleDetailView from "./ResaleDetailView";
 import { isFirebaseConfigured } from "@/lib/firebase";
+import { mergeLive } from "@/lib/live-merge";
 import { useResolvedSlug } from "@/hooks/useResolvedSlug";
 import type { Project, RentalProperty, ResaleProperty } from "@/lib/types";
 
@@ -35,7 +36,8 @@ export default function LiveDetail({ kind, initial }: { kind: Kind; initial?: It
         const live = (await get(slug)) as Item | null;
         if (cancelled) return;
         // Untouched seed copies in Firebase are older than the site data, so only admin-saved copies win.
-        if (live?.editedInAdmin) setItem({ ...initial, ...withoutEmpty(live) } as Item);
+        const merged = mergeLive(initial, live);
+        if (merged) setItem(merged);
         else if (!initial) setItem(null);
       } catch {
         if (!cancelled && !initial) setItem(null);
@@ -62,9 +64,4 @@ export default function LiveDetail({ kind, initial }: { kind: Kind; initial?: It
   if (kind === "project") return <ProjectDetailView p={item as Project} />;
   if (kind === "resale") return <ResaleDetailView p={item as ResaleProperty} />;
   return <RentalDetailView p={item as RentalProperty} />;
-}
-
-/** Drop null/undefined/empty-array fields so an incomplete live copy doesn't blank out built-in details. */
-function withoutEmpty(o: object) {
-  return Object.fromEntries(Object.entries(o).filter(([, v]) => v !== null && v !== undefined && !(Array.isArray(v) && v.length === 0)));
 }

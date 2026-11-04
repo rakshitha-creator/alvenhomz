@@ -40,6 +40,10 @@ interface ListingBase {
   representativeImages?: boolean;
   /** Set on live (Firebase) copies that have been saved through the admin — only those override the built-in data. */
   editedInAdmin?: boolean;
+  /** ISO time of the last admin save (live copies only). */
+  liveUpdatedAt?: string;
+  /** ISO time the built-in site data for this listing was last updated; if newer than the admin save, the site data wins. */
+  contentUpdatedAt?: string;
   /** When false, listing is hidden from the public site. Defaults to true for seed/JSON data. */
   published?: boolean;
   /** Optional project/property walkthrough video (Firebase Storage download URL). */

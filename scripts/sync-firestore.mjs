@@ -36,6 +36,12 @@ async function sync(name, items) {
   for (const item of items) {
     const cur = existing.get(item.slug);
     const editedInAdmin = cur && typeof cur.updatedAt === "string";
+    if (editedInAdmin && item.contentUpdatedAt && item.contentUpdatedAt > cur.updatedAt) {
+      // Site data updated after the admin save: merge it in, keep admin-only fields (FAQs, testimonials…).
+      console.log(`  ↻ merge ${name}/${item.slug} (site data newer than admin save)`);
+      if (apply) await db.collection(name).doc(item.slug).set({ ...strip(item), updatedAt: new Date().toISOString() }, { merge: true });
+      continue;
+    }
     if (editedInAdmin) {
       console.log(`  = ${name}/${item.slug} (edited in admin — kept)`);
       continue;

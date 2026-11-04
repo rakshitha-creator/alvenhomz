@@ -80,7 +80,8 @@ function fromDoc<T>(id: string, data: Record<string, unknown> | undefined): T | 
   if (!data) return null;
   const { createdAt: _c, updatedAt, ...rest } = data;
   // Admin saves write an ISO-string updatedAt; the original bulk seed wrote a Firestore Timestamp.
-  return { slug: id, ...rest, editedInAdmin: typeof updatedAt === "string" } as T;
+  const edited = typeof updatedAt === "string";
+  return { slug: id, ...rest, editedInAdmin: edited, ...(edited ? { liveUpdatedAt: updatedAt } : {}) } as T;
 }
 
 export async function listPublishedProjects(): Promise<Project[]> {
@@ -176,8 +177,10 @@ export async function getAdminDoc<T>(col: ListingCollection | "blogs", slug: str
 export async function saveListingDoc(col: ListingCollection | "blogs", slug: string, data: Record<string, unknown>) {
   const now = new Date().toISOString();
   const existing = await getDoc(doc(getFirebaseDb(), col, slug));
+  // editedInAdmin / liveUpdatedAt are derived when reading; never store them.
+  const { editedInAdmin: _e, liveUpdatedAt: _l, ...fields } = data;
   const normalized = {
-    ...data,
+    ...fields,
     slug,
     // Always persist gallery as a full array so removals replace the old list.
     images: Array.isArray(data.images) ? data.images : data.images === undefined ? undefined : [],
@@ -200,12 +203,14 @@ export type ImportPlan = { create: string[]; refresh: string[]; keep: string[]; 
 /**
  * Copies the website's built-in listings into Firestore without overwriting admin work (same rules as
  * scripts/sync-firestore.mjs): missing → created; only ever seeded (Timestamp updatedAt) → refreshed from the site data;
- * saved in the admin (ISO-string updatedAt) → kept; seed-only docs no longer on the site → unpublished.
+ * saved in the admin (ISO-string updatedAt) → kept, unless the site data was updated after that save (`contentUpdatedAt`),
+ * in which case the site fields are merged in and admin-only fields (FAQs, testimonials…) stay; seed-only docs no longer
+ * on the site → unpublished.
  * With `apply: false` it only returns the plan.
  */
 export async function importSiteListings(
   col: ListingCollection,
-  items: { slug: string }[],
+  items: { slug: string; contentUpdatedAt?: string }[],
   apply: boolean,
 ): Promise<ImportPlan> {
   const db = getFirebaseDb();
@@ -216,12 +221,17 @@ export async function importSiteListings(
 
   for (const item of items) {
     const cur = existing.get(item.slug);
-    if (cur && typeof cur.updatedAt === "string") {
+    const adminSaved = cur && typeof cur.updatedAt === "string";
+    if (adminSaved && !(item.contentUpdatedAt && item.contentUpdatedAt > (cur.updatedAt as string))) {
       plan.keep.push(item.slug);
       continue;
     }
     (cur ? plan.refresh : plan.create).push(item.slug);
-    if (apply) {
+    if (apply && adminSaved) {
+      // Site data is newer than the admin save: merge it in, keep admin-only fields, and stay "admin-saved".
+      const data = sanitizeForFirestore(JSON.parse(JSON.stringify(item))) as Record<string, unknown>;
+      await setDoc(doc(db, col, item.slug), { ...data, updatedAt: new Date().toISOString() }, { merge: true });
+    } else if (apply) {
       const data = sanitizeForFirestore(JSON.parse(JSON.stringify(item))) as Record<string, unknown>;
       await setDoc(doc(db, col, item.slug), {
         ...data,

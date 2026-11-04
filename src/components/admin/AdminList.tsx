@@ -6,7 +6,7 @@ import { DownloadCloud, Pencil, Plus } from "lucide-react";
 import { importSiteListings, listAllAdmin, type ListingCollection } from "@/lib/firebase-data";
 import { AdminPageHeader } from "./form";
 
-type Row = { slug: string; title: string; published?: boolean; subtitle?: string };
+type Row = { slug: string; title: string; published?: boolean; subtitle?: string; siteOnly?: boolean };
 
 export default function AdminList({
   collection,
@@ -24,7 +24,7 @@ export default function AdminList({
   editHref: (slug: string) => string;
   mapRow: (item: Record<string, unknown>) => Row;
   /** The website's built-in listings; when set, shows an "Import website listings" button. */
-  siteItems?: { slug: string }[];
+  siteItems?: { slug: string; contentUpdatedAt?: string }[];
 }) {
   const [rows, setRows] = useState<Row[] | null>(null);
   const [error, setError] = useState("");
@@ -38,7 +38,10 @@ export default function AdminList({
     listAllAdmin<Record<string, unknown>>(collection)
       .then((items) => {
         if (cancelled) return;
-        setRows(items.map(mapRow).sort((a, b) => a.title.localeCompare(b.title)));
+        const inAdmin = new Set(items.map((i) => String(i.slug)));
+        // Website listings not in the admin yet — open one and Save to add it (its photos and content are pre-filled).
+        const siteOnly = (siteItems ?? []).filter((i) => !inAdmin.has(i.slug)).map((i) => ({ ...mapRow(i as unknown as Record<string, unknown>), siteOnly: true }));
+        setRows([...items.map(mapRow), ...siteOnly].sort((a, b) => a.title.localeCompare(b.title)));
       })
       .catch((e) => {
         if (!cancelled) setError(e instanceof Error ? e.message : "Failed to load");
@@ -46,7 +49,7 @@ export default function AdminList({
     return () => {
       cancelled = true;
     };
-  }, [collection, mapRow, reload]);
+  }, [collection, mapRow, reload, siteItems]);
 
   const runImport = useCallback(async () => {
     if (collection === "blogs" || !siteItems) return;
@@ -122,10 +125,11 @@ export default function AdminList({
                 </div>
                 <span
                   className={`w-fit rounded-full px-2.5 py-1 text-[11px] font-semibold ${
-                    row.published !== false ? "bg-emerald-50 text-emerald-800" : "bg-sand text-muted"
+                    row.siteOnly ? "bg-amber-50 text-amber-800" : row.published !== false ? "bg-emerald-50 text-emerald-800" : "bg-sand text-muted"
                   }`}
+                  title={row.siteOnly ? "Shown on the website but not saved in the admin yet. Open it and click Save." : undefined}
                 >
-                  {row.published !== false ? "Published" : "Draft"}
+                  {row.siteOnly ? "Website only" : row.published !== false ? "Published" : "Draft"}
                 </span>
                 <div className="sm:text-right">
                   <Link href={editHref(row.slug)} className="btn-outline inline-flex py-2 text-xs">

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import ListingExplorer from "@/components/ListingExplorer";
-import { projectCard, rentalCard, resaleCard, type ListingCardData } from "@/lib/data";
+import { projectCard, projects, rentalCard, rentalProperties, resaleCard, resaleProperties, type ListingCardData } from "@/lib/data";
+import { mergeLive } from "@/lib/live-merge";
 import { isFirebaseConfigured } from "@/lib/firebase";
 import type { Project, RentalProperty, ResaleProperty } from "@/lib/types";
 
@@ -33,10 +34,10 @@ export default function LiveListingExplorer({
       const apply = (live: ListingCardData[]) => setCards(mergeBySlug(items, live));
       unsub =
         kind === "project"
-          ? data.listenPublishedProjects((l: Project[]) => apply(l.filter((x) => x.editedInAdmin).map(projectCard)))
+          ? data.listenPublishedProjects((l: Project[]) => apply(merged(l, projects).map(projectCard)))
           : kind === "resale"
-            ? data.listenPublishedResale((l: ResaleProperty[]) => apply(l.filter((x) => x.editedInAdmin).map(resaleCard)))
-            : data.listenPublishedRentals((l: RentalProperty[]) => apply(l.filter((x) => x.editedInAdmin).map(rentalCard)));
+            ? data.listenPublishedResale((l: ResaleProperty[]) => apply(merged(l, resaleProperties).map(resaleCard)))
+            : data.listenPublishedRentals((l: RentalProperty[]) => apply(merged(l, rentalProperties).map(rentalCard)));
     })().catch(() => {});
     return () => {
       cancelled = true;
@@ -45,6 +46,11 @@ export default function LiveListingExplorer({
   }, [kind, items]);
 
   return <ListingExplorer kind={kind} items={cards} suggestions={suggestions} />;
+}
+
+/** Admin-saved live listings, each combined with its built-in version (newest wins). */
+function merged<T extends Project | ResaleProperty | RentalProperty>(live: T[], built: T[]): T[] {
+  return live.map((x) => mergeLive(built.find((b) => b.slug === x.slug), x)).filter((x): x is T => !!x);
 }
 
 function mergeBySlug(base: ListingCardData[], live: ListingCardData[]) {
