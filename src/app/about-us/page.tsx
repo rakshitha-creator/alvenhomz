@@ -52,11 +52,19 @@ export default function AboutPage() {
             </p>
           </div>
         </Reveal>
-        <Reveal delay={120} className="grid grid-cols-2 gap-4">
+        <Reveal delay={120}>
+          {/* One 4:3 photo (no crop): living room on the left, doorway and keys on the right. Stacks under the copy on mobile. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img("tower-balconies", "sm")} alt="Residential apartment towers" loading="lazy" className="aspect-[3/4] w-full rounded-2xl object-cover" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={img("living-wood", "sm")} alt="Warm contemporary living room interior" loading="lazy" className="mt-10 aspect-[3/4] w-full rounded-2xl object-cover" />
+          <img
+            src={img("interiors/about-us")}
+            srcSet={`${img("interiors/about-us", "sm")} 720w, ${img("interiors/about-us")} 1448w`}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            width={1448}
+            height={1086}
+            alt="A furnished apartment with oak cabinetry and keys on the entry console."
+            loading="lazy"
+            className="aspect-[4/3] w-full rounded-2xl object-cover shadow-card"
+          />
         </Reveal>
       </section>
 

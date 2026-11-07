@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Sparkles, X } from "lucide-react";
 import type { InteriorProject } from "@/lib/types";
 import { cn, img } from "@/lib/utils";
 
@@ -66,7 +66,7 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
                 <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-300 uppercase">{item.category}</p>
                 <p className="mt-1.5 font-display text-xl font-semibold text-white">{item.title}</p>
                 <p className="mt-1 flex items-center gap-1 text-xs text-white/70">
-                  <MapPin className="h-3 w-3" /> {item.location}
+                  {item.concept ? <Sparkles className="h-3 w-3" /> : <MapPin className="h-3 w-3" />} {item.concept ? "Design concept" : item.location}
                 </p>
               </div>
             </button>
@@ -99,7 +99,7 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
               <p className="eyebrow">{open.category}</p>
               <h3 className="mt-2 text-2xl font-semibold">{open.title}</h3>
               <p className="mt-1 flex items-center gap-1 text-sm text-muted">
-                <MapPin className="h-3.5 w-3.5" /> {open.location}
+                {open.concept ? <Sparkles className="h-3.5 w-3.5" /> : <MapPin className="h-3.5 w-3.5" />} {open.concept ? "Design concept" : open.location}
               </p>
               <p className="mt-5 text-sm leading-relaxed text-navy-800">{open.description}</p>
               <div className="mt-6 flex gap-2">

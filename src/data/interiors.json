@@ -4,7 +4,7 @@
       "slug": "complete-home-interiors",
       "title": "Complete Home Interiors",
       "summary": "End-to-end design and execution for your entire home — from layout planning to the last cushion.",
-      "image": "living-double-height",
+      "image": "interiors/cover-complete-home",
       "icon": "home",
       "points": [
         "Space planning and 3D visualisation",
@@ -17,7 +17,7 @@
       "slug": "modular-kitchens",
       "title": "Modular Kitchens",
       "summary": "Ergonomic, durable kitchens in L, U, parallel and island layouts with premium hardware.",
-      "image": "kitchen-modular",
+      "image": "interiors/cover-modular-kitchens",
       "icon": "chef-hat",
       "points": [
         "BWP plywood and acrylic finishes",
@@ -30,7 +30,7 @@
       "slug": "living-room-interiors",
       "title": "Living Room Interiors",
       "summary": "Inviting living spaces with TV units, feature walls, layered lighting and curated furniture.",
-      "image": "living-gallery",
+      "image": "interiors/cover-living-room",
       "icon": "sofa",
       "points": [
         "Feature walls and panelling",
@@ -43,7 +43,7 @@
       "slug": "bedroom-interiors",
       "title": "Bedroom Interiors",
       "summary": "Calm, restful bedrooms with upholstered headboards, study corners and smart storage.",
-      "image": "bedroom-luxe",
+      "image": "interiors/cover-bedroom",
       "icon": "bed-double",
       "points": [
         "Headboards and bed back panels",
@@ -80,6 +80,162 @@
     }
   ],
   "portfolio": [
+    {
+      "slug": "concept-complete-home-1",
+      "title": "Warm Open-Plan Family Home",
+      "category": "Complete Home Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "An entryway that opens into a sunlit living and dining space, with an oak shoe console, a fabric sofa and a slim TV wall.",
+      "image": "interiors/complete-home-concept-1",
+      "gallery": [
+        "interiors/complete-home-concept-1",
+        "interiors/complete-home-concept-2"
+      ]
+    },
+    {
+      "slug": "concept-complete-home-2",
+      "title": "Sunlit Dining & Living Home",
+      "category": "Complete Home Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "A family dining table in solid wood beside a bright living area, tied together with warm neutrals, plants and open shelving.",
+      "image": "interiors/complete-home-concept-2",
+      "gallery": [
+        "interiors/complete-home-concept-2",
+        "interiors/complete-home-concept-1"
+      ]
+    },
+    {
+      "slug": "concept-modular-kitchens-1",
+      "title": "L-Shaped Kitchen with Garden Window",
+      "category": "Modular Kitchens",
+      "location": "Design concept",
+      "concept": true,
+      "description": "Cream shutters with wood accents, a black granite counter and a chimney, arranged around a window that brings in daylight.",
+      "image": "interiors/modular-kitchens-concept-1",
+      "gallery": [
+        "interiors/modular-kitchens-concept-1",
+        "interiors/modular-kitchens-concept-2"
+      ]
+    },
+    {
+      "slug": "concept-modular-kitchens-2",
+      "title": "Parallel Galley Kitchen",
+      "category": "Modular Kitchens",
+      "location": "Design concept",
+      "concept": true,
+      "description": "A compact parallel kitchen with handle-less upper units, quartz counters and a tall pull-out larder for everyday storage.",
+      "image": "interiors/modular-kitchens-concept-2",
+      "gallery": [
+        "interiors/modular-kitchens-concept-2",
+        "interiors/modular-kitchens-concept-1"
+      ]
+    },
+    {
+      "slug": "concept-living-room-1",
+      "title": "Balcony-Facing Living Room",
+      "category": "Living Room Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "A relaxed sofa set, a low wooden coffee table and a walnut TV unit, opening onto a bright balcony garden.",
+      "image": "interiors/living-room-concept-1",
+      "gallery": [
+        "interiors/living-room-concept-1",
+        "interiors/living-room-concept-2"
+      ]
+    },
+    {
+      "slug": "concept-living-room-2",
+      "title": "Cosy Reading Living Room",
+      "category": "Living Room Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "Soft linen seating, an accent armchair and layered rugs create a calm living room for slow weekends.",
+      "image": "interiors/living-room-concept-2",
+      "gallery": [
+        "interiors/living-room-concept-2",
+        "interiors/living-room-concept-1"
+      ]
+    },
+    {
+      "slug": "concept-bedroom-1",
+      "title": "Calm Master Bedroom",
+      "category": "Bedroom Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "A low upholstered bed, linen drapes and a framed art wall, with built-in wardrobes kept to one side.",
+      "image": "interiors/bedroom-concept-1",
+      "gallery": [
+        "interiors/bedroom-concept-1",
+        "interiors/bedroom-concept-2"
+      ]
+    },
+    {
+      "slug": "concept-bedroom-2",
+      "title": "Bedroom with Window Seat",
+      "category": "Bedroom Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "A cushioned window seat, full-height wooden wardrobe and soft bedding for a restful, clutter-free room.",
+      "image": "interiors/bedroom-concept-2",
+      "gallery": [
+        "interiors/bedroom-concept-2",
+        "interiors/bedroom-concept-1"
+      ]
+    },
+    {
+      "slug": "concept-home-office-1",
+      "title": "Study Nook with Floating Shelves",
+      "category": "Home Office Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "A wall-mounted desk with open shelves and warm task lighting, tucked into a quiet corner by the window.",
+      "image": "interiors/home-office-concept-1",
+      "gallery": [
+        "interiors/home-office-concept-1",
+        "interiors/home-office-concept-2"
+      ]
+    },
+    {
+      "slug": "concept-home-office-2",
+      "title": "Balcony-Side Work-from-Home Desk",
+      "category": "Home Office Interiors",
+      "location": "Design concept",
+      "concept": true,
+      "description": "An ergonomic chair and walnut desk with cable management, set beside the balcony for daylight and fresh air.",
+      "image": "interiors/home-office-concept-2",
+      "gallery": [
+        "interiors/home-office-concept-2",
+        "interiors/home-office-concept-1"
+      ]
+    },
+    {
+      "slug": "concept-wardrobes-1",
+      "title": "Open & Closed Bedroom Wardrobe",
+      "category": "Wardrobe Designs",
+      "location": "Design concept",
+      "concept": true,
+      "description": "Upper lofts, open shelves and a hanging section behind a mix of laminate shutters and an open bay.",
+      "image": "interiors/wardrobes-concept-1",
+      "gallery": [
+        "interiors/wardrobes-concept-1",
+        "interiors/wardrobes-concept-2"
+      ]
+    },
+    {
+      "slug": "concept-wardrobes-2",
+      "title": "Sliding Two-Tone Wardrobe",
+      "category": "Wardrobe Designs",
+      "location": "Design concept",
+      "concept": true,
+      "description": "Floor-to-ceiling sliding shutters in cream and walnut, with a glass-fronted section and internal organisers.",
+      "image": "interiors/wardrobes-concept-2",
+      "gallery": [
+        "interiors/wardrobes-concept-2",
+        "interiors/wardrobes-concept-1"
+      ]
+    },
     {
       "slug": "lakeview-apartment-hebbal",
       "title": "Lakeview Apartment",

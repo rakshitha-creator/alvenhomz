@@ -196,6 +196,8 @@ export interface InteriorProject {
   title: string;
   category: string;
   location: string;
+  /** Design concept (generated/visualised), not a completed client project: shown with a "Design concept" label, no location pin. */
+  concept?: boolean;
   description: string;
   image: string;
   gallery: string[];
