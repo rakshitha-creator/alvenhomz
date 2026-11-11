@@ -17,3 +17,15 @@ export function csvToList(value: string) {
 export function listToCsv(values: string[] | undefined) {
   return (values ?? []).join(", ");
 }
+
+/** For content where commas are meaningful (for example project highlights). */
+export function linesToList(value: string) {
+  return value
+    .split(/\r?\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+export function listToLines(values: string[] | undefined) {
+  return (values ?? []).join("\n");
+}

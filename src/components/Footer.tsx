@@ -19,7 +19,10 @@ export default function Footer() {
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Logo variant="light" imgClassName="h-32 w-auto" />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed">{site.description}</p>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed">
+            From finding your ideal home to designing its interiors, Alven Homz delivers end-to-end real estate solutions across Bangalore—specializing in
+            new launches, resale homes, rentals, and custom interior design.
+          </p>
           <ul className="mt-6 flex gap-3">
             {socials.map(({ href, label, Icon }) => (
               <li key={label}>
@@ -63,6 +66,11 @@ export default function Footer() {
             <li>
               <Link href="/about-us/" className="transition hover:text-white">
                 About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/careers/" className="transition hover:text-white">
+                Careers
               </Link>
             </li>
             <li>

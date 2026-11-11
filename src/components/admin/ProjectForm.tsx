@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Project, ProjectFaq, ProjectTestimonial } from "@/lib/types";
 import { saveListingDoc, deleteListingDoc } from "@/lib/firebase-data";
-import { csvToList, listToCsv, slugify } from "@/lib/slug";
+import { csvToList, linesToList, listToCsv, listToLines, slugify } from "@/lib/slug";
 import { cn, img } from "@/lib/utils";
 import { copyImageToStorage, isStorageUrl } from "@/lib/uploads";
 import { AdminPageHeader, Field, FormCard, FormInput, FormSelect, FormTextarea } from "./form";
@@ -141,7 +141,7 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
       .join("\n"),
   );
   const [amenitiesText, setAmenitiesText] = useState(listToCsv(initial?.amenities));
-  const [highlightsText, setHighlightsText] = useState(listToCsv(initial?.highlights));
+  const [highlightsText, setHighlightsText] = useState(listToLines(initial?.highlights));
   const [plansText, setPlansText] = useState(plansToText(initial?.floorPlans));
   const [nearbyText, setNearbyText] = useState(nearbyToText(initial?.nearby));
   const [faqsText, setFaqsText] = useState(faqsToText(initial?.faqs));
@@ -193,7 +193,7 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
         videoStoragePath: form.videoStoragePath || "",
         configurations: parseConfigs(),
         amenities: csvToList(amenitiesText),
-        highlights: csvToList(highlightsText),
+        highlights: linesToList(highlightsText),
         floorPlans: textToPlans(plansText),
         nearby: textToNearby(nearbyText),
         faqs: textToFaqs(faqsText),
@@ -331,8 +331,8 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
           <Field label="About developer">
             <FormTextarea value={form.developerAbout} onChange={(e) => set("developerAbout", e.target.value)} />
           </Field>
-          <Field label="Highlights (comma-separated)">
-            <FormTextarea value={highlightsText} onChange={(e) => setHighlightsText(e.target.value)} />
+          <Field label="Project highlights" hint="Enter one complete highlight per line. Commas within a highlight are preserved.">
+            <FormTextarea value={highlightsText} onChange={(e) => setHighlightsText(e.target.value)} className="min-h-[180px]" />
           </Field>
         </FormCard>
       )}

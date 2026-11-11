@@ -120,6 +120,7 @@ export type BannerPageId =
   | "rentals"
   | "blogs"
   | "about"
+  | "careers"
   | "contact"
   | "interiors";
 

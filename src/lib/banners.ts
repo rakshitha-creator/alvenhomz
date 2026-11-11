@@ -14,6 +14,7 @@ export const BANNER_SLOTS: Array<{
   { id: "rentals", label: "Rental Properties", path: "/rental-properties/", fallbackImage: "living-blue" },
   { id: "blogs", label: "Blogs", path: "/blogs/", fallbackImage: "living-white" },
   { id: "about", label: "About Us", path: "/about-us/", fallbackImage: "living-penthouse" },
+  { id: "careers", label: "Careers", path: "/careers/", fallbackImage: "office-cowork" },
   { id: "contact", label: "Contact Us", path: "/contact-us/", fallbackImage: "workspace-window" },
   { id: "interiors", label: "Interiors", path: "/interiors/", fallbackImage: "living-double-height" },
 ];

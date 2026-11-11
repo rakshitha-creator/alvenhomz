@@ -71,15 +71,24 @@ export function Facts({ items }: { items: Array<{ label: string; value?: string 
     <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
       {items
         .filter((f) => f.value !== undefined && f.value !== "")
-        .map((f) => (
-          <div key={f.label} className="rounded-xl border border-line bg-white px-4 py-3.5">
-            <dt className="flex items-center gap-1.5 text-xs font-medium tracking-wide text-muted uppercase">
-              {f.icon}
-              {f.label}
-            </dt>
-            <dd className="mt-1 font-semibold text-navy-900">{f.value}</dd>
-          </div>
-        ))}
+        .map((f) => {
+          const isReraNumber = f.label.toLowerCase().startsWith("rera");
+          return (
+            <div
+              key={f.label}
+              className={cn(
+                "min-w-0 rounded-xl border border-line bg-white px-4 py-3.5",
+                isReraNumber && "col-span-2 sm:col-span-2",
+              )}
+            >
+              <dt className="flex items-center gap-1.5 text-xs font-medium tracking-wide text-muted uppercase">
+                {f.icon}
+                {f.label}
+              </dt>
+              <dd className={cn("mt-1 font-semibold text-navy-900", isReraNumber && "break-words")}>{f.value}</dd>
+            </div>
+          );
+        })}
     </dl>
   );
 }

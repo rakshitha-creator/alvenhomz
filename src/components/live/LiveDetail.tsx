@@ -14,6 +14,16 @@ type Item = Project | ResaleProperty | RentalProperty;
 
 const SEGMENT: Record<Kind, string> = { project: "new-projects", resale: "resale-properties", rental: "rental-properties" };
 
+function restoreSplitHighlights(initial: Project | undefined, live: Project): Project {
+  if (!initial?.highlights?.length || !live.highlights?.length || live.highlights.length <= initial.highlights.length) return live;
+  const comparable = (items: string[]) => items
+    .join(", ")
+    .replace(/(\d),\s+(?=\d)/g, "$1,")
+    .replace(/\s+/g, " ")
+    .trim();
+  return comparable(live.highlights) === comparable(initial.highlights) ? { ...live, highlights: initial.highlights } : live;
+}
+
 /**
  * Renders a listing detail page from the site data baked into the build, then swaps in the live copy from the admin
  * (Firebase) so edits made there — photos, order, prices, text — show without a rebuild. Fields missing from the live
@@ -42,7 +52,8 @@ export default function LiveDetail({ kind, initial }: { kind: Kind; initial?: It
         const live = (await get(slug)) as Item | null;
         if (cancelled) return;
         if (firebaseOnly) {
-          setItem(live ? ({ ...initial, ...live } as Item) : (initial ?? null));
+          const project = live ? restoreSplitHighlights(initial as Project | undefined, live as Project) : null;
+          setItem(project ? ({ ...initial, ...project } as Item) : (initial ?? null));
           const { listPublishedProjects } = await import("@/lib/firebase-data");
           const all = await listPublishedProjects();
           if (!cancelled && all.length) setAllLive(all);

@@ -17,11 +17,12 @@ export const NAV = [
   { href: "/resale-properties/", label: "Resale" },
   { href: "/rental-properties/", label: "Rentals" },
   { href: "/interiors/", label: "Interiors" },
+  { href: "/careers/", label: "Careers" },
   { href: "/contact-us/", label: "Contact Us" },
 ];
 
 /** Pages that open with a full-bleed dark hero; the header sits transparently over it until the page scrolls. */
-const HERO_PAGES = ["/", "/about-us/", "/contact-us/", "/interiors/", "/new-projects/", "/resale-properties/", "/rental-properties/", "/blogs/", "/privacy-policy/", "/terms-and-conditions/"];
+const HERO_PAGES = ["/", "/about-us/", "/careers/", "/contact-us/", "/interiors/", "/new-projects/", "/resale-properties/", "/rental-properties/", "/blogs/", "/privacy-policy/", "/terms-and-conditions/"];
 
 export default function Header() {
   const pathname = usePathname();

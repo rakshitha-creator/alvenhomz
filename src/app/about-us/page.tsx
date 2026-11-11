@@ -34,21 +34,20 @@ export default function AboutPage() {
 
       <section className="container-x grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-2">
         <Reveal>
-          <p className="eyebrow">Who we are</p>
-          <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Beyond the keys to your home</h2>
+          <p className="eyebrow">About Us</p>
+          <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Care That Extends Long After the Keys</h2>
           <div className="mt-6 space-y-4 leading-relaxed text-navy-800">
             <p>
-              At Alven Homz, our relationship with homeowners has always gone beyond handing over the keys. Over 17 years of building quality homes, we
-              have earned the trust of our homeowners, and Alven Homz is our next step in strengthening that bond.
+              Taking possession of your home is just the start of your journey, and Alven Homz is here for the rest of it.
             </p>
             <p>
-              Alven Homz is your dedicated home services partner. We were created to support you long after you take possession of your
-              home. Built on Alven Homz&apos;s values of trust, care and quality, we offer reliable and cost-effective solutions that make homeownership easier and
-              more convenient.
+              Emerging as a dedicated home services company backed by <strong>Abhee Ventures&rsquo; 17-year track record of excellence</strong>, we bring
+              established expertise to modern home living. We were built to remove the stress of post-handover care by offering trusted, affordable,
+              all-in-one solutions.
             </p>
             <p>
-              From interior design and home transformations to rental, resale and property management, we bring essential home services together under one
-              roof, with one team you can rely on.
+              Whether you are looking to design your dream interiors, upgrade your living space, or manage rental and resale operations, our experienced
+              team has you covered every step of the way.
             </p>
           </div>
         </Reveal>
