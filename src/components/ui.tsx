@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 export function SectionHeading({
   eyebrow,
   title,
+  caption,
   description,
   align = "left",
   center = false,
@@ -15,6 +16,8 @@ export function SectionHeading({
 }: {
   eyebrow?: string;
   title: string;
+  /** Short supporting line shown directly under the heading, before the body. */
+  caption?: string;
   description?: string;
   align?: "left" | "center";
   center?: boolean;
@@ -27,6 +30,7 @@ export function SectionHeading({
       <div className={cn("max-w-2xl", isCenter && "mx-auto")}>
         {eyebrow && <p className={cn("eyebrow", light && "text-gold-300")}>{eyebrow}</p>}
         <h2 className={cn("mt-3 text-3xl font-semibold sm:text-4xl", light && "text-white")}>{title}</h2>
+        {caption && <p className={cn("mt-3 font-display text-lg italic", light ? "text-gold-300" : "text-gold-700")}>{caption}</p>}
         {description && <p className={cn("mt-4 text-base leading-relaxed", light ? "text-white/70" : "text-muted")}>{description}</p>}
       </div>
       {action}
@@ -110,14 +114,19 @@ export function NoticeBanner({ children }: { children: React.ReactNode }) {
 export function PageHero({
   eyebrow,
   title,
+  caption,
   description,
   image,
   bannerId,
+  actions,
 }: {
   eyebrow: string;
   title: string;
+  /** Short deck line between the H1 and the body. */
+  caption?: string;
   description: string;
   image: string;
+  actions?: React.ReactNode;
   /** When set, hero media is loaded from Firestore/Storage banners. */
   bannerId?: BannerPageId;
 }) {
@@ -130,10 +139,12 @@ export function PageHero({
         <img src={image} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35" fetchPriority="high" />
       )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950 via-espresso-950/85 to-espresso-950/30" />
-      <div className="container-x pt-[calc(88px+3rem)] pb-16 sm:pt-[calc(88px+4rem)] sm:pb-20">
+      <div className="container-x pt-[calc(88px+1.25rem)] pb-8 sm:pt-[calc(88px+4rem)] sm:pb-20">
         <p className="eyebrow text-gold-300 animate-fade-up">{eyebrow}</p>
-        <h1 className="mt-4 max-w-3xl text-4xl font-semibold text-white animate-fade-up [animation-delay:80ms] sm:text-5xl">{title}</h1>
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 animate-fade-up [animation-delay:160ms] sm:text-lg">{description}</p>
+        <h1 className="mt-3 max-w-3xl text-3xl font-semibold text-white sm:mt-4 sm:text-5xl">{title}</h1>
+        {caption && <p className="mt-3 font-display text-lg text-gold-300 italic sm:text-xl">{caption}</p>}
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 sm:mt-4 sm:text-lg">{description}</p>
+        {actions && <div className="mt-6 flex flex-wrap gap-3">{actions}</div>}
       </div>
     </section>
   );

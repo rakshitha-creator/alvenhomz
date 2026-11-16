@@ -15,6 +15,8 @@ export function DetailHeader({
   badges,
   price,
   priceNote,
+  caption,
+  intro,
 }: {
   crumbs: Array<{ name: string; path: string }>;
   title: string;
@@ -22,6 +24,10 @@ export function DetailHeader({
   badges: React.ReactNode;
   price: string;
   priceNote?: string;
+  /** Short deck line under the H1. */
+  caption?: string;
+  /** Opening paragraph built from the listing record. */
+  intro?: string;
 }) {
   return (
     <div className="flex flex-col gap-6 py-8 lg:flex-row lg:items-end lg:justify-between">
@@ -29,9 +35,11 @@ export function DetailHeader({
         <Breadcrumbs items={crumbs} />
         <div className="mt-4 flex flex-wrap gap-2">{badges}</div>
         <h1 className="mt-3 text-3xl font-semibold sm:text-4xl">{title}</h1>
+        {caption && <p className="mt-2 font-display text-lg text-gold-700 italic">{caption}</p>}
         <p className="mt-2 flex items-center gap-1.5 text-muted">
-          <MapPin className="h-4 w-4 text-gold-600" /> {location}
+          <MapPin className="h-4 w-4 shrink-0 text-gold-600" /> {location}
         </p>
+        {intro && <p className="mt-4 max-w-3xl leading-relaxed text-navy-800">{intro}</p>}
       </div>
       <div className="flex items-end gap-4 lg:flex-col lg:items-end">
         <p>
@@ -55,12 +63,27 @@ export function Badge({ children, tone = "default" }: { children: React.ReactNod
   return <span className={cn("rounded-full px-3 py-1 text-xs font-semibold", tones[tone])}>{children}</span>;
 }
 
-export function DetailSection({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+export function DetailSection({
+  id,
+  title,
+  caption,
+  intro,
+  children,
+}: {
+  id: string;
+  title: string;
+  caption?: string;
+  intro?: string;
+  children?: React.ReactNode;
+}) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-28 border-t border-line py-10 first:border-t-0 first:pt-0">
-      <h2 id={`${id}-title`} className="mb-6 text-2xl font-semibold">
+      <h2 id={`${id}-title`} className={cn("text-2xl font-semibold", caption || intro ? "mb-2" : "mb-6")}>
         {title}
       </h2>
+      {caption && <p className="font-display text-lg text-gold-700 italic">{caption}</p>}
+      {intro && <p className="mt-3 mb-6 leading-relaxed text-navy-800">{intro}</p>}
+      {!intro && caption && <div className="mb-6" />}
       {children}
     </section>
   );
@@ -109,18 +132,25 @@ export function EnquirySidebar({
   listing,
   summary,
   isSample,
+  heading = "Interested? Get in touch",
+  caption,
+  intro,
 }: {
   listing: ListingRef;
   summary: React.ReactNode;
   isSample?: boolean;
+  heading?: string;
+  caption?: string;
+  intro?: string;
 }) {
   return (
     <aside id="enquire" className="scroll-mt-24">
       <div className="space-y-4 lg:sticky lg:top-24 lg:max-h-[calc(100vh-6.5rem)] lg:overflow-y-auto lg:pb-2 no-scrollbar">
         <div className="card p-6">
           {summary}
-          <h2 className="mt-5 font-sans text-base font-bold">Interested? Get in touch</h2>
-          <p className="mt-1 mb-5 text-xs text-muted">Send your details on WhatsApp or email — we usually reply within a few working hours.</p>
+          <h2 className="mt-5 font-sans text-base font-bold">{heading}</h2>
+          {caption && <p className="mt-1 font-display text-gold-700 italic">{caption}</p>}
+          <p className="mt-1 mb-5 text-sm text-muted">{intro ?? "Send your details on WhatsApp or email and review them before sending."}</p>
           <LeadForm variant="listing" listing={listing} compact />
         </div>
         <div className="card p-4">

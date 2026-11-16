@@ -58,7 +58,7 @@ function PlanSketch({ bhk, label }: { bhk: number; label: string }) {
           <text x={2 + i * bedW + bedW / 2} y="52" textAnchor="middle" className="fill-navy-800 text-[12px] font-semibold">
             {i === 0 ? "Master Bed" : `Bedroom ${i + 1}`}
           </text>
-          <text x={2 + i * bedW + bedW / 2} y="70" textAnchor="middle" className="fill-muted text-[10px]">
+          <text x={2 + i * bedW + bedW / 2} y="70" textAnchor="middle" className="fill-muted text-xs">
             {i === 0 ? "+ Toilet" : ""}
           </text>
         </g>

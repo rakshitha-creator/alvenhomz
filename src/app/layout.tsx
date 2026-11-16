@@ -25,12 +25,11 @@ const playfair = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} – ${site.tagline} | New Projects, Resale, Rentals & Interiors`,
+    default: "Flats for Sale & Rent in Bengaluru | Interiors – Alven Homz",
     template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
-  keywords: ["real estate Bangalore", "Sarjapur Road apartments", "new projects", "resale flats", "rental apartments", "luxury villas", "interior design", "Alven Homz", "Alvenhomz"],
   icons: { icon: "/favicon.svg", apple: "/images/alvenhomz-logo.png" },
   openGraph: {
     type: "website",
@@ -59,8 +58,19 @@ const organizationLd = {
   description: site.description,
   telephone: site.phone,
   email: site.email,
-  address: { "@type": "PostalAddress", streetAddress: site.address, addressCountry: "IN" },
-  sameAs: Object.values(site.social),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address,
+    addressLocality: "Bengaluru",
+    addressRegion: "Karnataka",
+    postalCode: "560102",
+    addressCountry: "IN",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: Number(site.mapQuery.split(",")[0]), longitude: Number(site.mapQuery.split(",")[1]) },
+  areaServed: { "@type": "City", name: "Bengaluru" },
+  parentOrganization: { "@type": "Organization", name: "Abhee Ventures", url: "https://abheeventures.com/" },
+  // Only real profile links (placeholder home pages like instagram.com/ are left out).
+  sameAs: Object.values(site.social).filter((u) => /\.(com|in)\/[^/?#]+/.test(u)),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

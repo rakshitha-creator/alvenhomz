@@ -13,6 +13,7 @@
   --color-gold-400: #d6b779;
   --color-gold-500: #c29d57;
   --color-gold-600: #a5803c;
+  --color-gold-700: #8a6a2f;
   --color-ivory: #faf7f2;
   --color-sand: #f1eadf;
   --color-ink: #17202e;
@@ -25,12 +26,13 @@
   --shadow-card: 0 1px 2px rgb(13 31 58 / 0.04), 0 8px 24px -12px rgb(13 31 58 / 0.18);
   --shadow-lift: 0 2px 4px rgb(13 31 58 / 0.05), 0 24px 48px -20px rgb(13 31 58 / 0.35);
 
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
   /* "backwards" so no stacking context lingers after the animation (keeps modals above the header) */
   --animate-fade-in: fade-in 0.3s ease-out backwards;
 
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(18px); }
+    /* Starts mostly visible so text is readable (and counted as painted) straight away. */
+    from { opacity: 0.65; transform: translateY(10px); }
     to { opacity: 1; transform: none; }
   }
   @keyframes fade-in {
@@ -63,7 +65,8 @@
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 @utility eyebrow {
-  @apply text-xs font-semibold tracking-[0.22em] text-gold-600 uppercase;
+  /* #8a6a2f on ivory/white passes WCAG AA (4.5:1); the lighter brand gold did not. */
+  @apply text-xs font-bold tracking-[0.22em] text-[#8a6a2f] uppercase;
 }
 @utility btn {
   @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
@@ -84,7 +87,8 @@
   @apply btn bg-espresso-900 text-white hover:bg-espresso-700 hover:shadow-lift;
 }
 @utility input {
-  @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/70 transition outline-none focus:border-gold-500 focus:ring-4 focus:ring-gold-300/30;
+  /* 16px text so iPhones don't zoom in when a field is tapped. */
+  @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-base text-ink placeholder:text-muted/70 transition outline-none focus:border-gold-500 focus:ring-4 focus:ring-gold-300/30;
 }
 @utility label {
   @apply mb-1.5 block text-xs font-semibold tracking-wide text-navy-800 uppercase;
@@ -100,9 +104,9 @@
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0.65;
+  transform: translateY(10px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .reveal.is-visible {
   opacity: 1;
@@ -114,6 +118,8 @@
   .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+body[data-menu-open] .float-wa { display: none; }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }

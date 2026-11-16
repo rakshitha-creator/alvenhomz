@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { Building2, CalendarClock, FileText, Landmark, LayoutGrid, Ruler, ShieldCheck } from "lucide-react";
 import Amenities from "@/components/Amenities";
 import FloorPlans from "@/components/FloorPlans";
 import Gallery from "@/components/Gallery";
+import Faq, { type FaqItem } from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import MapEmbed from "@/components/MapEmbed";
 import { MobileEnquiryBar } from "@/components/ContactActions";
@@ -16,6 +18,7 @@ import { absoluteUrl, breadcrumbJsonLd } from "@/lib/seo";
 import { formatINR, formatPriceRange, img } from "@/lib/utils";
 
 import type { Project } from "@/lib/types";
+import { repairSplitList } from "@/lib/live-merge";
 
 const STATUS_TONE = { ready: "green", "under-construction": "amber", upcoming: "sky" } as const;
 
@@ -32,6 +35,26 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
     { name: p.name, path },
   ];
   const brochureMsg = `Hi Alven Homz, please share the brochure, price sheet and floor plans for ${p.name} (${location}).`;
+  const kindText = p.propertyType === "plot" ? "plotted development" : p.propertyType === "villa" ? "villa community" : "residential apartment development";
+  const configs = p.configurations.map((c) => c.label);
+  const configText = configs.length > 1 ? `${configs.slice(0, -1).join(", ")} and ${configs.at(-1)}` : (configs[0] ?? "");
+  const enquiryHref = `/contact-us/?topic=new-project&about=${encodeURIComponent(p.name)}#enquiry`;
+  const visitHref = `/contact-us/?topic=new-project&about=${encodeURIComponent(`Site visit – ${p.name}`)}#enquiry`;
+  const firstPlace = p.nearby[0]?.name;
+  const faqs: FaqItem[] = [
+    {
+      q: `Which floor plans are available at ${p.name}?`,
+      a: `${p.name} lists ${configText || "several configurations"}. Availability can vary by tower and phase. Ask for the current unit list and the floor plan for the specific residence you want to compare.`,
+    },
+    {
+      q: `When is possession expected at ${p.name}?`,
+      a: `The stated possession for ${p.name} is ${p.possession}. Confirm the schedule for the tower and unit you are considering.`,
+    },
+    {
+      q: `How much does a home at ${p.name} cost?`,
+      a: `${p.priceFrom > 0 ? `Quotes start from ${formatINR(p.priceFrom)} for the entry configuration.` : "Pricing is available on request."} Ask for a current unit-specific cost sheet to see the quoted price, applicable charges and payment milestones.`,
+    },
+  ];
 
   const sections = [
     { id: "overview", label: "Overview" },
@@ -67,7 +90,9 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
       <div className="container-x">
         <DetailHeader
           crumbs={crumbs}
-          title={p.name}
+          title={`${p.name} in ${p.locality}, Bengaluru`}
+          caption="Get to know the address before you visit."
+          intro={`${p.name} is a ${kindText} by ${p.developer} in ${p.locality}, Bengaluru${configText ? `, with ${configText} homes` : ""}. Review the layouts, the amenities for your phase and expected possession before requesting a quote for a specific unit.`}
           location={`${p.address}`}
           price={priceRange}
           priceNote={`by ${p.developer}`}
@@ -86,7 +111,12 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
           <div className="min-w-0">
             <SectionNav items={sections} />
 
-            <DetailSection id="overview" title="Project Overview">
+            <DetailSection
+              id="overview"
+              title="Project Overview"
+              caption="The details that shape the address."
+              intro={`${p.name} in ${p.locality} is ${PROJECT_STATUS[p.status].toLowerCase()}, with expected possession ${/^\d|^[A-Z][a-z]{2,8} \d{4}/.test(p.possession) ? "in " : ""}${p.possession}. Check the overview for the configuration options and the basis on which areas are quoted.`}
+            >
               <p className="leading-relaxed text-navy-800">{p.description}</p>
               <div className="mt-6">
                 <Facts
@@ -110,9 +140,9 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                   .
                 </p>
               )}
-              <h3 className="mt-8 font-sans text-base font-bold">Project highlights</h3>
+              <h3 className="mt-8 font-sans text-base font-bold">Project Highlights</h3>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {p.highlights.map((h) => (
+                {repairSplitList(p.highlights ?? []).map((h) => (
                   <li key={h} className="flex gap-3 rounded-xl bg-ivory px-4 py-3 text-sm text-navy-800">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-500" /> {h}
                   </li>
@@ -120,7 +150,12 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
               </ul>
             </DetailSection>
 
-            <DetailSection id="pricing" title="Price & Configurations">
+            <DetailSection
+              id="pricing"
+              title="Price and configurations"
+              caption="Understand the cost of the home you choose."
+              intro="Compare the available configurations by layout, quoted area and price basis. Request an itemised cost sheet for your preferred unit so you can review the quoted price, applicable charges and payment milestones together."
+            >
               <div className="overflow-x-auto rounded-2xl border border-line">
                 <table className="w-full min-w-[480px] text-left text-sm">
                   <thead className="bg-ivory text-xs tracking-wide text-muted uppercase">
@@ -132,11 +167,15 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-line">
-                    {p.configurations.map((c) => (
+                    {p.configurations.map((c, ci) => (
                       <tr key={c.label}>
                         <th scope="row" className="px-5 py-4 font-semibold text-navy-900">{c.label}</th>
                         <td className="px-5 py-4 text-navy-800">{c.area}</td>
-                        <td className="px-5 py-4 font-semibold text-navy-900">{c.price ? `${formatINR(c.price)}*` : "On request"}</td>
+                        <td className="px-5 py-4 font-semibold text-navy-900">{c.price
+                          ? `${formatINR(c.price)}*`
+                          : ci === 0 && p.priceFrom && !p.configurations.some((x) => x.price)
+                            ? `From ${formatINR(p.priceFrom)}*` /* matches the "onwards" price in the header */
+                            : "Price on request"}</td>
                         <td className="px-5 py-4 text-right">
                           <a
                             href={whatsappHref(`Hi Alven Homz, please share the latest price for ${c.label} at ${p.name}, ${location}.`)}
@@ -144,7 +183,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                             rel="noopener"
                             className="text-xs font-semibold text-gold-600 hover:text-navy-900"
                           >
-                            Get price sheet
+                            Get Today's Price on WhatsApp
                           </a>
                         </td>
                       </tr>
@@ -163,24 +202,38 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
               </div>
             </DetailSection>
 
-            <DetailSection id="amenities" title="Amenities">
+            <DetailSection
+              id="amenities"
+              title="Amenities"
+              intro={`Explore the facilities listed at ${p.name}. Check which are available and which are planned, especially if you're choosing this phase for a particular amenity.`}
+            >
               <Amenities items={p.amenities} />
             </DetailSection>
 
             {p.floorPlans.length > 0 && (
-              <DetailSection id="floor-plans" title="Floor Plans">
+              <DetailSection
+                id="floor-plans"
+                title="Floor Plans"
+                caption="See how the space will work for you."
+                intro="Select a configuration to see how the rooms connect, where the utility and storage sit and how much usable space is available. Ask for the floor plan and area basis for the unit you're considering."
+              >
                 <FloorPlans
                   plans={p.floorPlans}
                   onRequest={
                     <a href={whatsappHref(brochureMsg)} target="_blank" rel="noopener" className="btn-primary">
-                      Request official floor plans
+                      Send Me All Floor Plans
                     </a>
                   }
                 />
               </DetailSection>
             )}
 
-            <DetailSection id="location" title="Location & Nearby">
+            <DetailSection
+              id="location"
+              title="Location and Nearby"
+              caption="Place the project in context."
+              intro={`${p.name} is in ${p.locality}, Bengaluru.${firstPlace ? ` If you regularly travel to ${firstPlace} or the places below, review the route from the project entrance and allow for the time of day you normally make the trip.` : ""}`}
+            >
               <div className="grid gap-6 md:grid-cols-[1.3fr_1fr]">
                 <MapEmbed lat={p.lat} lng={p.lng} title={p.name} />
                 <ul className="divide-y divide-line rounded-2xl border border-line">
@@ -193,6 +246,14 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                 </ul>
               </div>
               <p className="mt-3 text-xs text-muted">Distances are approximate.</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href={enquiryHref} className="btn-primary">
+                  Request Current Availability
+                </Link>
+                <Link href={visitHref} className="btn-outline">
+                  Arrange a Site Visit
+                </Link>
+              </div>
             </DetailSection>
 
             <DetailSection id="developer" title={`About ${p.developer}`}>
@@ -224,6 +285,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
         </div>
       </div>
 
+      <Faq items={faqs} className="pt-4" />
       <Similar title="Similar Projects" items={similar(all, p, (x) => x.priceFrom).map(projectCard)} />
       <MobileEnquiryBar listing={listingRef} />
     </>

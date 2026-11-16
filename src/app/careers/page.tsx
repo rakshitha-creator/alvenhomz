@@ -1,35 +1,33 @@
-import { ArrowRight, BriefcaseBusiness, HeartHandshake, Lightbulb, MapPin, Users } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, MapPin } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import JobApplicationForm, { ApplyForRoleButton } from "@/components/JobApplicationForm";
+import Faq, { type FaqItem } from "@/components/Faq";
+import JobApplicationForm, { ApplyForRoleButton, GENERAL_APPLICATION } from "@/components/JobApplicationForm";
 import { PageHero, SectionHeading } from "@/components/ui";
-import { mailtoHref } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Careers at Alven Homz – Build Better Home Experiences",
-  description: "Explore career opportunities at Alven Homz and help us deliver trusted real estate, interior design and home services across Bangalore.",
+  title: "Real Estate & Interior Design Careers",
+  description: "Explore Bengaluru careers at Alven Homz across residential real estate, interior design, site execution and client advisory.",
   path: "/careers/",
   image: "office-cowork",
 });
 
-const reasons = [
+const FAQS: FaqItem[] = [
   {
-    icon: Users,
-    title: "Work as one team",
-    text: "Collaborate with experienced people across real estate, interiors and home services.",
+    q: "Where are Alven Homz roles based?",
+    a: "Alven Homz is based in Bengaluru. The individual role description specifies the office or project site and any travel associated with the work.",
   },
   {
-    icon: Lightbulb,
-    title: "Turn ideas into impact",
-    text: "Help create practical solutions that make owning and managing a home easier.",
+    q: "Should I include a portfolio when applying for a design role?",
+    a: "Yes. Include a portfolio link and describe your contribution to the work shown. Choose examples that reflect the skills listed for the role.",
   },
   {
-    icon: HeartHandshake,
-    title: "Build lasting trust",
-    text: "Put homeowners first and deliver thoughtful service at every stage of their journey.",
+    q: "How do I know whether a role is open?",
+    a: "Check the current openings list, then open the relevant posting for its responsibilities and application instructions.",
   },
 ];
+
 
 const jobs = [
   {
@@ -109,47 +107,41 @@ const jobs = [
 ];
 
 export default function CareersPage() {
-  const applicationHref = mailtoHref(
-    "Career application – Alven Homz",
-    "Hello Alven Homz team,\n\nI would like to explore career opportunities with Alven Homz. Please find my resume attached.\n\nName:\nPhone:\nArea of interest:\n",
-  );
-
   return (
     <>
       <PageHero
         bannerId="careers"
         eyebrow="Careers"
-        title="Build the future of home living with us"
-        description="Join a team committed to making real estate and home services simpler, more trusted and more rewarding for homeowners across Bangalore."
+        title="Careers at Alven Homz in Bengaluru"
+        caption="Do work people come home to."
+        description="Explore Bengaluru careers in residential property, interior design, client advisory and site execution. At Alven Homz, each role contributes to how a client chooses a home, prepares it for its next occupant or sees a design through from brief to handover."
         image={img("office-cowork")}
+        actions={
+          <a href="#open-roles" className="btn-gold">
+            View Open Roles <ArrowRight className="h-4 w-4" aria-hidden />
+          </a>
+        }
       />
 
       <section className="container-x py-20 sm:py-24">
-        <SectionHeading
-          eyebrow="Why Alven Homz"
-          title="Do meaningful work, together"
-          description="Backed by Abhee Ventures’ 17-year track record, Alven Homz brings established expertise and fresh thinking together under one roof."
-          align="center"
-        />
-        <div className="grid gap-6 md:grid-cols-3">
-          {reasons.map(({ icon: Icon, title, text }, index) => (
-            <Reveal key={title} delay={index * 80} className="card p-8">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-espresso-900 text-gold-400">
-                <Icon className="h-6 w-6" aria-hidden />
-              </span>
-              <h2 className="mt-5 text-2xl font-semibold">{title}</h2>
-              <p className="mt-3 leading-relaxed text-muted">{text}</p>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <p className="eyebrow">Culture</p>
+          <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">How we work</h2>
+          <p className="mt-3 font-display text-lg text-gold-700 italic">Good work starts with ownership.</p>
+          <p className="mt-5 leading-relaxed text-navy-800">
+            Property, design and site teams work from the same client brief. We value colleagues who explain decisions clearly, follow through on commitments
+            and pay attention to details, from the accuracy of a listing to the finish of a piece of joinery.
+          </p>
+        </Reveal>
       </section>
 
-      <section className="bg-ivory py-20 sm:py-24">
+      <section id="open-roles" className="scroll-mt-28 bg-ivory py-20 sm:py-24">
         <div className="container-x">
           <SectionHeading
             eyebrow="Current openings"
-            title="Find your place at Alven Homz"
-            description="Explore our current opportunities across real estate, interior design, sales, project execution and finance."
+            title="Open roles"
+            caption="Find the role that fits your craft."
+            description="Browse current openings in Bengaluru. Read the role description for its day-to-day responsibilities, experience requirements and any site or travel commitments."
           />
           <div className="grid gap-6 lg:grid-cols-2">
             {jobs.map((job, index) => {
@@ -192,29 +184,23 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <JobApplicationForm roles={jobs.map((job) => job.title)} />
+      <JobApplicationForm roles={[...jobs.map((job) => job.title), GENERAL_APPLICATION]} />
 
       <section className="container-x py-20 sm:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <Reveal>
-            <p className="eyebrow">Don&rsquo;t see your role?</p>
-            <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Your next opportunity could start here</h2>
-            <p className="mt-5 max-w-2xl leading-relaxed text-navy-800">
-              We are always interested in meeting thoughtful, driven people who care about great customer experiences. If your strengths are in real estate,
-              sales, interior design, project management, operations or customer service, we would love to hear from you.
+        <div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-espresso-900 p-8 text-white sm:p-12 md:flex-row md:items-center">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-semibold text-white">General applications</h2>
+            <p className="mt-2 font-display text-lg text-gold-300 italic">Tell us what you&apos;d like to build here.</p>
+            <p className="mt-3 leading-relaxed text-white/75">
+              If your experience spans residential real estate or interiors, tell us which work you&apos;d like to take on and share a brief example of a
+              project you helped deliver.
             </p>
-          </Reveal>
-          <Reveal delay={100} className="rounded-3xl bg-espresso-900 p-8 text-white sm:p-10">
-            <h2 className="text-3xl font-semibold text-white">Introduce yourself</h2>
-            <p className="mt-3 leading-relaxed text-white/70">
-              Email your resume and tell us which area you would like to work in. Our team will get in touch when a suitable opportunity is available.
-            </p>
-            <a href={applicationHref} className="btn-gold mt-7">
-              Send your resume <ArrowRight className="h-4 w-4" aria-hidden />
-            </a>
-          </Reveal>
+          </div>
+          <ApplyForRoleButton role={GENERAL_APPLICATION} label="Introduce Yourself" className="btn-gold shrink-0" />
         </div>
       </section>
+
+      <Faq items={FAQS} className="pt-0" />
     </>
   );
 }

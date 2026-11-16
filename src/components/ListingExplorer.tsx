@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, SearchX, SlidersHorizontal, X } from "lucide-react";
 import ListingCard from "./ListingCard";
@@ -105,15 +105,29 @@ export default function ListingExplorer({
   kind,
   items,
   suggestions = [],
+  emptyMessage,
 }: {
   kind: ListingKind;
   items: ListingCardData[];
   suggestions?: string[];
+  /** Copy for the zero-results state (filters or no inventory). */
+  emptyMessage?: string;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const filters = useMemo(() => readFilters(new URLSearchParams(searchParams.toString())), [searchParams]);
+  // Filters live in the URL query. Read it after mount (not via useSearchParams) so the static HTML renders every
+  // card instead of a Suspense fallback, which is what search engines and the first paint see.
+  const [search, setSearch] = useState("");
+  useEffect(() => {
+    const sync = () => setSearch(window.location.search);
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+  const replaceUrl = (url: string) => {
+    window.history.replaceState(window.history.state, "", url);
+    setSearch(url.includes("?") ? url.slice(url.indexOf("?")) : "");
+  };
+  const filters = useMemo(() => readFilters(new URLSearchParams(search)), [search]);
   const [drawer, setDrawer] = useState(false);
   const [q, setQ] = useState(filters.q);
 
@@ -125,7 +139,7 @@ export default function ListingExplorer({
   const update = (patch: Partial<Filters>, keepPage = false) => {
     const next = { ...filters, ...patch, page: keepPage ? (patch.page ?? filters.page) : 1 };
     const qs = toQuery(next);
-    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    replaceUrl(qs ? `${pathname}?${qs}` : pathname);
   };
 
   // Debounce free-text location search.
@@ -141,6 +155,8 @@ export default function ListingExplorer({
     update({ [key]: cur.includes(value) ? cur.filter((v) => v !== value) : [...cur, value] });
   };
 
+  // The "Featured" badge goes on the first two featured listings only.
+  const topFeatured = useMemo(() => new Set(items.filter((x) => x.featured).slice(0, 2).map((x) => x.slug)), [items]);
   const results = useMemo(() => applyFilters([...items], filters), [items, filters]);
   const pages = Math.max(1, Math.ceil(results.length / PAGE_SIZE));
   const page = Math.min(filters.page, pages);
@@ -185,7 +201,7 @@ export default function ListingExplorer({
 
   const clearAll = () => {
     setQ("");
-    router.replace(filters.sort ? `${pathname}?sort=${filters.sort}` : pathname, { scroll: false });
+    replaceUrl(filters.sort ? `${pathname}?sort=${filters.sort}` : pathname);
   };
 
   const panel = (
@@ -281,7 +297,7 @@ export default function ListingExplorer({
       <aside className="hidden lg:block">
         <div className="card sticky top-24 p-4">
           <div className="mb-5 flex items-center justify-between">
-            <h2 className="font-sans text-base font-bold">Filters</h2>
+            <p className="font-sans text-base font-bold text-navy-900">Filters</p>
             {activeCount > 0 && (
               <button type="button" onClick={clearAll} className="text-xs font-semibold text-gold-600 hover:text-navy-900">
                 Clear all
@@ -307,7 +323,7 @@ export default function ListingExplorer({
               className="btn-outline flex items-center gap-2 py-2 text-xs lg:hidden"
             >
               <SlidersHorizontal className="h-3.5 w-3.5" /> Filters
-              {activeCount > 0 && <span className="rounded-full bg-gold-500 px-1.5 py-0.5 text-[10px] font-bold text-navy-950">{activeCount}</span>}
+              {activeCount > 0 && <span className="rounded-full bg-gold-500 px-1.5 py-0.5 text-xs font-bold text-navy-950">{activeCount}</span>}
             </button>
 
             <label htmlFor="sort-by" className="sr-only">
@@ -332,7 +348,7 @@ export default function ListingExplorer({
           <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {visible.map((item, i) => (
               <li key={item.slug} className="animate-fade-up" style={{ animationDelay: `${i * 40}ms` }}>
-                <ListingCard item={item} priority={i < 3} />
+                <ListingCard item={item} priority={i < 3} showFeatured={topFeatured.has(item.slug)} />
               </li>
             ))}
           </ul>
@@ -341,9 +357,18 @@ export default function ListingExplorer({
             <span className="flex h-14 w-14 items-center justify-center rounded-full bg-ivory text-gold-600">
               <SearchX className="h-6 w-6" />
             </span>
-            <h3 className="mt-5 text-xl font-semibold">No properties match these filters</h3>
-            <p className="mt-2 max-w-sm text-sm text-muted">Try widening your budget or removing a filter. Our advisors can also share off-market options on WhatsApp.</p>
-            <button type="button" onClick={clearAll} className="btn-primary mt-6">Clear filters</button>
+            <h3 className="mt-5 text-xl font-semibold">{items.length ? "No matches" : "Nothing listed right now"}</h3>
+            <p className="mt-2 max-w-md text-sm text-muted">
+              {emptyMessage ?? "No properties match these filters. Broaden your search or tell us what you are looking for."}
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              {items.length > 0 && (
+                <button type="button" onClick={clearAll} className="btn-outline">Clear Filters</button>
+              )}
+              <a href={`/contact-us/?topic=${kind === "rental" ? "rent" : kind === "resale" ? "resale" : "new-project"}#enquiry`} className="btn-primary">
+                Tell us what you need
+              </a>
+            </div>
           </div>
         )}
 
@@ -368,7 +393,7 @@ export default function ListingExplorer({
         <button type="button" aria-label="Close filters" onClick={() => setDrawer(false)} className={cn("absolute inset-0 bg-espresso-950/50 transition-opacity", drawer ? "opacity-100" : "opacity-0")} />
         <div className={cn("absolute inset-x-0 bottom-0 flex max-h-[88vh] flex-col rounded-t-3xl bg-white transition-transform duration-300", drawer ? "translate-y-0" : "translate-y-full")}>
           <div className="flex items-center justify-between border-b border-line px-5 py-4">
-            <h2 className="font-sans text-base font-bold">Filters</h2>
+            <p className="font-sans text-base font-bold text-navy-900">Filters</p>
             <button type="button" onClick={() => setDrawer(false)} aria-label="Close filters" className="flex h-9 w-9 items-center justify-center rounded-full bg-ivory">
               <X className="h-4 w-4" />
             </button>
@@ -399,7 +424,7 @@ function Chips({ options, selected, onToggle }: { options: { value: string; labe
       {options.map((o) => {
         const on = selected.includes(o.value);
         return (
-          <button key={o.value} type="button" aria-pressed={on} onClick={() => onToggle(o.value)} className={cn("chip py-1 px-2.5 text-[11px]", on && "chip-active")}>
+          <button key={o.value} type="button" aria-pressed={on} onClick={() => onToggle(o.value)} className={cn("chip py-1 px-2.5 text-xs", on && "chip-active")}>
             {o.label}
           </button>
         );

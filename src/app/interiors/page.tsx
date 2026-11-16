@@ -1,19 +1,31 @@
-import { ArrowRight, BedDouble, Briefcase, ChefHat, Check, DoorClosed, Home, Phone, Sofa, type LucideIcon } from "lucide-react";
+import {
+  ArrowRight,
+  BedDouble,
+  Briefcase,
+  ChefHat,
+  DoorClosed,
+  Home,
+  Phone,
+  Sofa,
+  type LucideIcon,
+} from "lucide-react";
 import BannerMedia from "@/components/BannerMedia";
+import Faq, { type FaqItem } from "@/components/Faq";
+import ProcessSteps from "@/components/ProcessSteps";
 import InteriorPortfolio from "@/components/InteriorPortfolio";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import { SectionHeading } from "@/components/ui";
 import { WhatsAppIcon } from "@/components/icons";
-import { interiorPortfolio, interiorProcess, interiorServices, site, testimonials } from "@/lib/data";
+import { interiorPortfolio, interiorProcess, interiorServices, site } from "@/lib/data";
 import { telHref, whatsappHref } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Alven Homz Interiors – Home, Kitchen, Bedroom & Home Office Interior Design",
+  title: "Luxury Home Interior Designers in Bengaluru",
   description:
-    "Beautiful spaces, thoughtful designs, inspired living. Complete home interiors, modular kitchens, living rooms, bedrooms, wardrobes and home offices by Alven Homz Interiors.",
+    "Commission interiors for your Bengaluru apartment or villa, from modular kitchens and bespoke wardrobes to coordinated full-home design.",
   path: "/interiors/",
   image: "living-double-height",
 });
@@ -27,11 +39,28 @@ const ICONS: Record<string, LucideIcon> = {
   briefcase: Briefcase,
 };
 
-const CONSULT_MSG = "Hi Alven Homz Interiors, I'd like to book a free interior consultation.";
+const CONSULT_MSG = "Hi Alven Homz, I'd like to speak with a designer about my home's interiors.";
+
+const FAQS: FaqItem[] = [
+  {
+    q: "Can I commission just a kitchen or wardrobe?",
+    a: "Yes. You can enquire about a modular kitchen, wardrobes, individual rooms or a complete apartment or villa. We'll discuss the brief and site requirements before defining the scope and estimating the work.",
+  },
+  {
+    q: "What determines the cost and timeline?",
+    a: "The cost and timeline depend on the number of rooms, materials, custom joinery and site readiness. Share a floor plan and approximate handover date so we can discuss an estimate and the work it would cover.",
+  },
+  {
+    q: "Can I begin planning before possession or from overseas?",
+    a: "Yes. You can begin with an available floor plan and share your priorities ahead of possession, including from overseas. Final measurements and site conditions should be confirmed before approving work that depends on them.",
+  },
+  {
+    q: "What should I bring to a first home interiors consultation?",
+    a: "Bring your floor plan, tentative handover date and a list of the rooms you want to design. Photos, furniture dimensions and an approximate budget are helpful when discussing layout, materials and scope.",
+  },
+];
 
 export default function InteriorsPage() {
-  const interiorTestimonial = testimonials.find((t) => /interior/i.test(t.context));
-
   return (
     <div className="bg-espresso-950">
       {/* Hero */}
@@ -44,51 +73,53 @@ export default function InteriorsPage() {
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950 via-espresso-950/75 to-espresso-950/10" />
         <div className="container-x py-20">
-          <p className="eyebrow animate-fade-up text-gold-300">Alven Homz</p>
-          <h1 className="mt-5 max-w-3xl animate-fade-up text-4xl leading-[1.08] font-semibold text-white [animation-delay:80ms] sm:text-6xl">
-            Beautiful Spaces. <span className="text-gold-400 italic">Thoughtful Designs.</span> Inspired Living.
-          </h1>
-          <p className="mt-6 max-w-xl animate-fade-up text-lg leading-relaxed text-white/75 [animation-delay:160ms]">
-            Transform your home with elegant, functional and personalized interior design solutions.
+          <p className="eyebrow text-gold-300">Alven Homz Interiors</p>
+          <h1 className="mt-5 max-w-3xl text-4xl leading-[1.08] font-semibold text-white sm:text-6xl">Luxury home interiors in Bengaluru</h1>
+          <p className="mt-4 font-display text-xl text-gold-300 italic sm:text-2xl">Designed for the way you actually live.</p>
+          <p className="mt-5 max-w-2xl leading-relaxed text-white/80 sm:text-lg">
+            A home should feel as considered on an ordinary morning as it does when guests arrive. Alven Homz designs bespoke apartment and villa interiors
+            in Bengaluru, starting with how you cook, work, rest and entertain. We bring those routines into the floor plan, then carry a consistent approach
+            to lighting, joinery and materials through the rooms you choose to design.
           </p>
-          <div className="mt-10 flex animate-fade-up flex-wrap gap-3 [animation-delay:240ms]">
-            <a href="#consultation" className="btn-gold">
-              Book a Free Interior Consultation <ArrowRight className="h-4 w-4" />
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#interior-consultation" className="btn-gold">
+              Book an Interior Consultation <ArrowRight className="h-4 w-4" />
             </a>
             <a href={whatsappHref(CONSULT_MSG)} target="_blank" rel="noopener" className="btn-ghost-light">
-              <WhatsAppIcon className="h-4 w-4" /> WhatsApp a designer
+              <WhatsAppIcon className="h-4 w-4" /> Speak with a Designer
             </a>
           </div>
+          <ul className="mt-10 flex flex-wrap gap-2 text-sm text-white/85">
+            {["Apartments and villas", "One room or the whole home", "Plan before possession", "Planning from overseas"].map((t) => (
+              <li key={t} className="rounded-full border border-white/20 bg-white/5 px-4 py-2 backdrop-blur-sm">
+                {t}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       {/* Services */}
       <section className="bg-ivory py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="What we design" title="Interior Services" description="One studio for every room — designed, manufactured and installed by a single accountable team." align="center" />
+          <SectionHeading eyebrow="What we design" title="Interior services" caption="One point of view, carried through every room." align="center" />
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {interiorServices.map((s, i) => {
               const Icon = ICONS[s.icon] ?? Home;
               return (
-                <Reveal as="li" key={s.slug} delay={i * 60} className="group overflow-hidden rounded-2xl bg-white shadow-card transition hover:-translate-y-1 hover:shadow-lift">
+                <Reveal as="li" key={s.slug} delay={i * 60} className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-card transition hover:-translate-y-1 hover:shadow-lift">
                   <div className="relative aspect-[16/10] overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={img(s.image, "sm")} alt={s.title} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                    <span className="absolute bottom-0 left-6 flex h-12 w-12 translate-y-1/2 items-center justify-center rounded-xl bg-espresso-900 text-gold-400 shadow-lift">
-                      <Icon className="h-6 w-6" />
-                    </span>
                   </div>
-                  <div className="p-6 pt-10">
+                  {/* The icon sits half over the photo; it lives outside the photo box so the photo's clipping can't cut it off. */}
+                  <div className="relative px-6 pb-6">
+                    <span className="relative z-10 -mt-6 mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-espresso-900 text-gold-400 shadow-lift ring-4 ring-white">
+                      <Icon className="h-6 w-6" aria-hidden />
+                    </span>
                     <h3 className="text-xl font-semibold">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{s.summary}</p>
-                    <ul className="mt-4 space-y-2">
-                      {s.points.map((pt) => (
-                        <li key={pt} className="flex items-start gap-2 text-sm text-navy-800">
-                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" /> {pt}
-                        </li>
-                      ))}
-                    </ul>
-                    <a href={whatsappHref(`Hi Alven Homz Interiors, I'm interested in ${s.title}. Please share details.`)} target="_blank" rel="noopener" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-600">
+                    <p className="mt-2 text-sm leading-relaxed text-navy-800">{s.summary}</p>
+                    <a href={whatsappHref(`Hi Alven Homz, I'm interested in ${s.title.toLowerCase()}. Please share details.`)} target="_blank" rel="noopener" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-600">
                       Enquire on WhatsApp <ArrowRight className="h-4 w-4" />
                     </a>
                   </div>
@@ -102,48 +133,35 @@ export default function InteriorsPage() {
       {/* Portfolio */}
       <section className="py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="Portfolio" title="Our Interior Projects" description="A selection of homes and workplaces. Tap a project to see more photos." light />
+          <SectionHeading
+            eyebrow="Portfolio"
+            title="Selected interiors"
+            caption="See what a floor plan can become."
+            description="Look closely at how the layout, lighting and joinery respond to each home. Explore the materials up close and see how they sit alongside the larger decisions about circulation and storage."
+            light
+          />
           <InteriorPortfolio items={interiorPortfolio} />
-          <p className="mt-6 text-xs text-white/40">Portfolio images are representative sample photography — replace with completed Alven Homz projects.</p>
+          <p className="mt-6 text-xs text-white/60">Cards marked &ldquo;Design concept&rdquo; are concept visuals. Other images are representative photography, not completed Alven Homz projects.</p>
         </div>
       </section>
 
-      {/* Process */}
-      <section className="bg-white py-20 sm:py-28">
+      {/* Process — scroll story, one step at a time */}
+      <section className="bg-sand py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="How we work" title="Our Design Process" description="A clear, six-step journey from first conversation to final handover." align="center" />
-          <ol className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {interiorProcess.map((step, i) => (
-              <Reveal as="li" key={step.title} delay={i * 70} className="relative rounded-2xl border border-line bg-ivory p-7">
-                <span className="font-display text-5xl font-semibold text-gold-500/40">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-xl font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{step.description}</p>
-              </Reveal>
-            ))}
-          </ol>
+          <ProcessSteps steps={interiorProcess} />
         </div>
       </section>
-
-      {/* Quote */}
-      {interiorTestimonial && (
-        <section className="border-y border-white/10 py-16">
-          <div className="container-x max-w-3xl text-center">
-            <p className="font-display text-2xl leading-relaxed text-white italic sm:text-3xl">&ldquo;{interiorTestimonial.quote}&rdquo;</p>
-            <p className="mt-6 text-sm text-gold-300">
-              {interiorTestimonial.name} · {interiorTestimonial.context}
-            </p>
-          </div>
-        </section>
-      )}
 
       {/* Consultation */}
-      <section id="consultation" className="scroll-mt-20 py-20 sm:py-28">
+      <section id="interior-consultation" className="scroll-mt-28 py-20 sm:py-28">
         <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.2fr]">
           <div>
-            <p className="eyebrow text-gold-300">Free consultation</p>
-            <h2 className="mt-4 text-4xl leading-tight font-semibold text-white">Book a Free Interior Consultation</h2>
-            <p className="mt-5 max-w-md leading-relaxed text-white/70">
-              Share a few details about your space. A designer will reach out to understand your requirements and plan a site or studio visit.
+            <p className="eyebrow text-gold-300">Interior consultation</p>
+            <h2 className="mt-4 text-4xl leading-tight font-semibold text-white">Start your interior brief</h2>
+            <p className="mt-3 font-display text-lg text-gold-300 italic">Start with a plan. Make it yours.</p>
+            <p className="mt-5 max-w-md leading-relaxed text-white/75">
+              Share your floor plan, Bengaluru locality, property type, handover date and approximate budget. Tell us whether you&apos;re planning a complete
+              home, a kitchen or a few rooms, and mention any furniture or finishes you want to keep.
             </p>
             <div className="mt-8 grid gap-3 sm:max-w-xs">
               <a href={whatsappHref(CONSULT_MSG)} target="_blank" rel="noopener" className="btn-whatsapp">
@@ -161,6 +179,9 @@ export default function InteriorsPage() {
           </div>
         </div>
       </section>
+      <div className="bg-ivory">
+        <Faq items={FAQS} />
+      </div>
     </div>
   );
 }

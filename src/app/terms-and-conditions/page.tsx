@@ -5,8 +5,8 @@ import { mailtoHref, telHref } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
-  title: "Terms & Conditions",
-  description: "The terms that apply when you use the Alven Homz website and our property, rental, resale and interior services.",
+  title: "Website Terms and Conditions",
+  description: "Read the Alven Homz website terms for using property listings, enquiry channels and information about interior design services.",
   path: "/terms-and-conditions/",
   image: "workspace-window",
 });
@@ -225,8 +225,19 @@ export default function TermsPage() {
   return (
     <LegalPage
       eyebrow="Legal"
-      title="Terms & Conditions"
-      description="Please read these terms carefully before using our website and services."
+      title="Terms and Conditions"
+      caption="The terms behind using this website."
+      description="These terms cover use of the Alven Homz website, including the information shown in property listings, the enquiry channels and references to interior design services. Use the sections below to find the terms relevant to your visit or enquiry."
+      faqs={[
+        {
+          q: "Where can I confirm the scope or fees for a service?",
+          a: "Ask Alven Homz for the service-specific scope and fee details before making a commitment. See Payments, Fees and Transactions for the website terms.",
+        },
+        {
+          q: "Where can I read about availability and pricing shown on the site?",
+          a: "See Property Listings and Information in these terms and ask for the current details of the property you are considering.",
+        },
+      ]}
       updated={UPDATED}
       sections={sections}
     />

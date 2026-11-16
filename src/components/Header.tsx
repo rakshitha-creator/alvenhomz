@@ -22,7 +22,7 @@ export const NAV = [
 ];
 
 /** Pages that open with a full-bleed dark hero; the header sits transparently over it until the page scrolls. */
-const HERO_PAGES = ["/", "/about-us/", "/careers/", "/contact-us/", "/interiors/", "/new-projects/", "/resale-properties/", "/rental-properties/", "/blogs/", "/privacy-policy/", "/terms-and-conditions/"];
+const HERO_PAGES = ["/", "/about-us/", "/careers/", "/contact-us/", "/interiors/", "/new-projects/", "/resale-properties/", "/rental-properties/", "/blogs/", "/privacy-policy/", "/terms-and-conditions/", "/nri-property-services/", "/property-management/"];
 
 export default function Header() {
   const pathname = usePathname();
@@ -40,6 +40,9 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    // Lets the floating WhatsApp button hide while the menu is open (it covered "Enquire Now").
+    if (open) document.body.dataset.menuOpen = "";
+    else delete document.body.dataset.menuOpen;
   }, [open]);
 
   // Everywhere else (detail pages, etc.) the header is solid and a spacer keeps content out from under it.
@@ -57,9 +60,9 @@ export default function Header() {
         )}
       >
         <div className="container-x flex h-[98px] items-center justify-between gap-6">
-          <Logo variant={solid ? "dark" : "light"} />
+          <Logo variant={solid ? "dark" : "light"} tagline={false} />
 
-          <nav aria-label="Main" className="hidden lg:block">
+          <nav aria-label="Main" className="hidden xl:block">
             <ul className="flex items-center gap-1">
               {NAV.map((item) => (
                 <li key={item.href}>
@@ -67,14 +70,14 @@ export default function Header() {
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
-                      "relative rounded-full px-3.5 py-2 text-sm font-medium transition",
+                      "relative rounded-full px-3 py-2 text-sm font-medium whitespace-nowrap transition",
                       isActive(item.href)
                         ? solid ? "text-navy-900" : "text-white"
                         : solid ? "text-muted hover:text-navy-900" : "text-white/80 hover:text-white",
                     )}
                   >
                     {item.label}
-                    {isActive(item.href) && <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-gold-500" />}
+                    {isActive(item.href) && <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gold-500" />}
                   </Link>
                 </li>
               ))}
@@ -85,7 +88,7 @@ export default function Header() {
             <a
               href={telHref()}
               className={cn(
-                "hidden items-center gap-2 text-sm font-semibold xl:flex",
+                "hidden items-center gap-2 text-sm font-semibold whitespace-nowrap 2xl:flex",
                 solid ? "text-navy-900" : "text-white",
               )}
             >
@@ -97,13 +100,13 @@ export default function Header() {
               rel="noopener"
               aria-label="Chat on WhatsApp"
               className={cn(
-                "hidden h-10 w-10 items-center justify-center rounded-full border text-white transition sm:flex",
+                "hidden h-11 w-11 items-center justify-center rounded-full border text-white transition sm:flex",
                 solid ? "border-espresso-900 bg-espresso-900 hover:bg-espresso-700" : "border-white/40 hover:bg-white/10",
               )}
             >
               <WhatsAppIcon className="h-5 w-5" />
             </a>
-            <Link href="/contact-us/" className="btn-gold hidden py-2.5 sm:inline-flex">
+            <Link href="/contact-us/#enquiry" className="btn-gold hidden py-2.5 whitespace-nowrap sm:inline-flex">
               Enquire Now
             </Link>
             <button
@@ -113,7 +116,7 @@ export default function Header() {
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
               className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full border transition lg:hidden",
+                "flex h-11 w-11 items-center justify-center rounded-full border transition xl:hidden",
                 solid ? "border-line text-navy-900" : "border-white/40 text-white",
               )}
             >
@@ -126,7 +129,7 @@ export default function Header() {
 
       {/* Mobile nav drawer */}
       {open && (
-        <div id="mobile-nav" className="fixed inset-0 z-40 bg-espresso-950/60 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)}>
+        <div id="mobile-nav" className="fixed inset-0 z-40 bg-espresso-950/60 backdrop-blur-sm xl:hidden" onClick={() => setOpen(false)}>
           <div
             className="absolute top-[88px] right-0 bottom-0 w-full max-w-sm border-l border-line bg-white p-6 shadow-2xl transition-transform"
             onClick={(e) => e.stopPropagation()}
@@ -161,7 +164,7 @@ export default function Header() {
               >
                 <WhatsAppIcon className="h-5 w-5" /> WhatsApp Us
               </a>
-              <Link href="/contact-us/" className="btn-gold flex w-full items-center justify-center py-3 text-sm font-semibold">
+              <Link href="/contact-us/#enquiry" className="btn-gold flex w-full items-center justify-center py-3 text-sm font-semibold">
                 Enquire Now
               </Link>
             </div>

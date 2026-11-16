@@ -3,6 +3,7 @@
 import { Bath, BedDouble, CalendarCheck, Car, Layers, Ruler, Sofa, Users } from "lucide-react";
 import Amenities from "@/components/Amenities";
 import Gallery from "@/components/Gallery";
+import Faq, { type FaqItem } from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 import MapEmbed from "@/components/MapEmbed";
 import { MobileEnquiryBar } from "@/components/ContactActions";
@@ -15,7 +16,7 @@ import { bhkLabel, formatArea, formatDate, formatINR, img } from "@/lib/utils";
 import type { RentalProperty } from "@/lib/types";
 
 /** Detail page layout, shared by the static build (site data) and the live admin (Firebase) data. */
-export default function RentalDetailView({ p }: { p: RentalProperty }) {
+export default function RentalDetailView({ p, all = rentalProperties }: { p: RentalProperty; all?: RentalProperty[] }) {
 
   const path = `/rental-properties/${p.slug}/`;
   const location = `${p.locality}, ${p.city}`;
@@ -26,6 +27,21 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
     { name: "Home", path: "/" },
     { name: "Rental Properties", path: "/rental-properties/" },
     { name: p.title, path },
+  ];
+  const furnishingText = FURNISHING[p.furnishing] ?? p.furnishing;
+  const typeText = (PROPERTY_TYPES[p.propertyType] ?? p.propertyType).toLowerCase();
+  const bhkText = p.bhk ? bhkLabel(p.bhk) : "";
+  const moveIn = p.availableFrom ? formatDate(p.availableFrom) : "";
+  const faqs: FaqItem[] = [
+    {
+      q: "What is included in the rent for this home?",
+      a: `The monthly rent is ${rent}. See Rent and charges for maintenance, the deposit and any other applicable charges.`,
+    },
+    ...(moveIn ? [{ q: "When can I move in?", a: `The property is available from ${moveIn}, subject to current availability and the agreed lease terms.` }] : []),
+    {
+      q: "Which furnishings and appliances are included?",
+      a: "The listing inventory shows which furniture and appliances are included with this lease. Request a copy before signing and check the items and their condition at handover.",
+    },
   ];
 
   const costs = [
@@ -66,7 +82,9 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
       <div className="container-x">
         <DetailHeader
           crumbs={crumbs}
-          title={p.title}
+          title={`${furnishingText} ${bhkText ? `${bhkText} ` : ""}${typeText} for rent in ${p.locality}`}
+          caption="Know what's included before you visit."
+          intro={`This ${furnishingText.toLowerCase()} ${bhkText ? `${bhkText} ` : ""}${typeText} for rent in ${p.locality}, Bengaluru${moveIn ? ` is available from ${moveIn}` : ""}. Review the rent, deposit and included furnishings to see what you would need to arrange before moving in.`}
           location={p.address}
           price={rent}
           priceNote="per month"
@@ -93,7 +111,7 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
               ]}
             />
 
-            <DetailSection id="costs" title="Rent & Charges">
+            <DetailSection id="costs" title="Rent and charges" caption="The monthly rent is only the starting point.">
               <ul className="grid gap-4 sm:grid-cols-3">
                 {costs.map((c) => (
                   <li key={c.label} className={c.highlight ? "rounded-2xl bg-espresso-900 p-5 text-white" : "rounded-2xl border border-line bg-white p-5"}>
@@ -109,7 +127,7 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
               </p>
             </DetailSection>
 
-            <DetailSection id="overview" title="Property Overview">
+            <DetailSection id="overview" title="Property overview" caption="See if the home fits your move-in plans.">
               <Facts
                 items={[
                   { label: "Configuration", value: p.bhk ? bhkLabel(p.bhk) : PROPERTY_TYPES[p.propertyType] ?? p.propertyType, icon: <BedDouble className="h-3.5 w-3.5" /> },
@@ -122,11 +140,17 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
                   { label: "Preferred tenants", value: tenants, icon: <Users className="h-3.5 w-3.5" /> },
                 ]}
               />
-              <h3 className="mt-8 font-sans text-base font-bold">About this property</h3>
+              <h3 className="mt-8 font-sans text-base font-bold">About the residence</h3>
+              <p className="mt-1 font-display text-gold-700 italic">Picture an ordinary morning here.</p>
               <p className="mt-3 leading-relaxed text-navy-800">{p.description}</p>
             </DetailSection>
 
-            <DetailSection id="furnishing" title={`Furnishing – ${FURNISHING[p.furnishing] ?? p.furnishing}`}>
+            <DetailSection
+              id="furnishing"
+              title={`Furnishing – ${furnishingText}`}
+              caption="Check the details that make daily life easier."
+              intro="Review the furniture and appliances included with this home. Check the itemised inventory before committing and confirm the condition of each item at handover."
+            >
               <ul className="flex flex-wrap gap-2">
                 {p.furnishingDetails.map((f) => (
                   <li key={f} className="rounded-full border border-line bg-white px-4 py-2 text-sm text-navy-800">{f}</li>
@@ -134,17 +158,28 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
               </ul>
             </DetailSection>
 
-            <DetailSection id="amenities" title="Amenities">
+            <DetailSection
+              id="amenities"
+              title="Amenities"
+              intro="See which community facilities and parking come with the lease. If you expect to use a particular facility, ask whether access or charges are covered in the lease terms."
+            >
               <Amenities items={p.amenities} />
             </DetailSection>
 
-            <DetailSection id="location" title="Location">
+            <DetailSection
+              id="location"
+              title="Location"
+              intro="See how the property connects to the places you travel to every day. If that journey shapes your choice of rental, try it from the property entrance when you visit."
+            >
               <p className="mb-4 text-sm text-navy-800">{p.address}</p>
               <MapEmbed lat={p.lat} lng={p.lng} title={p.title} />
             </DetailSection>
           </div>
 
           <EnquirySidebar
+            heading="Enquire about this rental"
+            caption="Take the next step towards moving in."
+            intro="Share your intended move-in date and a convenient viewing time. If parking, furnishing or lease length is important to your plans, include it in your enquiry."
             listing={listingRef}
             isSample={p.isSample}
             summary={
@@ -167,7 +202,8 @@ export default function RentalDetailView({ p }: { p: RentalProperty }) {
         </div>
       </div>
 
-      <Similar title="Similar Rentals" items={similar(rentalProperties, p, (x) => x.rent).map(rentalCard)} />
+      <Faq items={faqs} className="pt-4" />
+      <Similar title="Similar Rentals" items={similar(all, p, (x) => x.rent).map(rentalCard)} />
       <MobileEnquiryBar listing={listingRef} />
     </>
   );

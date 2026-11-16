@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Faq, { type FaqItem } from "@/components/Faq";
 import { PageHero } from "@/components/ui";
 import { img } from "@/lib/utils";
 
@@ -8,19 +9,23 @@ export type LegalSection = { id: string; title: string; body: React.ReactNode };
 export default function LegalPage({
   eyebrow,
   title,
+  caption,
   description,
   updated,
   sections,
+  faqs = [],
 }: {
   eyebrow: string;
   title: string;
+  caption?: string;
   description: string;
   updated: string;
   sections: LegalSection[];
+  faqs?: FaqItem[];
 }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} description={description} image={img("workspace-window")} />
+      <PageHero eyebrow={eyebrow} title={title} caption={caption} description={description} image={img("workspace-window")} />
 
       <section className="container-x grid gap-12 py-16 sm:py-20 lg:grid-cols-[240px_1fr]">
         <nav aria-label="On this page" className="hidden lg:block">
@@ -58,6 +63,7 @@ export default function LegalPage({
           </p>
         </article>
       </section>
+      <Faq items={faqs} className="pt-0" />
     </>
   );
 }

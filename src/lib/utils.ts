@@ -45,6 +45,8 @@ export function bhkLabel(bhk?: number) {
 
 /** Path to a photo in /public/images. "sm" is the 720px card/thumbnail variant. */
 export function img(name: string, size: "lg" | "sm" = "lg") {
+  // Local photos under /images have an 800px "-sm" copy for cards and thumbnails (logos and watermarks excepted).
+  if (size === "sm" && /^\/images\/.+\.webp$/.test(name) && !/-sm\.webp$|\/logo|watermark/.test(name)) return name.replace(/\.webp$/, "-sm.webp");
   if (name.startsWith("/") || name.startsWith("http")) return name;
   return `/images/${name}${size === "sm" ? "-sm" : ""}.webp`;
 }

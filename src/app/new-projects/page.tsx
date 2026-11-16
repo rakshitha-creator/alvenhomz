@@ -1,33 +1,102 @@
-import { Suspense } from "react";
-import { ExplorerSkeleton } from "@/components/ListingExplorer";
-import LiveListingExplorer from "@/components/live/LiveListingExplorer";
+import Link from "next/link";
+import Faq, { type FaqItem } from "@/components/Faq";
+import HubResults from "@/components/HubResults";
+import { ContentBlock } from "@/components/InfoCards";
 import { PageHero } from "@/components/ui";
-import { locationSuggestions, projectCards } from "@/lib/data";
+import { locationSuggestions, projectCard } from "@/lib/data";
+import { getProjects } from "@/lib/server-data";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "New Projects – New Launch & Under-Construction Homes in Bangalore",
+  title: "New Residential Projects in Bengaluru",
   description:
-    "Browse new launch, under-construction and upcoming residential projects — apartments, villas and plots — with prices, configurations, possession dates and RERA details.",
+    "Compare new apartments, villas and plotted developments in Bengaluru by location, configuration, budget and expected possession. Request a shortlist.",
   path: "/new-projects/",
   image: "tower-balconies",
 });
 
-export default function NewProjectsPage() {
+const FAQS: FaqItem[] = [
+  {
+    q: "What should I compare before shortlisting a new project?",
+    a: "Compare the carpet area, floor plan, unit-specific cost, payment schedule, phase amenities and expected possession. Use the exact tower and phase when checking dates or what's included.",
+  },
+  {
+    q: "How do I check a project's RERA registration?",
+    a: "For a project that requires registration, ask for the phase-specific registration number and check the project record on the Karnataka RERA portal.",
+  },
+  {
+    q: "What does “price onwards” mean?",
+    a: "“Price onwards” is the starting quote for a specified configuration or unit. Ask which unit the quote applies to, when it was issued and what charges sit outside the quoted amount. Request an itemised cost sheet for the home you're considering.",
+  },
+  {
+    q: "Can I start a shortlist from outside India?",
+    a: "Yes. Share your preferred Bengaluru neighbourhoods, approximate budget, configuration and visit window. Ask for current plans, availability and viewing options before arranging appointments.",
+  },
+];
+
+export default async function NewProjectsPage() {
+  const items = (await getProjects()).map(projectCard);
   return (
     <>
       <PageHero
+        bannerId="new-projects"
         eyebrow="New Projects"
-        title="New Launch & Under-Construction Projects"
-        description="Compare configurations, starting prices, possession timelines and amenities across premium projects."
+        title="New residential projects in Bengaluru"
+        caption="See what's taking shape across Bengaluru."
+        description="Explore new residential projects in Bengaluru, including new launches and developments under construction. Start with where you'd like to live, then compare floor plans, quoted costs and expected possession. If you're buying for family or planning a return to Bengaluru, consider which layouts can adapt to your needs and which handover dates work with your plans."
         image={img("tower-balconies")}
       />
-      <section className="container-x py-12">
-        <Suspense fallback={<ExplorerSkeleton />}>
-          <LiveListingExplorer kind="project" items={projectCards()} suggestions={locationSuggestions()} firebaseOnly />
-        </Suspense>
-      </section>
+      <HubResults
+        kind="project"
+        items={items}
+        suggestions={locationSuggestions()}
+        title="Search and filters"
+        caption="Narrow the map. Sharpen the shortlist."
+        body="Choose your preferred neighbourhood, budget and property type. Where filters are available, narrow the results by configuration or possession stage. Open individual project pages to review the developer, phase details and floor plans."
+        emptyMessage="No projects match these filters. Broaden your search or tell us what you are looking for."
+        actions={
+          <Link href="/contact-us/?topic=new-project#enquiry" className="btn-outline">
+            Request a Shortlist
+          </Link>
+        }
+      />
+      <ContentBlock
+        tone="sand"
+        title="Compare the details that affect your decision"
+        caption="Look beyond the brochure."
+        cards={[
+          {
+            title: "Floor plan",
+            text: "Look at the carpet area and how the rooms connect. Check where furniture can sit, whether the kitchen has a separate utility, and how a spare bedroom could work as a study or guest room.",
+          },
+          {
+            title: "Price",
+            text: "Request an itemised cost sheet for your preferred unit. Compare the quoted price, applicable charges and payment milestones before weighing it against another home.",
+          },
+          {
+            title: "Timeline",
+            text: "Ask for the developer's most recent possession update for the specific phase or tower. Check when the amenities you expect to use are due to be available.",
+          },
+        ]}
+      />
+      <ContentBlock
+        tone="dark"
+        title="Request a project brief"
+        caption="Begin with the brief, down to the details."
+        body="Share your preferred Bengaluru neighbourhoods, configuration, budget and timeline. Tell us which points are flexible so we can discuss a focused shortlist. If you live overseas, include your time zone and expected visit dates."
+        actions={
+          <>
+            <Link href="/contact-us/?topic=new-project#enquiry" className="btn-gold">
+              Request Project Details
+            </Link>
+            <Link href="/contact-us/?topic=new-project&about=Site%20visit#enquiry" className="btn-ghost-light">
+              Arrange a Site Visit
+            </Link>
+          </>
+        }
+      />
+      <Faq items={FAQS} />
     </>
   );
 }

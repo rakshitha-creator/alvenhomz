@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   title: "Privacy Policy",
-  description: "How Alven Homz collects, uses, stores and protects the personal information you share through our website, WhatsApp, phone and email.",
+  description: "Read how Alven Homz handles information shared through its website, enquiry channels and related services.",
   path: "/privacy-policy/",
   image: "workspace-window",
 });
@@ -212,7 +212,15 @@ export default function PrivacyPolicyPage() {
     <LegalPage
       eyebrow="Legal"
       title="Privacy Policy"
-      description="How we collect, use and protect the information you share with Alven Homz."
+      caption="How we handle the information you share."
+      description="This Privacy Policy explains how Alven Homz handles information associated with your use of the website and the enquiries you choose to send. Use the sections below to find details about enquiry channels, third-party services and how to reach us about privacy."
+      faqs={[
+        { q: "Where can I ask a question about my enquiry information?", a: "Use the contact details in the Contact and Grievances section of this policy." },
+        {
+          q: "Where can I read about enquiries sent on WhatsApp or by email?",
+          a: "See the sections covering enquiry channels and third-party services for details on how those channels are handled.",
+        },
+      ]}
       updated={UPDATED}
       sections={sections}
     />

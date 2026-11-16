@@ -26,7 +26,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
     };
   }, [open, go]);
 
-  const alt = (i: number) => `${title} – photo ${i + 1} of ${count}`;
+  const alt = (i: number) => `${title} – ${describe(images[i]) ?? `photo ${i + 1} of ${count}`}`;
 
   return (
     <div>
@@ -65,7 +65,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
             aria-label={`View photo ${i + 2}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img(name, "sm")} alt={alt(i + 1)} loading="lazy" className="h-full w-full object-cover transition duration-500 hover:scale-105" />
+            <img src={img(name, "sm")} alt={alt(i + 1)} loading="eager" width={720} height={540} className="h-full w-full object-cover transition duration-500 hover:scale-105" />
             {i === 1 && count > 3 && (
               <span className="absolute inset-0 flex items-center justify-center bg-espresso-950/55 text-sm font-semibold text-white">+{count - 3} photos</span>
             )}
@@ -119,4 +119,27 @@ export default function Gallery({ images, title }: { images: string[]; title: st
       )}
     </div>
   );
+}
+
+const ROOM_WORDS: [RegExp, string][] = [
+  [/master-?plan/i, "master plan"],
+  [/location-?map|metro-?map/i, "location map"],
+  [/plan-|floor-?plan/i, "floor plan"],
+  [/living/i, "living room"],
+  [/kitchen/i, "kitchen"],
+  [/bedroom/i, "bedroom"],
+  [/bath|toilet/i, "bathroom"],
+  [/wardrobe/i, "wardrobe"],
+  [/dining/i, "dining area"],
+  [/pool/i, "swimming pool"],
+  [/club/i, "clubhouse"],
+  [/entrance|entry|gate/i, "entrance"],
+  [/aerial/i, "aerial view"],
+  [/elevation|tower|facade|building/i, "building exterior"],
+];
+
+/** A short description of a photo from its file name, for alt text (e.g. "kitchen", "floor plan"). */
+function describe(src: string): string | undefined {
+  const name = decodeURIComponent(src.split("?")[0].split("/").pop() ?? "");
+  return ROOM_WORDS.find(([re]) => re.test(name))?.[1];
 }

@@ -5,12 +5,14 @@ import { FacebookIcon, InstagramIcon, LinkedInIcon, YouTubeIcon } from "./icons"
 import { site } from "@/lib/data";
 import { mailtoHref, telHref } from "@/lib/contact";
 
+// Only real profile links are shown; a bare home page (e.g. https://www.instagram.com/) is a placeholder.
+const isProfile = (url: string) => /^https?:\/\/[^/]+\/[^/?#]+/.test(url);
 const socials = [
   { href: site.social.instagram, label: "Instagram", Icon: InstagramIcon },
   { href: site.social.facebook, label: "Facebook", Icon: FacebookIcon },
   { href: site.social.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
   { href: site.social.youtube, label: "YouTube", Icon: YouTubeIcon },
-];
+].filter((s) => isProfile(s.href));
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -20,8 +22,8 @@ export default function Footer() {
         <div className="lg:col-span-5">
           <Logo variant="light" imgClassName="h-32 w-auto" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed">
-            From finding your ideal home to designing its interiors, Alven Homz delivers end-to-end real estate solutions across Bangalore—specializing in
-            new launches, resale homes, rentals, and custom interior design.
+            Alven Homz brings residential property advisory and bespoke home interiors together in Bengaluru. Explore new developments, resale homes and
+            rentals, or speak with us about selling, leasing or redesigning a residence you already own.
           </p>
           <ul className="mt-6 flex gap-3">
             {socials.map(({ href, label, Icon }) => (
@@ -31,7 +33,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:border-gold-400 hover:text-gold-300"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:border-gold-400 hover:text-gold-300"
                 >
                   <Icon className="h-[18px] w-[18px]" />
                 </a>
@@ -60,7 +62,22 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/interiors/" className="transition hover:text-white">
-                Alven Homz
+                Interiors
+              </Link>
+            </li>
+            <li>
+              <Link href="/blogs/" className="transition hover:text-white">
+                Blogs
+              </Link>
+            </li>
+            <li>
+              <Link href="/nri-property-services/" className="transition hover:text-white">
+                NRI Property Services
+              </Link>
+            </li>
+            <li>
+              <Link href="/property-management/" className="transition hover:text-white">
+                Property Management
               </Link>
             </li>
             <li>
@@ -103,13 +120,12 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-x flex flex-col gap-3 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-x flex flex-col gap-3 pt-6 pb-24 text-xs sm:flex-row sm:items-center sm:justify-between sm:pb-6">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <p>© {year} {site.name}. All rights reserved.</p>
-            <Link href="/privacy-policy/" className="transition hover:text-white">Privacy Policy</Link>
-            <Link href="/terms-and-conditions/" className="transition hover:text-white">Terms &amp; Conditions</Link>
+            <Link href="/privacy-policy/" className="inline-flex min-h-11 items-center text-sm transition hover:text-white">Privacy Policy</Link>
+            <Link href="/terms-and-conditions/" className="inline-flex min-h-11 items-center text-sm transition hover:text-white">Terms &amp; Conditions</Link>
           </div>
-          <p className="text-white/50">Rental listings shown are sample content for demonstration and are not verified offers.</p>
         </div>
       </div>
     </footer>

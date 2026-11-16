@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import type { BlogPost } from "@/lib/types";
 import { getBlogBySlug } from "@/lib/firebase-data";
@@ -10,35 +9,39 @@ import { isFirebaseConfigured } from "@/lib/firebase";
 import { formatDate, img } from "@/lib/utils";
 import { useResolvedSlug } from "@/hooks/useResolvedSlug";
 
-export default function BlogDetailClient({ fromQuery = false }: { fromQuery?: boolean }) {
+export default function BlogDetailClient({ fromQuery = false, initial }: { fromQuery?: boolean; initial?: BlogPost }) {
   const pathSlug = useResolvedSlug("blogs");
-  const searchParams = useSearchParams();
-  const slug = fromQuery ? (searchParams.get("slug") ?? "") : pathSlug;
-  const [post, setPost] = useState<BlogPost | null | undefined>(undefined);
+  // Query-route posts read ?slug= after mount, so path-route articles render fully in the static HTML (no Suspense fallback).
+  const [querySlug, setQuerySlug] = useState("");
+  useEffect(() => {
+    if (fromQuery) setQuerySlug(new URLSearchParams(window.location.search).get("slug") ?? "");
+  }, [fromQuery]);
+  const slug = fromQuery ? querySlug : pathSlug || initial?.slug || "";
+  const [post, setPost] = useState<BlogPost | null | undefined>(initial);
 
   useEffect(() => {
     let cancelled = false;
     async function load() {
       if (!slug) {
-        setPost(null);
+        if (!fromQuery && !initial) setPost(null);
         return;
       }
       if (!isFirebaseConfigured()) {
-        if (!cancelled) setPost(null);
+        if (!cancelled && !initial) setPost(null);
         return;
       }
       try {
         const item = await getBlogBySlug(slug);
-        if (!cancelled) setPost(item);
+        if (!cancelled && (item || !initial)) setPost(item);
       } catch {
-        if (!cancelled) setPost(null);
+        if (!cancelled && !initial) setPost(null);
       }
     }
     load();
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, initial, fromQuery]);
 
   useEffect(() => {
     if (post?.title) document.title = `${post.title} | Alven Homz`;
@@ -78,7 +81,7 @@ export default function BlogDetailClient({ fromQuery = false }: { fromQuery?: bo
       </header>
       {post.coverImage && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={img(post.coverImage)} alt="" className="mx-auto mt-10 aspect-[21/9] w-full max-w-5xl rounded-3xl object-cover" />
+        <img src={img(post.coverImage)} alt={post.title} width={1600} height={686} className="mx-auto mt-10 aspect-[21/9] w-full max-w-5xl rounded-3xl object-cover" />
       )}
       <div className="prose-alven mx-auto mt-10 max-w-3xl space-y-4 text-[15px] leading-relaxed text-navy-800 [&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-navy-900 [&_h3]:mt-6 [&_h3]:text-xl [&_h3]:font-semibold [&_a]:font-semibold [&_a]:text-gold-600 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5">
         <ReactMarkdown>{post.body}</ReactMarkdown>

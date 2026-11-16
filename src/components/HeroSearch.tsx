@@ -32,7 +32,7 @@ function HeroSelect({
 }) {
   return (
     <div className="relative pt-2.5 focus-within:bg-ivory/60">
-      <label htmlFor={id} className="block pl-10 text-[11px] font-semibold tracking-wide text-muted uppercase">
+      <label htmlFor={id} className="block pl-10 text-xs font-semibold tracking-wide text-muted uppercase">
         {label}
       </label>
       <span className="pointer-events-none absolute top-1/2 left-4 mt-1.5 text-gold-600" aria-hidden="true">
@@ -102,14 +102,14 @@ export default function HeroSearch({ suggestions = [] }: { suggestions?: string[
       >
         <div className="grid divide-y divide-line rounded-xl border border-line md:grid-cols-[1.6fr_1fr_1fr] md:divide-x md:divide-y-0">
           <div className="relative pt-2.5">
-            <span className="block pl-10 text-[11px] font-semibold tracking-wide text-muted uppercase" aria-hidden="true">
-              Location
+            <span className="block pl-10 text-xs font-semibold tracking-wide text-muted uppercase" aria-hidden="true">
+              Preferred neighbourhood
             </span>
             <LocationInput
               value={location}
               onChange={setLocation}
               suggestions={suggestions}
-              placeholder="Search city or locality"
+              placeholder="Gunjur, Sarjapur Road, Kudlu Gate…"
               inputClassName="-mt-1 border-transparent bg-transparent pt-1 pb-3 text-base font-medium focus:border-transparent focus:ring-0"
             />
           </div>
@@ -152,7 +152,7 @@ export default function HeroSearch({ suggestions = [] }: { suggestions?: string[
           type="submit"
           className="btn absolute bottom-0 left-1/2 w-[min(18rem,80%)] -translate-x-1/2 translate-y-1/2 bg-espresso-900 py-4 text-base text-white shadow-lift hover:bg-espresso-700"
         >
-          <Search className="h-5 w-5 text-gold-400" /> Search
+          <Search className="h-5 w-5 text-gold-400" /> Find Properties
         </button>
       </form>
     </div>

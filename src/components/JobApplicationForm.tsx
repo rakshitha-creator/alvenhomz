@@ -6,17 +6,20 @@ import { mailtoHref } from "@/lib/contact";
 
 const APPLY_EVENT = "alvenhomz:apply-for-job";
 
-export function ApplyForRoleButton({ role }: { role: string }) {
+export const GENERAL_APPLICATION = "General Application";
+
+export function ApplyForRoleButton({ role, label = "Apply for this role", className = "btn-outline mt-7 self-start" }: { role: string; label?: string; className?: string }) {
   return (
     <button
       type="button"
-      className="btn-outline mt-7 self-start"
+      className={className}
+      aria-label={role === GENERAL_APPLICATION ? label : `${label}: ${role}`}
       onClick={() => {
         window.dispatchEvent(new CustomEvent(APPLY_EVENT, { detail: role }));
-        document.getElementById("job-application")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        document.getElementById("apply")?.scrollIntoView({ behavior: "smooth", block: "start" });
       }}
     >
-      Apply for this role <ArrowRight className="h-4 w-4" aria-hidden />
+      {label} <ArrowRight className="h-4 w-4" aria-hidden />
     </button>
   );
 }
@@ -113,15 +116,17 @@ export default function JobApplicationForm({ roles }: { roles: string[] }) {
   const fieldError = (key: keyof FormValues) => errors[key] ? `${uid}-${key}-error` : undefined;
 
   return (
-    <section id="job-application" className="scroll-mt-28 bg-espresso-950 py-20 text-white sm:py-24">
+    <section id="apply" className="scroll-mt-28 bg-espresso-950 py-20 text-white sm:py-24">
       <div className="container-x grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <div>
           <p className="eyebrow text-gold-300">Apply now</p>
-          <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">Send us your application</h2>
-          <p className="mt-5 leading-relaxed text-white/70">
-            Complete the form and submit your details. Your email app will open with the application ready to send; attach your resume before sending if you
-            have not included a resume link.
+          <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">Apply to Alven Homz</h2>
+          <p className="mt-3 font-display text-lg text-gold-300 italic">Show us the work you&apos;re proud of.</p>
+          <p className="mt-5 leading-relaxed text-white/75">
+            Share your résumé and the role you&apos;re applying for. For a design role, include a portfolio link and explain your contribution to each featured
+            project, such as concept development, drawings, materials or site coordination.
           </p>
+          <p className="mt-4 text-sm text-white/60">Your email app opens with the application ready to send. Attach your résumé if you haven&apos;t included a link.</p>
         </div>
         <form onSubmit={submit} noValidate className="grid gap-4 rounded-3xl bg-white p-6 text-navy-900 sm:grid-cols-2 sm:p-8">
           <div className="sm:col-span-2">
@@ -160,7 +165,7 @@ export default function JobApplicationForm({ roles }: { roles: string[] }) {
             <textarea id={`${uid}-message`} className="input min-h-28 resize-y" value={values.message} onChange={set("message")} placeholder="Tell us briefly about your experience." />
           </div>
           <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
-            <button type="submit" className="btn-gold">Send application <ArrowRight className="h-4 w-4" aria-hidden /></button>
+            <button type="submit" className="btn-gold">Send Application <ArrowRight className="h-4 w-4" aria-hidden /></button>
             {sent ? <p className="flex items-center gap-2 text-sm font-semibold text-emerald-700"><CheckCircle2 className="h-4 w-4" aria-hidden /> Application prepared. Please send it from your email app.</p> : null}
           </div>
         </form>

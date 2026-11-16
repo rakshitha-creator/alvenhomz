@@ -1,4 +1,4 @@
-// Re-mounts on every navigation, giving each page a soft fade-in transition.
+// Pages render at full opacity straight away (a whole-page fade delayed the first paint and looked washed out).
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div className="animate-fade-in">{children}</div>;
+  return <>{children}</>;
 }

@@ -5,12 +5,17 @@ import { ChevronLeft, ChevronRight, MapPin, Sparkles, X } from "lucide-react";
 import type { InteriorProject } from "@/lib/types";
 import { cn, img } from "@/lib/utils";
 
+/** Cards shown per batch; one tall card plus four fills two rows of the 3-column grid exactly. */
+const PAGE = 5;
+
 export default function InteriorPortfolio({ items }: { items: InteriorProject[] }) {
   const categories = useMemo(() => ["All", ...new Set(items.map((i) => i.category))], [items]);
   const [cat, setCat] = useState("All");
   const [open, setOpen] = useState<InteriorProject | null>(null);
   const [photo, setPhoto] = useState(0);
-  const shown = cat === "All" ? items : items.filter((i) => i.category === cat);
+  const [limit, setLimit] = useState(PAGE);
+  const filtered = cat === "All" ? items : items.filter((i) => i.category === cat);
+  const shown = filtered.slice(0, limit);
 
   useEffect(() => {
     if (!open) return;
@@ -36,7 +41,10 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
             type="button"
             role="tab"
             aria-selected={cat === c}
-            onClick={() => setCat(c)}
+            onClick={() => {
+              setCat(c);
+              setLimit(PAGE);
+            }}
             className={cn(
               "shrink-0 rounded-full border px-4 py-2 text-sm transition",
               cat === c ? "border-gold-400 bg-gold-500 font-semibold text-navy-950" : "border-white/20 text-white/80 hover:border-white/50",
@@ -49,7 +57,7 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
 
       <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((item, i) => (
-          <li key={item.slug} className={cn("animate-fade-up", i % 5 === 0 && "lg:row-span-2")} style={{ animationDelay: `${i * 50}ms` }}>
+          <li key={item.slug} className={cn("animate-fade-up", i % 5 === 0 && "lg:row-span-2")} style={{ animationDelay: `${(i % PAGE) * 50}ms` }}>
             <button
               type="button"
               onClick={() => {
@@ -63,7 +71,7 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
               <img src={img(item.image, i % 5 === 0 ? "lg" : "sm")} alt={`${item.title} – ${item.category}`} loading="lazy" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso-950/90 via-espresso-950/10 to-transparent opacity-90 transition group-hover:opacity-100" />
               <div className="absolute inset-x-0 bottom-0 p-5">
-                <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-300 uppercase">{item.category}</p>
+                <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">{item.category}</p>
                 <p className="mt-1.5 font-display text-xl font-semibold text-white">{item.title}</p>
                 <p className="mt-1 flex items-center gap-1 text-xs text-white/70">
                   {item.concept ? <Sparkles className="h-3 w-3" /> : <MapPin className="h-3 w-3" />} {item.concept ? "Design concept" : item.location}
@@ -73,6 +81,14 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
           </li>
         ))}
       </ul>
+
+      {filtered.length > shown.length && (
+        <div className="mt-10 flex justify-center">
+          <button type="button" onClick={() => setLimit((n) => n + PAGE)} className="btn-ghost-light">
+            Show more projects ({filtered.length - shown.length})
+          </button>
+        </div>
+      )}
 
       {open && (
         <div role="dialog" aria-modal="true" aria-label={open.title} className="fixed inset-0 z-[70] flex items-center justify-center bg-espresso-950/95 p-4 animate-fade-in">

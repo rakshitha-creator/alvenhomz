@@ -1,16 +1,18 @@
 import BlogListClient from "@/components/BlogListClient";
 import { PageHero } from "@/components/ui";
+import { getBlogs } from "@/lib/server-data";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
 export const metadata = pageMetadata({
-  title: "Blogs – Real Estate Insights from Alven Homz",
-  description: "Guides and updates on buying, selling, renting and interiors across Bangalore from the Alven Homz team.",
+  title: "Blogs – Home Buying, Renting & Interiors Insights",
+  description: "Guides and updates on buying, selling, renting and interiors across Bengaluru from the Alven Homz team.",
   path: "/blogs/",
   image: "living-white",
 });
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const posts = await getBlogs();
   return (
     <>
       <PageHero
@@ -21,7 +23,7 @@ export default function BlogsPage() {
         image={img("living-white")}
       />
       <section className="container-x py-12 sm:py-16">
-        <BlogListClient />
+        <BlogListClient initial={posts} />
       </section>
     </>
   );

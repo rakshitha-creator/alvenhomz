@@ -18,6 +18,7 @@ export function pageMetadata({
 }): Metadata {
   const url = absoluteUrl(path);
   const ogImage = absoluteUrl(img(image));
+  description = clampText(description, 155);
   return {
     title,
     description,
@@ -33,6 +34,12 @@ export function pageMetadata({
     },
     twitter: { card: "summary_large_image", title, description, images: [ogImage] },
   };
+}
+
+/** Shortens text to `max` characters at a word boundary (search results cut longer descriptions). */
+export function clampText(text: string, max: number) {
+  if (text.length <= max) return text;
+  return `${text.slice(0, max - 1).replace(/\s+\S*$/, "").replace(/[,;:–—-]\s*$/, "")}…`;
 }
 
 export function breadcrumbJsonLd(items: Array<{ name: string; path: string }>) {

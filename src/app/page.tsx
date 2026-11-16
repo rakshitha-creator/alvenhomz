@@ -1,16 +1,16 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BadgeCheck,
-  Building,
   Handshake,
+  ListChecks,
   MapPin,
-  Paintbrush,
   Phone,
   Quote,
   Scale,
-  ShieldCheck,
 } from "lucide-react";
+import Faq, { type FaqItem } from "@/components/Faq";
+import { ContentBlock } from "@/components/InfoCards";
+import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import ListingCard from "@/components/ListingCard";
 import LeadForm from "@/components/LeadForm";
@@ -21,83 +21,130 @@ import {
   interiorServices,
   locationSuggestions,
   popularLocations,
-  projectCards,
-  resaleCards,
+  projectCard,
+  resaleCard,
   site,
   testimonials,
 } from "@/lib/data";
+import { getProjects, getResaleList } from "@/lib/server-data";
 import { telHref, whatsappHref } from "@/lib/contact";
 import { pageMetadata } from "@/lib/seo";
 import { img, initials } from "@/lib/utils";
 
 export const metadata = {
   ...pageMetadata({
-    title: "Alven Homz – Find Your Perfect Space | New Projects, Resale, Rentals & Interiors",
+    title: "Bengaluru Real Estate & Luxury Interiors | Alven Homz",
     description:
-      "Explore new launch projects, resale homes and rental properties across Bangalore — Sarjapur Road, Gunjur, Bommasandra and more — plus interior design, rental, resale and property management by Alven Homz.",
+      "Explore new projects, resale homes, rentals and bespoke interiors in Bengaluru. Speak with Alven Homz about your next home or a property you already own.",
     path: "/",
   }),
-  title: { absolute: "Alven Homz – Find Your Perfect Space | New Projects, Resale, Rentals & Interiors" },
+  title: { absolute: "Bengaluru Real Estate & Luxury Interiors | Alven Homz" },
 };
 
 const featured = <T extends { featured: boolean }>(list: T[], n = 3) => list.filter((x) => x.featured).slice(0, n);
 
 const WHY = [
-  { icon: BadgeCheck, title: "Diligence before display", text: "We review documents, approvals and pricing before a property is presented to you." },
-  { icon: Scale, title: "Honest, data-led advice", text: "Clear comparisons on price, location and rental yield — never pressure selling." },
-  { icon: Handshake, title: "End-to-end assistance", text: "Site visits, negotiation, home loans, documentation and registration support." },
-  { icon: Paintbrush, title: "Interiors under one roof", text: "Move from keys to a finished home with Alven Homz." },
-  { icon: ShieldCheck, title: "Transparent costs", text: "Rent, deposit, maintenance and charges spelled out upfront." },
-  { icon: Building, title: "New, resale & rental", text: "One trusted advisor for every stage — buying, renting or investing." },
+  {
+    icon: ListChecks,
+    title: "A shortlist built around your brief",
+    text: "Tell us which neighbourhoods, layouts and timelines work for you. We'll use those details to focus the search and help you compare the homes you're considering.",
+  },
+  {
+    icon: Scale,
+    title: "Clarity on costs",
+    text: "Ask for an itemised quote for a purchase or a breakdown of rent, maintenance and deposit for a lease. You'll have a clearer basis for comparing two properties.",
+  },
+  {
+    icon: Handshake,
+    title: "Continuity after handover",
+    text: "The same home may need different things over time. Speak with us about interiors before you move in, or about resale and leasing if your plans change.",
+  },
 ];
 
-export default function HomePage() {
-  const newProjectsList = featured(projectCards());
-  const resaleList = featured(resaleCards());
+const HOME_FAQS: FaqItem[] = [
+  {
+    q: "What does Alven Homz do in Bengaluru?",
+    a: "Alven Homz helps clients buy new and resale homes, find rentals, sell or lease a residence and plan home interiors in Bengaluru. If you already own a property, you can enquire directly about the service you need.",
+  },
+  {
+    q: "Can I enquire if I live overseas?",
+    a: "Yes. You can start your Bengaluru property or interiors enquiry from overseas. Share your country, time zone and plans for the home, together with your travel dates if you expect to visit.",
+  },
+  {
+    q: "Can Alven Homz help me shortlist a neighbourhood in Bengaluru?",
+    a: "Yes. Share the places you need to reach regularly, your budget and the kind of home you want. We can discuss where to focus your search and which routes to try from each shortlisted property.",
+  },
+];
+
+const NEXT_STEPS = [
+  { label: "Buy a Home", href: "/new-projects/" },
+  { label: "Find a Rental", href: "/rental-properties/" },
+  { label: "Sell Your Home", href: "/contact-us/?topic=owner#enquiry" },
+  { label: "Design Your Home", href: "/interiors/" },
+];
+
+// Homeowner stories stay hidden until stories with permission to publish are available (copy deck instruction).
+const SHOW_STORIES = false;
+
+export default async function HomePage() {
+  const newProjectsList = featured((await getProjects()).map(projectCard));
+  const resaleList = featured((await getResaleList()).map(resaleCard));
 
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate z-10 flex h-[calc(100svh-88px-9rem)] min-h-[520px] md:h-[calc(100svh-88px-7.5rem)] flex-col justify-end bg-espresso-900">
+      <section className="relative isolate z-10 flex min-h-svh flex-col justify-end bg-espresso-900 pt-[120px]">
         <div className="absolute inset-0 -z-10 isolate overflow-hidden">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/images/brand/hero-1.webp"
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 h-full w-full object-cover"
-          >
-            <source src="/videos/home-banner.mp4" type="video/mp4" />
-          </video>
+          <HeroVideo poster="/images/brand/hero-1.webp" video="/videos/home-banner.mp4" mobileVideo="/videos/home-banner-720.mp4" />
           <div className="absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-espresso-900/30 to-transparent" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-900/30 via-transparent to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-[70%] bg-gradient-to-t from-espresso-900/90 via-espresso-900/50 via-50% to-transparent md:h-[55%] md:from-espresso-900/80 md:via-espresso-900/35" />
+          {/* Darker on the left and bottom where the text sits, so it stays readable over bright window frames. */}
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950/85 via-espresso-950/55 to-espresso-950/10 lg:via-espresso-950/40" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-[75%] bg-gradient-to-t from-espresso-950/90 via-espresso-950/45 to-transparent" />
         </div>
         <div className="container-x pb-8 sm:pb-10">
-          <div className="grid items-end gap-5 lg:grid-cols-[1.25fr_1fr] lg:gap-12">
-            <h1 className="animate-fade-up text-4xl leading-[1.06] font-semibold text-white [text-shadow:0_2px_24px_rgb(42_28_19/0.6)] sm:text-5xl lg:text-6xl">
-              Find Your Perfect Space with <span className="text-gold-400 italic">Alven Homz</span>
-            </h1>
-            <p className="animate-fade-up border-l-2 border-gold-500 pl-4 text-base leading-relaxed text-white/90 [text-shadow:0_1px_12px_rgb(42_28_19/0.7)] [animation-delay:120ms] sm:text-lg lg:mb-2">
-              Explore New Projects, Resale Homes, Rentals &amp; Premium Interiors.
-            </p>
+          <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+            <div>
+              <h1 className="text-4xl leading-[1.05] font-semibold text-white [text-shadow:0_2px_24px_rgb(28_18_12/0.55)] sm:text-5xl lg:text-[3.4rem]">
+                Bengaluru homes, thoughtfully chosen and <span className="text-gold-400 italic">designed</span>
+              </h1>
+              <div className="mt-5 flex items-center gap-4">
+                <span aria-hidden className="hidden h-px w-12 shrink-0 bg-gold-400 sm:block" />
+                <p className="font-display text-xl text-gold-300 italic sm:text-2xl">The right address is only the beginning.</p>
+              </div>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a href="#property-search" className="btn-gold">
+                  Search properties
+                </a>
+                <Link href="/contact-us/#enquiry" className="btn-ghost-light">
+                  Speak with an Advisor
+                </Link>
+              </div>
+            </div>
+            {/* Intro on a frosted panel so it reads over any video frame */}
+            <div className="rounded-2xl border border-white/15 bg-espresso-950/55 p-6 shadow-lift backdrop-blur-md sm:p-7">
+              <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Buy · Sell · Lease · Design</p>
+              <p className="mt-3 text-[15px] leading-relaxed text-white/90">
+                A home should fit the way you live, from the neighbourhood you return to each evening to the rooms you spend the most time in. Alven Homz helps
+                you buy, sell and lease residential property in Bengaluru and design interiors for the home you choose. Explore new projects, owner-listed
+                resale homes and premium rentals, or speak with us about preparing a property you already own.
+              </p>
+            </div>
           </div>
         </div>
-        <div className="container-x relative -mb-24 animate-fade-up [animation-delay:220ms] md:-mb-20">
+        <div id="property-search" className="container-x relative mt-10 mb-10 scroll-mt-28 animate-fade-up [animation-delay:220ms] sm:mb-16">
+          <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Start with the way you want to live</p>
           <HeroSearch suggestions={locationSuggestions()} />
         </div>
       </section>
 
       {/* Featured New Projects */}
-      <section className="container-x pt-40 pb-20 sm:pt-36 sm:pb-24">
+      <section className="container-x py-20 sm:py-24">
         <SectionHeading
           eyebrow="New Launches"
-          title="Featured New Projects"
-          description="Handpicked new-launch and under-construction projects from reputed developers."
-          action={<ViewAll href="/new-projects/" arrow>All new projects</ViewAll>}
+          title="Featured new projects"
+          caption="A closer look at what's taking shape."
+          description="Explore new residential projects in Bengaluru by neighbourhood, configuration and stage of construction. Compare the layout, cost and expected possession of each home, then look at the amenities planned for its phase and the journeys you'll make most often."
+          action={<ViewAll href="/new-projects/" arrow>Explore New Projects</ViewAll>}
         />
         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {newProjectsList.map((p, i) => (
@@ -113,9 +160,10 @@ export default function HomePage() {
         <div className="container-x">
           <SectionHeading
             eyebrow="Resale"
-            title="Featured Resale Properties"
-            description="Ready homes in established neighbourhoods — move in without the wait."
-            action={<ViewAll href="/resale-properties/" arrow>All resale properties</ViewAll>}
+            title="Featured resale properties"
+            caption="See the home beyond the floor plan."
+            description="Explore owner-listed resale homes in Bengaluru, from ready-to-move residences to units still under construction. For a completed home, look closely at the light, condition and furnishing. For a construction-stage resale, ask about the handover timeline, outstanding payments and transfer process."
+            action={<ViewAll href="/resale-properties/" arrow>Explore Resale Homes</ViewAll>}
           />
           <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {resaleList.map((p, i) => (
@@ -134,16 +182,20 @@ export default function HomePage() {
           src="/images/brand/interiors-watermark.webp"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 left-0 -z-10 h-[85%] w-auto select-none"
+          width={540}
+          height={900}
+          loading="lazy"
+          className="pointer-events-none absolute bottom-0 left-0 -z-10 aspect-[540/900] h-[85%] w-auto max-w-none object-contain select-none"
         />
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
             <p className="eyebrow">Alven Homz</p>
-            <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">
-              Transform Your House into a <span className="text-gold-600 italic">Dream Home.</span>
-            </h2>
-            <p className="mt-5 max-w-lg leading-relaxed text-muted">
-              From modular kitchens to complete villa interiors, our designers create spaces that are elegant, functional and entirely yours.
+            <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">Interiors designed around your life</h2>
+            <p className="mt-3 font-display text-xl text-gold-700 italic">Make the address unmistakably yours.</p>
+            <p className="mt-5 max-w-lg leading-relaxed text-navy-800">
+              From the proportions of a kitchen island to the light you come home to, the details shape how a house feels. Our Bengaluru interior design
+              services cover complete apartment and villa interiors as well as modular kitchens, living rooms, bedrooms, wardrobes and home offices. We start
+              with your routines, then shape the layout, materials and finishes around them.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {interiorServices.map((s) => (
@@ -156,14 +208,9 @@ export default function HomePage() {
               <Link href="/interiors/" className="btn-gold">
                 Explore Interiors <ArrowRight className="h-4 w-4" />
               </Link>
-              <a
-                href={whatsappHref("Hi Alven Homz Interiors, I'd like a free interior consultation.")}
-                target="_blank"
-                rel="noopener"
-                className="btn-outline"
-              >
-                <WhatsAppIcon className="h-4 w-4" /> Free consultation
-              </a>
+              <Link href="/interiors/#interior-consultation" className="btn-outline">
+                Book an Interior Consultation
+              </Link>
             </div>
           </Reveal>
           <Reveal delay={120} className="grid h-[440px] grid-cols-3 grid-rows-4 gap-3 sm:h-[560px] sm:gap-4">
@@ -209,11 +256,7 @@ export default function HomePage() {
       {/* Popular locations */}
       <section className="bg-ivory py-20 sm:py-24">
         <div className="container-x">
-          <SectionHeading
-            eyebrow="Locations"
-            title="Popular Locations"
-            description="Interiors, rental, resale and property management across Bangalore's growing neighbourhoods."
-          />
+          <SectionHeading eyebrow="Locations" title="Explore by neighbourhood" caption="The neighbourhood is part of the home." />
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {popularLocations.map((l, i) => (
               <Reveal
@@ -222,33 +265,43 @@ export default function HomePage() {
                 delay={i * 80}
                 className="sm:last:col-span-2 sm:last:mx-auto sm:last:w-1/2 lg:last:col-span-1 lg:last:mx-0 lg:last:w-auto"
               >
-                <a
-                  href={whatsappHref(`Hi Alven Homz, I'd like to know about your services in ${l.name}.`)}
-                  target="_blank"
-                  rel="noopener"
-                  className="group card flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold-500"
-                >
+                <div className="group card relative flex h-full flex-col overflow-hidden transition duration-300 hover:-translate-y-1 hover:shadow-lift">
                   <div className="aspect-[4/3] overflow-hidden bg-sand">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={img(l.image)}
-                      alt={`${l.name}, Bangalore`}
+                      src={img(l.image, "sm")}
+                      alt={`${l.name}, Bengaluru`}
+                      width={800}
+                      height={600}
                       loading="lazy"
                       className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-5">
-                    <p className="flex items-start gap-1.5 font-display text-xl leading-snug font-semibold text-navy-900">
+                    <h3 className="flex items-start gap-1.5 font-display text-xl leading-snug font-semibold text-navy-900">
                       <MapPin className="mt-1 h-4 w-4 shrink-0 text-gold-600" />
-                      {l.name}
-                    </p>
-                    <p className="mt-1.5 text-sm font-semibold text-gold-600">{l.blurb}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">{l.description}</p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-navy-900">
-                      Enquire <ArrowRight className="h-4 w-4 text-gold-600 transition group-hover:translate-x-0.5" />
-                    </span>
+                      {/* Stretched link: the whole card opens the homes in this area. */}
+                      <Link href={`/new-projects/?q=${encodeURIComponent(l.name)}`} className="after:absolute after:inset-0 focus-visible:outline-none">
+                        {l.name}
+                      </Link>
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-navy-800">{l.description}</p>
+                    <div className="mt-auto flex items-center justify-between gap-3 pt-4">
+                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900">
+                        See homes in {l.name} <ArrowRight className="h-4 w-4 text-gold-600 transition group-hover:translate-x-0.5" />
+                      </span>
+                      <a
+                        href={whatsappHref(`Hi Alven Homz, I'd like to know about your services in ${l.name}.`)}
+                        target="_blank"
+                        rel="noopener"
+                        aria-label={`Ask about ${l.name} on WhatsApp`}
+                        className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line text-espresso-900 transition hover:border-espresso-900"
+                      >
+                        <WhatsAppIcon className="h-5 w-5" />
+                      </a>
+                    </div>
                   </div>
-                </a>
+                </div>
               </Reveal>
             ))}
           </ul>
@@ -259,11 +312,11 @@ export default function HomePage() {
       <section className="container-x py-20 sm:py-24">
         <SectionHeading
           eyebrow="Why Alven Homz"
-          title="Why Choose Alven Homz"
-          description="A premium advisory experience built on transparency, local expertise and care."
+          title="Why Alven Homz"
+          caption="Know what matters before you decide."
           center
         />
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-5 md:grid-cols-3">
           {WHY.map((item, i) => (
             <Reveal
               as="li"
@@ -281,13 +334,15 @@ export default function HomePage() {
         </ul>
       </section>
 
-      {/* Testimonials */}
+      {/* Homeowner stories (hidden until approved stories exist) */}
+      {SHOW_STORIES && (
       <section className="bg-sand/60 py-20 sm:py-24">
         <div className="container-x">
           <SectionHeading
-            eyebrow="Testimonials"
-            title="What our homeowners say"
-            action={<ViewAll href="/about-us/">More stories</ViewAll>}
+            eyebrow="Homeowner stories"
+            title="Homeowner stories"
+            caption="Every home began with a different brief."
+            description="Read how homeowners approached a purchase, prepared a residence for lease or developed an interior design brief. Each story starts with the decision the client needed to make and the details that helped them move forward."
           />
           <ul className="grid gap-5 md:grid-cols-3">
             {testimonials.slice(0, 3).map((t, i) => (
@@ -313,6 +368,7 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
+      )}
 
       {/* Contact CTA */}
       <section id="contact" className="container-x py-20 sm:py-24">
@@ -327,11 +383,11 @@ export default function HomePage() {
             />
             <div className="relative">
               <p className="eyebrow text-gold-300">Talk to an advisor</p>
-              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
-                Schedule a site visit or get expert advice
-              </h2>
-              <p className="mt-4 max-w-md leading-relaxed text-white/70">
-                Tell us what you&apos;re looking for and we&apos;ll reply on WhatsApp or email with options that match your brief.
+              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Tell us what you have in mind</h2>
+              <p className="mt-3 font-display text-lg text-gold-300 italic">A few details make for a better shortlist.</p>
+              <p className="mt-4 max-w-md leading-relaxed text-white/75">
+                Tell us which part of Bengaluru you have in mind, when you&apos;d like to move and which details matter most. Include a preferred configuration
+                or budget range if you&apos;re comparing homes, or a floor plan if you&apos;re ready to talk interiors.
               </p>
               <div className="mt-8 grid gap-3 sm:max-w-xs">
                 <a href={telHref()} className="btn-gold">
@@ -353,6 +409,25 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Find the right next step */}
+      <ContentBlock
+        tone="sand"
+        title="Find the right next step"
+        caption="Four ways to make your next move."
+        body="Buying, renting, selling and designing a home each start with a different brief. Choose where you are in the process to see which details to have ready and where to begin."
+        actions={NEXT_STEPS.map((n) => (
+          <Link key={n.label} href={n.href} className="btn-outline bg-white">
+            {n.label} <ArrowRight className="h-4 w-4" />
+          </Link>
+        ))}
+      />
+
+      <p className="container-x -mb-6 pt-10 text-center text-sm text-navy-800">
+        Living overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI property services</Link>. Own a home
+        you&apos;d like to lease or sell? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
+      </p>
+      <Faq items={HOME_FAQS} />
     </>
   );
 }
