@@ -93,15 +93,18 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative isolate z-10 flex min-h-svh flex-col justify-end bg-espresso-900 pt-[120px]">
-        <div className="absolute inset-0 -z-10 isolate overflow-hidden">
+      {/* Below lg the video is its own band and the copy sits beneath it; from lg up the copy overlays the video. */}
+      <section className="relative isolate z-10 flex flex-col bg-espresso-900 lg:min-h-svh lg:justify-end lg:pt-[120px]">
+        <div className="relative isolate h-[60svh] min-h-[360px] overflow-hidden lg:absolute lg:inset-0 lg:-z-10 lg:h-auto lg:min-h-0">
           <HeroVideo poster="/images/brand/hero-1.webp" video="/videos/home-banner.mp4" mobileVideo="/videos/home-banner-720.mp4" />
-          <div className="absolute inset-x-0 top-0 -z-10 h-28 bg-gradient-to-b from-espresso-900/30 to-transparent" />
+          <div className="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-espresso-900/60 to-transparent lg:h-28 lg:from-espresso-900/30" />
+          {/* Mobile/tablet: soft fade from the video into the copy below. */}
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-20 bg-gradient-to-t from-espresso-900 to-transparent lg:hidden" />
           {/* Darker on the left and bottom where the text sits, so it stays readable over bright window frames. */}
-          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950/85 via-espresso-950/55 to-espresso-950/10 lg:via-espresso-950/40" />
-          <div className="absolute inset-x-0 bottom-0 -z-10 h-[75%] bg-gradient-to-t from-espresso-950/90 via-espresso-950/45 to-transparent" />
+          <div className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso-950/85 via-espresso-950/55 to-espresso-950/10 lg:block lg:via-espresso-950/40" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-[75%] lg:block bg-gradient-to-t from-espresso-950/90 via-espresso-950/45 to-transparent" />
         </div>
-        <div className="container-x pb-8 sm:pb-10">
+        <div className="container-x pt-8 pb-8 sm:pb-10 lg:pt-0">
           <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
             <div>
               <h1 className="text-4xl leading-[1.05] font-semibold text-white [text-shadow:0_2px_24px_rgb(28_18_12/0.55)] sm:text-5xl lg:text-[3.4rem]">
