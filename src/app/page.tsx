@@ -104,7 +104,7 @@ export default async function HomePage() {
           <div className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-espresso-950/85 via-espresso-950/55 to-espresso-950/10 lg:block lg:via-espresso-950/40" />
           <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-[75%] lg:block bg-gradient-to-t from-espresso-950/90 via-espresso-950/45 to-transparent" />
         </div>
-        <div className="container-x pt-8 pb-8 sm:pb-10 lg:pt-0">
+        <div className="container-x pt-8 pb-8 sm:pb-10 lg:pt-0 lg:pb-16">
           <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
             <div>
               <h1 className="text-4xl leading-[1.05] font-semibold text-white [text-shadow:0_2px_24px_rgb(28_18_12/0.55)] sm:text-5xl lg:text-[3.4rem]">
@@ -126,7 +126,7 @@ export default async function HomePage() {
             {/* Intro on a frosted panel so it reads over any video frame */}
             <div className="rounded-2xl border border-white/15 bg-espresso-950/55 p-6 shadow-lift backdrop-blur-md sm:p-7">
               <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Buy · Sell · Lease · Design</p>
-              <p className="mt-3 text-[15px] leading-relaxed text-white/90">
+              <p className="mt-3 text-left text-[15px] leading-relaxed text-white/90">
                 A home should fit the way you live, from the neighbourhood you return to each evening to the rooms you spend the most time in. Alven Homz helps
                 you buy, sell and lease residential property in Bengaluru and design interiors for the home you choose. Explore new projects, owner-listed
                 resale homes and premium rentals, or speak with us about preparing a property you already own.
@@ -134,7 +134,11 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-        <div id="property-search" className="container-x relative mt-10 mb-10 scroll-mt-28 animate-fade-up [animation-delay:220ms] sm:mb-16">
+      </section>
+
+      {/* Property search — its own band directly after the hero */}
+      <section id="property-search" className="relative z-10 scroll-mt-28 bg-espresso-900 pt-4 pb-12 sm:pb-16 lg:pt-12">
+        <div className="container-x">
           <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Start with the way you want to live</p>
           <HeroSearch suggestions={locationSuggestions()} />
         </div>
