@@ -146,7 +146,7 @@ export default async function HomePage() {
           description="Explore new residential projects in Bengaluru by neighbourhood, configuration and stage of construction. Compare the layout, cost and expected possession of each home, then look at the amenities planned for its phase and the journeys you'll make most often."
           action={<ViewAll href="/new-projects/" arrow>Explore New Projects</ViewAll>}
         />
-        <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
+        <ul className="no-scrollbar relative -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
           {newProjectsList.map((p, i) => (
             <Reveal as="li" key={p.slug} delay={i * 80} className="w-[85%] shrink-0 snap-start md:w-auto">
               <ListingCard item={p} priority={i === 0} />
@@ -165,7 +165,7 @@ export default async function HomePage() {
             description="Explore owner-listed resale homes in Bengaluru, from ready-to-move residences to units still under construction. For a completed home, look closely at the light, condition and furnishing. For a construction-stage resale, ask about the handover timeline, outstanding payments and transfer process."
             action={<ViewAll href="/resale-properties/" arrow>Explore Resale Homes</ViewAll>}
           />
-          <ul className="no-scrollbar -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
+          <ul className="no-scrollbar relative -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
             {resaleList.map((p, i) => (
               <Reveal as="li" key={p.slug} delay={i * 80} className="w-[85%] shrink-0 snap-start md:w-auto">
                 <ListingCard item={p} />
