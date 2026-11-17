@@ -86,11 +86,11 @@ export default function HeroSearch({ suggestions = [] }: { suggestions?: string[
               setBudget("");
             }}
             className={cn(
-              "flex items-center gap-2 rounded-t-2xl px-4 py-3 text-sm font-semibold transition sm:px-6",
-              tab === t.id ? "bg-white text-navy-900" : "bg-white/10 text-white/85 hover:bg-white/15",
+              "relative z-[1] -mb-px flex items-center gap-2 rounded-t-2xl border px-4 py-3 text-sm font-semibold transition sm:px-6",
+              tab === t.id ? "border-line border-b-white bg-white text-navy-900" : "border-transparent bg-sand text-navy-800 hover:bg-ivory",
             )}
           >
-            <t.icon className={cn("h-4 w-4", tab === t.id ? "text-gold-600" : "text-gold-300")} />
+            <t.icon className={cn("h-4 w-4", tab === t.id ? "text-gold-600" : "text-[#8a6a2f]")} />
             {t.label}
           </button>
         ))}
@@ -98,7 +98,7 @@ export default function HeroSearch({ suggestions = [] }: { suggestions?: string[
       <form
         onSubmit={submit}
         role="search"
-        className="relative rounded-2xl rounded-tl-none bg-white p-3 pb-10 shadow-[0_18px_50px_-18px_rgb(8_21_42/0.45)] sm:p-4 sm:pb-12"
+        className="relative rounded-2xl rounded-tl-none border border-line bg-white p-3 pb-10 shadow-[0_18px_50px_-18px_rgb(8_21_42/0.45)] sm:p-4 sm:pb-12"
       >
         <div className="grid divide-y divide-line rounded-xl border border-line md:grid-cols-[1.6fr_1fr_1fr] md:divide-x md:divide-y-0">
           <div className="relative pt-2.5">

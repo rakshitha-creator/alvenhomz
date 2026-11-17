@@ -105,7 +105,7 @@ export default async function HomePage() {
           <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-[75%] lg:block bg-gradient-to-t from-espresso-950/90 via-espresso-950/45 to-transparent" />
         </div>
         <div className="container-x pt-8 pb-8 sm:pb-10 lg:pt-0 lg:pb-16">
-          <div className="grid max-w-3xl gap-8 lg:gap-10">
+          <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
             <div>
               <h1 className="text-4xl leading-[1.05] font-semibold text-white [text-shadow:0_2px_24px_rgb(28_18_12/0.55)] sm:text-5xl lg:text-[3.4rem]">
                 Bengaluru homes, thoughtfully chosen and <span className="text-gold-400 italic">designed</span>
@@ -124,7 +124,7 @@ export default async function HomePage() {
               </div>
             </div>
             {/* Intro on a frosted panel so it reads over any video frame */}
-            <div className="rounded-2xl border border-white/15 bg-espresso-950/55 p-6 shadow-lift backdrop-blur-md sm:p-7 lg:max-w-xl">
+            <div className="rounded-2xl border border-white/15 bg-espresso-950/55 p-6 shadow-lift backdrop-blur-md sm:p-7">
               <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Buy · Sell · Lease · Design</p>
               <p className="mt-3 text-left text-[15px] leading-relaxed text-white/90">
                 A home should fit the way you live, from the neighbourhood you return to each evening to the rooms you spend the most time in. Alven Homz helps
@@ -137,9 +137,9 @@ export default async function HomePage() {
       </section>
 
       {/* Property search — its own band directly after the hero */}
-      <section id="property-search" className="relative z-10 scroll-mt-28 bg-espresso-900 pt-4 pb-12 sm:pb-16 lg:pt-12">
+      <section id="property-search" className="relative z-10 scroll-mt-28 pt-12 sm:pt-16">
         <div className="container-x">
-          <p className="mb-3 text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Start with the way you want to live</p>
+          <p className="eyebrow mb-3">Start with the way you want to live</p>
           <HeroSearch suggestions={locationSuggestions()} />
         </div>
       </section>
