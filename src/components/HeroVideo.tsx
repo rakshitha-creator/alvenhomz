@@ -7,7 +7,18 @@ import { useEffect, useRef, useState } from "react";
  * the video loads only after the page has finished loading — a 720p (~1 MB) file on phones, full HD on large
  * screens — and is skipped entirely for visitors with Data Saver, a slow connection or reduced motion.
  */
-export default function HeroVideo({ poster, video, mobileVideo }: { poster: string; video: string; mobileVideo: string }) {
+export default function HeroVideo({
+  poster,
+  mobilePoster,
+  video,
+  mobileVideo,
+}: {
+  poster: string;
+  /** Portrait poster for phones/tablets (below 1024px); falls back to `poster`. */
+  mobilePoster?: string;
+  video: string;
+  mobileVideo: string;
+}) {
   const [src, setSrc] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);
   const ref = useRef<HTMLVideoElement>(null);
@@ -31,8 +42,11 @@ export default function HeroVideo({ poster, video, mobileVideo }: { poster: stri
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={poster} alt="" aria-hidden fetchPriority="high" decoding="async" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+      <picture>
+        {mobilePoster && <source media="(max-width: 1023px)" srcSet={mobilePoster} />}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={poster} alt="" aria-hidden fetchPriority="high" decoding="async" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+      </picture>
       {src && (
         <video
           ref={ref}

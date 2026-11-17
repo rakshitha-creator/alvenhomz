@@ -96,7 +96,7 @@ export default async function HomePage() {
       {/* Below lg the video is its own band and the copy sits beneath it; from lg up the copy overlays the video. */}
       <section className="relative isolate z-10 flex flex-col bg-espresso-900 lg:min-h-svh lg:justify-end lg:pt-[120px]">
         <div className="relative isolate h-[max(60svh,360px)] overflow-hidden lg:absolute lg:inset-0 lg:-z-10 lg:h-auto lg:min-h-0">
-          <HeroVideo poster="/images/brand/hero-1.webp" video="/videos/home-banner.mp4" mobileVideo="/videos/home-banner-720.mp4" />
+          <HeroVideo poster="/images/brand/hero-1.webp" mobilePoster="/images/brand/hero-mobile.webp" video="/videos/home-banner.mp4" mobileVideo="/videos/home-banner-mobile.mp4" />
           <div className="absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-espresso-900/60 to-transparent lg:hidden" />
           {/* Mobile/tablet: darkens the bottom of the video, where the heading overlaps it, and fades into the copy below. */}
           <div className="absolute inset-x-0 bottom-0 -z-10 h-[45%] bg-gradient-to-t from-espresso-900 via-espresso-900/60 to-transparent lg:hidden" />
