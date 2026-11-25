@@ -25,6 +25,11 @@ export async function uploadListingVideo(
   return uploadFile(path, file, onProgress);
 }
 
+export async function uploadProjectBrochure(slug: string, file: File, onProgress?: (pct: number) => void) {
+  const path = `listings/projects/${slug}/brochure/${crypto.randomUUID()}-${safeName(file.name)}`;
+  return uploadFile(path, file, onProgress);
+}
+
 export async function uploadBlogImage(slug: string, file: File, onProgress?: (pct: number) => void) {
   const path = `blogs/${slug}/${crypto.randomUUID()}-${safeName(file.name)}`;
   return uploadFile(path, file, onProgress);

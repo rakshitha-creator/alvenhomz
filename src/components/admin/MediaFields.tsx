@@ -348,3 +348,65 @@ export function BlogCoverField({
     </div>
   );
 }
+
+/** Project brochure: upload a PDF to Firebase Storage or paste any public link. Shown as "Download Brochure" on the site. */
+export function BrochureField({ slug, value, onChange }: { slug: string; value?: string; onChange: (url: string | undefined) => void }) {
+  const [progress, setProgress] = useState<number | null>(null);
+  const [error, setError] = useState("");
+
+  const onFile = async (file: File | undefined, input: HTMLInputElement) => {
+    if (!file) return;
+    if (!slug) {
+      setError("Set a slug before uploading the brochure.");
+      input.value = "";
+      return;
+    }
+    if (file.type !== "application/pdf") {
+      setError("Please choose a PDF file.");
+      input.value = "";
+      return;
+    }
+    setError("");
+    try {
+      const { uploadProjectBrochure } = await import("@/lib/uploads");
+      const { url } = await uploadProjectBrochure(slug, file, setProgress);
+      onChange(url);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Upload failed");
+    } finally {
+      setProgress(null);
+      input.value = "";
+    }
+  };
+
+  return (
+    <Field label="Brochure (PDF)" hint="Upload a PDF or paste a link. Visitors see a Download Brochure button. Click Save afterwards.">
+      <div className="space-y-2">
+        <FormInput type="url" placeholder="https://…/brochure.pdf" value={value || ""} onChange={(e) => onChange(e.target.value.trim() || undefined)} />
+        <div className="flex flex-wrap items-center gap-3 text-sm">
+          <label className="inline-flex cursor-pointer items-center rounded-xl border border-line bg-white px-3 py-2 font-semibold text-navy-900 hover:bg-ivory">
+            {progress !== null ? `Uploading… ${progress}%` : value ? "Replace PDF" : "Upload PDF"}
+            <input type="file" accept="application/pdf" className="sr-only" disabled={progress !== null} onChange={(e) => onFile(e.target.files?.[0], e.target)} />
+          </label>
+          {value && (
+            <>
+              <a href={value} target="_blank" rel="noopener" className="font-semibold text-gold-700 underline">
+                Open current brochure
+              </a>
+              <button
+                type="button"
+                className="font-semibold text-red-600 underline"
+                onClick={() => {
+                  if (window.confirm("Remove the brochure from this project? Click Save afterwards.")) onChange(undefined);
+                }}
+              >
+                Remove
+              </button>
+            </>
+          )}
+        </div>
+        {error && <p className="text-xs font-medium text-red-600">{error}</p>}
+      </div>
+    </Field>
+  );
+}

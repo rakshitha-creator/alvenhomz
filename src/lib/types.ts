@@ -94,6 +94,8 @@ export interface Project extends ListingBase {
   contact?: ProjectContact;
   /** Optional testimonials specific to this project. */
   testimonials?: ProjectTestimonial[];
+  /** Downloadable brochure (PDF) — a Firebase Storage URL uploaded in the admin, or any public link. */
+  brochureUrl?: string;
 }
 
 export interface Lead {
@@ -110,6 +112,8 @@ export interface Lead {
   createdAt?: string;
   updatedAt?: string;
   status?: "new" | "contacted" | "closed";
+  /** Visitor ticked "agree to receive promotional content" on the enquiry form. */
+  marketingConsent?: boolean;
 }
 
 /** CMS-managed page hero/banner media (Firestore text meta + Storage file). */

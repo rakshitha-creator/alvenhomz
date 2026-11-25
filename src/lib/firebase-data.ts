@@ -68,6 +68,7 @@ function clearBlankFields(payload: Record<string, unknown>, source: Record<strin
 }
 
 const LISTING_CLEAR_KEYS = [
+  "brochureUrl",
   "videoUrl",
   "videoStoragePath",
   "priceTo",

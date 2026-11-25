@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useState } from "react";
-import { CalendarCheck, Mail, MessageSquareText, Phone } from "lucide-react";
+import { CalendarCheck, MessageSquareText, Phone, Send } from "lucide-react";
 import { WhatsAppIcon } from "./icons";
 import { track } from "./Analytics";
 import { formatFields, listingMessage, mailtoHref, telHref, whatsappHref, type ListingRef } from "@/lib/contact";
@@ -11,12 +11,15 @@ import { cn, formatDate } from "@/lib/utils";
 
 type Variant = "listing" | "contact" | "interiors";
 
-const INTERESTS = ["Buying a new project", "Buying a resale property", "Renting a property", "Selling or leasing my property", "Interior design", "Something else"];
+const INTERESTS = ["Buying a new project", "Buying a resale property", "Renting a property", "Selling or renting out my property", "Interior design", "Something else"];
 const INTERIOR_PROPERTY_TYPES = ["Apartment", "Villa", "Independent House", "Office / Commercial"];
 const INTERIOR_BUDGETS = ["Under ₹5 Lakh", "₹5 – 10 Lakh", "₹10 – 20 Lakh", "₹20 – 50 Lakh", "₹50 Lakh+"];
 const TIME_SLOTS = ["Morning (9 AM – 12 PM)", "Afternoon (12 – 4 PM)", "Evening (4 – 7 PM)"];
 
 type Values = Record<string, string>;
+
+/** Email relay (Cloud Function) that delivers the enquiry to the Alven Homz inbox. */
+const EMAIL_ENDPOINT = "https://us-central1-email-js-1a09b.cloudfunctions.net/emailjs/submit-form";
 type Errors = Partial<Record<string, string>>;
 
 // A 10-digit Indian mobile, or any international number written with its country code (+ and 8–15 digits).
@@ -42,7 +45,7 @@ export const TOPICS: Record<string, string> = {
   "new-project": "Buying a new project",
   resale: "Buying a resale property",
   rent: "Renting a property",
-  owner: "Selling or leasing my property",
+  owner: "Selling or renting out my property",
   interiors: "Interior design",
   other: "Something else",
 };
@@ -112,14 +115,18 @@ export default function LeadForm({
     if (topic || about) setValues((v) => ({ ...v, ...(topic ? { interest: topic } : {}), ...(about ? { about } : {}) }));
   }, [variant]);
   const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState<"callback" | "whatsapp" | "email" | null>(null);
+  const [sent, setSent] = useState<"callback" | "whatsapp" | "email" | "sent" | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
+  // Optional marketing opt-in; never pre-ticked and not needed to send an enquiry.
+  const [consent, setConsent] = useState(false);
 
   const set = (k: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setValues((v) => ({ ...v, [k]: e.target.value }));
     if (errors[k]) setErrors((er) => ({ ...er, [k]: undefined }));
   };
 
-  const send = async (channel: "callback" | "whatsapp" | "email") => {
+  const send = async (channel: "callback" | "whatsapp" | "email" | "submit") => {
     const errs = validate(values, variant);
     setErrors(errs);
     const first = Object.keys(errs)[0];
@@ -128,6 +135,31 @@ export default function LeadForm({
       return;
     }
     const message = buildMessage(values, variant, listing);
+    setSendError("");
+
+    // "Send Enquiry": deliver by email through the relay; only report success when it confirms.
+    if (channel === "submit") {
+      setSending(true);
+      try {
+        const body = new URLSearchParams({
+          name: values.name.trim(),
+          email: values.email?.trim() ?? "",
+          phone: values.phone.trim(),
+          message,
+          subject: subjectFor(values, variant, listing),
+        });
+        body.append("additionalRecipients[]", site.email);
+        const res = await fetch(EMAIL_ENDPOINT, { method: "POST", body });
+        const text = (await res.text()).trim();
+        if (!res.ok || text !== "Email sent successfully") throw new Error(text || "Error sending email.");
+      } catch {
+        setSending(false);
+        setSendError("We couldn't send your enquiry. Please try again, or use WhatsApp or call us.");
+        return;
+      }
+      setSending(false);
+    }
+
     try {
       const { createLead } = await import("@/lib/firebase-data");
       const { isFirebaseConfigured } = await import("@/lib/firebase");
@@ -144,23 +176,25 @@ export default function LeadForm({
               .join(" — ") || undefined,
           listingTitle: listing?.title ?? (values.about || undefined),
           listingUrl: listing?.url,
-          source: channel === "callback" ? `${variant} · call back` : variant,
+          source: channel === "callback" ? `${variant} · call back` : channel === "submit" ? `${variant} · email` : variant,
           createdAt: new Date().toISOString(),
           status: "new",
+          marketingConsent: consent,
         });
       }
     } catch {
       // Lead storage is best-effort; WhatsApp/email still open.
     }
     track("generate_lead", { method: channel, form: variant, page_path: window.location.pathname });
-    if (channel === "callback") {
-      // Nothing to open: the lead is saved and the team calls back.
+    if (channel === "callback" || channel === "submit") {
+      // Nothing to open: the lead is saved (and emailed) and the team gets back to the visitor.
     } else if (channel === "whatsapp") {
       window.open(whatsappHref(message), "_blank", "noopener");
     } else {
       window.location.href = mailtoHref(subjectFor(values, variant, listing), message);
     }
-    setSent(channel);
+    setSent(channel === "submit" ? "sent" : channel);
+    if (channel === "submit") setValues((v) => ({ intent: v.intent, time: v.time }));
   };
 
   const today = new Date().toISOString().slice(0, 10);
@@ -188,7 +222,7 @@ export default function LeadForm({
       noValidate
       onSubmit={(e) => {
         e.preventDefault();
-        send("whatsapp");
+        if (!sending) send("submit");
       }}
       className="space-y-4"
     >
@@ -216,7 +250,7 @@ export default function LeadForm({
       <div className={cn("grid gap-4", !compact && "sm:grid-cols-2")}>
         {field("name", "Full name *", <input {...aria("name")} className={fieldCls} autoComplete="name" value={values.name ?? ""} onChange={set("name")} placeholder="Your name" />)}
         {field("phone", "Mobile number with country code *", <input {...aria("phone")} className={fieldCls} type="tel" inputMode="tel" autoComplete="tel" value={values.phone ?? ""} onChange={set("phone")} placeholder="+91 98765 43210" />)}
-        {field("email", "Email (optional)", <input {...aria("email")} className={fieldCls} type="email" autoComplete="email" value={values.email ?? ""} onChange={set("email")} placeholder="you@example.com" />, variant !== "interiors")}
+        {field("email", "Email ", <input {...aria("email")} className={fieldCls} type="email" autoComplete="email" value={values.email ?? ""} onChange={set("email")} placeholder="you@example.com" />, variant !== "interiors")}
 
         {variant === "listing" && values.intent === "visit" && (
           <>
@@ -296,6 +330,16 @@ export default function LeadForm({
         )}
       </div>
 
+      <label className={cn("flex cursor-pointer items-start gap-3 text-sm leading-relaxed", dark ? "text-white/80" : "text-navy-800")}>
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className={cn("mt-0.5 h-5 w-5 shrink-0 cursor-pointer rounded accent-gold-500", dark ? "border-white/30" : "border-line")}
+        />
+        <span>We agree to receive promotional content through Email, SMS, WhatsApp, and Phone Calls from Alven Homz.</span>
+      </label>
+
       {sent === "callback" ? (
         <div role="status" className={cn("rounded-2xl px-5 py-4 text-sm leading-relaxed", dark ? "bg-white/10 text-white" : "bg-emerald-50 text-emerald-900")}>
           <p className="font-semibold">Thank you, {values.name.trim().split(" ")[0]}! We&apos;ve received your request.</p>
@@ -307,28 +351,32 @@ export default function LeadForm({
         </div>
       ) : (
         <>
-          <div className={cn("grid gap-3", !compact && "sm:grid-cols-2")}>
-            <button type="submit" className="btn-whatsapp w-full">
-              <WhatsAppIcon className="h-5 w-5" /> Continue on WhatsApp
-            </button>
-            <button type="button" onClick={() => send("email")} className={cn("w-full", dark ? "btn-ghost-light" : "btn-outline")}>
-              <Mail className="h-4 w-4" /> Open Email Draft
-            </button>
-          </div>
-          <p className={cn("text-xs", dark ? "text-white/70" : "text-muted")}>
-            Choose WhatsApp or email to open your draft. Review the details before sending. Prefer a call?{" "}
-            <button type="button" onClick={() => send("callback")} className="inline-flex min-h-11 items-center font-semibold underline">
-              <Phone className="mr-1 h-3.5 w-3.5" /> Request a call back
-            </button>
-          </p>
-          {sent && (
-            <p role="status" className={cn("rounded-xl px-4 py-3 text-xs leading-relaxed", dark ? "bg-white/10 text-white/80" : "bg-emerald-50 text-emerald-900")}>
-              Thanks — we&apos;ve saved your enquiry.{" "}
-              {sent === "whatsapp"
-                ? "WhatsApp has opened with your details filled in; tap Send there to reach our team."
-                : "Your email app has opened with a pre-filled draft; press Send to reach our team."}
+          <button type="submit" disabled={sending} className={cn("w-full disabled:cursor-wait disabled:opacity-70", dark ? "btn-gold" : "btn-primary")}>
+            <Send className="h-4 w-4" /> {sending ? "Please wait…" : "Send Enquiry"}
+          </button>
+          {sendError && (
+            <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-xs leading-relaxed font-medium text-red-700">
+              {sendError}
             </p>
           )}
+          {sent && (
+            <p role="status" className={cn("rounded-xl px-4 py-3 text-sm leading-relaxed", dark ? "bg-white/10 text-white/85" : "bg-emerald-50 text-emerald-900")}>
+              {sent === "sent"
+                ? "Thank you! Your enquiry has been sent. Our team will get back to you shortly."
+                : sent === "whatsapp"
+                  ? "Thanks — we've saved your enquiry. WhatsApp has opened with your details filled in; tap Send there to reach our team."
+                  : "Thanks — we've saved your enquiry. Your email app has opened with a pre-filled draft; press Send to reach our team."}
+            </p>
+          )}
+          <div className={cn("flex flex-wrap items-center gap-x-4 gap-y-1 text-xs", dark ? "text-white/70" : "text-muted")}>
+            <span>Prefer another way?</span>
+            <button type="button" onClick={() => send("whatsapp")} className="inline-flex min-h-11 items-center gap-1 font-semibold underline">
+              <WhatsAppIcon className="h-3.5 w-3.5" /> WhatsApp
+            </button>
+            <button type="button" onClick={() => send("callback")} className="inline-flex min-h-11 items-center gap-1 font-semibold underline">
+              <Phone className="h-3.5 w-3.5" /> Request a call back
+            </button>
+          </div>
         </>
       )}
       <p className={cn("flex items-start gap-1.5 text-xs leading-relaxed", dark ? "text-white/60" : "text-muted")}>

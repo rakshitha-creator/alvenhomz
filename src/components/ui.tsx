@@ -121,7 +121,8 @@ export function PageHero({
   actions,
 }: {
   eyebrow: string;
-  title: string;
+  /** Plain text, or JSX when the heading needs a forced line break. */
+  title: React.ReactNode;
   /** Short deck line between the H1 and the body. */
   caption?: string;
   description: string;

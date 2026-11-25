@@ -58,6 +58,7 @@ export default async function ResalePage() {
       />
       <ContentBlock
         tone="sand"
+        align="center"
         title="Experience the home before you decide"
         caption="See beyond the walls. Understand the lifestyle."
         body="Visit the property at a convenient time to assess natural light, ventilation and the surrounding environment. Explore the layout, check room dimensions and consider your furniture requirements. For under-construction homes, verify that the plans and visuals accurately reflect the specific unit."

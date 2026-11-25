@@ -51,6 +51,7 @@ export default function AdminLeadsPage() {
                   {formatDate(lead.createdAt)}
                 </p>
                 {lead.listingTitle && <p className="mt-1 text-xs font-medium text-navy-800">{lead.listingTitle}</p>}
+                <p className="mt-1 text-xs text-muted">Promotional messages: {lead.marketingConsent ? "Agreed" : "Not agreed"}</p>
                 {lead.message && <p className="mt-2 text-sm text-muted">{lead.message}</p>}
               </div>
               <div className="flex flex-wrap items-start gap-2">

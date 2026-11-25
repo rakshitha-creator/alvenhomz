@@ -58,14 +58,14 @@ const WHY = [
   {
     icon: Handshake,
     title: "A trusted partner beyond the transaction",
-    text: "Our relationship doesn't end with a property purchase or handover. From interiors and home improvement to leasing, resale and ongoing property management, we stay connected to support your evolving needs.",
+    text: "Our relationship doesn't end with a property purchase or handover. From interiors and home improvement to renting, resale and ongoing property management, we stay connected to support your evolving needs.",
   },
 ];
 
 const HOME_FAQS: FaqItem[] = [
   {
     q: "What does Alven Homz do in Bengaluru?",
-    a: "Alven Homz helps clients buy new and resale homes, find rentals, sell or lease a residence and plan home interiors in Bengaluru. If you already own a property, you can enquire directly about the service you need.",
+    a: "Alven Homz helps clients buy new and resale homes, find rentals, sell or rent out a residence and plan home interiors in Bengaluru. If you already own a property, you can enquire directly about the service you need.",
   },
   {
     q: "Can I enquire if I live overseas?",
@@ -79,9 +79,10 @@ const HOME_FAQS: FaqItem[] = [
 
 const NEXT_STEPS = [
   { label: "Buy a Home", href: "/new-projects/" },
+    { label: "Design Your Home", href: "/interiors/" },
+
   { label: "Find a Rental", href: "/rental-properties/" },
   { label: "Sell Your Home", href: "/contact-us/?topic=owner#enquiry" },
-  { label: "Design Your Home", href: "/interiors/" },
 ];
 
 // Homeowner stories stay hidden until stories with permission to publish are available (copy deck instruction).
@@ -105,16 +106,15 @@ export default async function HomePage() {
           <div className="absolute inset-x-0 bottom-0 -z-10 hidden h-[55%] bg-gradient-to-t from-espresso-950/85 via-espresso-950/40 to-transparent lg:block" />
         </div>
         <div className="container-x relative -mt-[max(15svh,90px)] pb-8 sm:pb-10 lg:mt-0 lg:pb-16">
-          <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+          <div className="mx-auto max-w-3xl text-center">
             <div>
-              <h1 className="text-4xl leading-[1.05] font-semibold text-white [text-shadow:0_2px_24px_rgb(28_18_12/0.55)] sm:text-5xl lg:text-[3.4rem]">
-                Bengaluru homes, thoughtfully chosen and <span className="text-gold-400 italic">designed</span>
+              <h1 className="text-[1.75rem] leading-[1.15] font-semibold text-white [text-shadow:0_2px_24px_rgb(28_18_12/0.55)] sm:text-4xl lg:text-[2.4rem]">
+                Bengaluru homes, thoughtfully <br className="hidden sm:block" /> chosen and <span className="text-gold-400 italic">designed</span>
               </h1>
-              <div className="mt-5 flex items-center gap-4">
-                <span aria-hidden className="hidden h-px w-12 shrink-0 bg-gold-400 sm:block" />
+              <div className="mt-5 flex items-center justify-center gap-4">
                 <p className="font-display text-xl text-gold-300 italic sm:text-2xl">The right address is only the beginning.</p>
               </div>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <a href="#property-search" className="btn-gold">
                   Search properties
                 </a>
@@ -123,21 +123,28 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
-            {/* Intro on a frosted panel so it reads over any video frame */}
-            <div className="rounded-2xl border border-white/15 bg-espresso-950/55 p-6 shadow-lift backdrop-blur-md sm:p-7">
-              <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Buy · Sell · Lease · Design</p>
-              <p className="mt-3 text-left text-[15px] leading-relaxed text-white/90">
-                A home is more than an address; it reflects your lifestyle. At Alven Homz, we simplify your property journey with thoughtfully selected new
-                projects, resale homes, premium rentals and personalised interior solutions across Bengaluru. From finding your ideal home to making the most of
-                the one you own, we&apos;re here to help.
-              </p>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Property search — its own band directly after the hero */}
-      <section id="property-search" className="relative z-10 scroll-mt-28 pt-12 sm:pt-16">
+      {/* Intro — what Alven Homz does, between the hero and the search */}
+      <section aria-labelledby="home-intro" className="container-x pt-14 sm:pt-20">
+        <Reveal className="mx-auto max-w-4xl text-center">
+          <h2 id="home-intro" className="text-2xl leading-snug font-semibold sm:text-4xl">
+            Property Management <span aria-hidden className="mx-3 hidden text-gold-500 sm:inline">|</span>
+            <span className="block text-gold-700 italic sm:inline">Interior Solutions</span>
+          </h2>
+          <span aria-hidden className="mx-auto mt-5 block h-px w-16 bg-gold-400" />
+          <p className="mt-5 text-base leading-relaxed text-navy-800 hyphens-none sm:text-lg">
+            Alven Homz brings property management and interior design together in Bengaluru. We help you explore new residential projects, resale homes
+            and premium rentals with your preferred neighbourhood and lifestyle in mind. If you own a home in the city, we can help you sell or rent it out,
+            whether you live here or overseas. When you&apos;re ready to move in, we design interiors around the way you live.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* Property search */}
+      <section id="property-search" className="relative z-10 scroll-mt-28 pt-12 sm:pt-14">
         <div className="container-x">
           <p className="eyebrow mb-3">Start with the way you want to live</p>
           <HeroSearch suggestions={locationSuggestions()} />
@@ -196,8 +203,8 @@ export default async function HomePage() {
         />
         <div className="container-x grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
-            <p className="eyebrow">Alven Homz</p>
-            <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">Interiors designed around your life</h2>
+            <p className="eyebrow">Interiors Solutions</p>
+            <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-4xl">Interiors designed around your life</h2>
             <p className="mt-3 font-display text-xl text-gold-700 italic">Make the address unmistakably yours.</p>
             <p className="mt-5 max-w-lg leading-relaxed text-navy-800">
               Your home should reflect your personality and lifestyle. At Alven Homz, we blend design, functionality and comfort to create beautiful,
@@ -319,7 +326,7 @@ export default async function HomePage() {
       <section className="container-x py-20 sm:py-24">
         <SectionHeading
           eyebrow="Why Alven Homz"
-          title="Why Alven Homz"
+          title="One Team, From Search to Styling"
           caption="Making every property decision simpler, clearer and more rewarding."
           center
         />
@@ -334,8 +341,8 @@ export default async function HomePage() {
               <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-espresso-900 text-gold-400">
                 <item.icon className="h-6 w-6" />
               </span>
-              <h3 className="mt-5 text-xl font-semibold">{item.title}</h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted">{item.text}</p>
+              <h3 className="mt-5 text-xl font-semibold md:flex md:min-h-[3.5rem] md:items-center md:justify-center">{item.title}</h3>
+              <p className="mt-3 text-justify text-sm leading-relaxed text-muted hyphens-none [text-align-last:center]">{item.text}</p>
             </Reveal>
           ))}
         </ul>
@@ -349,7 +356,7 @@ export default async function HomePage() {
             eyebrow="Homeowner stories"
             title="Homeowner stories"
             caption="Every home began with a different brief."
-            description="Read how homeowners approached a purchase, prepared a residence for lease or developed an interior design brief. Each story starts with the decision the client needed to make and the details that helped them move forward."
+            description="Read how homeowners approached a purchase, prepared a residence for rent or developed an interior design brief. Each story starts with the decision the client needed to make and the details that helped them move forward."
           />
           <ul className="grid gap-5 md:grid-cols-3">
             {testimonials.slice(0, 3).map((t, i) => (
@@ -432,8 +439,8 @@ export default async function HomePage() {
       />
 
       <p className="container-x -mb-6 pt-10 text-center text-sm text-navy-800">
-        Living overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI property services</Link>. Own a home
-        you&apos;d like to lease or sell? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
+        Living overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI Corner</Link>. Own a home
+        you&apos;d like to rent out or sell? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
       </p>
       <Faq items={HOME_FAQS} />
     </>

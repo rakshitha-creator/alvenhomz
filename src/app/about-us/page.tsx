@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Building2, Eye, Gem, Home, KeyRound, Sofa, Target } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import Faq, { type FaqItem } from "@/components/Faq";
-import { PageHero, SectionHeading } from "@/components/ui";
+import BannerMedia from "@/components/BannerMedia";
+import { SectionHeading } from "@/components/ui";
 import { pageMetadata } from "@/lib/seo";
 import { img } from "@/lib/utils";
 
@@ -34,7 +35,7 @@ const JOURNEY = [
   { title: "Share your brief", text: "Tell us your property needs, preferred location, budget and timeline." },
   { title: "Explore the options", text: "Review suitable properties, plans, costs and timelines to make informed decisions." },
   { title: "Define the way forward", text: "Finalise the requirements, scope of work and responsibilities before proceeding." },
-  { title: "Bring the plan to life", text: "From interior execution to preparing your property for sale or lease, we ensure a smooth and coordinated experience." },
+  { title: "Bring the plan to life", text: "From interior execution to preparing your property for sale or rent, we ensure a smooth and coordinated experience." },
 ];
 
 const FAQS: FaqItem[] = [
@@ -44,7 +45,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Can I approach Alven Homz after buying a home elsewhere?",
-    a: "Yes. You can enquire about interior design, leasing or resale for a Bengaluru home you purchased independently. Share its location, current status and the outcome you have in mind.",
+    a: "Yes. You can enquire about interior design, renting out or resale for a Bengaluru home you purchased independently. Share its location, current status and the outcome you have in mind.",
   },
   {
     q: "Who does Alven Homz work with?",
@@ -55,25 +56,63 @@ const FAQS: FaqItem[] = [
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        bannerId="about"
-        eyebrow="About Alven Homz"
-        title="A Bengaluru property partner beyond the purchase"
-        caption="Your home journey deserves a partner for every step."
-        description="Alven Homz brings residential property solutions and personalised interior services together under one roof in Bengaluru. Whether you are looking to buy a new or resale home, sell or lease your property, or design a space that reflects your lifestyle, we make the journey simpler and more seamless. From finding the right property to transforming it into a home or maximising its value through sale or rental, we stay connected to your needs at every stage of homeownership."
-        image={img("living-penthouse")}
-      />
+      {/* Hero — the photo on its own; the page heading sits in the intro section below. */}
+      <section aria-label="About Alven Homz" className="relative isolate h-[58svh] min-h-[360px] overflow-hidden bg-espresso-950 sm:h-[68svh] lg:h-[78svh]">
+        <BannerMedia pageId="about" fallback="living-penthouse" alt="A bright Bengaluru living room prepared by Alven Homz" priority />
+        {/* Light shade at the top only, so the menu stays readable over the photo. */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-espresso-950/85 via-espresso-950/40 to-transparent" />
+      </section>
+
+      {/* Intro — photo on the left, the page heading and story on the right */}
+      <section className="bg-ivory">
+        <div className="container-x grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:py-24">
+          <Reveal className="relative">
+            <span aria-hidden className="absolute -bottom-3 -left-3 hidden h-full w-full rounded-3xl border-2 border-gold-400/60 sm:block" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={img("dining-living")}
+              srcSet={`${img("dining-living", "sm")} 800w, ${img("dining-living")} 1600w`}
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              alt="An open living and dining space in a Bengaluru home"
+              loading="lazy"
+              className="relative aspect-[4/3] w-full rounded-3xl object-cover shadow-lift"
+            />
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="eyebrow">About Alven Homz</p>
+            <h1 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl">A Bengaluru property partner beyond the purchase</h1>
+            <p className="mt-3 font-display text-lg text-gold-700 italic">Your home journey deserves a partner for every step.</p>
+            <p className="mt-5 text-base leading-relaxed text-navy-800 hyphens-none max-sm:text-left">
+              Alven Homz brings residential property solutions and personalised interior services together under one roof in Bengaluru. Whether you are
+              looking to buy a new or resale home, sell or rent out your property, or design a space that reflects your lifestyle, we make the journey simpler
+              and more seamless.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-navy-800 hyphens-none max-sm:text-left">
+              From finding the right property to transforming it into a home or maximising its value through sale or rental, we stay connected to your
+              needs at every stage of homeownership.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/contact-us/#enquiry" className="btn-primary">
+                Speak with an Advisor <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/new-projects/" className="btn-outline">
+                Explore Properties
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       {/* Who we are */}
       <section className="container-x grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <Reveal>
           <p className="eyebrow">Who we are</p>
-          <h2 className="mt-3 text-3xl font-semibold sm:text-5xl">Care after the keys</h2>
+          <h2 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl">Care after the keys</h2>
           <div className="mt-5 flex items-center gap-4">
             <span aria-hidden className="hidden h-px w-10 shrink-0 bg-gold-500 sm:block" />
-            <p className="font-display text-lg text-gold-700 italic sm:text-xl">The keys mark the start of a new chapter.</p>
+            <p className="font-display text-lg text-gold-700 italic">The keys mark the start of a new chapter.</p>
           </div>
-          <p className="mt-6 text-lg leading-relaxed text-navy-800">
+          <p className="mt-5 text-base leading-relaxed text-navy-800 hyphens-none max-sm:text-left">
             Some approach us with a floor plan and a handover date, while others are planning a sale or preparing their property for tenants. We
             understand your objectives and guide you through every step, from finding the right home to making it ready for its next chapter.
           </p>
@@ -196,7 +235,7 @@ export default function AboutPage() {
                 Meet Alven Homz <ArrowRight className="h-4 w-4" />
               </Link>
               <p className="text-sm text-white/70 lg:text-right">
-                Living overseas? <Link href="/nri-property-services/" className="font-semibold text-gold-300 underline">NRI property services</Link>
+                Living overseas? <Link href="/nri-property-services/" className="font-semibold text-gold-300 underline">NRI Corner</Link>
                 <br />
                 Own a home? <Link href="/property-management/" className="font-semibold text-gold-300 underline">Property management</Link>
               </p>

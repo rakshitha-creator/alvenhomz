@@ -9,7 +9,7 @@ import { img } from "@/lib/utils";
 export const metadata = pageMetadata({
   title: "Property Management in Bengaluru",
   description:
-    "Explore owner services for leasing, resale and preparing a Bengaluru home for its next occupant. Discuss the right scope for your property.",
+    "Explore owner services for renting, resale and preparing a Bengaluru home for its next occupant. Discuss the right scope for your property.",
   path: "/property-management/",
   image: "living-white",
 });
@@ -19,14 +19,14 @@ const OWNER = "/contact-us/?topic=owner#enquiry";
 const FAQS: FaqItem[] = [
   {
     q: "What does Alven Homz help property owners with?",
-    a: "Alven Homz helps Bengaluru property owners plan leasing, resale and interiors for a home's next occupant. The tasks and fees depend on the property and the scope agreed with the owner.",
+    a: "Alven Homz helps Bengaluru property owners plan renting, resale and interiors for a home's next occupant. The tasks and fees depend on the property and the scope agreed with the owner.",
   },
   {
     q: "Can I enquire about a vacant or under-construction home?",
     a: "Yes. Tell us whether the home is vacant, occupied or under construction, and which possession or move-in date you're working towards. We can discuss which preparation can begin now and which tasks depend on access or handover.",
   },
   {
-    q: "Can I plan leasing while I live abroad?",
+    q: "Can I plan renting out my home while I live abroad?",
     a: "Yes. Share the home's location, furnishing, expected availability and your time zone. We can discuss what information tenants will need and what local viewing coordination can be included in the scope.",
   },
 ];
@@ -38,7 +38,7 @@ export default function PropertyManagementPage() {
         eyebrow="Property Management"
         title="Property management for Bengaluru homeowners"
         caption="Make the next move for the home you own."
-        description="Alven Homz helps Bengaluru homeowners prepare a property for leasing, resale or its next occupant. Whether you've received the keys to a new apartment, are between tenants or are deciding what to do with a home from overseas, we start with the property's condition, availability and the outcome you want."
+        description="Alven Homz helps Bengaluru homeowners prepare a property for renting, resale or its next occupant. Whether you've received the keys to a new apartment, are between tenants or are deciding what to do with a home from overseas, we start with the property's condition, availability and the outcome you want."
         image={img("living-white")}
         actions={
           <Link href={OWNER} className="btn-gold">
@@ -48,8 +48,8 @@ export default function PropertyManagementPage() {
       />
 
       <ContentBlock
-        title="Prepare a home for leasing"
-        caption="Get the home ready to lease."
+        title="Prepare a home for renting"
+        caption="Get the home ready to rent out."
         body="Start with the home's condition, furnishing and earliest move-in date. We can discuss how to present it to tenants, which charges and inclusions to state upfront, and how viewings could work while the home is occupied or being readied."
         actions={
           <Link href="/rental-properties/" className="btn-outline">
@@ -71,7 +71,7 @@ export default function PropertyManagementPage() {
       <ContentBlock
         title="Interiors before the next move"
         caption="Start with the details the next occupant will use every day."
-        body="Start with the rooms and fittings that will matter most to the next occupant, such as practical kitchen storage, lighting or durable wardrobe finishes. We can discuss the improvements that fit your budget and timing, whether you plan to move in or offer the home for lease."
+        body="Start with the rooms and fittings that will matter most to the next occupant, such as practical kitchen storage, lighting or durable wardrobe finishes. We can discuss the improvements that fit your budget and timing, whether you plan to move in or offer the home for rent."
         actions={
           <Link href="/interiors/" className="btn-outline">
             Interiors

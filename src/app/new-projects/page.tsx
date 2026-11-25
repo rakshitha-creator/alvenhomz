@@ -52,7 +52,7 @@ export default async function NewProjectsPage() {
         items={items}
         suggestions={locationSuggestions()}
         title="Search and filters"
-        caption="Narrow the map. Sharpen the shortlist."
+        caption="Select the filter."
         body="Choose your preferred neighbourhood, budget and property type. Where filters are available, narrow the results by configuration or possession stage. Open individual project pages to review the developer, phase details and floor plans."
         emptyMessage="No projects match these filters. Broaden your search or tell us what you are looking for."
         actions={

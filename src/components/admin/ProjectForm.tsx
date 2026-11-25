@@ -8,7 +8,7 @@ import { csvToList, linesToList, listToCsv, listToLines, slugify } from "@/lib/s
 import { cn, img } from "@/lib/utils";
 import { copyImageToStorage, isStorageUrl } from "@/lib/uploads";
 import { AdminPageHeader, Field, FormCard, FormInput, FormSelect, FormTextarea } from "./form";
-import { ImageUploadField, VideoUploadField } from "./MediaFields";
+import { BrochureField, ImageUploadField, VideoUploadField } from "./MediaFields";
 
 const SECTIONS = [
   { id: "about", label: "About" },
@@ -325,6 +325,7 @@ export default function ProjectForm({ initial }: { initial?: Project }) {
               <FormInput value={form.towers || ""} onChange={(e) => set("towers", e.target.value || undefined)} />
             </Field>
           </div>
+          <BrochureField slug={form.slug} value={form.brochureUrl} onChange={(url) => set("brochureUrl", url)} />
           <Field label="Project description">
             <FormTextarea required value={form.description} onChange={(e) => set("description", e.target.value)} />
           </Field>

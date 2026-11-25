@@ -32,7 +32,7 @@ function HeroSelect({
 }) {
   return (
     <div className="relative pt-2.5 focus-within:bg-ivory/60">
-      <label htmlFor={id} className="block pl-10 text-xs font-semibold tracking-wide text-muted uppercase">
+      <label htmlFor={id} className="block pl-10 text-xs font-semibold tracking-wide text-muted">
         {label}
       </label>
       <span className="pointer-events-none absolute top-1/2 left-4 mt-1.5 text-gold-600" aria-hidden="true">
@@ -102,8 +102,8 @@ export default function HeroSearch({ suggestions = [] }: { suggestions?: string[
       >
         <div className="grid divide-y divide-line rounded-xl border border-line md:grid-cols-[1.6fr_1fr_1fr] md:divide-x md:divide-y-0">
           <div className="relative pt-2.5">
-            <span className="block pl-10 text-xs font-semibold tracking-wide text-muted uppercase" aria-hidden="true">
-              Preferred neighbourhood
+            <span className="block pl-10 text-xs font-semibold tracking-wide text-muted" aria-hidden="true">
+              Preferred Neighbourhood
             </span>
             <LocationInput
               value={location}
@@ -113,7 +113,7 @@ export default function HeroSearch({ suggestions = [] }: { suggestions?: string[
               inputClassName="-mt-1 border-transparent bg-transparent pt-1 pb-3 text-base font-medium focus:border-transparent focus:ring-0"
             />
           </div>
-          <HeroSelect id="hero-type" label="Property type" icon={<Building2 className="h-4 w-4" />}>
+          <HeroSelect id="hero-type" label="Property Type" icon={<Building2 className="h-4 w-4" />}>
             <select
               id="hero-type"
               value={type}

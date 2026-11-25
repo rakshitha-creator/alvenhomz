@@ -37,10 +37,10 @@ export default function RentalDetailView({ p, all = rentalProperties }: { p: Ren
       q: "What is included in the rent for this home?",
       a: `The monthly rent is ${rent}. See Rent and charges for maintenance, the deposit and any other applicable charges.`,
     },
-    ...(moveIn ? [{ q: "When can I move in?", a: `The property is available from ${moveIn}, subject to current availability and the agreed lease terms.` }] : []),
+    ...(moveIn ? [{ q: "When can I move in?", a: `The property is available from ${moveIn}, subject to current availability and the agreed rental terms.` }] : []),
     {
       q: "Which furnishings and appliances are included?",
-      a: "The listing inventory shows which furniture and appliances are included with this lease. Request a copy before signing and check the items and their condition at handover.",
+      a: "The listing inventory shows which furniture and appliances are included with this rental. Request a copy before signing and check the items and their condition at handover.",
     },
   ];
 
@@ -161,7 +161,7 @@ export default function RentalDetailView({ p, all = rentalProperties }: { p: Ren
             <DetailSection
               id="amenities"
               title="Amenities"
-              intro="See which community facilities and parking come with the lease. If you expect to use a particular facility, ask whether access or charges are covered in the lease terms."
+              intro="See which community facilities and parking come with the rental. If you expect to use a particular facility, ask whether access or charges are covered in the rental terms."
             >
               <Amenities items={p.amenities} />
             </DetailSection>
@@ -179,7 +179,7 @@ export default function RentalDetailView({ p, all = rentalProperties }: { p: Ren
           <EnquirySidebar
             heading="Enquire about this rental"
             caption="Take the next step towards moving in."
-            intro="Share your intended move-in date and a convenient viewing time. If parking, furnishing or lease length is important to your plans, include it in your enquiry."
+            intro="Share your intended move-in date and a convenient viewing time. If parking, furnishing or rental period is important to your plans, include it in your enquiry."
             listing={listingRef}
             isSample={p.isSample}
             summary={

@@ -5,14 +5,14 @@ import { FacebookIcon, InstagramIcon, LinkedInIcon, YouTubeIcon } from "./icons"
 import { site } from "@/lib/data";
 import { mailtoHref, telHref } from "@/lib/contact";
 
-// Only real profile links are shown; a bare home page (e.g. https://www.instagram.com/) is a placeholder.
-const isProfile = (url: string) => /^https?:\/\/[^/]+\/[^/?#]+/.test(url);
+// Always shown in the footer. Put the Alven Homz profile URLs in src/data/site.json (social.*);
+// until then each icon opens that network's home page.
 const socials = [
-  { href: site.social.instagram, label: "Instagram", Icon: InstagramIcon },
   { href: site.social.facebook, label: "Facebook", Icon: FacebookIcon },
   { href: site.social.linkedin, label: "LinkedIn", Icon: LinkedInIcon },
+  { href: site.social.instagram, label: "Instagram", Icon: InstagramIcon },
   { href: site.social.youtube, label: "YouTube", Icon: YouTubeIcon },
-].filter((s) => isProfile(s.href));
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -20,12 +20,15 @@ export default function Footer() {
     <footer className="bg-espresso-950 text-white/70">
       <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <Logo variant="light" imgClassName="h-32 w-auto" />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed">
+          {/* Logo centred over the intro text below it */}
+          <div className="flex max-w-sm justify-center">
+            <Logo variant="light" imgClassName="h-32 w-auto" />
+          </div>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed hyphens-none">
             Alven Homz brings residential property advisory and bespoke home interiors together in Bengaluru. Explore new developments, resale homes and
-            rentals, or speak with us about selling, leasing or redesigning a residence you already own.
+            rentals, or speak with us about selling, renting out or redesigning a residence you already own.
           </p>
-          <ul className="mt-6 flex gap-3">
+          <ul aria-label="Alven Homz on social media" className="mt-6 flex max-w-sm justify-center gap-3">
             {socials.map(({ href, label, Icon }) => (
               <li key={label}>
                 <a
@@ -72,7 +75,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/nri-property-services/" className="transition hover:text-white">
-                NRI Property Services
+                NRI Corner
               </Link>
             </li>
             <li>
@@ -120,11 +123,11 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-x flex flex-col gap-3 pt-6 pb-24 text-xs sm:flex-row sm:items-center sm:justify-between sm:pb-6">
+        <div className="container-x flex flex-col gap-3 pt-6 pb-24 text-sm sm:flex-row sm:items-center sm:justify-between sm:pb-6">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             <p>© {year} {site.name}. All rights reserved.</p>
-            <Link href="/privacy-policy/" className="inline-flex min-h-11 items-center text-sm transition hover:text-white">Privacy Policy</Link>
-            <Link href="/terms-and-conditions/" className="inline-flex min-h-11 items-center text-sm transition hover:text-white">Terms &amp; Conditions</Link>
+            <Link href="/privacy-policy/" className="inline-flex min-h-11 items-center transition hover:text-white">Privacy Policy</Link>
+            <Link href="/terms-and-conditions/" className="inline-flex min-h-11 items-center transition hover:text-white">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>

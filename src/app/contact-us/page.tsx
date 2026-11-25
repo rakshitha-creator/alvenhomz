@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import Faq from "@/components/Faq";
 import LeadForm from "@/components/LeadForm";
 import MapEmbed from "@/components/MapEmbed";
@@ -22,11 +22,18 @@ export const metadata = {
 
 export default function ContactPage() {
   const channels = [
-    { icon: Phone, title: "Call", value: site.phone, text: "", href: telHref(), cta: "Call now" },
+    {
+      icon: Phone,
+      title: "Call",
+      value: site.phone,
+      text: "Speak directly with an advisor about buying, selling, renting or your home interiors.",
+      href: telHref(),
+      cta: "Call now",
+    },
     {
       icon: WhatsAppIcon,
       title: "WhatsApp",
-      value: "Message us on WhatsApp",
+      value: "Chat on WhatsApp",
       text: "Share your preferred neighbourhood, property link or a short description of your interiors brief.",
       href: whatsappHref("Hi Alven Homz, I have an enquiry."),
       cta: "Open WhatsApp",
@@ -59,38 +66,47 @@ export default function ContactPage() {
         eyebrow="Contact Us"
         title="Let's make your next move easier"
         caption="Your property journey begins with a conversation."
-        description="Whether you're looking to buy, rent, sell, lease or transform your home, share your requirements with us. Our team will connect with you to understand your needs and guide you towards the right solutions."
+        description="Whether you're looking to buy, rent, sell or transform your home, share your requirements with us. Our team will connect with you to understand your needs and guide you towards the right solutions."
         image={img("workspace-window")}
       />
 
-      <section aria-labelledby="channels-heading" className="container-x pt-14">
-        <h2 id="channels-heading" className="text-3xl font-semibold">Choose how to reach us</h2>
-        <p className="mt-2 font-display text-lg text-gold-700 italic">Choose the way you prefer to reach us.</p>
-        <p className="mt-2 text-sm text-navy-800">
-          Contacting us from overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI property services</Link>.
-          Own a home in Bengaluru? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
-        </p>
-      </section>
-      <section className="container-x mt-6 grid gap-4 sm:grid-cols-3">
-        {channels.map((c) => (
-          <a
-            key={c.title}
-            href={c.href}
-            target={c.external ? "_blank" : undefined}
-            rel={c.external ? "noopener" : undefined}
-            className="group card relative flex items-center gap-4 p-6 transition hover:-translate-y-1 hover:shadow-lift"
-          >
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-espresso-900 text-gold-400">
-              <c.icon className="h-5 w-5" />
-            </span>
-            <span>
-              <span className="block text-xs font-semibold tracking-wide text-muted uppercase">{c.title}</span>
-              <span className="mt-0.5 block font-semibold break-words text-navy-900">{c.value}</span>
-              {c.text && <span className="mt-1 block text-sm leading-relaxed text-navy-800">{c.text}</span>}
-              <span className="mt-1 block text-xs font-semibold text-gold-600 group-hover:text-navy-900">{c.cta} →</span>
-            </span>
-          </a>
-        ))}
+      <section aria-labelledby="channels-heading" className="container-x pt-16 sm:pt-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">Get in touch</p>
+          <h2 id="channels-heading" className="mt-3 text-3xl font-semibold sm:text-4xl">Choose how to reach us</h2>
+          <p className="mt-3 font-display text-lg text-gold-700 italic">Choose the way you prefer to reach us.</p>
+          <p className="mt-3 text-sm text-navy-800">
+            Contacting us from overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI Corner</Link>.
+            Own a home in Bengaluru? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
+          </p>
+        </div>
+
+        <ul className="mt-10 grid gap-5 md:grid-cols-3">
+          {channels.map((c) => (
+            <li key={c.title}>
+              <a
+                href={c.href}
+                target={c.external ? "_blank" : undefined}
+                rel={c.external ? "noopener" : undefined}
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white p-7 shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold-400 hover:shadow-lift"
+              >
+                {/* Gold accent that grows along the top edge on hover */}
+                <span aria-hidden className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gold-500 transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-espresso-900 text-gold-400 transition group-hover:bg-gold-500 group-hover:text-espresso-950">
+                  <c.icon className="h-6 w-6" />
+                </span>
+                <span className="mt-6 text-xs font-semibold tracking-[0.2em] text-gold-700 uppercase">{c.title}</span>
+                <span className="mt-2 mb-6 font-display text-xl font-semibold break-words text-navy-900 sm:text-2xl">{c.value}</span>
+                <span className="mt-auto flex items-center justify-between border-t border-line pt-5 text-sm font-semibold text-navy-900">
+                  <span>{c.cta}</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ivory text-gold-700 transition group-hover:translate-x-1 group-hover:bg-espresso-900 group-hover:text-gold-300">
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-[1.2fr_1fr]">

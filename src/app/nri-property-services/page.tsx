@@ -9,7 +9,7 @@ import { img } from "@/lib/utils";
 export const metadata = pageMetadata({
   title: "NRI Property Services in Bengaluru",
   description:
-    "Buying, selling, leasing or designing a Bengaluru home from overseas? Discuss your property brief, visit window and service needs with Alven Homz.",
+    "Buying, selling, renting out or designing a Bengaluru home from overseas? Discuss your property brief, visit window and service needs with Alven Homz.",
   path: "/nri-property-services/",
   image: "living-penthouse",
 });
@@ -40,9 +40,15 @@ export default function NriPropertyServicesPage() {
     <>
       <PageHero
         eyebrow="NRI Property Services"
-        title="Bengaluru property services for NRI clients"
+        title={
+          <>
+            Bengaluru property services
+            <br />
+            for NRI clients
+          </>
+        }
         caption="A Bengaluru address, even when life takes you elsewhere."
-        description="Buying or managing a Bengaluru home while living overseas starts with deciding what you need from the property. It might be a family residence, a place to return to or a home you plan to lease. Alven Homz helps NRI clients explore new and resale homes, discuss leasing or selling an existing property, and plan interiors around handover dates and visits to the city."
+        description="Buying or managing a Bengaluru home while living overseas starts with deciding what you need from the property. It might be a family residence, a place to return to or a home you plan to rent out. Alven Homz helps NRI clients explore new and resale homes, discuss renting out or selling an existing property, and plan interiors around handover dates and visits to the city."
         image={img("living-penthouse")}
         actions={
           <Link href={CONSULT} className="btn-gold">
@@ -68,9 +74,9 @@ export default function NriPropertyServicesPage() {
       />
       <ContentBlock
         tone="sand"
-        title="Selling or leasing a Bengaluru home"
+        title="Selling or renting out a Bengaluru home"
         caption="Set the plan before arranging the viewings."
-        body="Tell us whether the home is occupied, vacant or awaiting handover. We can discuss how to present it for sale or lease, what prospective buyers or tenants will ask, and which viewing arrangements are practical while you're overseas. We agree responsibilities and fees before work starts."
+        body="Tell us whether the home is occupied, vacant or awaiting handover. We can discuss how to present it for sale or rent, what prospective buyers or tenants will ask, and which viewing arrangements are practical while you're overseas. We agree responsibilities and fees before work starts."
         actions={
           <>
             <Link href="/resale-properties/" className="btn-outline bg-white">

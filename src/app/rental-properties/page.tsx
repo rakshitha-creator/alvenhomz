@@ -19,14 +19,14 @@ export const metadata = pageMetadata({
 const FAQS: FaqItem[] = [
   {
     q: "What is usually payable before moving in?",
-    a: "The amount payable before moving in depends on the agreed lease. Ask for a written breakdown covering the security deposit, initial rent, maintenance and any applicable service charges, together with the due dates.",
+    a: "The amount payable before moving in depends on the agreed rental terms. Ask for a written breakdown covering the security deposit, initial rent, maintenance and any applicable service charges, together with the due dates.",
   },
   {
     q: "What is included in a furnished rental?",
     a: "Furniture and appliances vary by home. Ask for an itemised inventory, check which items stay with the property and note their condition during handover.",
   },
   {
-    q: "Can I enquire about leasing my home while living abroad?",
+    q: "Can I enquire about renting out my home while living abroad?",
     a: "Yes. Tell us whether the Bengaluru home is vacant, furnished or occupied, and when it can be shown. Share your time zone and the support you'd like so we can discuss the tasks that could be included.",
   },
   {
@@ -53,14 +53,14 @@ export default async function RentalPage() {
         suggestions={locationSuggestions()}
         title="Refine your rental search"
         caption="Start with the routines that shape your day."
-        body="Search by neighbourhood, monthly rent, configuration, property type and furnishing. Open the listing to check the move-in date, parking and confirmed inclusions. If a longer lease or specific appliance matters to you, raise it before arranging a visit."
+        body="Search by neighbourhood, monthly rent, configuration, property type and furnishing. Open the listing to check the move-in date, parking and confirmed inclusions. If a longer rental period or specific appliance matters to you, raise it before arranging a visit."
         emptyMessage="No rental homes match these filters. Change your search or tell us where and when you would like to move."
       />
       <ContentBlock
         tone="sand"
         title="Understand the cost of moving in"
         caption="A clear view of the cost of moving in."
-        body="Understand the total rental commitment before finalising your home. Review the rent, maintenance, security deposit and any additional charges, along with what is included in the lease and the payment schedule."
+        body="Understand the total rental commitment before finalising your home. Review the rent, maintenance, security deposit and any additional charges, along with what is included in the rental agreement and the payment schedule."
         cards={[
           { title: "Monthly rent and maintenance", text: "Confirm the monthly rent and maintenance charges separately, including what each covers." },
           { title: "Security deposit", text: "Understand the deposit amount, payment terms and refund conditions before moving in." },
@@ -69,7 +69,7 @@ export default async function RentalPage() {
       />
       <ContentBlock
         tone="dark"
-        title="For homeowners looking to lease"
+        title="For homeowners looking to rent out"
         caption="Give your property the right introduction."
         body="Tell us where the property is, how it's furnished and when it can be occupied. We can discuss how to present the residence, what to include in the listing and how to arrange viewings around the property's availability."
         actions={
@@ -78,7 +78,7 @@ export default async function RentalPage() {
               Find a Rental
             </a>
             <Link href="/contact-us/?topic=owner#enquiry" className="btn-gold">
-              Discuss Leasing Your Home
+              Discuss Renting Out Your Home
             </Link>
             <Link href="/property-management/" className="btn-ghost-light">
               Property management for owners

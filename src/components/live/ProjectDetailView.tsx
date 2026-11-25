@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Building2, CalendarClock, FileText, Landmark, LayoutGrid, Ruler, ShieldCheck } from "lucide-react";
+import { Building2, CalendarClock, Download, FileText, Landmark, LayoutGrid, Ruler, ShieldCheck } from "lucide-react";
+import { track } from "@/components/Analytics";
 import Amenities from "@/components/Amenities";
 import FloorPlans from "@/components/FloorPlans";
 import Gallery from "@/components/Gallery";
@@ -35,6 +36,31 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
     { name: p.name, path },
   ];
   const brochureMsg = `Hi Alven Homz, please share the brochure, price sheet and floor plans for ${p.name} (${location}).`;
+  // "Download Brochure": the uploaded PDF when there is one; otherwise it asks for the brochure on WhatsApp.
+  const brochureButton = (className = "btn-gold") =>
+    p.brochureUrl ? (
+      <a
+        href={p.brochureUrl}
+        target="_blank"
+        rel="noopener"
+        download
+        className={className}
+        onClick={() => track("brochure_download", { project: p.slug, page_path: window.location.pathname })}
+      >
+        <Download className="h-4 w-4" /> Download Brochure
+      </a>
+    ) : (
+      // No PDF uploaded yet: same button, sends the brochure request on WhatsApp.
+      <a
+        href={whatsappHref(brochureMsg)}
+        target="_blank"
+        rel="noopener"
+        className={className}
+        onClick={() => track("brochure_request", { project: p.slug, page_path: window.location.pathname })}
+      >
+        <Download className="h-4 w-4" /> Download Brochure
+      </a>
+    );
   const kindText = p.propertyType === "plot" ? "plotted development" : p.propertyType === "villa" ? "villa community" : "residential apartment development";
   const configs = p.configurations.map((c) => c.label);
   const configText = configs.length > 1 ? `${configs.slice(0, -1).join(", ")} and ${configs.at(-1)}` : (configs[0] ?? "");
@@ -117,8 +143,8 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
               caption="The details that shape the address."
               intro={`${p.name} in ${p.locality} is ${PROJECT_STATUS[p.status].toLowerCase()}, with expected possession ${/^\d|^[A-Z][a-z]{2,8} \d{4}/.test(p.possession) ? "in " : ""}${p.possession}. Check the overview for the configuration options and the basis on which areas are quoted.`}
             >
-              <p className="leading-relaxed text-navy-800">{p.description}</p>
-              <div className="mt-6">
+              <p className="leading-relaxed text-navy-800 hyphens-none">{p.description}</p>
+              <div className="mt-10">
                 <Facts
                   items={[
                     { label: "Status", value: PROJECT_STATUS[p.status], icon: <Building2 className="h-3.5 w-3.5" /> },
@@ -140,7 +166,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                   .
                 </p>
               )}
-              <h3 className="mt-8 font-sans text-base font-bold">Project Highlights</h3>
+              <h3 className="mt-10 font-sans text-base font-bold">Project Highlights</h3>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {repairSplitList(p.highlights ?? []).map((h) => (
                   <li key={h} className="flex gap-3 rounded-xl bg-ivory px-4 py-3 text-sm text-navy-800">
@@ -152,7 +178,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
 
             <DetailSection
               id="pricing"
-              title="Price and configurations"
+              title={`${p.name}: Price and configurations`}
               caption="Understand the cost of the home you choose."
               intro="Compare the available configurations by layout, quoted area and price basis. Request an itemised cost sheet for your preferred unit so you can review the quoted price, applicable charges and payment milestones together."
             >
@@ -193,9 +219,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
               </div>
               <p className="mt-3 text-xs text-muted">*Indicative starting prices. Taxes, registration and other charges extra. Confirm current pricing with our team.</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href={whatsappHref(brochureMsg)} target="_blank" rel="noopener" className="btn-whatsapp">
-                  <WhatsAppIcon className="h-4 w-4" /> Get brochure on WhatsApp
-                </a>
+                {brochureButton()}
                 <a href="#enquire" className="btn-outline">
                   <FileText className="h-4 w-4" /> Enquire Now
                 </a>
@@ -279,6 +303,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">Starting from</p>
                 <p className="mt-1 font-display text-3xl font-semibold text-navy-900">{formatINR(p.priceFrom)}</p>
                 <p className="mt-1 text-sm text-muted">{p.configurations.map((c) => c.label).join(" · ")}</p>
+                <div className="mt-4 grid">{brochureButton("btn-gold w-full")}</div>
               </div>
             }
           />

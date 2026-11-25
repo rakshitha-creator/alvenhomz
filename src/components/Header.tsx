@@ -17,7 +17,7 @@ export const NAV = [
   { href: "/resale-properties/", label: "Resale" },
   { href: "/rental-properties/", label: "Rentals" },
   { href: "/interiors/", label: "Interiors" },
-  { href: "/careers/", label: "Careers" },
+  { href: "/nri-property-services/", label: "NRI Corner" },
   { href: "/contact-us/", label: "Contact Us" },
 ];
 

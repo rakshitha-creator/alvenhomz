@@ -81,8 +81,8 @@ export function DetailSection({
       <h2 id={`${id}-title`} className={cn("text-2xl font-semibold", caption || intro ? "mb-2" : "mb-6")}>
         {title}
       </h2>
-      {caption && <p className="font-display text-lg text-gold-700 italic">{caption}</p>}
-      {intro && <p className="mt-3 mb-6 leading-relaxed text-navy-800">{intro}</p>}
+      {caption && <p className="mt-1 font-display text-lg text-gold-700 italic">{caption}</p>}
+      {intro && <p className="mt-4 mb-6 leading-relaxed text-navy-800 hyphens-none">{intro}</p>}
       {!intro && caption && <div className="mb-6" />}
       {children}
     </section>
@@ -91,7 +91,7 @@ export function DetailSection({
 
 export function Facts({ items }: { items: Array<{ label: string; value?: string | number; icon?: React.ReactNode }> }) {
   return (
-    <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <dl className="grid grid-cols-2 gap-4 sm:grid-cols-3">
       {items
         .filter((f) => f.value !== undefined && f.value !== "")
         .map((f) => {
