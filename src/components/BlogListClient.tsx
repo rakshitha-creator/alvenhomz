@@ -43,7 +43,7 @@ export default function BlogListClient({ initial = [] }: { initial?: BlogPost[] 
 
   if (!posts) {
     return (
-      <p className="text-sm text-muted" aria-busy="true">
+      <p className="text-base text-muted" aria-busy="true">
         Loading articles…
       </p>
     );
@@ -53,7 +53,7 @@ export default function BlogListClient({ initial = [] }: { initial?: BlogPost[] 
     return (
       <div className="card px-6 py-16 text-center">
         <h2 className="text-xl font-semibold">No articles yet</h2>
-        <p className="mt-2 text-sm text-muted">Check back soon for insights on buying, renting and interiors.</p>
+        <p className="mt-2 text-base text-muted">Check back soon for insights on buying, renting and interiors.</p>
       </div>
     );
   }
@@ -82,7 +82,7 @@ export default function BlogListClient({ initial = [] }: { initial?: BlogPost[] 
                   {post.title}
                 </Link>
               </h2>
-              <p className="mt-2 line-clamp-3 flex-1 text-sm text-muted">{post.excerpt}</p>
+              <p className="mt-2 line-clamp-3 flex-1 text-base text-muted">{post.excerpt}</p>
               <Link
                 href={blogHref(post.slug, built)}
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 hover:text-navy-900"

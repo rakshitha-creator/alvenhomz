@@ -150,7 +150,7 @@ export function EnquirySidebar({
           {summary}
           <h2 className="mt-5 font-sans text-base font-bold">{heading}</h2>
           {caption && <p className="mt-1 font-display text-gold-700 italic">{caption}</p>}
-          <p className="mt-1 mb-5 text-sm text-muted">{intro ?? "Send your details on WhatsApp or email and review them before sending."}</p>
+          <p className="mt-1 mb-5 text-base text-muted">{intro ?? "Send your details on WhatsApp or email and review them before sending."}</p>
           <LeadForm variant="listing" listing={listing} compact />
         </div>
         <div className="card p-4">

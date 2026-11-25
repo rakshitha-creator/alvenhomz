@@ -277,7 +277,7 @@ export default function LeadForm({
             )}
             {field("city", "Preferred area", <input {...aria("city")} className={fieldCls} value={values.city ?? ""} onChange={set("city")} placeholder="e.g. Sarjapur Road" />)}
             {values.about && (
-              <p className={cn("text-sm sm:col-span-2", dark ? "text-white/70" : "text-muted")}>
+              <p className={cn("text-base sm:col-span-2", dark ? "text-white/70" : "text-muted")}>
                 About: <span className="font-semibold">{values.about}</span>
               </p>
             )}
@@ -360,7 +360,7 @@ export default function LeadForm({
             </p>
           )}
           {sent && (
-            <p role="status" className={cn("rounded-xl px-4 py-3 text-sm leading-relaxed", dark ? "bg-white/10 text-white/85" : "bg-emerald-50 text-emerald-900")}>
+            <p role="status" className={cn("rounded-xl px-4 py-3 text-base leading-relaxed", dark ? "bg-white/10 text-white/85" : "bg-emerald-50 text-emerald-900")}>
               {sent === "sent"
                 ? "Thank you! Your enquiry has been sent. Our team will get back to you shortly."
                 : sent === "whatsapp"

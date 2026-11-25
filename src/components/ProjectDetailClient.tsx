@@ -72,7 +72,7 @@ export default function ProjectDetailClient() {
     return (
       <div className="container-x py-20 text-center">
         <h1 className="text-2xl font-semibold">Project not found</h1>
-        <p className="mt-2 text-sm text-muted">This listing may be unpublished or the link is incorrect.</p>
+        <p className="mt-2 text-base text-muted">This listing may be unpublished or the link is incorrect.</p>
       </div>
     );
   }
@@ -227,7 +227,7 @@ export default function ProjectDetailClient() {
             <DetailSection id="developer" title={`About ${p.developer}`}>
               <div className="flex gap-5 rounded-2xl bg-ivory p-6">
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-espresso-900 font-display text-2xl text-gold-300">{p.developer[0]}</span>
-                <p className="text-sm leading-relaxed text-navy-800">{p.developerAbout}</p>
+                <p className="text-base leading-relaxed text-navy-800">{p.developerAbout}</p>
               </div>
             </DetailSection>
 
@@ -237,7 +237,7 @@ export default function ProjectDetailClient() {
                   {p.faqs!.map((f) => (
                     <li key={f.question} className="rounded-2xl border border-line bg-white px-5 py-4">
                       <p className="font-semibold text-navy-900">{f.question}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-navy-800">{f.answer}</p>
+                      <p className="mt-2 text-base leading-relaxed text-navy-800">{f.answer}</p>
                     </li>
                   ))}
                 </ul>
@@ -284,8 +284,8 @@ export default function ProjectDetailClient() {
                 <ul className="grid gap-4 sm:grid-cols-2">
                   {p.testimonials!.map((t) => (
                     <li key={`${t.name}-${t.quote.slice(0, 24)}`} className="rounded-2xl border border-line bg-white p-5">
-                      <p className="text-sm leading-relaxed text-navy-800">&ldquo;{t.quote}&rdquo;</p>
-                      <p className="mt-4 text-sm font-semibold text-navy-900">{t.name}</p>
+                      <p className="text-base leading-relaxed text-navy-800">&ldquo;{t.quote}&rdquo;</p>
+                      <p className="mt-4 text-base font-semibold text-navy-900">{t.name}</p>
                       {t.context && <p className="text-xs text-muted">{t.context}</p>}
                     </li>
                   ))}
@@ -301,7 +301,7 @@ export default function ProjectDetailClient() {
               <div>
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">Starting from</p>
                 <p className="mt-1 font-display text-3xl font-semibold text-navy-900">{formatINR(p.priceFrom)}</p>
-                <p className="mt-1 text-sm text-muted">{p.configurations.map((c) => c.label).join(" · ")}</p>
+                <p className="mt-1 text-base text-muted">{p.configurations.map((c) => c.label).join(" · ")}</p>
               </div>
             }
           />

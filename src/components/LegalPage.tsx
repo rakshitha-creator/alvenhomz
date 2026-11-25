@@ -45,7 +45,7 @@ export default function LegalPage({
         </nav>
 
         <article className="max-w-3xl">
-          <p className="text-sm text-muted">Last updated: {updated}</p>
+          <p className="text-base text-muted">Last updated: {updated}</p>
           {sections.map((s, i) => (
             <section key={s.id} id={s.id} className="scroll-mt-[120px] border-b border-line py-8 last:border-0">
               <h2 className="text-2xl font-semibold sm:text-[1.7rem]">
@@ -57,7 +57,7 @@ export default function LegalPage({
               </div>
             </section>
           ))}
-          <p className="mt-8 text-sm text-muted">
+          <p className="mt-8 text-base text-muted">
             See also: <Link href="/privacy-policy/" className="font-semibold text-gold-600 underline">Privacy Policy</Link> ·{" "}
             <Link href="/terms-and-conditions/" className="font-semibold text-gold-600 underline">Terms &amp; Conditions</Link>
           </p>

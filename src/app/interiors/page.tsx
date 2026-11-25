@@ -43,20 +43,24 @@ const CONSULT_MSG = "Hi Alven Homz, I'd like to speak with a designer about my h
 
 const FAQS: FaqItem[] = [
   {
-    q: "Can I commission just a kitchen or wardrobe?",
-    a: "Yes. You can enquire about a modular kitchen, wardrobes, individual rooms or a complete apartment or villa. We'll discuss the brief and site requirements before defining the scope and estimating the work.",
+    q: "How much should I budget for 3 BHK interiors in Bengaluru?",
+    a: "For planning, allow approximately ₹10–16 lakh before GST for a mid-range 3 BHK interior and ₹17–28 lakh or more for a premium specification. The number of wardrobes, kitchen layout, custom joinery and finishes shape the estimate. Share your floor plan with Alven Homz for a room-wise quotation.",
   },
   {
-    q: "What determines the cost and timeline?",
-    a: "The cost and timeline depend on the number of rooms, materials, custom joinery and site readiness. Share a floor plan and approximate handover date so we can discuss an estimate and the work it would cover.",
+    q: "What does a modular kitchen cost in Bengaluru?",
+    a: "Around ₹2.5–4 lakh is a useful initial allowance for a moderately sized modular kitchen. Tall pantry units, premium hardware, countertops and appliances can increase the total. When requesting your quote, specify which appliances you already own and whether countertop supply and installation should be included.",
   },
   {
-    q: "Can I begin planning before possession or from overseas?",
-    a: "Yes. You can begin with an available floor plan and share your priorities ahead of possession, including from overseas. Final measurements and site conditions should be confirmed before approving work that depends on them.",
+    q: "How are interiors calculated for a 1,500 sq. ft. apartment?",
+    a: "The apartment’s advertised area is only a starting point. A wardrobe quote may use the width and height of its shutters, while flooring uses the area being laid. For a meaningful estimate, share the floor plan and list the rooms, cabinetry and finishes you want included.",
   },
   {
-    q: "What should I bring to a first home interiors consultation?",
-    a: "Bring your floor plan, tentative handover date and a list of the rooms you want to design. Photos, furniture dimensions and an approximate budget are helpful when discussing layout, materials and scope.",
+    q: "What should a full-home interior quotation include?",
+    a: "Look for a room-wise breakdown of dimensions, materials, hardware, finishes and installation. Check design fees, taxes and exclusions separately. A kitchen quote is easier to compare when you can see whether it includes the countertop, sink, fittings, appliances and electrical work.",
+  },
+  {
+    q: "How much should I budget for villa interiors in Bengaluru?",
+    a: "For an initial estimate, ₹15–22 lakh is an indicative starting band for a four-bedroom home or villa, with more extensive specifications reaching ₹22–40 lakh or above. Define the scope floor by floor, especially for staircase finishes, double-height rooms, additional kitchens and outdoor areas.",
   },
 ];
 
@@ -75,7 +79,7 @@ export default function InteriorsPage() {
         <div className="container-x pt-32 pb-20">
           <h1 className="max-w-3xl text-4xl leading-[1.08] font-semibold text-white sm:text-6xl">Luxury home interiors in Bengaluru</h1>
           <p className="mt-4 font-display text-xl text-gold-300 italic sm:text-2xl">Thoughtfully designed around your lifestyle.</p>
-          <p className="mt-5 max-w-2xl leading-relaxed text-white/80 sm:text-lg">
+          <p className="mt-5 max-w-2xl leading-relaxed text-white/80">
             Alven Homz creates bespoke interiors for apartments and villas in Bengaluru, thoughtfully tailored to your lifestyle and everyday needs. From space
             planning and lighting to materials and finishes, every detail is designed to bring together comfort, functionality and timeless elegance.
           </p>
@@ -116,7 +120,7 @@ export default function InteriorsPage() {
                       <Icon className="h-6 w-6" aria-hidden />
                     </span>
                     <h3 className="text-xl font-semibold">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-navy-800">{s.summary}</p>
+                    <p className="mt-2 text-base leading-relaxed text-navy-800">{s.summary}</p>
                     <a href={whatsappHref(`Hi Alven Homz, I'm interested in ${s.title.toLowerCase()}. Please share details.`)} target="_blank" rel="noopener" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:text-gold-600">
                       Enquire on WhatsApp <ArrowRight className="h-4 w-4" />
                     </a>

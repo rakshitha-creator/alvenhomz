@@ -126,7 +126,7 @@ export default function JobApplicationForm({ roles }: { roles: string[] }) {
             Share your résumé and the role you&apos;re applying for. For a design role, include a portfolio link and explain your contribution to each featured
             project, such as concept development, drawings, materials or site coordination.
           </p>
-          <p className="mt-4 text-sm text-white/60">Your email app opens with the application ready to send. Attach your résumé if you haven&apos;t included a link.</p>
+          <p className="mt-4 text-base text-white/60">Your email app opens with the application ready to send. Attach your résumé if you haven&apos;t included a link.</p>
         </div>
         <form onSubmit={submit} noValidate className="grid gap-4 rounded-3xl bg-white p-6 text-navy-900 sm:grid-cols-2 sm:p-8">
           <div className="sm:col-span-2">
@@ -166,7 +166,7 @@ export default function JobApplicationForm({ roles }: { roles: string[] }) {
           </div>
           <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
             <button type="submit" className="btn-gold">Send Application <ArrowRight className="h-4 w-4" aria-hidden /></button>
-            {sent ? <p className="flex items-center gap-2 text-sm font-semibold text-emerald-700"><CheckCircle2 className="h-4 w-4" aria-hidden /> Application prepared. Please send it from your email app.</p> : null}
+            {sent ? <p className="flex items-center gap-2 text-base font-semibold text-emerald-700"><CheckCircle2 className="h-4 w-4" aria-hidden /> Application prepared. Please send it from your email app.</p> : null}
           </div>
         </form>
       </div>

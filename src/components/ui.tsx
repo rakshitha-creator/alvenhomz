@@ -144,7 +144,7 @@ export function PageHero({
         <p className="eyebrow text-gold-300 animate-fade-up">{eyebrow}</p>
         <h1 className="mt-3 max-w-3xl text-3xl font-semibold text-white sm:mt-4 sm:text-5xl">{title}</h1>
         {caption && <p className="mt-3 font-display text-lg text-gold-300 italic sm:text-xl">{caption}</p>}
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/75 sm:mt-4 sm:text-lg">{description}</p>
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/75 sm:mt-4">{description}</p>
         {actions && <div className="mt-6 flex flex-wrap gap-3">{actions}</div>}
       </div>
     </section>

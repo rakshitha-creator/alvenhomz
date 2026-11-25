@@ -75,7 +75,7 @@ export default function ContactPage() {
           <p className="eyebrow">Get in touch</p>
           <h2 id="channels-heading" className="mt-3 text-3xl font-semibold sm:text-4xl">Choose how to reach us</h2>
           <p className="mt-3 font-display text-lg text-gold-700 italic">Choose the way you prefer to reach us.</p>
-          <p className="mt-3 text-sm text-navy-800">
+          <p className="mt-3 text-base text-navy-800">
             Contacting us from overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI Corner</Link>.
             Own a home in Bengaluru? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
           </p>
@@ -113,7 +113,7 @@ export default function ContactPage() {
         <div id="enquiry" className="card scroll-mt-28 p-6 sm:p-10">
           <h2 className="text-3xl font-semibold">Send your brief</h2>
           <p className="mt-2 font-display text-lg text-gold-700 italic">Tell us what matters most to you.</p>
-          <p className="mt-3 mb-8 text-sm leading-relaxed text-navy-800">
+          <p className="mt-3 mb-8 text-base leading-relaxed text-navy-800">
             Select the service you need and share a few details. A neighbourhood or listing link helps with a property enquiry. For interiors, add the
             property type and when you expect to receive the keys.
           </p>
@@ -124,10 +124,10 @@ export default function ContactPage() {
           <div className="card p-6">
             <h2 className="text-2xl font-semibold">Visit our Bengaluru office</h2>
             <p className="mt-1 font-display text-gold-700 italic">Meet us in HSR Layout.</p>
-            <p className="mt-3 flex gap-3 text-sm text-navy-800 select-text">
+            <p className="mt-3 flex gap-3 text-base text-navy-800 select-text">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" /> <span>Alven Homz, {site.address}</span>
             </p>
-            <p className="mt-2 text-sm text-muted">Contact us before visiting to confirm a suitable time.</p>
+            <p className="mt-2 text-base text-muted">Contact us before visiting to confirm a suitable time.</p>
             <div className="mt-4 flex flex-wrap gap-3">
               <a href={directions} target="_blank" rel="noopener" className="btn-outline py-2 text-sm">
                 Get Directions
@@ -140,7 +140,7 @@ export default function ContactPage() {
               <>
             <h2 className="mt-6 text-xl font-semibold">Follow Alven Homz</h2>
             <p className="mt-1 font-display text-gold-700 italic">A closer look at our work in Bengaluru.</p>
-            <p className="mt-2 text-sm text-navy-800">Follow Alven Homz for Bengaluru property features, interior design details and updates from the team.</p>
+            <p className="mt-2 text-base text-navy-800">Follow Alven Homz for Bengaluru property features, interior design details and updates from the team.</p>
             <ul className="mt-3 flex gap-2">
               {socials.map(({ href, label, Icon }) => (
                 <li key={label}>

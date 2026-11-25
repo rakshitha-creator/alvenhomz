@@ -74,11 +74,11 @@ export default function FeaturedListings({ kind }: { kind: ListingKind }) {
   }, [kind]);
 
   if (loading) {
-    return <p className="text-sm text-muted" aria-busy="true">Loading listings…</p>;
+    return <p className="text-base text-muted" aria-busy="true">Loading listings…</p>;
   }
 
   if (!items.length) {
-    return <p className="text-sm text-muted">No featured listings published yet.</p>;
+    return <p className="text-base text-muted">No featured listings published yet.</p>;
   }
 
   return (

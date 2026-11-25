@@ -67,8 +67,8 @@ export default function ListingCard({
             {item.title}
           </Link>
         </h3>
-        <p className="mt-1 text-sm text-muted">{item.subtitle}</p>
-        <p className="mt-3 flex items-center gap-1.5 text-sm text-navy-800">
+        <p className="mt-1 text-base text-muted">{item.subtitle}</p>
+        <p className="mt-3 flex items-center gap-1.5 text-base text-navy-800">
           <MapPin className="h-4 w-4 shrink-0 text-gold-600" />
           {location}
         </p>

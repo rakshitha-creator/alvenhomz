@@ -71,7 +71,7 @@ export default function TestimonialsSlider({ testimonials }: { testimonials: Tes
   return (
     <div role="region" aria-label="Homeowner testimonials" aria-roledescription="carousel">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm font-medium text-muted" aria-live="polite" aria-atomic="true">
+        <p className="text-base font-medium text-muted" aria-live="polite" aria-atomic="true">
           Showing {start}–{end} of {total} testimonials
         </p>
         <div className="flex items-center gap-2">
@@ -124,7 +124,7 @@ export default function TestimonialsSlider({ testimonials }: { testimonials: Tes
                 {initials(testimonial.name)}
               </span>
               <div>
-                <p className="text-sm font-semibold text-navy-900">{testimonial.name}</p>
+                <p className="text-base font-semibold text-navy-900">{testimonial.name}</p>
                 <p className="text-xs text-muted">{testimonial.context}</p>
               </div>
             </div>

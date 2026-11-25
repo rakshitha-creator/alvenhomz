@@ -64,16 +64,24 @@ const WHY = [
 
 const HOME_FAQS: FaqItem[] = [
   {
-    q: "What does Alven Homz do in Bengaluru?",
-    a: "Alven Homz helps clients buy new and resale homes, find rentals, sell or rent out a residence and plan home interiors in Bengaluru. If you already own a property, you can enquire directly about the service you need.",
+    q: "How do I choose the best real estate consultant in Bangalore?",
+    a: "Look for an advisor who knows your preferred neighbourhoods and explains the full cost of each home. At Alven Homz, we help you compare new projects and resale homes by location, budget and possession date.",
   },
   {
-    q: "Can I enquire if I live overseas?",
-    a: "Yes. You can start your Bengaluru property or interiors enquiry from overseas. Share your country, time zone and plans for the home, together with your travel dates if you expect to visit.",
+    q: "How do I shortlist the best interior designers in Bangalore?",
+    a: "Look for layouts that suit your routine and a quote that shows what each room will cost. At Alven Homz, we plan apartment and villa interiors around how you cook, work and host.",
   },
   {
-    q: "Can Alven Homz help me shortlist a neighbourhood in Bengaluru?",
-    a: "Yes. Share the places you need to reach regularly, your budget and the kind of home you want. We can discuss where to focus your search and which routes to try from each shortlisted property.",
+    q: "What should I compare among the top property management companies in Bangalore?",
+    a: "Compare who handles viewings, what support continues after handover and how fees are calculated. Alven Homz helps owners prepare homes for rent or resale and agrees the scope and fees upfront.",
+  },
+  {
+    q: "How do I choose the best property consultant in Bangalore for NRI home buyers?",
+    a: "Choose a consultant who helps you decide which homes are worth a trip. Alven Homz helps you compare floor plans, prices and possession dates from overseas, then plan viewings around your Bengaluru visit.",
+  },
+  {
+    q: "How can Alven Homz help NRIs sell property in Bangalore from abroad?",
+    a: "We help you set an asking price using comparable homes, prepare your property for sale and coordinate viewings with your local keyholder. You review offers from abroad and decide the price and handover terms.",
   },
 ];
 
@@ -135,7 +143,7 @@ export default async function HomePage() {
             <span className="block text-gold-700 italic sm:inline">Interior Solutions</span>
           </h2>
           <span aria-hidden className="mx-auto mt-5 block h-px w-16 bg-gold-400" />
-          <p className="mt-5 text-base leading-relaxed text-navy-800 hyphens-none sm:text-lg">
+          <p className="mt-5 text-base leading-relaxed text-navy-800 hyphens-none">
             Alven Homz brings property management and interior design together in Bengaluru. We help you explore new residential projects, resale homes
             and premium rentals with your preferred neighbourhood and lifestyle in mind. If you own a home in the city, we can help you sell or rent it out,
             whether you live here or overseas. When you&apos;re ready to move in, we design interiors around the way you live.
@@ -299,7 +307,7 @@ export default async function HomePage() {
                         {l.name}
                       </Link>
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-navy-800">{l.description}</p>
+                    <p className="mt-2 text-base leading-relaxed text-navy-800">{l.description}</p>
                     <div className="mt-auto flex items-center justify-between gap-3 pt-4">
                       <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900">
                         See homes in {l.name} <ArrowRight className="h-4 w-4 text-gold-600 transition group-hover:translate-x-0.5" />
@@ -342,7 +350,7 @@ export default async function HomePage() {
                 <item.icon className="h-6 w-6" />
               </span>
               <h3 className="mt-5 text-xl font-semibold md:flex md:min-h-[3.5rem] md:items-center md:justify-center">{item.title}</h3>
-              <p className="mt-3 text-justify text-sm leading-relaxed text-muted hyphens-none [text-align-last:center]">{item.text}</p>
+              <p className="mt-3 text-justify text-base leading-relaxed text-muted hyphens-none [text-align-last:center]">{item.text}</p>
             </Reveal>
           ))}
         </ul>
@@ -367,13 +375,13 @@ export default async function HomePage() {
                 className="card flex flex-col p-6"
               >
                 <Quote className="h-8 w-8 text-gold-500" />
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-navy-800">{t.quote}</p>
+                <p className="mt-4 flex-1 text-base leading-relaxed text-navy-800">{t.quote}</p>
                 <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
                   <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-espresso-900 text-sm font-semibold text-gold-300">
                     {initials(t.name)}
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-navy-900">{t.name}</p>
+                    <p className="text-base font-semibold text-navy-900">{t.name}</p>
                     <p className="text-xs text-muted">{t.context}</p>
                   </div>
                 </div>
@@ -438,7 +446,7 @@ export default async function HomePage() {
         ))}
       />
 
-      <p className="container-x -mb-6 pt-10 text-center text-sm text-navy-800">
+      <p className="container-x -mb-6 pt-10 text-center text-base text-navy-800">
         Living overseas? See <Link href="/nri-property-services/" className="font-semibold text-gold-700 underline">NRI Corner</Link>. Own a home
         you&apos;d like to rent out or sell? See <Link href="/property-management/" className="font-semibold text-gold-700 underline">property management</Link>.
       </p>

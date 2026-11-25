@@ -85,7 +85,7 @@ export default function Gallery({ images, title }: { images: string[]; title: st
       {open && (
         <div role="dialog" aria-modal="true" aria-label={`${title} photos`} className="fixed inset-0 z-[70] flex flex-col bg-espresso-950/95 animate-fade-in">
           <div className="flex items-center justify-between px-4 py-3 text-white sm:px-6">
-            <p className="text-sm">
+            <p className="text-base">
               <span className="font-display text-lg">{title}</span>
               <span className="ml-3 text-white/60">{index + 1} / {count}</span>
             </p>

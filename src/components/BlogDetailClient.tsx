@@ -77,7 +77,7 @@ export default function BlogDetailClient({ fromQuery = false, initial }: { fromQ
           {formatDate(post.publishedAt)} · {post.author}
         </p>
         <h1 className="mt-3 font-display text-3xl font-semibold text-navy-900 sm:text-5xl">{post.title}</h1>
-        <p className="mt-4 text-base text-muted sm:text-lg">{post.excerpt}</p>
+        <p className="mt-4 text-base text-muted">{post.excerpt}</p>
       </header>
       {post.coverImage && (
         // eslint-disable-next-line @next/next/no-img-element

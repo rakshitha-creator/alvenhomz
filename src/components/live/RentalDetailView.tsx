@@ -171,7 +171,7 @@ export default function RentalDetailView({ p, all = rentalProperties }: { p: Ren
               title="Location"
               intro="See how the property connects to the places you travel to every day. If that journey shapes your choice of rental, try it from the property entrance when you visit."
             >
-              <p className="mb-4 text-sm text-navy-800">{p.address}</p>
+              <p className="mb-4 text-base text-navy-800">{p.address}</p>
               <MapEmbed lat={p.lat} lng={p.lng} title={p.title} />
             </DetailSection>
           </div>

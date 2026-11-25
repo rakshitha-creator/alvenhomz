@@ -18,20 +18,24 @@ export const metadata = pageMetadata({
 
 const FAQS: FaqItem[] = [
   {
-    q: "What is usually payable before moving in?",
-    a: "The amount payable before moving in depends on the agreed rental terms. Ask for a written breakdown covering the security deposit, initial rent, maintenance and any applicable service charges, together with the due dates.",
+    q: "How much does a fully furnished 2 BHK on Sarjapur Road cost, including maintenance?",
+    a: "An indicative November 2026 asking-rent band is ₹35,000–₹70,000 per month across selected furnished homes on Sarjapur Road. The sector, building type, parking and appliance inventory can change the quote. Ask for maintenance separately so you know the full monthly cost before viewing.",
   },
   {
-    q: "What is included in a furnished rental?",
-    a: "Furniture and appliances vary by home. Ask for an itemised inventory, check which items stay with the property and note their condition during handover.",
+    q: "Can I rent a furnished 2 BHK in Electronic City Phase 1 for under ₹40,000 a month?",
+    a: "Yes, a furnished 2 BHK can fall within a ₹40,000 monthly budget, depending on availability and maintenance. If ₹40,000 is your ceiling, give Alven Homz that figure as your rent-plus-maintenance limit. Share your workplace gate and move-in date so the shortlist also fits your commute and timing.",
   },
   {
-    q: "Can I enquire about renting out my home while living abroad?",
-    a: "Yes. Tell us whether the Bengaluru home is vacant, furnished or occupied, and when it can be shown. Share your time zone and the support you'd like so we can discuss the tasks that could be included.",
+    q: "How much money should I set aside before moving into a rental home in Bengaluru?",
+    a: "Budget for the security deposit, first month’s rent, maintenance due at move-in and any agreed brokerage. For example, at ₹50,000 monthly rent, a minimum three-month deposit plus the first month’s rent comes to ₹2 lakh before other charges. The deposit amount and payment schedule depend on the rental agreement.",
   },
   {
-    q: "How do I compare two Bengaluru rentals with similar rent?",
-    a: "Compare the monthly cost including maintenance, then look at the deposit, furnishing, parking and move-in dates. Ask which charges are due upfront and whether each home has the inclusions you'll use.",
+    q: "How can I find a 3 BHK for rent on Sarjapur Road within my total monthly budget?",
+    a: "Start with your monthly ceiling and work backwards. If your limit is ₹65,000 and society maintenance is ₹6,000, your base-rent limit is ₹59,000. Tell us which junction or workplace you need to reach, your furnishing preference and your move-in date so we can narrow the search.",
+  },
+  {
+    q: "How do I find a rental home near Kudlu Gate with a practical office commute?",
+    a: "Use your office entrance and usual arrival time as the starting point. For each home, check the route from the apartment gate, including the side of the main road you need to reach. If two homes have similar rents, try the journey during your normal commute before deciding which to rent.",
   },
 ];
 

@@ -114,10 +114,10 @@ export default function InteriorPortfolio({ items }: { items: InteriorProject[] 
               </button>
               <p className="eyebrow">{open.category}</p>
               <h3 className="mt-2 text-2xl font-semibold">{open.title}</h3>
-              <p className="mt-1 flex items-center gap-1 text-sm text-muted">
+              <p className="mt-1 flex items-center gap-1 text-base text-muted">
                 {open.concept ? <Sparkles className="h-3.5 w-3.5" /> : <MapPin className="h-3.5 w-3.5" />} {open.concept ? "Design concept" : open.location}
               </p>
-              <p className="mt-5 text-sm leading-relaxed text-navy-800">{open.description}</p>
+              <p className="mt-5 text-base leading-relaxed text-navy-800">{open.description}</p>
               <div className="mt-6 flex gap-2">
                 {open.gallery.map((g, i) => (
                   <button key={g} type="button" onClick={() => setPhoto(i)} aria-label={`Show photo ${i + 1}`} className={cn("h-14 w-16 overflow-hidden rounded-lg border-2", i === photo ? "border-gold-500" : "border-transparent")}>

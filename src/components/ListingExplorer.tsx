@@ -310,7 +310,7 @@ export default function ListingExplorer({
 
       <div>
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm text-muted" aria-live="polite">
+          <p className="text-base text-muted" aria-live="polite">
             Showing <span className="font-semibold text-navy-900">{results.length}</span>{" "}
             {results.length === 1 ? "property" : "properties"}
             {activeCount > 0 && <span className="text-xs text-muted"> ({activeCount} active filter{activeCount > 1 ? "s" : ""})</span>}
@@ -358,7 +358,7 @@ export default function ListingExplorer({
               <SearchX className="h-6 w-6" />
             </span>
             <h3 className="mt-5 text-xl font-semibold">{items.length ? "No matches" : "Nothing listed right now"}</h3>
-            <p className="mt-2 max-w-md text-sm text-muted">
+            <p className="mt-2 max-w-md text-base text-muted">
               {emptyMessage ?? "No properties match these filters. Broaden your search or tell us what you are looking for."}
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">

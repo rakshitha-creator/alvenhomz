@@ -30,7 +30,7 @@ export default function FloorPlans({ plans, onRequest }: { plans: FloorPlan[]; o
         <div>
           <p className="eyebrow">Floor plan</p>
           <h3 className="mt-2 text-2xl font-semibold">{plan.label}</h3>
-          <p className="mt-1 text-sm text-muted">Approx. {plan.area}</p>
+          <p className="mt-1 text-base text-muted">Approx. {plan.area}</p>
           {!plan.image && (
             <p className="mt-4 text-xs leading-relaxed text-muted">
               Indicative layout for illustration only. Request the official floor plan and brochure from our team for exact dimensions.

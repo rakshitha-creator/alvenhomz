@@ -18,20 +18,24 @@ export const metadata = pageMetadata({
 
 const FAQS: FaqItem[] = [
   {
-    q: "Is every resale property ready to move into?",
-    a: "Resale includes completed properties and units offered for transfer during construction. Check whether the unit is ready to occupy, when handover is expected and which steps apply to the sale or transfer.",
+    q: "What size 3 BHK resale apartment can I consider in Gunjur with a ₹2 crore budget?",
+    a: "As a budgeting example, ₹2 crore covers around 1,667 sq. ft. at ₹12,000 per sq. ft., or 1,600 sq. ft. at ₹12,500 per sq. ft., before additional purchase costs. If ₹2 crore is your total spending limit, reserve room for registration, applicable fees and any refurbishment before setting your offer price.",
   },
   {
-    q: "What changes when I compare a new project with a resale in the same community?",
-    a: "The seller, quoted cost, payment schedule, transfer steps and handover status may differ. Compare the specific units on the same area basis and ask who can confirm the latest information for each.",
+    q: "Can I move into a ready-to-move resale flat on Sarjapur Road immediately?",
+    a: "You can move in once the purchase is complete and the seller can give you vacant possession. A finished flat may still be owner-occupied or tenanted. If you have a fixed moving date, confirm who occupies the home, when they will vacate and the key-handover date before making an offer.",
   },
   {
-    q: "What should I ask about before making an offer?",
-    a: "Ask for the current ownership or allotment documents, outstanding dues, applicable transfer steps and expected handover date. Have your legal adviser review the documents relevant to that unit before you commit.",
+    q: "Why do two resale flats in the same Bengaluru society have different prices?",
+    a: "The difference often comes down to usable area, floor, outlook, parking and what stays in the home. An apartment with fitted wardrobes, appliances and immediate vacant possession may suit a different budget from an unfurnished, occupied home. Ask for the inclusions in writing before comparing the two asking prices.",
   },
   {
-    q: "Can Alven Homz help me sell my apartment?",
-    a: "Yes. Share the community, configuration, occupancy or construction status and your proposed timeline. We can discuss how to present the home, prepare listing information and schedule viewings.",
+    q: "Should I compare resale flat prices using carpet area or built-up area?",
+    a: "Use the same area measurement for both homes. For example, a ₹1.80 crore apartment quoted at 1,500 sq. ft. built-up works out to ₹12,000 per sq. ft. If its carpet area is 1,200 sq. ft., the same apartment costs ₹15,000 per carpet sq. ft. That difference matters when comparing two offers.",
+  },
+  {
+    q: "How should I price my Bengaluru apartment before putting it up for resale?",
+    a: "Start with comparable homes in your own society or phase. Match the configuration and area, then account for parking, condition, furnishing and handover timing. Recent completed sales, where available, help establish what buyers have paid. Current asking prices show what your home will compete against.",
   },
 ];
 

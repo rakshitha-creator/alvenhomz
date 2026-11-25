@@ -166,7 +166,7 @@ export default function RentalDetailClient() {
             )}
 
             <DetailSection id="location" title="Location">
-              <p className="mb-4 text-sm text-navy-800">{p.address}</p>
+              <p className="mb-4 text-base text-navy-800">{p.address}</p>
               <MapEmbed lat={p.lat} lng={p.lng} title={p.title} />
             </DetailSection>
           </div>

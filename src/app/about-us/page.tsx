@@ -40,16 +40,24 @@ const JOURNEY = [
 
 const FAQS: FaqItem[] = [
   {
-    q: "Where is Alven Homz based?",
-    a: "Alven Homz is based in Sector 6, HSR Layout, Bengaluru. You can reach the team by phone, WhatsApp or email. Contact us in advance to arrange an office visit.",
+    q: "What sets Alven Homz apart as a real estate consultant in Bangalore?",
+    a: "We bring property advice and interior design together. When you shortlist a home with us, we look at the neighbourhood, total cost and possession date, alongside how well the layout suits the way you live.",
   },
   {
-    q: "Can I approach Alven Homz after buying a home elsewhere?",
-    a: "Yes. You can enquire about interior design, renting out or resale for a Bengaluru home you purchased independently. Share its location, current status and the outcome you have in mind.",
+    q: "Can I work with Alven Homz for interior design if I bought my home elsewhere?",
+    a: "Yes. We design interiors for apartments and villas across Bengaluru, including homes purchased independently. You can come to us with a full-home brief or start with a single space, such as a modular kitchen.",
   },
   {
-    q: "Who does Alven Homz work with?",
-    a: "We work with people buying, selling, renting or designing homes in Bengaluru, including homeowners and buyers living abroad. We start with the property and the decision you're working towards.",
+    q: "What property management services does Alven Homz offer homeowners in Bangalore?",
+    a: "We help owners prepare homes for rent or resale, present the property and plan viewings. At the outset, we agree on the scope, who handles each task and the fees involved.",
+  },
+  {
+    q: "Why choose Alven Homz as an NRI home-buying consultant in Bangalore?",
+    a: "We help you narrow your search before you travel. From overseas, you can compare new projects by floor plan, price and possession date, then use your Bengaluru visit to view the homes that best fit your brief.",
+  },
+  {
+    q: "How does Alven Homz help NRIs sell a Bangalore property from abroad?",
+    a: "We help you compare similar homes, set an asking price and coordinate viewings with your local keyholder. You can review buyer offers from overseas and decide which price and handover terms work for you.",
   },
 ];
 
@@ -108,8 +116,7 @@ export default function AboutPage() {
         <Reveal>
           <p className="eyebrow">Who we are</p>
           <h2 className="mt-3 text-3xl leading-tight font-semibold sm:text-4xl">Care after the keys</h2>
-          <div className="mt-5 flex items-center gap-4">
-            <span aria-hidden className="hidden h-px w-10 shrink-0 bg-gold-500 sm:block" />
+          <div className="mt-3">
             <p className="font-display text-lg text-gold-700 italic">The keys mark the start of a new chapter.</p>
           </div>
           <p className="mt-5 text-base leading-relaxed text-navy-800 hyphens-none max-sm:text-left">
@@ -159,7 +166,7 @@ export default function AboutPage() {
               <Reveal as="li" key={step.title} delay={i * 70} className="relative rounded-2xl bg-white p-6 shadow-card">
                 <span className="font-display text-4xl font-semibold text-gold-500/50">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-2 font-sans text-lg font-semibold text-navy-900">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-800">{step.text}</p>
+                <p className="mt-2 text-base leading-relaxed text-navy-800">{step.text}</p>
               </Reveal>
             ))}
           </ol>
@@ -207,7 +214,7 @@ export default function AboutPage() {
               <Reveal as="li" key={v.word} delay={i * 70} className="rounded-2xl border-t-2 border-gold-400 bg-white/[0.06] p-7">
                 <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">0{i + 1}</p>
                 <h4 className="mt-2 font-display text-2xl font-semibold text-white">{v.word}</h4>
-                <p className="mt-3 text-sm leading-relaxed text-white/75">{v.text}</p>
+                <p className="mt-3 text-base leading-relaxed text-white/75">{v.text}</p>
               </Reveal>
             ))}
           </ul>
@@ -234,7 +241,7 @@ export default function AboutPage() {
               <Link href="/contact-us/#enquiry" className="btn-gold">
                 Meet Alven Homz <ArrowRight className="h-4 w-4" />
               </Link>
-              <p className="text-sm text-white/70 lg:text-right">
+              <p className="text-base text-white/70 lg:text-right">
                 Living overseas? <Link href="/nri-property-services/" className="font-semibold text-gold-300 underline">NRI Corner</Link>
                 <br />
                 Own a home? <Link href="/property-management/" className="font-semibold text-gold-300 underline">Property management</Link>

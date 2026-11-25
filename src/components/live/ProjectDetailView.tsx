@@ -67,7 +67,9 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
   const enquiryHref = `/contact-us/?topic=new-project&about=${encodeURIComponent(p.name)}#enquiry`;
   const visitHref = `/contact-us/?topic=new-project&about=${encodeURIComponent(`Site visit – ${p.name}`)}#enquiry`;
   const firstPlace = p.nearby[0]?.name;
-  const faqs: FaqItem[] = [
+  // Project-specific FAQs (website data or admin) replace the general questions when present.
+  const ownFaqs: FaqItem[] = (p.faqs ?? []).filter((f) => f.question && f.answer).map((f) => ({ q: f.question, a: f.answer }));
+  const generalFaqs: FaqItem[] = [
     {
       q: `Which floor plans are available at ${p.name}?`,
       a: `${p.name} lists ${configText || "several configurations"}. Availability can vary by tower and phase. Ask for the current unit list and the floor plan for the specific residence you want to compare.`,
@@ -81,6 +83,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
       a: `${p.priceFrom > 0 ? `Quotes start from ${formatINR(p.priceFrom)} for the entry configuration.` : "Pricing is available on request."} Ask for a current unit-specific cost sheet to see the quoted price, applicable charges and payment milestones.`,
     },
   ];
+  const faqs = ownFaqs.length ? ownFaqs : generalFaqs;
 
   const sections = [
     { id: "overview", label: "Overview" },
@@ -290,7 +293,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
                 ) : (
                   <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-espresso-900 font-display text-2xl text-gold-300">{p.developer[0]}</span>
                 )}
-                <p className="text-sm leading-relaxed text-navy-800">{p.developerAbout}</p>
+                <p className="text-base leading-relaxed text-navy-800">{p.developerAbout}</p>
               </div>
             </DetailSection>
           </div>
@@ -302,7 +305,7 @@ export default function ProjectDetailView({ p, all = projects }: { p: Project; a
               <div>
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">Starting from</p>
                 <p className="mt-1 font-display text-3xl font-semibold text-navy-900">{formatINR(p.priceFrom)}</p>
-                <p className="mt-1 text-sm text-muted">{p.configurations.map((c) => c.label).join(" · ")}</p>
+                <p className="mt-1 text-base text-muted">{p.configurations.map((c) => c.label).join(" · ")}</p>
                 <div className="mt-4 grid">{brochureButton("btn-gold w-full")}</div>
               </div>
             }

@@ -166,7 +166,7 @@ export default function ResaleDetailView({ p, all = resaleProperties }: { p: Res
               caption="A home is also the places you go every day."
               intro={`See how this address in ${p.locality} connects to the places you travel to most. When planning your viewing, try the route from the community entrance at the time you would normally travel.`}
             >
-              <p className="mb-4 text-sm text-navy-800">{p.address}</p>
+              <p className="mb-4 text-base text-navy-800">{p.address}</p>
               <MapEmbed lat={p.lat} lng={p.lng} title={p.title} />
             </DetailSection>
           </div>
@@ -181,7 +181,7 @@ export default function ResaleDetailView({ p, all = resaleProperties }: { p: Res
               <div>
                 <p className="text-xs font-medium tracking-wide text-muted uppercase">Selling price</p>
                 <p className="mt-1 font-display text-3xl font-semibold text-navy-900">{priceDisplay}</p>
-                <p className="mt-1 text-sm text-muted">
+                <p className="mt-1 text-base text-muted">
                   {p.bhk ? `${bhkLabel(p.bhk)} · ` : ""}
                   {formatArea(p.builtUpArea)} · {FURNISHING[p.furnishing] ?? p.furnishing}
                 </p>

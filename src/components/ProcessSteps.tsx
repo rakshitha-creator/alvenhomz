@@ -47,7 +47,7 @@ export default function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
             {String(active + 1).padStart(2, "0")}
             <span className="ml-2 align-top text-2xl text-muted">/ {String(steps.length).padStart(2, "0")}</span>
           </p>
-          <p key={active} className="mt-3 animate-fade-up text-xl font-semibold text-gold-700">
+          <p key={active} className="mt-3 animate-fade-up text-base font-semibold text-gold-700">
             {steps[active]?.title}
           </p>
           <div className="mt-6 h-1.5 w-full max-w-sm overflow-hidden rounded-full bg-line">

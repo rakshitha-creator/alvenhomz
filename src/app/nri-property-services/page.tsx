@@ -18,20 +18,24 @@ const CONSULT = "/contact-us/?topic=other&about=NRI%20%2F%20overseas%20enquiry#e
 
 const FAQS: FaqItem[] = [
   {
-    q: "Can I start buying a Bengaluru home before travelling to India?",
-    a: "Yes. Start by sharing your preferred localities, budget and timeline. Ask for current floor plans, unit availability and viewing options, then discuss transaction requirements specific to your circumstances with your advisers.",
+    q: "Can I buy a new apartment in Bengaluru while living abroad?",
+    a: "Yes. As an NRI, you can purchase a residential apartment in Bengaluru and pay through an inward bank remittance or an eligible NRE, NRO or FCNR(B) account. To start your search with Alven Homz, share your budget, preferred neighbourhoods and when you want possession. We can help you compare projects before you plan a trip.",
   },
   {
-    q: "Can I enquire about renting or selling a Bengaluru home while abroad?",
-    a: "Yes. Share the property's Bengaluru locality, ownership and occupancy status, and the support you need. We can discuss listing preparation and viewing coordination and agree what's included before work starts.",
+    q: "How can I verify a Bengaluru project before paying a booking amount from overseas?",
+    a: "Start with the Karnataka RERA registration number for the project phase you’re considering. Match the developer, phase and stated completion date to the booking documents. Then request the exact unit plan, carpet area, itemised cost sheet, payment milestones and cancellation terms. If you arrange a video walkthrough, confirm whether it shows your unit, a model apartment or the construction site.",
   },
   {
-    q: "What should I share for the first call?",
-    a: "Share your country, time zone, preferred locality or property details, and your approximate budget or asking-price expectation. Mention your next visit and the decision you want to make before it.",
+    q: "Can I sell my Bengaluru apartment without travelling to India?",
+    a: "It may be possible to complete the sale through a trusted representative under a properly executed and authenticated Power of Attorney (PoA). Before signing it abroad, have an Indian property lawyer confirm which sale and registration steps it must cover and how it should be authenticated for use in Karnataka. This lets you settle the paperwork before committing to a buyer’s timeline.",
   },
   {
-    q: "What can I organise before my next Bengaluru visit?",
-    a: "You can shortlist properties, request current plans and quotes, and discuss available viewing times. If your visit includes interiors, share the floor plan and check when the property can be accessed for a site meeting.",
+    q: "How can Alven Homz help me price and sell my Bengaluru home from overseas?",
+    a: "Start by sharing the community name, floor plan, parking details, occupancy status and preferred sale date. We can help you compare similar homes in the same community, discuss an asking price and plan viewings with your local keyholder. If the home is tenanted, tell us when it can be shown and whether you intend to sell it with the tenant in place.",
+  },
+  {
+    q: "How much will I receive after selling my Bengaluru property, and can I transfer the proceeds abroad?",
+    a: "Your sale price and the amount available to remit can differ. Before accepting an offer, ask your chartered accountant to estimate buyer withholding (TDS), your final tax liability and net proceeds after any outstanding loan and sale expenses. Ask your authorised dealer bank to confirm how much you can remit and which records it needs, particularly if you inherited the home or originally paid for it from overseas.",
   },
 ];
 

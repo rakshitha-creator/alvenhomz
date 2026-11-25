@@ -164,7 +164,7 @@ export default function CareersPage() {
                     </div>
                   </div>
                   {job.location ? (
-                    <p className="mt-5 flex items-center gap-2 text-sm text-muted">
+                    <p className="mt-5 flex items-center gap-2 text-base text-muted">
                       <MapPin className="h-4 w-4 shrink-0 text-gold-600" aria-hidden /> {job.location}
                     </p>
                   ) : null}

@@ -79,7 +79,9 @@ async function merged<T extends { slug: string; highlights?: string[] }>(collect
   const out = builtIn.map((b) => {
     const l = bySlug.get(b.slug);
     if (!l) return b;
-    const item = { ...b, ...l } as T;
+    // Like the browser-side merge: empty admin fields (e.g. faqs: []) don't wipe out the website's data.
+    const filled = Object.fromEntries(Object.entries(l).filter(([, v]) => v !== null && v !== undefined && !(Array.isArray(v) && v.length === 0)));
+    const item = { ...b, ...filled } as T;
     if (item.highlights) item.highlights = repairSplitList(item.highlights, b.highlights);
     return item;
   });

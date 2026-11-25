@@ -38,7 +38,7 @@ export function ContentBlock({
             {cards.map((c) => (
               <li key={c.title} className={cn("rounded-2xl p-6", dark ? "border border-white/10 bg-white/5" : "card")}>
                 <h3 className={cn("font-sans text-lg font-semibold", dark ? "text-white" : "text-navy-900")}>{c.title}</h3>
-                <p className={cn("mt-2 text-sm leading-relaxed", dark ? "text-white/70" : "text-navy-800")}>{c.text}</p>
+                <p className={cn("mt-2 text-base leading-relaxed", dark ? "text-white/70" : "text-navy-800")}>{c.text}</p>
               </li>
             ))}
           </ul>
