@@ -155,6 +155,12 @@ export interface ResaleProperty extends ListingBase {
   readyToMove: boolean;
   ownership: string;
   postedOn: string;
+  /** Tower or block, e.g. "Tower B". */
+  tower?: string;
+  /** Flat / unit number, e.g. "2507". */
+  unitNo?: string;
+  /** Expected handover, e.g. "July 2027" (shown instead of the generic status when set). */
+  possession?: string;
 }
 
 export interface RentalProperty extends ListingBase {

@@ -116,12 +116,14 @@ export default function ResaleDetailView({ p, all = resaleProperties }: { p: Res
               <Facts
                 items={[
                   { label: "Configuration", value: p.bhk ? bhkLabel(p.bhk) : PROPERTY_TYPES[p.propertyType] ?? p.propertyType, icon: <BedDouble className="h-3.5 w-3.5" /> },
-                  { label: "Bathrooms", value: p.bathrooms, icon: <Bath className="h-3.5 w-3.5" /> },
+                  ...(p.tower ? [{ label: "Tower", value: p.tower, icon: <Building className="h-3.5 w-3.5" /> }] : []),
+                  ...(p.unitNo ? [{ label: "Unit no.", value: p.unitNo, icon: <Building className="h-3.5 w-3.5" /> }] : []),
+                  { label: "Bathrooms", value: p.bathrooms || undefined, icon: <Bath className="h-3.5 w-3.5" /> },
                   { label: "Carpet area", value: formatArea(p.carpetArea), icon: <Ruler className="h-3.5 w-3.5" /> },
-                  { label: "Built-up area", value: formatArea(p.builtUpArea), icon: <Ruler className="h-3.5 w-3.5" /> },
+                  { label: "Super built-up area", value: formatArea(p.builtUpArea), icon: <Ruler className="h-3.5 w-3.5" /> },
                   { label: "Floor", value: /\d/.test(p.floor) && p.totalFloors ? `${p.floor} of ${p.totalFloors}` : p.floor, icon: <Layers className="h-3.5 w-3.5" /> },
                   { label: "Parking", value: p.parking, icon: <Car className="h-3.5 w-3.5" /> },
-                  { label: "Possession", value: p.readyToMove ? "Ready to move" : "Under construction", icon: <CalendarDays className="h-3.5 w-3.5" /> },
+                  { label: "Possession", value: p.readyToMove ? "Ready to move" : p.possession ? `${p.possession} (expected)` : "Under construction", icon: <CalendarDays className="h-3.5 w-3.5" /> },
                   { label: "Furnishing", value: FURNISHING[p.furnishing] ?? p.furnishing, icon: <Sofa className="h-3.5 w-3.5" /> },
                   { label: "Facing", value: p.facing, icon: <Compass className="h-3.5 w-3.5" /> },
                   ...(p.readyToMove ? [{ label: "Property age", value: p.ageYears <= 1 ? "Less than 1 year" : `${p.ageYears} years`, icon: <CalendarDays className="h-3.5 w-3.5" /> }] : []),

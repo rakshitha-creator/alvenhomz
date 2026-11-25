@@ -143,7 +143,7 @@ export default function InteriorsPage() {
             light
           />
           <InteriorPortfolio items={interiorPortfolio} />
-          <p className="mt-6 text-xs text-white/60">Cards marked &ldquo;Design concept&rdquo; are concept visuals. Other images are representative photography, not completed Alven Homz projects.</p>
+          <p className="mt-6 text-xs text-white/60">Cards marked &ldquo;Design concept&rdquo; are concept visuals. Abhee Celestial City shows a completed interior; other images are representative photography.</p>
         </div>
       </section>
 

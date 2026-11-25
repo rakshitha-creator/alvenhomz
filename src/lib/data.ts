@@ -93,7 +93,7 @@ export function resaleCard(p: ResaleProperty): ListingCardData {
     slug: p.slug,
     href: `${KIND_BASE.resale}/${p.slug}/`,
     title: p.title,
-    subtitle: PROPERTY_TYPES[p.propertyType] ?? p.propertyType,
+    subtitle: [p.tower, p.unitNo && `Unit ${p.unitNo}`, p.possession && `Possession ${p.possession}`].filter(Boolean).join(" · ") || (PROPERTY_TYPES[p.propertyType] ?? p.propertyType),
     city: p.city,
     locality: p.locality,
     image: p.images[0],

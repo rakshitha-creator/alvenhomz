@@ -51,6 +51,28 @@
   ],
   "portfolio": [
     {
+      "slug": "celestial-city-3bhk",
+      "title": "Abhee Celestial City 3 BHK",
+      "category": "Complete home interiors",
+      "location": "Abhee Celestial City, Whitefield–Sarjapur Main Road",
+      "description": "A completed 3 BHK interior with a modular kitchen, wardrobes, a kids' room with a bunk bed, study units and a styled living and dining area.",
+      "image": "/images/resale/celestial-b204-1.webp",
+      "gallery": [
+        "/images/resale/celestial-b204-1.webp",
+        "/images/resale/celestial-b204-2.webp",
+        "/images/resale/celestial-b204-3.webp",
+        "/images/resale/celestial-b204-4.webp",
+        "/images/resale/celestial-b204-5.webp",
+        "/images/resale/celestial-b204-6.webp",
+        "/images/resale/celestial-b204-7.webp",
+        "/images/resale/celestial-b204-8.webp",
+        "/images/resale/celestial-b204-9.webp",
+        "/images/resale/celestial-b204-10.webp",
+        "/images/resale/celestial-b204-11.webp",
+        "/images/resale/celestial-b204-12.webp"
+      ]
+    },
+    {
       "slug": "concept-complete-home-1",
       "title": "Warm Open-Plan Family Home",
       "category": "Complete home interiors",

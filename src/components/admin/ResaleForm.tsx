@@ -131,6 +131,9 @@ export default function ResaleForm({ initial }: { initial?: ResaleProperty }) {
             </FormSelect>
           </Field>
           <Field label="Parking"><FormInput value={form.parking} onChange={(e) => set("parking", e.target.value)} /></Field>
+          <Field label="Tower / block"><FormInput value={form.tower || ""} onChange={(e) => set("tower", e.target.value || undefined)} /></Field>
+          <Field label="Unit number"><FormInput value={form.unitNo || ""} onChange={(e) => set("unitNo", e.target.value || undefined)} /></Field>
+          <Field label="Possession (e.g. July 2027)"><FormInput value={form.possession || ""} onChange={(e) => set("possession", e.target.value || undefined)} /></Field>
           <Field label="Floor"><FormInput value={form.floor} onChange={(e) => set("floor", e.target.value)} /></Field>
           <Field label="Total floors"><FormInput type="number" value={form.totalFloors || ""} onChange={(e) => set("totalFloors", Number(e.target.value) || 0)} /></Field>
           <Field label="Facing"><FormInput value={form.facing} onChange={(e) => set("facing", e.target.value)} /></Field>
