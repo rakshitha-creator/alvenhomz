@@ -57,9 +57,9 @@ export default function ContactPage() {
       <PageHero
         bannerId="contact"
         eyebrow="Contact Us"
-        title="Contact Alven Homz in Bengaluru"
-        caption="A better conversation starts with your brief."
-        description="Tell us what you have in mind for your Bengaluru home. We can discuss a shortlist for a purchase or rental, the preparation involved in selling or leasing a residence, or the brief for an interior design consultation. If you're contacting us from overseas, share a convenient time to speak."
+        title="Let's make your next move easier"
+        caption="Your property journey begins with a conversation."
+        description="Whether you're looking to buy, rent, sell, lease or transform your home, share your requirements with us. Our team will connect with you to understand your needs and guide you towards the right solutions."
         image={img("workspace-window")}
       />
 

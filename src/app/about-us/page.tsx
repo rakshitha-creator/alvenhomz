@@ -18,9 +18,9 @@ export const metadata = {
 };
 
 const VALUES = [
-  { word: "Clarity", text: "We set out the facts that shape a decision, including what's included, what needs confirming and who can provide the latest information." },
-  { word: "Consideration", text: "We make room for the way each client lives and works, including the routines, travel plans and family needs that shape a property or design brief." },
-  { word: "Accountability", text: "We agree the scope and who handles each part of the work, so clients know what to expect as the plan progresses." },
+  { word: "Clarity", text: "We provide transparent information and clear guidance to help clients make confident decisions." },
+  { word: "Consideration", text: "We understand individual needs and lifestyles to deliver solutions that truly matter." },
+  { word: "Accountability", text: "We take ownership of our commitments, ensuring clear responsibilities and dependable service throughout." },
 ];
 
 const SERVICES = [
@@ -31,10 +31,10 @@ const SERVICES = [
 ];
 
 const JOURNEY = [
-  { title: "Share your brief", text: "Tell us what you want the property to do: the neighbourhood, the people who'll live there and your timeline." },
-  { title: "Compare the details", text: "Work through floor plans, costs and possession or move-in dates side by side, with what still needs confirming set out." },
-  { title: "Agree the next step", text: "Agree the scope and who handles each part of the work before anything moves forward." },
-  { title: "Prepare the home", text: "From interiors before you move in to readying the home for sale or lease, the same team stays with the plan." },
+  { title: "Share your brief", text: "Tell us your property needs, preferred location, budget and timeline." },
+  { title: "Explore the options", text: "Review suitable properties, plans, costs and timelines to make informed decisions." },
+  { title: "Define the way forward", text: "Finalise the requirements, scope of work and responsibilities before proceeding." },
+  { title: "Bring the plan to life", text: "From interior execution to preparing your property for sale or lease, we ensure a smooth and coordinated experience." },
 ];
 
 const FAQS: FaqItem[] = [
@@ -59,8 +59,8 @@ export default function AboutPage() {
         bannerId="about"
         eyebrow="About Alven Homz"
         title="A Bengaluru property partner beyond the purchase"
-        caption="A relationship that lasts beyond handover."
-        description="Alven Homz is a Bengaluru residential property and interior design company. We work with buyers comparing new or resale residences, owners preparing a home for sale or lease, and clients designing apartments and villas. Many of those decisions are connected. A floor plan can shape an interiors brief, and a possession date can determine when you're ready to move in or put a home on the rental market."
+        caption="Your home journey deserves a partner for every step."
+        description="Alven Homz brings residential property solutions and personalised interior services together under one roof in Bengaluru. Whether you are looking to buy a new or resale home, sell or lease your property, or design a space that reflects your lifestyle, we make the journey simpler and more seamless. From finding the right property to transforming it into a home or maximising its value through sale or rental, we stay connected to your needs at every stage of homeownership."
         image={img("living-penthouse")}
       />
 
@@ -74,9 +74,8 @@ export default function AboutPage() {
             <p className="font-display text-lg text-gold-700 italic sm:text-xl">The keys mark the start of a new chapter.</p>
           </div>
           <p className="mt-6 text-lg leading-relaxed text-navy-800">
-            Some clients come to us with a floor plan and a handover date. Others are weighing up a sale or preparing an apartment for its first tenant. We
-            begin with what you want the property to do and use that brief to work through the decisions in order, from choosing a residence to preparing it
-            for the people who&apos;ll live there.
+            Some approach us with a floor plan and a handover date, while others are planning a sale or preparing their property for tenants. We
+            understand your objectives and guide you through every step, from finding the right home to making it ready for its next chapter.
           </p>
           <ul className="mt-8 grid grid-cols-2 gap-3">
             {SERVICES.map((sv) => (
@@ -141,8 +140,7 @@ export default function AboutPage() {
               <h3 className="mt-5 text-3xl font-semibold text-white">Our mission</h3>
               <p className="mt-2 font-display text-lg text-gold-300 italic">Clarity at every decision.</p>
               <p className="mt-4 leading-relaxed text-white/75">
-                We make residential property and interiors decisions easier to evaluate by starting with a clear brief and explaining the details that affect
-                each option. We agree the work involved before the next step.
+                We simplify property and interior decisions through clear guidance, transparent information and well-defined solutions at every stage.
               </p>
             </Reveal>
             <Reveal delay={80} className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 sm:p-10">
@@ -153,8 +151,7 @@ export default function AboutPage() {
               <h3 className="mt-5 text-3xl font-semibold text-white">Our vision</h3>
               <p className="mt-2 font-display text-lg text-gold-300 italic">A partner for the life of your home.</p>
               <p className="mt-4 leading-relaxed text-white/75">
-                We aim to be the Bengaluru property and interiors team clients return to as their circumstances change, from choosing their first residence to
-                redesigning or leasing a home they already own.
+                To be a trusted property and interiors partner in Bengaluru, building lasting relationships as our clients&apos; needs and aspirations evolve.
               </p>
             </Reveal>
           </div>
@@ -190,8 +187,8 @@ export default function AboutPage() {
               <h2 className="text-3xl font-semibold text-white sm:text-4xl">Talk to us about your home</h2>
               <p className="mt-2 font-display text-lg text-gold-300 italic">Begin with the home you have in mind.</p>
               <p className="mt-4 max-w-2xl leading-relaxed text-white/80">
-                Tell us where you are in the process, whether you have a Bengaluru neighbourhood in mind, an existing property to discuss or a floor plan ready
-                for review. We&apos;ll use that as the starting point for the conversation.
+                Share your requirements, preferred location or existing property details. Whether you&apos;re exploring a new home, planning a sale or
+                considering interiors, we&apos;re here to help you take the next step with confidence.
               </p>
             </div>
             <div className="flex flex-col gap-4 lg:items-end">

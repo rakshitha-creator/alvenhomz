@@ -60,11 +60,11 @@ export default async function RentalPage() {
         tone="sand"
         title="Understand the cost of moving in"
         caption="A clear view of the cost of moving in."
-        body="Ask for monthly rent, maintenance, the security deposit and any applicable service charges as separate amounts. Confirm what the lease includes, such as furniture, appliances or a designated parking space, and check when the first payments are due."
+        body="Understand the total rental commitment before finalising your home. Review the rent, maintenance, security deposit and any additional charges, along with what is included in the lease and the payment schedule."
         cards={[
-          { title: "Monthly rent and maintenance", text: "Ask for the monthly rent and the maintenance as separate amounts, and whether either is included in the other." },
-          { title: "Security deposit", text: "Confirm the deposit amount and when it is due before you move in." },
-          { title: "Service charges", text: "Ask for any applicable service charges as a separate amount, with the date each is due." },
+          { title: "Monthly rent and maintenance", text: "Confirm the monthly rent and maintenance charges separately, including what each covers." },
+          { title: "Security deposit", text: "Understand the deposit amount, payment terms and refund conditions before moving in." },
+          { title: "Service charges", text: "Identify any additional charges, their purpose and applicable payment timelines." },
         ]}
       />
       <ContentBlock

@@ -44,7 +44,7 @@ export default async function ResalePage() {
         eyebrow="Resale Properties"
         title="Resale homes in Bengaluru"
         caption="Find a home with a story already underway."
-        description="Explore owner-listed apartments, villas and independent homes in Bengaluru. A ready-to-move resale lets you see the residence and its community in use. An under-construction resale calls for a closer look at the allotment, remaining payments and transfer process. Compare the actual layout, furnishing, possession status and total quoted cost before requesting a viewing."
+        description="Explore resale apartments, villas and independent homes across Bengaluru. Whether ready to move in or under construction, evaluate the property's layout, condition, furnishing, possession status and overall cost. We help you understand the details and make informed choices before scheduling a visit."
         image={img("living-white")}
       />
       <HubResults
@@ -58,9 +58,9 @@ export default async function ResalePage() {
       />
       <ContentBlock
         tone="sand"
-        title="See the residence in context"
-        caption="The difference is in the viewing."
-        body="Visit at a time when you'd normally be home so you can judge daylight, ventilation and activity around the residence. Walk the route from parking to the entrance and check room dimensions against the furniture you plan to bring. If the unit is still under construction, ask which plans and images represent the specific home."
+        title="Experience the home before you decide"
+        caption="See beyond the walls. Understand the lifestyle."
+        body="Visit the property at a convenient time to assess natural light, ventilation and the surrounding environment. Explore the layout, check room dimensions and consider your furniture requirements. For under-construction homes, verify that the plans and visuals accurately reflect the specific unit."
       />
       <ContentBlock
         tone="dark"

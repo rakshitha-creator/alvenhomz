@@ -63,20 +63,20 @@ export default async function NewProjectsPage() {
       />
       <ContentBlock
         tone="sand"
-        title="Compare the details that affect your decision"
+        title="Compare the details that shape your decision"
         caption="Look beyond the brochure."
         cards={[
           {
             title: "Floor plan",
-            text: "Look at the carpet area and how the rooms connect. Check where furniture can sit, whether the kitchen has a separate utility, and how a spare bedroom could work as a study or guest room.",
+            text: "Evaluate the space, room layouts and functionality to ensure the home suits your lifestyle and everyday needs.",
           },
           {
             title: "Price",
-            text: "Request an itemised cost sheet for your preferred unit. Compare the quoted price, applicable charges and payment milestones before weighing it against another home.",
+            text: "Review the detailed cost breakdown, additional charges and payment schedules to understand the overall investment.",
           },
           {
             title: "Timeline",
-            text: "Ask for the developer's most recent possession update for the specific phase or tower. Check when the amenities you expect to use are due to be available.",
+            text: "Understand the expected possession date, construction progress and availability of amenities before making your decision.",
           },
         ]}
       />

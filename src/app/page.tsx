@@ -13,6 +13,7 @@ import { ContentBlock } from "@/components/InfoCards";
 import HeroVideo from "@/components/HeroVideo";
 import HeroSearch from "@/components/HeroSearch";
 import ListingCard from "@/components/ListingCard";
+import MobileSlider from "@/components/MobileSlider";
 import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import { SectionHeading, ViewAll } from "@/components/ui";
@@ -46,18 +47,18 @@ const featured = <T extends { featured: boolean }>(list: T[], n = 3) => list.fil
 const WHY = [
   {
     icon: ListChecks,
-    title: "A shortlist built around your brief",
-    text: "Tell us which neighbourhoods, layouts and timelines work for you. We'll use those details to focus the search and help you compare the homes you're considering.",
+    title: "Solutions tailored to your needs",
+    text: "Every requirement is unique. Share your preferred location, budget, lifestyle and timelines, and our team will curate suitable options to help you make informed decisions with confidence.",
   },
   {
     icon: Scale,
-    title: "Clarity on costs",
-    text: "Ask for an itemised quote for a purchase or a breakdown of rent, maintenance and deposit for a lease. You'll have a clearer basis for comparing two properties.",
+    title: "Transparency at every step",
+    text: "We believe in clear communication and complete transparency. From property pricing to rental agreements and other associated charges, we ensure you have a clear understanding before making a commitment.",
   },
   {
     icon: Handshake,
-    title: "Continuity after handover",
-    text: "The same home may need different things over time. Speak with us about interiors before you move in, or about resale and leasing if your plans change.",
+    title: "A trusted partner beyond the transaction",
+    text: "Our relationship doesn't end with a property purchase or handover. From interiors and home improvement to leasing, resale and ongoing property management, we stay connected to support your evolving needs.",
   },
 ];
 
@@ -126,9 +127,9 @@ export default async function HomePage() {
             <div className="rounded-2xl border border-white/15 bg-espresso-950/55 p-6 shadow-lift backdrop-blur-md sm:p-7">
               <p className="text-xs font-semibold tracking-[0.2em] text-gold-300 uppercase">Buy · Sell · Lease · Design</p>
               <p className="mt-3 text-left text-[15px] leading-relaxed text-white/90">
-                A home should fit the way you live, from the neighbourhood you return to each evening to the rooms you spend the most time in. Alven Homz helps
-                you buy, sell and lease residential property in Bengaluru and design interiors for the home you choose. Explore new projects, owner-listed
-                resale homes and premium rentals, or speak with us about preparing a property you already own.
+                A home is more than an address; it reflects your lifestyle. At Alven Homz, we simplify your property journey with thoughtfully selected new
+                projects, resale homes, premium rentals and personalised interior solutions across Bengaluru. From finding your ideal home to making the most of
+                the one you own, we&apos;re here to help.
               </p>
             </div>
           </div>
@@ -152,13 +153,13 @@ export default async function HomePage() {
           description="Explore new residential projects in Bengaluru by neighbourhood, configuration and stage of construction. Compare the layout, cost and expected possession of each home, then look at the amenities planned for its phase and the journeys you'll make most often."
           action={<ViewAll href="/new-projects/" arrow>Explore New Projects</ViewAll>}
         />
-        <ul className="no-scrollbar relative -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
+        <MobileSlider label="Featured new projects">
           {newProjectsList.map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={i * 80} className="w-[85%] shrink-0 snap-start md:w-auto">
+            <li key={p.slug} className="w-[85%] shrink-0 snap-start sm:w-[60%] md:w-auto">
               <ListingCard item={p} priority={i === 0} />
-            </Reveal>
+            </li>
           ))}
-        </ul>
+        </MobileSlider>
       </section>
 
       {/* Featured Resale */}
@@ -171,13 +172,13 @@ export default async function HomePage() {
             description="Explore owner-listed resale homes in Bengaluru, from ready-to-move residences to units still under construction. For a completed home, look closely at the light, condition and furnishing. For a construction-stage resale, ask about the handover timeline, outstanding payments and transfer process."
             action={<ViewAll href="/resale-properties/" arrow>Explore Resale Homes</ViewAll>}
           />
-          <ul className="no-scrollbar relative -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
-            {resaleList.map((p, i) => (
-              <Reveal as="li" key={p.slug} delay={i * 80} className="w-[85%] shrink-0 snap-start md:w-auto">
+          <MobileSlider label="Featured resale properties">
+            {resaleList.map((p) => (
+              <li key={p.slug} className="w-[85%] shrink-0 snap-start sm:w-[60%] md:w-auto">
                 <ListingCard item={p} />
-              </Reveal>
+              </li>
             ))}
-          </ul>
+          </MobileSlider>
         </div>
       </section>
 
@@ -199,9 +200,9 @@ export default async function HomePage() {
             <h2 className="mt-4 text-4xl leading-tight font-semibold sm:text-5xl">Interiors designed around your life</h2>
             <p className="mt-3 font-display text-xl text-gold-700 italic">Make the address unmistakably yours.</p>
             <p className="mt-5 max-w-lg leading-relaxed text-navy-800">
-              From the proportions of a kitchen island to the light you come home to, the details shape how a house feels. Our Bengaluru interior design
-              services cover complete apartment and villa interiors as well as modular kitchens, living rooms, bedrooms, wardrobes and home offices. We start
-              with your routines, then shape the layout, materials and finishes around them.
+              Your home should reflect your personality and lifestyle. At Alven Homz, we blend design, functionality and comfort to create beautiful,
+              thoughtfully designed spaces. From complete apartment and villa interiors to modular kitchens, bedrooms, wardrobes and living spaces, every detail
+              is crafted around your needs with quality materials and timeless finishes.
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {interiorServices.map((s) => (
@@ -319,7 +320,7 @@ export default async function HomePage() {
         <SectionHeading
           eyebrow="Why Alven Homz"
           title="Why Alven Homz"
-          caption="Know what matters before you decide."
+          caption="Making every property decision simpler, clearer and more rewarding."
           center
         />
         <ul className="grid gap-5 md:grid-cols-3">
@@ -389,11 +390,12 @@ export default async function HomePage() {
             />
             <div className="relative">
               <p className="eyebrow text-gold-300">Talk to an advisor</p>
-              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Tell us what you have in mind</h2>
-              <p className="mt-3 font-display text-lg text-gold-300 italic">A few details make for a better shortlist.</p>
+              <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Let&apos;s find the right fit</h2>
+              <p className="mt-3 font-display text-lg text-gold-300 italic">Tell us what you&apos;re looking for.</p>
               <p className="mt-4 max-w-md leading-relaxed text-white/75">
-                Tell us which part of Bengaluru you have in mind, when you&apos;d like to move and which details matter most. Include a preferred configuration
-                or budget range if you&apos;re comparing homes, or a floor plan if you&apos;re ready to talk interiors.
+                A little insight into your preferences helps us find the right options for you. Share your preferred location in Bengaluru, budget, property
+                configuration and expected timeline. Whether you&apos;re exploring a new home, considering a resale or rental property, or planning your interiors,
+                our team is here to guide you every step of the way.
               </p>
               <div className="mt-8 grid gap-3 sm:max-w-xs">
                 <a href={telHref()} className="btn-gold">
@@ -416,12 +418,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Find the right next step */}
+      {/* Find the right way forward */}
       <ContentBlock
         tone="sand"
-        title="Find the right next step"
-        caption="Four ways to make your next move."
-        body="Buying, renting, selling and designing a home each start with a different brief. Choose where you are in the process to see which details to have ready and where to begin."
+        title="Find the right way forward"
+        caption="Four ways to make your next move with confidence."
+        body="Whether you're looking to buy, rent, sell or design your home, every journey begins with the right guidance. Tell us what you're looking for, and we'll help you explore the right solutions, understand what matters and take the next step with confidence."
         actions={NEXT_STEPS.map((n) => (
           <Link key={n.label} href={n.href} className="btn-outline bg-white">
             {n.label} <ArrowRight className="h-4 w-4" />

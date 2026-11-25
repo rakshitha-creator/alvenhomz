@@ -72,14 +72,12 @@ export default function InteriorsPage() {
           priority
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso-950 via-espresso-950/75 to-espresso-950/10" />
-        <div className="container-x py-20">
-          <p className="eyebrow text-gold-300">Alven Homz Interiors</p>
-          <h1 className="mt-5 max-w-3xl text-4xl leading-[1.08] font-semibold text-white sm:text-6xl">Luxury home interiors in Bengaluru</h1>
-          <p className="mt-4 font-display text-xl text-gold-300 italic sm:text-2xl">Designed for the way you actually live.</p>
+        <div className="container-x pt-32 pb-20">
+          <h1 className="max-w-3xl text-4xl leading-[1.08] font-semibold text-white sm:text-6xl">Luxury home interiors in Bengaluru</h1>
+          <p className="mt-4 font-display text-xl text-gold-300 italic sm:text-2xl">Thoughtfully designed around your lifestyle.</p>
           <p className="mt-5 max-w-2xl leading-relaxed text-white/80 sm:text-lg">
-            A home should feel as considered on an ordinary morning as it does when guests arrive. Alven Homz designs bespoke apartment and villa interiors
-            in Bengaluru, starting with how you cook, work, rest and entertain. We bring those routines into the floor plan, then carry a consistent approach
-            to lighting, joinery and materials through the rooms you choose to design.
+            Alven Homz creates bespoke interiors for apartments and villas in Bengaluru, thoughtfully tailored to your lifestyle and everyday needs. From space
+            planning and lighting to materials and finishes, every detail is designed to bring together comfort, functionality and timeless elegance.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#interior-consultation" className="btn-gold">
